@@ -1,4 +1,4 @@
-import { cadastroCliente, deleteCliente } from '../../types/cliente'
+import { cadastroCliente, deleteCliente, loginCliente } from '../../types/cliente'
 
 export default async (req: any, res: any) => {
 
@@ -11,8 +11,13 @@ export default async (req: any, res: any) => {
 
     } else if (method == "deleteCliente") {
 
-        const createCliente = await deleteCliente(email, senha)
-        res.json({ result: createCliente })
+        const deletarCliente = await deleteCliente(email, senha)
+        res.json({ result: deletarCliente })
+
+    } else if (method == "loginCliente") {
+
+        const checkLogin = await loginCliente(email, senha)
+        res.json({ result: checkLogin })
     }
 
 }
