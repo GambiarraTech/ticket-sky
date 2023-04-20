@@ -1,0 +1,42 @@
+{
+    "extends": [
+      "airbnb",
+      "airbnb-typescript",
+      "airbnb/hooks",
+      "plugin:@next/next/recommended",
+      "prettier"
+      // "plugin:tailwindcss/recommended"
+    ],
+    // "plugins": ["simple-import-sort", "import", "tailwindcss"],
+    "plugins": ["simple-import-sort", "import"],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "globals": {
+      "React": "readonly"
+    },
+    "rules": {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "react/function-component-definition": [
+        "error",
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+      ],
+      "react/jsx-props-no-spreading": "off",
+      "import/extensions": [
+        "error",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ]
+    }
+  }
