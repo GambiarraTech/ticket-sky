@@ -2,27 +2,30 @@ import { cadastroCliente, deleteCliente, loginCliente } from '../../types/client
 
 export default async (req: any, res: any) => {
 
-    const { email, senha, method } = req.body
+    const { email, senha } = req.body
 
-    if (method == "createCliente") {
+    const method = req.method
 
-        const createCliente = await cadastroCliente(email, senha)
-        res.json({ result: createCliente })
-
-    } else if (method == "deleteCliente") {
-
-        const deletarCliente = await deleteCliente(email, senha)
-        res.json({ result: deletarCliente })
-
-    } else if (method == "loginCliente") {
-
-        const checkLogin = await loginCliente(email, senha)
-        res.json({ result: checkLogin })
+    switch (method) {
+        case 'GET': {
+            const checkLogin = await loginCliente(email, senha)
+            res.json({ result: checkLogin })
+            break
+        }
+        case 'POST': {
+            const createCliente = await cadastroCliente(email, senha)
+            res.json({ result: createCliente })
+            break
+        }
+        case 'PUT': {
+            // this is second case block
+            // and there can be any number of cases
+            break
+        }
+        case 'DELETE': {
+            const deletarCliente = await deleteCliente(email, senha)
+            res.json({ result: deletarCliente })
+            break
+        }
     }
-
 }
-
-
-
-
-
