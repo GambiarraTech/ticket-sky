@@ -2,7 +2,7 @@ import { query } from '@/lib/db'
 
 export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string) {
 
-    if( cpf == undefined){
+    if (cpf == undefined) {
         cpf = ""
     }
 

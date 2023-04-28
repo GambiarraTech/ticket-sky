@@ -6,18 +6,20 @@ import * as router from '../pages/api/router';
 
 export default function Home() {
   const [cliente, setCliente] = useState({
+    nome: '',
+    sobrenome: '',
     email: '',
     senha: '',
   });
 
   return (
     <div>
+      <input type="text" placeholder="Nome" onChange={(e) => (cliente.nome = e.target.value)} />
+      <input type="text" placeholder="Sobrenome" onChange={(e) => (cliente.sobrenome = e.target.value)} />
       <input type="email" placeholder="Email" onChange={(e) => (cliente.email = e.target.value)} />
       <input type="password" placeholder="Senha" onChange={(e) => (cliente.senha = e.target.value)} />
 
       <button onClick={() => router.apiPost(cliente, 'cliente')}>Cadastrar-se</button>
-
-      <button onClick={() => router.apiGet('cliente')}>deletar</button>
     </div>
   );
 }
