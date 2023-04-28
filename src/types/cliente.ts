@@ -7,7 +7,7 @@ export async function cadastroCliente(nome: string, sobrenome: string, email: st
     }
 
     await query({
-        query: "INSERT INTO usuario (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
+        query: "INSERT INTO cliente (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
         values: [nome, sobrenome, email, senha, cpf]
     })
 
@@ -15,7 +15,7 @@ export async function cadastroCliente(nome: string, sobrenome: string, email: st
 
 export async function deleteCliente(email: string, senha: string) {
     await query({
-        query: "DELETE FROM usuario WHERE usuario.email = (?) AND usuario.senha = (?)",
+        query: "DELETE FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
         values: [email, senha]
     })
 
@@ -24,7 +24,7 @@ export async function deleteCliente(email: string, senha: string) {
 export async function loginCliente(email: string, senha: string) {
 
     const cliente = await query({
-        query: "SELECT * FROM usuario WHERE usuario.email = (?) AND usuario.senha = (?)",
+        query: "SELECT * FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
         values: [email, senha]
     })
 
