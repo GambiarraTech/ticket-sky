@@ -1,8 +1,8 @@
-import { Navbar } from '@/components/navbar/Navbar';
-import { Inter } from 'next/font/google';
-import Head from 'next/head';
+import { NavbarCliente } from '@/components/navbar/NavbarCliente'
+import { Inter } from 'next/font/google'
+import Head from 'next/head'
 
-const font = Inter({ subsets: ['latin'], weight: '500' });
+const font = Inter({ subsets: ['latin'], weight: '500' })
 
 export default function Home() {
   return (
@@ -10,7 +10,8 @@ export default function Home() {
       <Head>
         <title>TicketSky - Página Inicial</title>
       </Head>
-      <Navbar />
+      <NavbarCliente Logado={true} />
     </main>
-  );
+  )
 }
+

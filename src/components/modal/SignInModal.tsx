@@ -1,31 +1,36 @@
-import { useCallback, useState } from 'react';
-import { IoClose } from 'react-icons/io5';
-import * as router from '../../pages/api/router';
-import { LogoModal } from './LogoModal';
+import { useCallback, useState } from 'react'
+import { IoClose } from 'react-icons/io5'
+import * as router from '../../pages/api/router'
+import { LogoModal } from './LogoModal'
 
 interface LoginModalProps {
-  showModal: boolean;
-  handleClick: () => void;
+  showModal: boolean
+  handleClick: () => void
 }
 
 export const SignInModal = ({ showModal, handleClick }: LoginModalProps) => {
-  const [variant, setVariant] = useState('signIn');
+  const [variant, setVariant] = useState('signIn')
+  const [logado, setLogado] = useState(false)
 
   const changeVariant = useCallback(() => {
-    setVariant((currentvariant) => (currentvariant === 'signIn' ? 'signUp' : 'signIn'));
-  }, []);
+    setVariant((currentvariant) => (currentvariant === 'signIn' ? 'signUp' : 'signIn'))
+  }, [])
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleClick();
-  };
+    e.preventDefault()
+    handleClick()
+  }
+
+  const handleLogado = () => {
+    setLogado(true)
+  }
 
   const [cliente, setCliente] = useState({
     nome: '',
     sobrenome: '',
     email: '',
     senha: '',
-  });
+  })
 
   return (
     <>
@@ -88,6 +93,7 @@ export const SignInModal = ({ showModal, handleClick }: LoginModalProps) => {
                     />
                   </div>
                   <button
+                    onSubmit={handleLogado}
                     onClick={() => router.apiPost(cliente, 'cliente')}
                     className="block w-full mt-3 py-3 px-4 text-[#ffffff] text-sm text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg"
                   >
@@ -106,5 +112,5 @@ export const SignInModal = ({ showModal, handleClick }: LoginModalProps) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
