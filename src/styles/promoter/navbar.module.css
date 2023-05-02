@@ -1,0 +1,12 @@
+.navbar {
+  @apply container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center;
+}
+
+.header {
+  @apply shadow-sm bg-[#0013a6] h-auto;
+}
+
+.title {
+  @apply md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center text-white;
+}
+
