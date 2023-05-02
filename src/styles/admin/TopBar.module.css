@@ -1,0 +1,4 @@
+.TopBar{
+    @apply bg-azul-ticket flex items-center w-full justify-center;
+}
+
