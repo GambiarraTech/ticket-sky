@@ -1,3 +1,4 @@
+import Layout from '@/components/layout/Layout';
 import { useState } from 'react';
 import * as router from '../pages/api/router';
 // plano: com base no método a gente vai diferenciar as funções dentro da api (if req.method =='post') ai por exemplo.
@@ -13,13 +14,17 @@ export default function Home() {
   });
 
   return (
-    <div>
-      <input type="text" placeholder="Nome" onChange={(e) => (cliente.nome = e.target.value)} />
-      <input type="text" placeholder="Sobrenome" onChange={(e) => (cliente.sobrenome = e.target.value)} />
-      <input type="email" placeholder="Email" onChange={(e) => (cliente.email = e.target.value)} />
-      <input type="password" placeholder="Senha" onChange={(e) => (cliente.senha = e.target.value)} />
+    <>
+      <Layout>
+        <div>
+          <input type="text" placeholder="Nome" onChange={(e) => (cliente.nome = e.target.value)} />
+          <input type="text" placeholder="Sobrenome" onChange={(e) => (cliente.sobrenome = e.target.value)} />
+          <input type="email" placeholder="Email" onChange={(e) => (cliente.email = e.target.value)} />
+          <input type="password" placeholder="Senha" onChange={(e) => (cliente.senha = e.target.value)} />
 
-      <button onClick={() => router.apiPost(cliente, 'cliente')}>Cadastrar-se</button>
-    </div>
+          <button onClick={() => router.apiPost(cliente, 'cliente')}>Cadastrar-se</button>
+        </div>
+      </Layout>
+    </>
   );
 }
