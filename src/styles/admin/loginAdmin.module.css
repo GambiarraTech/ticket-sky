@@ -1,0 +1,13 @@
+.bg{
+    @apply bg-azul-ticket h-screen
+}
+.teste{
+    @apply cursor-pointer
+}
+
+.centro{
+    @apply bg-azul-ticket justify-center flex
+
+}
+
+

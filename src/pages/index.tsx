@@ -6,25 +6,34 @@ import * as router from '../pages/api/router';
 // comwhere id = "valor passado". so que no api a gente só usa para identificar o methodo e fzr o destructuring no valores.
 
 export default function Home() {
-  const [cliente, setCliente] = useState({
+  const [cliente] = useState({
     nome: '',
     sobrenome: '',
     email: '',
     senha: '',
+    cpf: '',
+    service: '',
   });
 
-  return (
-    <>
-      <Layout>
-        <div>
-          <input type="text" placeholder="Nome" onChange={(e) => (cliente.nome = e.target.value)} />
-          <input type="text" placeholder="Sobrenome" onChange={(e) => (cliente.sobrenome = e.target.value)} />
-          <input type="email" placeholder="Email" onChange={(e) => (cliente.email = e.target.value)} />
-          <input type="password" placeholder="Senha" onChange={(e) => (cliente.senha = e.target.value)} />
+  function cadastroCliente(e: any) {
+    cliente.service = e.target.name;
 
-          <button onClick={() => router.apiPost(cliente, 'cliente')}>Cadastrar-se</button>
-        </div>
-      </Layout>
-    </>
+    router.apiPost(cliente, 'cliente');
+  }
+
+  return (
+    <div>
+      <input type="text" placeholder="Nome" onChange={(e) => (cliente.nome = e.target.value)} />
+      <input type="text" placeholder="Sobrenome" onChange={(e) => (cliente.sobrenome = e.target.value)} />
+      <input type="email" placeholder="Email" onChange={(e) => (cliente.email = e.target.value)} />
+      <input type="password" placeholder="Senha" onChange={(e) => (cliente.senha = e.target.value)} />
+      <input type="text" placeholder="Cpf" onChange={(e) => (cliente.cpf = e.target.value)} />
+
+      <button name="cadastroCliente" onClick={cadastroCliente}>
+        Cadastrar-se
+      </button>
+
+      <p className="teste">Hello world!</p>
+    </div>
   );
 }

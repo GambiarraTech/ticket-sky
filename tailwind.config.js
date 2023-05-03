@@ -8,6 +8,10 @@ module.exports = {
       white: colors.white,
     },
     extend: {},
+    colors: {
+      'azul-ticket': '#0112a6',
+      'ciano-ticket': '#03f7ff',
+    },
   },
   plugins: [],
 };
