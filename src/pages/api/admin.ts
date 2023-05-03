@@ -10,9 +10,9 @@ export default async (req: any, res: any) => {
             res.json({ result: checkLogin })
 
             if (checkLogin != null) {
-                res.redirect(307, '/admin')
+                console.log('Logado')
             } else {
-                res.redirect(307, '/admin/login')
+                console.log('Não logado')
             }
 
             break
