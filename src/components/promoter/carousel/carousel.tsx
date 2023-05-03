@@ -1,144 +1,69 @@
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import styles from '../../../styles/promoter/carousel.module.css';
 
-export const Carousel = () => {
+interface CarouselProps {
+  title?: String;
+}
+
+export const Carousel = ({ title }: CarouselProps) => {
+  const [data, setData] = useState([]);
+  const carousel = useRef(null);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/static/sampleDatas.json')
+      .then((response) => response.json())
+      .then(setData);
+  }, []);
+
+  const handleLeftClick = (e: any) => {
+    e.preventDefault();
+    carousel.current.scrollLeft -= carousel.current.offsetWidth;
+  };
+
+  const handleRightClick = (e: any) => {
+    e.preventDefault();
+    carousel.current.scrollLeft += carousel.current.offsetWidth;
+    console.log(carousel.current.offsetWidth);
+  };
+
+  if (!data || !data.length) return null;
+
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        TITULO DA SEÇÃO
-        <div className="flex flex-wrap -m-4">
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
-
-          <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
-              <Image src="/images/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
-            <div className="mt-4">
-              <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CU</h3>
-              <h2 className="text-gray-900 title-font text-lg font-medium">Funciona Capeta</h2>
-              <p className="mt-1">$16.00</p>
-            </div>
-          </div>
+    <div className={styles.column}>
+      <div className={styles.titleAndButtons}>
+        <div>
+          <p>{title}</p>
+        </div>
+        <div className={styles.buttons}>
+          <button onClick={handleLeftClick}>
+            <IoIosArrowBack size="32" />
+          </button>
+          <button onClick={handleRightClick}>
+            <IoIosArrowForward size="32" />
+          </button>
         </div>
       </div>
-    </section>
+      <div className={styles.container}>
+        <div className={styles.carousel} ref={carousel}>
+          {data.map((item) => {
+            const { id, name, date, address, image } = item;
+            return (
+              <div className={styles.item} key={id}>
+                <div className={styles.image}>
+                  <Image src={image} alt={name} height="260" width="420" />
+                </div>
+                <div className={styles.info}>
+                  <span className={styles.date}>{date}</span>
+                  <span className={styles.name}>{name}</span>
+                  <span className={styles.address}>{address}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };

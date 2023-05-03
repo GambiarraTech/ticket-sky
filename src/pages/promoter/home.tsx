@@ -1,16 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
-import { Navbar} from '@/components/promoter/navbar/navbar'
-import { Carousel } from '@/components/promoter/carousel/carousel'
+import { Carousel } from '@/components/promoter/carousel/carousel';
+import { Navbar } from '@/components/promoter/navbar/navbar';
 
 export default function Home() {
-    return(
-        <div>
-            <Navbar />
-            <Carousel />
-        </div>
-
-
-
-    )
+  return (
+    <div>
+      <Navbar />
+      <Carousel title="Eventos futuros"></Carousel>
+    </div>
+  );
 }

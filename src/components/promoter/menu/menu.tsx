@@ -9,8 +9,11 @@ export const Menu = ({ showmenu, whenclick }: MenuProps) => {
   return (
     <>
       {showmenu && (
-        <div onClick={whenclick} className=" absolute right-5 z-20 w-56 py-2 mt-1  bg-white rounded-lg shadow-xl border-[1px] ">
-          <div className="flex items-center p-3 -mt-2 text-sm font-bold text-black transition-colors duration-200 transform  justify-center">
+        <div className=" absolute right-5 z-20 w-56 py-2 mt-1  bg-white rounded-lg shadow-xl border-[1px] ">
+          <div
+            onClick={whenclick}
+            className="flex items-center p-3 -mt-2 text-sm font-bold text-black transition-colors duration-200 transform  justify-center"
+          >
             Menu
           </div>
 

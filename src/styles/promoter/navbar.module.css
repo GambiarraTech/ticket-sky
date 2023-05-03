@@ -7,6 +7,5 @@
 }
 
 .title {
-  @apply md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center text-white;
+  @apply md:ml-auto md:mr-auto flex flex-wrap items-center font-bold text-2xl justify-center text-white;
 }
-
