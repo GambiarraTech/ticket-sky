@@ -1,7 +1,7 @@
-.footer{
-    @apply bg-azul-ticket fixed bottom-0 text-center w-full
+.footer {
+  @apply bg-ticket-sky-blue fixed bottom-0 text-center w-full;
 }
- .footer p{
-    @apply flex justify-center;
-    color: white;
- }
+.footer p {
+  @apply flex justify-center;
+  color: white;
+}

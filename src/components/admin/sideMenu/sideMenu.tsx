@@ -1,4 +1,4 @@
-import styles from '@/styles/sideMenu/sideMenu.module.css';
+import styles from '@/styles/admin/sideMenu.module.css';
 import { FaFolderOpen, FaTicketAlt, FaUserTie, FaUsers } from 'react-icons/fa';
 export default function SideMenu({ children }: { children: React.ReactNode }) {
   return (

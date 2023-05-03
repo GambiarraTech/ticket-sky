@@ -1,13 +1,10 @@
-.bg{
-    @apply bg-azul-ticket h-screen
+.bg {
+  @apply bg-ticket-sky-blue h-screen;
 }
-.teste{
-    @apply cursor-pointer
-}
-
-.centro{
-    @apply bg-azul-ticket justify-center flex
-
+.teste {
+  @apply cursor-pointer;
 }
 
-
+.centro {
+  @apply bg-ticket-sky-blue justify-center flex;
+}
