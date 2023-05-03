@@ -1,5 +1,5 @@
 .formulario{
-    @apply grid mt-[17%] h-[18rem] w-[22.5rem] rounded-md p-5;
+    @apply grid mt-4 h-[18rem] w-[22.5rem] rounded-md p-5;
     background-color: white
 }
 
@@ -31,17 +31,21 @@
 }
 
 .titleBox{
-    @apply fixed top-[17%];
+    @apply flex flex-col items-center;
 
 }
 
-.titleBox a img{
-    @apply font-sans text-2xl mb-10 ml-5;
+.titleBox img{
+    @apply font-sans text-2xl;
     color: white
 }
 
 
 .titleBox p{
-    @apply font-sans text-2xl;
+    @apply font-sans text-2xl pt-8;
     color: white
+}
+
+.container{
+    @apply pt-32
 }

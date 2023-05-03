@@ -17,11 +17,10 @@ export default function formulario() {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.titleBox}>
-        <a href="">
-          <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
-        </a>
+        <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
+
         <p>Login de Administador</p>
       </div>
       <div className={styles.formulario}>
@@ -38,6 +37,6 @@ export default function formulario() {
           Entrar
         </button>
       </div>
-    </>
+    </div>
   );
 }
