@@ -35,7 +35,7 @@ const DataTable: FC<TableProps> = ({ data, columns}) => {
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                         {mapRows.map((item, index) => (
-                            <tr>
+                            <tr key={index}>
                                 {mapData[index].map((item) => (
                                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                                         {item}
