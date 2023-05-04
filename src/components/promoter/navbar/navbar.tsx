@@ -6,7 +6,7 @@ import { IoNotificationsSharp } from 'react-icons/io5';
 import { Menu } from '../menu/menu';
 import LogoNavbarPromoter from './LogoNavBar';
 
-export const Navbar = () => {
+export const Navbar = ({ children }: any) => {
   const [showmenu, setshowmenu] = useState(false);
   const whenclick = () => {
     setshowmenu(!showmenu);
@@ -14,18 +14,27 @@ export const Navbar = () => {
   return (
     <header aria-label="NavbarPromoter" className={style.header}>
       <div className={style.navbar}>
-        <Link href="">
-          <LogoNavbarPromoter />
-        </Link>
-        <nav className={style.title}>Promoter</nav>
-        <button className="mr-2.5">
-          <IoNotificationsSharp size="18" className="text-white" />
-        </button>
-        <button className="ml-2.5" onClick={whenclick}>
-          <FaUserCircle size="32" className="text-white" />
-        </button>
+        <nav className={style.title}>
+          <div className={style.logo}>
+            <Link href="">
+              <LogoNavbarPromoter />
+            </Link>
+          </div>
+          <div>
+            <h1>Promoter</h1>
+          </div>
+          <div className={style.buttons}>
+            <button className={style.buttonNotification}>
+              <IoNotificationsSharp size="18" />
+            </button>
+            <button className={style.buttonMenu} onClick={whenclick}>
+              <FaUserCircle size="32" />
+            </button>
+          </div>
+        </nav>
       </div>
       <Menu showmenu={showmenu} whenclick={whenclick} />
+      {children}
     </header>
   );
 };
