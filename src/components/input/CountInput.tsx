@@ -26,9 +26,9 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
       <button
         type="button"
         onClick={reduzir}
-        className="bg-gray-200 hover:bg-gray-200 rounded-lg px-3 py-2 focus:outline-none"
+        className="bg-gray-200 hover:bg-gray-400 rounded-lg px-3 py-2 focus:outline-none"
       >
-        <AiOutlineMinus size="5" />
+        <AiOutlineMinus size="10" />
       </button>
       <input
         type="quantity"
@@ -46,9 +46,9 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
       <button
         type="button"
         onClick={adicionar}
-        className="bg-gray-200 hover:bg-gray-200 rounded-lg px-3 py-2 focus:outline-none"
+        className="bg-gray-200 hover:bg-gray-400 rounded-lg px-3 py-2 focus:outline-none"
       >
-        <AiOutlinePlus size="5" />
+        <AiOutlinePlus size="10" />
       </button>
     </div>
   )
