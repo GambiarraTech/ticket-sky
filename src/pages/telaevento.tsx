@@ -2,6 +2,7 @@ import CountInput from '@/components/input/CountInput'
 import { NavbarCliente } from '@/components/navbar/NavbarCliente'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { MdOutlineLocationCity } from 'react-icons/md'
 
@@ -52,15 +53,19 @@ export default function TelaEvento() {
                     <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
                   </div>
 
-                  <div className="relative"></div>
+                  <div className="relative" />
                 </div>
                 <div></div>
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">$58.00</span>
-                <button className="mr-1.5 flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-800 rounded">
-                  Comprar
-                </button>
+                <div className="flex flex-1 justify-end">
+                  <Link href="">
+                    <button className="mr-1.5 flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-800 rounded">
+                      Comprar
+                    </button>
+                  </Link>
+                </div>
               </div>
               <div className="mt-8 text-lg text-blue-800">Local do Evento</div>
               <div className="gap-2 mt-6 flex flex-row items-center">
