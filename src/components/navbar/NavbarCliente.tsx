@@ -18,7 +18,7 @@ export const NavbarCliente = ({ Logado }: NavbarClienteProps) => {
   }
 
   return (
-    <header aria-label="NavbarCliente" className="shadow-md bg-transparent h-18">
+    <header aria-label="NavbarCliente" className="shadow-md bg-transparent h-auto">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link href="">
           <LogoNavbar />
