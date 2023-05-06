@@ -1,4 +1,4 @@
-import { cadastroCliente, deleteCliente, loginCliente } from '../../types/cliente'
+import { cadastroCliente, loginCliente } from '../../types/cliente'
 
 export default async (req: any, res: any) => {
 
@@ -15,15 +15,15 @@ export default async (req: any, res: any) => {
             res.json({ result: createCliente })
             break
         }
-        case 'PUT': {
-            // this is second case block
-            // and there can be any number of cases
-            break
-        }
-        case 'DELETE': {
-            const deletarCliente = await deleteCliente(email, senha)
-            res.json({ result: deletarCliente })
-            break
-        }
+        // case 'PUT': {
+        //     // this is second case block
+        //     // and there can be any number of cases
+        //     break
+        // }
+        // case 'DELETE': {
+        //     const deletarCliente = await deleteCliente(email, senha)
+        //     res.json({ result: deletarCliente })
+        //     break
+        // }
     }
 }
