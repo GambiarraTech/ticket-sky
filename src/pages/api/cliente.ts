@@ -2,15 +2,17 @@ import { cadastroCliente, deleteCliente, loginCliente } from '../../types/client
 
 export default async (req: any, res: any) => {
 
-    const { nome, sobrenome, email, senha, cpf, service } = req.body
+    const { nome, sobrenome, email, senha, cpf } = req.body
 
-    switch (service) {
-        case 'loginCliente': {
+    const method = req.method
+
+    switch (method) {
+        case 'GET': {
             const checkLogin = await loginCliente(email, senha)
             res.json({ result: checkLogin })
             break
         }
-        case 'cadastroCliente': {
+        case 'POST': {
             const createCliente = await cadastroCliente(nome, sobrenome, email, senha, cpf)
             res.json({ result: createCliente })
             break
