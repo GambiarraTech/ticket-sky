@@ -1,4 +1,4 @@
-import style from '@/styles/button.module.css'
+import style from '@/styles/cliente/button.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
@@ -48,9 +48,10 @@ export const NavbarCliente = ({ Logado }: NavbarClienteProps) => {
             <button className="mr-2.5">
               <IoNotificationsSharp size="18" className="text-[#0013a6]" />
             </button>
-            <button className="ml-2.5">
+            <button onClick={whenClick} className="ml-2.5">
               <FaUserCircle size="28" className="text-[#0013a6]" />
             </button>
+            <MenuDropDown showModalMenu={showModalMenu} whenClick={whenClick} />
           </>
         ) : (
           <>
@@ -63,13 +64,6 @@ export const NavbarCliente = ({ Logado }: NavbarClienteProps) => {
             <SignInModal showModal={showModal} handleClick={handleClick} />
           </>
         )}
-        <button
-          onClick={whenClick}
-          className="rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff]"
-        >
-          Menu
-        </button>
-        <MenuDropDown showModalMenu={showModalMenu} whenClick={whenClick} />
       </div>
     </header>
   )

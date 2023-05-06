@@ -1,8 +1,8 @@
-import { IoClose } from 'react-icons/io5';
+import { IoClose } from 'react-icons/io5'
 
 interface MeuPerfilProps {
-  showModalPerfil: boolean;
-  handleClick: () => void;
+  showModalPerfil: boolean
+  handleClick: () => void
 }
 
 export const MeuPerfil = ({ showModalPerfil, handleClick }: MeuPerfilProps) => {
@@ -21,11 +21,10 @@ export const MeuPerfil = ({ showModalPerfil, handleClick }: MeuPerfilProps) => {
                 <span className="sr-only">Fechar</span>
                 <IoClose />
               </button>
-              x
             </div>
           </div>
         </div>
       )}
     </>
-  );
-};
+  )
+}

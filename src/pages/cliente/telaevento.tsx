@@ -1,5 +1,5 @@
-import CountInput from '@/components/input/CountInput'
-import { NavbarCliente } from '@/components/navbar/NavbarCliente'
+import CountInput from '@/components/cliente/input/CountInput'
+import { NavbarCliente } from '@/components/cliente/navbar/NavbarCliente'
 import { Inter } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'

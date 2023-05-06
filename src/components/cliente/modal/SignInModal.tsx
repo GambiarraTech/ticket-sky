@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { IoClose } from 'react-icons/io5'
-import * as router from '../../pages/api/router'
+import * as router from '../../../pages/api/router'
 import { LogoModal } from './LogoModal'
 
 interface LoginModalProps {

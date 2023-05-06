@@ -1,22 +1,22 @@
-import style from '@/styles/menu.module.css';
+import style from '@/styles/cliente/menu.module.css'
 
-import { useState } from 'react';
-import { BiCreditCard } from 'react-icons/bi';
-import { FaUser } from 'react-icons/fa';
-import { IoLogOutOutline, IoTicket } from 'react-icons/io5';
-import { MeuPerfil } from './meuPerfil';
+import { useState } from 'react'
+import { BiCreditCard } from 'react-icons/bi'
+import { FaUser } from 'react-icons/fa'
+import { IoLogOutOutline, IoTicket } from 'react-icons/io5'
+import { MeuPerfil } from './meuPerfil'
 
 interface MenuDropDownProps {
-  showModalMenu: boolean;
-  whenClick: () => void;
+  showModalMenu: boolean
+  whenClick: () => void
 }
 
 export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownProps) {
-  const [showModalPerfil, setShowModalPerfil] = useState(false);
+  const [showModalPerfil, setShowModalPerfil] = useState(false)
 
   const handleClick = () => {
-    setShowModalPerfil(!setShowModalPerfil);
-  };
+    setShowModalPerfil(!setShowModalPerfil)
+  }
 
   return (
     <>
@@ -49,5 +49,5 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
         </div>
       )}
     </>
-  );
+  )
 }
