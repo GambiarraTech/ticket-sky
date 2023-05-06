@@ -7,10 +7,10 @@ export const Carousel = () => {
       <div className="container px-5 py-24 mx-auto">
         TITULO DA SEÇÃO
         <div className="flex flex-wrap -m-4">
-          <Link href="http://localhost:3000/telaevento" className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+          <Link href="http://localhost:3000/cliente/telaevento" className="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -19,9 +19,9 @@ export const Carousel = () => {
           </Link>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -30,9 +30,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -41,9 +41,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -52,9 +52,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -63,9 +63,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -74,9 +74,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -85,9 +85,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -96,9 +96,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -107,9 +107,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -118,9 +118,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>
@@ -129,9 +129,9 @@ export const Carousel = () => {
           </div>
 
           <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a className="block relative h-48 rounded overflow-hidden">
+            <div className="block relative h-48 rounded overflow-hidden">
               <Image src="/quadrado.png" alt="Item 1" height="260" width="420" />
-            </a>
+            </div>
             <div className="mt-4">
               <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Promoter</h3>
               <h2 className="text-gray-900 title-font text-lg font-medium">Nome do Evento</h2>

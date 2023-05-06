@@ -23,9 +23,7 @@ export default function meusIngressos() {
       <Head>
         <title>TicketSky - Meus Ingressos</title>
       </Head>
-
       <NavbarCliente Logado={true} />
-
       <Table data={data} />
     </div>
   )
