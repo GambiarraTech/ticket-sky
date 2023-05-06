@@ -14,9 +14,13 @@ export async function apiPost(data: any, endpoint: any) {
             'Content-Type': 'application/json',
         },
     });
-
-    return response.json;
+    return response.json();
 }
+
+
+
+
+
 
 export async function apiPut(data: any, endpoint: any) {
 
@@ -27,6 +31,7 @@ export async function apiPut(data: any, endpoint: any) {
             'Content-Type': 'application/json',
         },
     });
+
 
     return response.json;
 }
