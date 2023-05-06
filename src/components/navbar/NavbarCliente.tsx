@@ -5,6 +5,7 @@ import { BiSearch } from 'react-icons/bi'
 import { FaUserCircle } from 'react-icons/fa'
 import { IoNotificationsSharp } from 'react-icons/io5'
 import { SignInModal } from '../modal/SignInModal'
+import MenuDropDown from '../modal/menu'
 import { LogoNavbar } from './LogoNavbarCliente'
 
 interface NavbarClienteProps {
@@ -13,8 +14,14 @@ interface NavbarClienteProps {
 
 export const NavbarCliente = ({ Logado }: NavbarClienteProps) => {
   const [showModal, setShowModal] = useState(false)
+  const [showModalMenu, setShowModalMenu] = useState(false)
+
   const handleClick = () => {
     setShowModal(!showModal)
+  }
+
+  const whenClick = () => {
+    setShowModalMenu(!showModalMenu)
   }
 
   return (
@@ -56,6 +63,13 @@ export const NavbarCliente = ({ Logado }: NavbarClienteProps) => {
             <SignInModal showModal={showModal} handleClick={handleClick} />
           </>
         )}
+        <button
+          onClick={whenClick}
+          className="rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff]"
+        >
+          Menu
+        </button>
+        <MenuDropDown showModalMenu={showModalMenu} whenClick={whenClick} />
       </div>
     </header>
   )
