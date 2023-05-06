@@ -47,7 +47,7 @@
 }
 
 .buttons button {
-  @apply bg-transparent border-none;
+  @apply border-none;
 }
 
 .titleAndButtons {

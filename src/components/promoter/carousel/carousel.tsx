@@ -7,9 +7,9 @@ interface CarouselProps {
   title?: String;
 }
 
-export const Carousel = ({ title }: CarouselProps) => {
+export default function Carousel({ title }: CarouselProps) {
   const [data, setData] = useState([]);
-  const carousel = useRef(null);
+  let carousel = useRef(null);
 
   useEffect(() => {
     fetch('http://localhost:3000/static/sampleDatas.json')
@@ -66,4 +66,4 @@ export const Carousel = ({ title }: CarouselProps) => {
       </div>
     </div>
   );
-};
+}

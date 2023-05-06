@@ -1,5 +1,5 @@
-import { Carousel } from '@/components/promoter/carousel/carousel';
-import { Navbar } from '@/components/promoter/navbar/navbar';
+import Carousel from '@/components/promoter/carousel/Carousel';
+import Navbar from '@/components/promoter/navbar/NavBar';
 
 export default function Home() {
   return (

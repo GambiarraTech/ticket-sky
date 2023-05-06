@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
-import { Menu } from '../menu/menu';
+import Menu from '../menu/Menu';
 import LogoNavbarPromoter from './LogoNavBar';
 
-export const Navbar = ({ children }: any) => {
+export default function NavBar({ children }: any) {
   const [showmenu, setshowmenu] = useState(false);
   const whenclick = () => {
     setshowmenu(!showmenu);
@@ -37,4 +37,4 @@ export const Navbar = ({ children }: any) => {
       {children}
     </header>
   );
-};
+}
