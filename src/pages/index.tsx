@@ -1,4 +1,4 @@
-import { Navbar } from '@/components/navbar/Navbar';
+import { NavbarCliente } from '@/components/navbar/NavbarCliente';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
 
@@ -10,7 +10,7 @@ export default function Home() {
       <Head>
         <title>TicketSky - Página Inicial</title>
       </Head>
-      <Navbar />
+      <NavbarCliente Logado={false} />
     </main>
   );
 }

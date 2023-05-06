@@ -11,7 +11,7 @@ interface MenuDropDownProps {
   whenClick: () => void;
 }
 
-export const MenuDropDown = ({ showModalMenu, whenClick }: MenuDropDownProps) => {
+export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownProps) {
   const [showModalPerfil, setShowModalPerfil] = useState(false);
 
   const handleClick = () => {
@@ -50,4 +50,4 @@ export const MenuDropDown = ({ showModalMenu, whenClick }: MenuDropDownProps) =>
       )}
     </>
   );
-};
+}
