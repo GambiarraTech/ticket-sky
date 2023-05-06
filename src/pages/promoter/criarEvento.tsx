@@ -29,6 +29,8 @@ export default function CriarEvento() {
     event.preventDefault();
     console.log(JSON.stringify(evento));
   };
+
+
   return (
     <NavBar>
       <div className={style.header}>
@@ -82,11 +84,15 @@ export default function CriarEvento() {
                 className={style.input}
                 name="cep"
                 type="text"
+                id="cep"
+                pattern="[0-9]+"
+                maxLength={8}
+                minLength={8}
                 required
                 onChange={(e) => {
                   evento.cep = e.target.value;
                 }}
-              />
+              ></input>
             </div>
 
             <div className={style.campo}>
@@ -133,26 +139,14 @@ export default function CriarEvento() {
             </div>
             <div className={style.data}>
               <div className={style.campo}>
-                Hora:
+                Horário:
                 <input
-                  className={style.input_pequeno}
+                  className={style.input_data}
                   name="hora"
-                  type="text"
+                  type="time"
                   required
                   onChange={(e) => {
                     evento.hora = e.target.value;
-                  }}
-                />
-              </div>
-              <div className={style.campo}>
-                Minuto:
-                <input
-                  className={style.input_pequeno}
-                  name="minuto"
-                  type="text"
-                  required
-                  onChange={(e) => {
-                    evento.minuto = e.target.value;
                   }}
                 />
               </div>
