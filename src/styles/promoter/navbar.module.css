@@ -1,0 +1,27 @@
+.navbar {
+  @apply w-full flex flex-wrap p-5 flex-col md:flex-row items-center justify-center shadow-sm bg-[#0013a6] h-auto;
+}
+
+.header {
+  @apply container max-w-full min-h-full;
+}
+
+.title {
+  @apply w-full min-h-full flex flex-wrap font-bold text-2xl items-center justify-between text-white;
+}
+
+.buttons {
+  @apply flex items-center mr-5 gap-5;
+}
+
+.buttonNotification IoNotificationsSharp {
+  @apply text-white;
+}
+
+.buttonMenu FaUserCircle {
+  @apply text-white;
+}
+
+.logo {
+  @apply ml-5;
+}

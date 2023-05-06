@@ -1,0 +1,13 @@
+.titleBox {
+  @apply flex flex-col items-center;
+}
+
+.titleBox img {
+  @apply font-sans text-2xl;
+  color: white;
+}
+
+.titleBox p {
+  @apply font-sans text-2xl py-6;
+  color: white;
+}
