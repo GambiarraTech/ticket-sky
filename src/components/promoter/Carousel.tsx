@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import styles from '../../../styles/promoter/carousel.module.css';
+import styles from '../../styles/promoter/carousel.module.css';
 
 interface CarouselProps {
   title?: String;
