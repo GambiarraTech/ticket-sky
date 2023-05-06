@@ -1,0 +1,55 @@
+.column {
+  @apply flex flex-col font-bold text-xl w-full min-h-full justify-center items-center;
+}
+
+.container {
+  @apply max-w-[75%];
+}
+
+.carousel {
+  @apply flex overflow-x-auto scroll-smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.item {
+  @apply bg-white m-2.5 p-2.5 w-80 flex-none;
+}
+
+.image img {
+  @apply w-full object-cover rounded-2xl h-56;
+}
+
+.info {
+  @apply flex flex-col justify-between;
+}
+
+.info span {
+  @apply block text-center p-1 rounded-xl;
+}
+
+.name {
+  @apply text-xl font-bold;
+}
+
+.date {
+  @apply text-base text-green-500;
+}
+
+.address {
+  @apply text-xs my-1;
+}
+
+.buttons {
+  @apply flex text-center;
+}
+
+.buttons button {
+  @apply bg-transparent border-none;
+}
+
+.titleAndButtons {
+  @apply w-[75%] flex justify-between;
+}
