@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavBar from '../../components/promoter/navbar/NavBar';
+import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
 
 export default function CriarEvento() {
