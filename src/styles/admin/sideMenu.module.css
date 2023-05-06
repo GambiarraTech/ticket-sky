@@ -1,0 +1,43 @@
+.sideMenu {
+  @apply h-full
+  w-56
+  bg-ticket-sky-blue
+  fixed;
+}
+
+.logo {
+  @apply h-40
+  w-full
+  justify-center
+  align-middle
+  flex;
+}
+
+.logo img {
+  @apply h-52 w-52;
+}
+
+.hr {
+  @apply m-auto w-[50%];
+  color: #f3f3f4d7;
+}
+
+.optionsList {
+  @apply flex flex-col w-full h-72 justify-center;
+}
+
+.optionsItem {
+  @apply flex p-3 ml-5 mr-5;
+}
+
+.optionsItem a {
+  @apply text-[#DADEF8] flex flex-row text-base;
+}
+
+.icon {
+  @apply h-6 w-6 text-[#DADEF8] mr-3;
+}
+
+.children {
+  @apply ml-56 p-0 h-[100vh];
+}

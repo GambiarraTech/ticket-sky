@@ -1,7 +1,0 @@
-.lightbutton {
-  @apply rounded-lg bg-[#dfe0ff] hover:bg-[#e0e0e0] px-5 py-2.5 text-sm text-[#0013a6];
-}
-
-.bluebutton {
-  @apply rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff];
-}
