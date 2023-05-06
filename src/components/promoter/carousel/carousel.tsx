@@ -9,7 +9,7 @@ interface CarouselProps {
 
 export default function Carousel({ title }: CarouselProps) {
   const [data, setData] = useState([]);
-  let carousel = useRef(null);
+  let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch('http://localhost:3000/static/sampleDatas.json')
@@ -19,13 +19,17 @@ export default function Carousel({ title }: CarouselProps) {
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
-    carousel.current.scrollLeft -= carousel.current.offsetWidth;
+    if (carousel.current != null) {
+      carousel.current.scrollLeft -= carousel.current.offsetWidth;
+    }
   };
 
   const handleRightClick = (e: any) => {
     e.preventDefault();
-    carousel.current.scrollLeft += carousel.current.offsetWidth;
-    console.log(carousel.current.offsetWidth);
+    if (carousel.current != null) {
+      carousel.current.scrollLeft += carousel.current.offsetWidth;
+      console.log(carousel.current.offsetWidth);
+    }
   };
 
   if (!data || !data.length) return null;
