@@ -17,11 +17,11 @@ export default function TelaEvento() {
   }
 
   return (
-    <main className={`${font.className}`}>
+    <main className={font.className}>
       <section className={style.section}>
         <NavbarCliente Logado={true} />
-        <div className={style.containerGeral}>
-          <div>
+        <div>
+          <div className={style.containerGeral}>
             <Image alt="Banner do Evento" className={style.imgBanner} width="400" height="400" src="/quadrado.png" />
             <div className={style.content}>
               <h2 className={style.promoterName}>Nome do Promoter</h2>
