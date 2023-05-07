@@ -16,6 +16,11 @@ export default async (req: any, res: any) => {
 
                 if (checkLogin != null) {
 
+                    //O token criando aqui segue a seguinte lógica:
+                    //os primeiros digitos do token antes do primeiro hifen representa o usuario logado
+                    //o primeiro digito representa o tipo do usuario:
+                    //1 = admin 2 = promotor e 3 = cliente
+                    //e o restante o id dele na sua respectiva tabela
                     const token = '1' + checkLogin.id + '-' + uuid()
 
                     const data = {
@@ -44,7 +49,7 @@ export default async (req: any, res: any) => {
             const data = {
                 email: checkLogin.email,
                 nome: checkLogin.nome,
-                role: '1'
+                role: 'admin'
             }
 
             res.json({ user: data })

@@ -1,7 +1,7 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import styles from '@/styles/admin/formLogin.module.css';
 import { useContext, useState } from 'react';
 import * as router from '../../pages/api/router';
-import { AuthContext } from '@/contexts/AuthContext';
 
 export default function FormLogin() {
   const [admin] = useState({
@@ -10,19 +10,17 @@ export default function FormLogin() {
     service: '',
   });
 
-  const { login } = useContext(AuthContext)
+  const { login } = useContext(AuthContext);
 
   async function loginAdmin(e: any) {
     admin.service = e.target.name;
-    const res =  router.apiPost(admin, 'admin');
+    const res = router.apiPost(admin, 'admin');
     let data;
     res.then((value) => {
+      data = value.result;
 
-        data = value.result
-        login(data)
-    })
-
-
+      login(data);
+    });
   }
 
   return (

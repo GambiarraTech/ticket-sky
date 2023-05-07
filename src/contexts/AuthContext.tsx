@@ -1,6 +1,6 @@
 import { getUser } from '@/pages/api/router';
 import Router from 'next/router';
-import { parseCookies, setCookie } from 'nookies';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from 'react';
 
 type User = {
@@ -18,6 +18,8 @@ type AuthContextType = {
   user: User;
   isLogged: boolean;
   login: ({ token, user }: loginData) => Promise<void>;
+  logout: () => Promise<void>;
+  autenticar: (path: string) => Promise<void>;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -47,8 +49,36 @@ export function AuthProvider({ children }: any) {
 
     setUser(user);
 
-    Router.push('/admin');
+    Router.push(`/${user.role}`);
   }
 
-  return <AuthContext.Provider value={{ user: user!, isLogged, login }}>{children}</AuthContext.Provider>;
+  async function logout() {
+    const cookies = parseCookies();
+
+    const token = cookies['ticketsky-token'];
+
+    if (token) {
+      getUser(token).then((response) => {
+        destroyCookie(undefined, 'ticketsky-token');
+
+        setUser(null);
+
+        Router.push(`/${response.user.role}/login`);
+      });
+    }
+  }
+
+  async function autenticar(path: string) {
+    const cookies = parseCookies();
+
+    const token = cookies['ticketsky-token'];
+
+    if (!token) {
+      Router.push(path);
+    }
+  }
+
+  return (
+    <AuthContext.Provider value={{ user: user!, isLogged, login, logout, autenticar }}>{children}</AuthContext.Provider>
+  );
 }

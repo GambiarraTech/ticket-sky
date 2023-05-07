@@ -1,9 +1,19 @@
 import SideMenu from '@/components/admin/SideMenu';
-import { useContext} from 'react';
 import { AuthContext } from '@/contexts/AuthContext';
+import { useContext } from 'react';
 
 export default function Admin() {
-  const { user } = useContext(AuthContext)
-  return <SideMenu>vai se fuder {user?.nome}</SideMenu>;
+  const { user, logout, autenticar } = useContext(AuthContext);
 
+  autenticar('/admin/login');
+
+  return (
+    <>
+      <SideMenu>
+        <p>vai se fuder {user?.nome}</p>
+        <button onClick={logout}> deslogar </button>
+      </SideMenu>
+      ;
+    </>
+  );
 }
