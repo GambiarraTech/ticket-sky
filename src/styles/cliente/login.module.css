@@ -1,0 +1,59 @@
+.modal {
+  @apply fixed inset-0 z-10 overflow-y-auto flex items-center min-h-screen px-4 py-8;
+}
+
+.modalBg {
+  @apply relative w-full max-w-lg p-4 mx-auto bg-[#ffffff] rounded-lg shadow-lg;
+}
+
+.bgBlur {
+  @apply fixed inset-0 w-full h-full bg-[#000000] opacity-40 blur-md;
+}
+
+.closeButtonPosition {
+  @apply flex justify-end;
+}
+
+.closeButton {
+  @apply p-2 text-[#808080] rounded-lg hover:bg-[#e2e8f0];
+}
+
+.hideFechar {
+  @apply sr-only;
+}
+
+.centerText {
+  @apply max-w-sm mx-auto py-3 space-y-3 text-center;
+}
+
+.centerLogo {
+  @apply flex flex-1 justify-center;
+}
+
+.title {
+  @apply text-lg font-medium text-[#2d3748];
+}
+
+.description {
+  @apply text-[15px] text-[#718096];
+}
+
+.inputPosition {
+  @apply flex flex-row gap-3;
+}
+
+.inputSignUp {
+  @apply w-full my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
+}
+
+.loginButton {
+  @apply block w-full mt-3 py-3 px-4 text-white text-sm text-center bg-ticket-sky-blue hover:bg-hoover-blue rounded-lg;
+}
+
+.linkButton {
+  @apply text-[#000d67]  ml-1 hover:underline cursor-pointer;
+}
+
+.positionLinkButton {
+  @apply flex justify-center text-black mt-5;
+}

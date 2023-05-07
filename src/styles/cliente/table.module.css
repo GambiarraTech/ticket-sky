@@ -1,0 +1,43 @@
+.positionTable {
+  @apply flex flex-col overflow-x-auto p-10 w-7/12 self-center m-auto;
+}
+
+.borderTable {
+  @apply overflow-hidden rounded-lg shadow-xl;
+}
+
+.table {
+  @apply min-w-full divide-y divide-gray-300;
+}
+
+.thead {
+  @apply bg-ticket-sky-blue;
+}
+
+.title {
+  @apply px-6 py-6 text-2xl text-center text-gray-50 uppercase font-semibold;
+}
+
+.tableContent {
+  @apply py-8 px-8 mx-auto bg-white rounded-xl shadow-xl space-y-2 sm:py-4 sm:flex sm:space-y-0 sm:space-x-6;
+}
+
+.contentText {
+  @apply text-center space-y-2 sm:text-left space-y-0.5;
+}
+
+.spaceText {
+  @apply space-y-1;
+}
+
+.eventName {
+  @apply text-xl text-black;
+}
+
+.eventInfo {
+  @apply text-slate-500 text-base;
+}
+
+.imgBorder {
+  @apply rounded-xl shadow-gray-700 shadow-md;
+}
