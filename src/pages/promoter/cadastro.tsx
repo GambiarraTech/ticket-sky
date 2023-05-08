@@ -1,11 +1,8 @@
 import style from '@/styles/promoter/acessoPromoter.module.css';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-
-const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function PromoterSignUp() {
   return (
