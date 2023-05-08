@@ -1,4 +1,4 @@
-import style from '@/styles/promoter/acessopromoter.module.css';
+import style from '@/styles/promoter/acessoPromoter.module.css';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import Image from 'next/image';
