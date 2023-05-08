@@ -1,5 +1,5 @@
-import SideMenu from '@/components/admin/sideMenu/sideMenu';
+import Layout from '@/components/admin/Layout';
 
 export default function Admin() {
-  return <SideMenu>Teste</SideMenu>;
+  return <Layout>Home</Layout>;
 }

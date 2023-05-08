@@ -1,0 +1,24 @@
+.navBar {
+  @apply h-24 w-[100%] bg-[#F6F6F5] flex justify-between items-center;
+}
+
+.navBar h1 {
+  @apply text-[#000D67] text-xl font-medium;
+}
+
+.buttons {
+  @apply h-full w-[10%] flex justify-center items-center space-x-6;
+}
+
+.icon {
+  @apply text-[#000D67];
+}
+
+.hr {
+  @apply bg-[#F6F6F5];
+}
+
+.hr hr {
+  @apply m-auto w-[90%];
+  color: #cecece;
+}

@@ -8,7 +8,6 @@ export default function loginAdmin() {
       <div className={styles.centro}>
         <Formulario />
       </div>
-
       <Footer />
     </main>
   );
