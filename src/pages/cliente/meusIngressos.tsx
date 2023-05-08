@@ -1,4 +1,4 @@
-import NavbarCliente from '@/components/cliente/navbar/NavbarCliente';
+import NavbarCliente from '@/components/cliente/navbar/Navbar';
 import Table, { meusIngressosType } from '@/components/cliente/table/TableIngressos';
 import Head from 'next/head';
 

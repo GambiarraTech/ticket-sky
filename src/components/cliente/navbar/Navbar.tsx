@@ -1,13 +1,13 @@
-import style from '@/styles/cliente/navbarCliente.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
+import style from '../../../styles/cliente/navbar.module.css';
 
 import LoginModal from '../login/LoginModal';
-import MenuDropDown from '../menu/menu';
-import LogoNavbar from './LogoNavbarCliente';
+import MenuDropDown from '../menu/Menu';
+import LogoNavbar from './LogoNavbar';
 
 interface NavbarClienteProps {
   Logado: boolean;

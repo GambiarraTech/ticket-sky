@@ -1,4 +1,4 @@
-import NavbarCliente from '@/components/cliente/navbar/NavbarCliente';
+import NavbarCliente from '@/components/cliente/navbar/Navbar';
 import Carousel from '@/components/promoter/Carousel';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';

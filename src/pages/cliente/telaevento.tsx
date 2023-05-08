@@ -1,11 +1,11 @@
-import CountInput from '@/components/cliente/input/CountInput';
-import NavbarCliente from '@/components/cliente/navbar/NavbarCliente';
-import style from '@/styles/cliente/telaEvento.module.css';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MdOutlineLocationCity } from 'react-icons/md';
+import CountInput from '../../components/cliente/input/CountInput';
+import NavbarCliente from '../../components/cliente/navbar/Navbar';
+import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BiCreditCard } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { IoLogOutOutline, IoTicket } from 'react-icons/io5';
-import MeuPerfil from './meuPerfil';
+import MeuPerfil from './MeuPerfil';
 
 interface MenuDropDownProps {
   showModalMenu: boolean;

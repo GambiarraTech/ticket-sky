@@ -1,9 +1,9 @@
-import style from '@/styles/promoter/navbar.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
+import style from '../../styles/promoter/navbar.module.css';
 import Menu from './Menu';
 
 export default function NavBar({ children }: any) {
