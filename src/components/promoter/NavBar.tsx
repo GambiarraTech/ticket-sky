@@ -1,12 +1,12 @@
-import style from '@/styles/promoter/navbar.module.css';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
-import { Menu } from '../menu/menu';
-import LogoNavbarPromoter from './LogoNavBar';
+import style from '../../styles/promoter/navbar.module.css';
+import Menu from './Menu';
 
-export const Navbar = ({ children }: any) => {
+export default function NavBar({ children }: any) {
   const [showmenu, setshowmenu] = useState(false);
   const whenclick = () => {
     setshowmenu(!showmenu);
@@ -17,7 +17,7 @@ export const Navbar = ({ children }: any) => {
         <nav className={style.title}>
           <div className={style.logo}>
             <Link href="">
-              <LogoNavbarPromoter />
+              <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />
             </Link>
           </div>
           <div>
@@ -37,4 +37,4 @@ export const Navbar = ({ children }: any) => {
       {children}
     </header>
   );
-};
+}

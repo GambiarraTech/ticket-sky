@@ -5,7 +5,7 @@ interface MenuProps {
   whenclick: () => void;
 }
 
-export const Menu = ({ showmenu, whenclick }: MenuProps) => {
+export default function Menu({ showmenu, whenclick }: MenuProps) {
   return (
     <>
       {showmenu && (
@@ -52,4 +52,4 @@ export const Menu = ({ showmenu, whenclick }: MenuProps) => {
       )}
     </>
   );
-};
+}

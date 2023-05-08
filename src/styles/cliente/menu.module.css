@@ -1,0 +1,32 @@
+.dropdown {
+  @apply absolute flex flex-col top-20 right-6 w-60 p-4 rounded-lg bg-white border border-gray-700;
+}
+
+.dropdown::before {
+  @apply absolute top-[-0.7rem] right-[1.1rem] w-[20px] h-[20px] transform rotate-45 bg-white border-t border-l border-gray-700;
+  content: '';
+}
+
+.menu {
+  @apply flex flex-col items-start gap-4;
+}
+
+.bg {
+  @apply fixed inset-0 w-full h-full;
+}
+
+.positionIcons {
+  @apply flex items-center my-2;
+}
+
+.button {
+  @apply mr-4 flex;
+}
+
+.icone {
+  @apply mr-4 text-[#0013a6];
+}
+
+.iconeLogout {
+  @apply mr-4 text-[#a60e00];
+}
