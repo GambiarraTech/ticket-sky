@@ -1,7 +1,7 @@
 import styles from '@/styles/admin/Layout.module.css';
 import Footer from './Footer';
 import NavBar from './NavBar';
-import SideMenu from './sideMenu';
+import SideMenu from './SideMenu';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
