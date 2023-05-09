@@ -1,5 +1,4 @@
 import styles from '@/styles/admin/sideMenu.module.css';
-import Link from 'next/link';
 import { FaFolderOpen, FaTicketAlt, FaUserTie, FaUsers } from 'react-icons/fa';
 export default function SideMenu({ children }: { children: React.ReactNode }) {
   return (
@@ -12,31 +11,31 @@ export default function SideMenu({ children }: { children: React.ReactNode }) {
 
         <div className={styles.optionsList}>
           <div className={styles.optionsItem}>
-            <Link href="/admin/administradores">
+            <a href="">
               <FaUserTie className={styles.icon} />
               Administradores
-            </Link>
+            </a>
           </div>
 
           <div className={styles.optionsItem}>
-            <Link href="/admin/promoters">
+            <a href="">
               <FaUsers className={styles.icon} />
               Promoters
-            </Link>
+            </a>
           </div>
 
           <div className={styles.optionsItem}>
-            <Link href="/admin/eventos">
+            <a href="">
               <FaTicketAlt className={styles.icon} />
               Eventos
-            </Link>
+            </a>
           </div>
 
           <div className={styles.optionsItem}>
-            <Link href="/admin/relatorios">
+            <a href="">
               <FaFolderOpen className={styles.icon} />
               Relatórios
-            </Link>
+            </a>
           </div>
         </div>
         <hr className={styles.hr} />
