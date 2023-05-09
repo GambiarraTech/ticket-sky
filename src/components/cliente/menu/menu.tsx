@@ -24,14 +24,17 @@ interface MenuDropDownProps {
 export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownProps) {
   const [activeModal, setActiveModal] = useState<JSX.Element | null>(null);
 
+  //Muda estado do componente - ativo
   const handleClick = (component: JSX.Element) => {
     setActiveModal(component);
   };
 
+  //Estado do componente = null
   const handleClose = () => {
     setActiveModal(null);
   };
 
+  //Map dos botões
   const menuButtons: MenuButton[] = [
     {
       label: 'Ver Perfil',
@@ -53,16 +56,12 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
     },
   ];
 
-  const handleButtonClick = (button: MenuButton) => {
-    handleClick(button.component);
-  };
-
   return (
     <>
       {showModalMenu && (
         <div className={style.dropdown}>
           {menuButtons.map((button) => (
-            <ul onClick={() => handleButtonClick(button)}>
+            <ul onClick={() => handleClick(button.component)}>
               <button className={style.button}>
                 {button.icon}
                 {button.label}
