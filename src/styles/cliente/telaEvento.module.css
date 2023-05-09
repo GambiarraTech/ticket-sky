@@ -1,0 +1,76 @@
+.section {
+  @apply text-gray-700 overflow-hidden;
+}
+
+.containerGeral {
+  @apply container px-5 py-24 lg:w-4/5 mx-auto flex flex-wrap;
+}
+
+.imgBanner {
+  @apply lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded;
+}
+
+.content {
+  @apply lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0;
+}
+
+.promoterName {
+  @apply text-sm text-gray-700 tracking-widest mb-3;
+}
+
+.eventName {
+  @apply text-ticket-sky-blue text-3xl font-medium mb-1 flex mb-4;
+}
+
+.description {
+  @apply leading-relaxed;
+}
+
+.eventInfo {
+  @apply flex mt-6 items-center pb-5 border-b-2 max-w-screen-xl border-gray-50 mb-5 flex-col ml-6 w-full;
+}
+
+.countPosition {
+  @apply flex-col ml-6 w-full;
+}
+
+.eventInfoIndividual {
+  @apply flex flex-row gap-4 items-center justify-between;
+}
+
+.flexEvent {
+  @apply flex;
+}
+
+.price {
+  @apply font-medium text-2xl text-gray-900;
+}
+
+.positionBuyButton {
+  @apply flex flex-1 justify-end;
+}
+
+.buyButton {
+  @apply mr-1.5 flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 rounded;
+}
+
+.eventLocation {
+  @apply mt-8 text-lg text-ticket-sky-blue;
+}
+
+.iconLocation {
+  @apply gap-2 mt-6 flex flex-row items-center;
+}
+
+/* COUNT INPUT */
+.countInput {
+  @apply flex items-center w-full justify-end;
+}
+
+.buttonCount {
+  @apply bg-gray-200 hover:bg-gray-400 rounded-lg px-3 py-2 focus:outline-none;
+}
+
+.centerQuant {
+  @apply px-3 py-2 w-16 text-center;
+}

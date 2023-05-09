@@ -1,17 +1,40 @@
 import { query } from '@/lib/db'
 
+export type Admin = {
+    id: number,
+    nome: string,
+    senha: string,
+    email: string,
+    super_admin: number
+}
+
 export async function loginAdmin(email: string, senha: string) {
 
-    const admin = await query({
+    const admin : any = await query({
         query: "SELECT * FROM administrador WHERE administrador.email = (?) AND administrador.senha = (?)",
-        values: [email, senha]
+        values: [email, senha],
     })
 
     if (Object.keys(admin).length > 0) {
-        return admin
+        return admin[0]
     } else {
         return null
     }
 
+
+}
+
+export async function getAdmin(id: string) {
+
+    const admin : any = await query({
+        query: "SELECT * FROM administrador WHERE administrador.id = (?)",
+        values: [id],
+    })
+
+    if (Object.keys(admin).length > 0) {
+        return admin[0]
+    } else {
+        return null
+    }
 
 }

@@ -1,10 +1,7 @@
-.bg {
+.background {
   @apply bg-ticket-sky-blue h-screen;
 }
-.teste {
-  @apply cursor-pointer;
-}
 
-.centro {
-  @apply bg-ticket-sky-blue justify-center flex;
+.container {
+  @apply pt-24 flex flex-col items-center;
 }

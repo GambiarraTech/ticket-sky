@@ -1,12 +1,14 @@
 import Footer from '@/components/admin/Footer';
-import Formulario from '@/components/admin/Formulario';
+import TitleLogin from '@/components/admin/TitleLogin';
 import styles from '@/styles/admin/loginAdmin.module.css';
+import FormLogin from '../../components/admin/FormLogin';
 
 export default function loginAdmin() {
   return (
-    <main className={styles.bg}>
-      <div className={styles.centro}>
-        <Formulario />
+    <main className={styles.background}>
+      <div className={styles.container}>
+        <TitleLogin />
+        <FormLogin />
       </div>
       <Footer />
     </main>
