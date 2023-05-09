@@ -87,7 +87,7 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                   </div>
                   <button
                     onSubmit={handleLogado}
-                    onClick={() => router.apiPost(cliente, 'cliente')}
+                    onClick={() => router.apiPost(cliente, 'cadastroCliente')}
                     className={style.loginButton}
                   >
                     {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
