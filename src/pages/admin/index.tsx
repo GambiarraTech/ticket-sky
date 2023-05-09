@@ -1,5 +1,6 @@
-import SideMenu from '@/components/admin/SideMenu';
+
 import { AuthContext } from '@/contexts/AuthContext';
+import Layout from '@/components/admin/Layout';
 import { useContext } from 'react';
 
 export default function Admin() {
@@ -9,10 +10,10 @@ export default function Admin() {
 
   return (
     <>
-      <SideMenu>
+      <Layout>
         <p>vai se fuder {user?.nome}</p>
         <button onClick={logout}> deslogar </button>
-      </SideMenu>
+      </Layout>
       ;
     </>
   );
