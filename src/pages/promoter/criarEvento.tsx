@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
 import Dropzone from '../../components/promoter/Dropzone';
+import parseCookies from 'nookies';
+import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '../api/router'
 
 export default function CriarEvento() {
   const [evento, setEvento] = useState({
@@ -19,7 +22,18 @@ export default function CriarEvento() {
     backstage: 0,
   });
 
+  const { user, logout, autenticar } = useContext(AuthContext);
+  autenticar('/promoter/cadastro');
   const [selectedFile, setSelectedFile] = useState<File>();
+
+    const cookies = parseCookies.get();
+
+    const token = cookies['ticketsky-token'];
+
+    const id = token.split('-')[1]
+
+
+
 
   const handleForm = (event: any) => {
     event.preventDefault();
@@ -35,13 +49,27 @@ export default function CriarEvento() {
     data.append('vip',`${evento.vip}`); //*formData só aceita strig ou arquivo
     data.append('pista',`${evento.pista}`);
     data.append('backstage',`${evento.backstage}`);
+    data.append('idPromoter',id)
+    data.append('service','criarEvento')
     if(selectedFile){
         data.append('imagem',selectedFile);
     }
+
+
+    const res = router.apiPost(data, 'evento');
+    let dado;
+    res.then((value) => {
+      dado = value.result;
+    })
+
+
+
+
     console.log(JSON.stringify(evento));
     for (const [chave, valor] of data.entries()) {
         console.log(chave, valor);
       }
+      console.log(data.get('nome'))
     /*const objeto = Object.fromEntries(data.entries());
     const jsonString = JSON.stringify(objeto);
 
@@ -52,7 +80,7 @@ export default function CriarEvento() {
     <NavBar>
       <div className={style.header}>
         <div className={style.title}>Criar Evento</div>
-        <form className={style.formulario} onSubmit={handleForm}>
+        <form className={style.formulario} name='criarEvento' onSubmit={handleForm}>
           <div className={style.partes}>
             <div className={style.campo}>
               Nome do evento:
