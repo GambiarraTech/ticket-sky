@@ -1,8 +1,14 @@
 export async function apiGet(endpoint: any) {
 
-    const response = await fetch(`../api/${endpoint}`);
+    const response = await fetch(`../api/${endpoint}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
 
-    return response.json;
+    return response.json();
+
 }
 
 export async function apiPost(data: any, endpoint: any) {

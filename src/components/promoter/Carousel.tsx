@@ -1,3 +1,4 @@
+import { apiGet } from '@/pages/api/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -22,9 +23,9 @@ export default function Carousel({ title, page }: CarouselProps) {
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/static/sampleDatas.json')
-      .then((response) => response.json())
-      .then(setData);
+    apiGet('evento').then((value) => {
+      setData(value.result);
+    });
   }, []);
 
   const handleLeftClick = (e: any) => {
@@ -62,17 +63,20 @@ export default function Carousel({ title, page }: CarouselProps) {
       <div className={styles.container}>
         <div className={styles.carousel} ref={carousel}>
           {data.map((item) => {
-            const { id, name, date, address, image } = item;
+            const { id, descricao, banner, data_hora, nome, bairro, rua, number } = item;
+            const url = 'data:image/png;base64,' + banner;
             return (
               <Link href={`/${page}`} key={id}>
                 <div className={styles.item} key={id}>
                   <div className={styles.image}>
-                    <Image src={image} alt={name} height="260" width="420" />
+                    <Image src={url} alt={nome} height="260" width="420" />
                   </div>
                   <div className={styles.info}>
-                    <span className={styles.date}>{date}</span>
-                    <span className={styles.name}>{name}</span>
-                    <span className={styles.address}>{address}</span>
+                    <span className={styles.date}>{data_hora}</span>
+                    <span className={styles.name}>{nome}</span>
+                    <span className={styles.address}>
+                      {bairro}, {rua}, {number}
+                    </span>
                   </div>
                 </div>
               </Link>

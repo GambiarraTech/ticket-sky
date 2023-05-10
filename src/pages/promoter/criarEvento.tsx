@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
 import Dropzone from '../../components/promoter/Dropzone';
+import parseCookies from 'nookies';
+import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '../api/router'
 
 export default function CriarEvento() {
   const [evento, setEvento] = useState({
@@ -21,6 +24,15 @@ export default function CriarEvento() {
 
   const [selectedFile, setSelectedFile] = useState<File>();
 
+  const { user, logout, autenticar } = useContext(AuthContext);
+  autenticar('/promoter/cadastro');
+
+  const cookies = parseCookies.get();
+
+    const token = cookies['ticketsky-token'];
+
+    const id = token.split('-')[1]
+
   const handleForm = (event: any) => {
     event.preventDefault();
     const data = new FormData();
@@ -35,9 +47,20 @@ export default function CriarEvento() {
     data.append('vip',`${evento.vip}`); //*formData só aceita strig ou arquivo
     data.append('pista',`${evento.pista}`);
     data.append('backstage',`${evento.backstage}`);
+    data.append('idPromoter',id)
+    data.append('service','criarEvento')
     if(selectedFile){
         data.append('imagem',selectedFile);
     }
+
+    const res = router.apiPost(data, 'evento');
+    let dado;
+    res.then((value) => {
+      dado = value.result;
+    })
+
+
+    
     console.log(JSON.stringify(evento));
     for (const [chave, valor] of data.entries()) {
         console.log(chave, valor);
