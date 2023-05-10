@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
+import Dropzone from '../../components/promoter/Dropzone';
+import parseCookies from 'nookies';
+import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '../api/router'
 
 export default function CriarEvento() {
   const [evento, setEvento] = useState({
@@ -12,24 +16,60 @@ export default function CriarEvento() {
     local: '',
     data: '',
     hora: '',
-    minuto: '',
     descricao: '',
-    imagem: '',
     vip: 0,
-    camarote: 0,
+    pista: 0,
     backstage: 0,
   });
 
-  const handleFormEdit = (event: any, name: string) => {
-    setEvento({ ...evento, [name]: event.target.value });
-    event.preventDefault();
-  };
+  const [selectedFile, setSelectedFile] = useState<File>();
+
+  const { user, logout, autenticar } = useContext(AuthContext);
+  autenticar('/promoter/cadastro');
+
+  const cookies = parseCookies.get();
+
+    const token = cookies['ticketsky-token'];
+
+    const id = token.split('-')[1]
 
   const handleForm = (event: any) => {
     event.preventDefault();
-    console.log(JSON.stringify(evento));
-  };
+    const data = new FormData();
+    data.append('nome',evento.nome);
+    data.append('cidade',evento.cidade);
+    data.append('bairro',evento.bairro);
+    data.append('cep',evento.cep);
+    data.append('categoria',evento.categoria);
+    data.append('local',evento.local);
+    data.append('data',evento.data);
+    data.append('descricao',evento.descricao);
+    data.append('vip',`${evento.vip}`); //*formData só aceita strig ou arquivo
+    data.append('pista',`${evento.pista}`);
+    data.append('backstage',`${evento.backstage}`);
+    data.append('idPromoter',id)
+    data.append('service','criarEvento')
+    if(selectedFile){
+        data.append('imagem',selectedFile);
+    }
 
+    const res = router.apiPost(data, 'evento');
+    let dado;
+    res.then((value) => {
+      dado = value.result;
+    })
+
+
+    
+    console.log(JSON.stringify(evento));
+    for (const [chave, valor] of data.entries()) {
+        console.log(chave, valor);
+      }
+    /*const objeto = Object.fromEntries(data.entries());
+    const jsonString = JSON.stringify(objeto);
+
+    console.log(jsonString);*/
+  };
 
   return (
     <NavBar>
@@ -169,58 +209,53 @@ export default function CriarEvento() {
           </div>
 
           <div className={style.partes}>
+
             <div className={style.campo}>
               Banner do evento:
-              <input
-                className={style.input_imagem}
-                name="imagem"
-                type="file"
-                accept="image/*"
-                required
-                onChange={(e) => {
-                  evento.imagem = e.target.value;
-                }}
-              />
+              <Dropzone onFileUploaded = {setSelectedFile} />
             </div>
+
             <div className={style.data}>Quantidade de ingressos disponiveis:</div>
-            <div className={style.campo}>
-              VIP:
-              <input
-                className={style.input_pequeno}
-                name="vip"
-                type="number"
-                min={0}
-                required
-                onChange={(e) => {
-                  evento.vip = Number(e.target.value);
-                }}
-              />
-            </div>
-            <div className={style.campo}>
-              Camarote:
-              <input
-                className={style.input_pequeno}
-                name="camarote"
-                type="number"
-                min={0}
-                required
-                onChange={(e) => {
-                  evento.camarote = Number(e.target.value);
-                }}
-              />
-            </div>
-            <div className={style.campo}>
-              Backstage:
-              <input
-                className={style.input_pequeno}
-                name="backstage"
-                type="number"
-                min={0}
-                required
-                onChange={(e) => {
-                  evento.backstage = Number(e.target.value);
-                }}
-              />
+            <div className={style.ingressos}>
+              <div className={style.campo}>
+                VIP:
+                <input
+                  className={style.input_pequeno}
+                  name="vip"
+                  type="number"
+                  min={0}
+                  required
+                  onChange={(e) => {
+                    evento.vip = Number(e.target.value);
+                  }}
+                />
+              </div>
+              <div className={style.campo}>
+                Pista:
+                <input
+                  className={style.input_pequeno}
+                  name="pista"
+                  type="number"
+                  min={0}
+                  required
+                  onChange={(e) => {
+                    evento.pista = Number(e.target.value);
+                  }}
+                />
+              </div>
+              <div className={style.campo}>
+                Backstage:
+                <input
+                  className={style.input_pequeno}
+                  name="backstage"
+                  type="number"
+                  min={0}
+                  required
+                  onChange={(e) => {
+                    evento.backstage = Number(e.target.value);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </form>

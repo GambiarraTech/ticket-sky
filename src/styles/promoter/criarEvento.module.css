@@ -22,7 +22,7 @@
 }
 
 .data{
-    @apply font-semibold flex gap-2
+    @apply font-semibold flex gap-2 mt-2
 }
 
 .input_data{
@@ -44,4 +44,8 @@
 
 .input_pequeno{
     @apply w-14 bg-blue-100 rounded-lg p-1 hover:bg-blue-200 hover:scale-105
+}
+
+.ingressos{
+    @apply flex text-sm gap-2 justify-center items-center
 }

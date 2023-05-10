@@ -1,51 +1,79 @@
-import style from '@/styles/cliente/menu.module.css';
-
 import { useState } from 'react';
+
+import style from '@/styles/cliente/menu.module.css';
+import CartaoCredito from './cartaoCredito';
+import MeuPerfil from './meuPerfil';
+
+import Link from 'next/link';
 import { BiCreditCard } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
-import { IoLogOutOutline, IoTicket } from 'react-icons/io5';
-import MeuPerfil from './MeuPerfil';
+import { IoTicket } from 'react-icons/io5';
+
+interface MenuButton {
+  label: string | JSX.Element; // Nome do botão no menu
+  icon: JSX.Element; // Ícone do botão
+  type: 'modal' | 'link'; // Tipo do botão
+  component: JSX.Element;
+}
 
 interface MenuDropDownProps {
   showModalMenu: boolean;
-  whenClick: () => void;
+  whenClick: () => void; // Para verificar se clicou no botão de perfil (vem da navbar)
 }
 
 export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownProps) {
-  const [showModalPerfil, setShowModalPerfil] = useState(false);
+  const [activeModal, setActiveModal] = useState<JSX.Element | null>(null);
 
-  const handleClick = () => {
-    setShowModalPerfil(!setShowModalPerfil);
+  const handleClick = (component: JSX.Element) => {
+    setActiveModal(component);
+  };
+
+  const handleClose = () => {
+    setActiveModal(null);
+  };
+
+  const menuButtons: MenuButton[] = [
+    {
+      label: 'Ver Perfil',
+      icon: <FaUser size={24} className={style.icone} />,
+      type: 'modal',
+      component: <MeuPerfil handleClick={handleClick} handleClose={handleClose} />,
+    },
+    {
+      label: 'Cartão de crédito',
+      icon: <BiCreditCard size={24} className={style.icone} />,
+      type: 'modal',
+      component: <CartaoCredito handleClick={handleClick} handleClose={handleClose} />,
+    },
+    {
+      label: <Link href="/cliente/meusIngressos">Meus Ingressos</Link>,
+      icon: <IoTicket size={24} className={style.icone} />,
+      type: 'link',
+      component: <Link href="/cliente/meusIngressos"></Link>, //IGNORAR ESSA MERDA
+    },
+  ];
+
+  const handleButtonClick = (button: MenuButton) => {
+    handleClick(button.component);
   };
 
   return (
     <>
-      <MeuPerfil showModalPerfil={showModalPerfil} handleClick={handleClick} />
       {showModalMenu && (
-        <div className={style.dropdown} onClick={() => setShowModalPerfil(true)}>
-          <ul className={style.menu}>
-            <span className={style.positionIcons}>
+        <div className={style.dropdown}>
+          {menuButtons.map((button) => (
+            <ul onClick={() => handleButtonClick(button)}>
               <button className={style.button}>
-                <FaUser size={24} className={style.icone} />
-                Ver Perfil
+                {button.icon}
+                {button.label}
               </button>
-            </span>
-
-            <span className={style.positionIcons}>
-              <BiCreditCard size={24} className={style.icone} />
-              <li>Cartão de Crédito</li>
-            </span>
-
-            <span className={style.positionIcons}>
-              <IoTicket size={24} className={style.icone} />
-              <li>Meus Ingressos</li>
-            </span>
-
-            <span className={style.positionIcons}>
-              <IoLogOutOutline size={24} className={style.iconeLogout} />
-              <li>Logout</li>
-            </span>
-          </ul>
+            </ul>
+          ))}
+        </div>
+      )}
+      {activeModal && (
+        <div onClick={handleClose}>
+          <div onClick={(e) => e.stopPropagation()}>{activeModal}</div>
         </div>
       )}
     </>

@@ -1,15 +1,19 @@
+/* Modal */
 .modal {
   @apply fixed inset-0 z-10 overflow-y-auto flex items-center min-h-screen px-4 py-8;
 }
 
+/* Quadrado branco - bg modal */
 .modalBg {
   @apply relative w-full max-w-lg p-4 mx-auto bg-[#ffffff] rounded-lg shadow-lg;
 }
 
+/* Blur do fundo */
 .bgBlur {
   @apply fixed inset-0 w-full h-full bg-[#000000] opacity-40 blur-md;
 }
 
+/* Botão de fechar */
 .closeButtonPosition {
   @apply flex justify-end;
 }
@@ -22,10 +26,12 @@
   @apply sr-only;
 }
 
+/* Centralizar texto no modal*/
 .centerText {
   @apply max-w-sm mx-auto py-3 space-y-3 text-center;
 }
 
+/* Centralizar logo no modal*/
 .centerLogo {
   @apply flex flex-1 justify-center;
 }
@@ -34,10 +40,12 @@
   @apply text-lg font-medium text-[#2d3748];
 }
 
+/* Descrição abaixo da logo  */
 .description {
   @apply text-[15px] text-[#718096];
 }
 
+/* Inputs */
 .inputPosition {
   @apply flex flex-row gap-3;
 }
@@ -46,10 +54,12 @@
   @apply w-full my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
 }
 
+/* Botão fazer login/fazer cadastro */
 .loginButton {
   @apply block w-full mt-3 py-3 px-4 text-white text-sm text-center bg-ticket-sky-blue hover:bg-hoover-blue rounded-lg;
 }
 
+/* Botão Primeiro acesso? - link */
 .linkButton {
   @apply text-[#000d67]  ml-1 hover:underline cursor-pointer;
 }

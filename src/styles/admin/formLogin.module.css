@@ -18,3 +18,7 @@
   margin-block-start: auto;
   color: white;
 }
+
+.mensagemErro {
+    @apply text-[red] pb-2 -mt-7 font-medium text-sm;
+  }
