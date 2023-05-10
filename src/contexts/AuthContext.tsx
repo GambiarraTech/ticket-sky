@@ -27,8 +27,11 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
 
+  //isLogged recebe true se o ''user'' existir e false caso não exista
   const isLogged = !!user;
 
+  //useEffect() é uma função que é executada toda vez que algo é renderizado, no caso abaixo
+  //é verificado a todo momento se o token existe e caso exista salva o usuario da aplicacao
   useEffect(() => {
     const cookies = parseCookies();
 
@@ -41,6 +44,7 @@ export function AuthProvider({ children }: any) {
     }
   }, []);
 
+  //Faz o login na aplicaçao cria o token, seta o usuario e redireciona para a pagina em questao que o usuario pertence
   async function login({ token, user }: loginData) {
     //setando cookie (contexto, nome, token, parametros adicionais)
     setCookie(undefined, 'ticketsky-token', token, {
@@ -52,6 +56,8 @@ export function AuthProvider({ children }: any) {
     Router.push(`/${user.role}`);
   }
 
+  //Funçao que faz o logout do usuario do sistema, destrói o token, seta o usuario da aplicaçao como null
+  //e redireciona para o login do tipo do usuario logado anteriormente
   async function logout() {
     const cookies = parseCookies();
 
@@ -68,6 +74,7 @@ export function AuthProvider({ children }: any) {
     }
   }
 
+  //Funçao que checa se existe um usuario logado e caso nao exista redireciona o usuario ao caminho inserido nos parametros
   async function autenticar(path: string) {
     const cookies = parseCookies();
 
