@@ -69,11 +69,11 @@ export default function Carousel({ title, page }: CarouselProps) {
               <Link href={`/${page}`} key={id}>
                 <div className={styles.item} key={id}>
                   <div className={styles.image}>
-                    <Image src={url} alt={nome} height="260" width="420" />
+                    <Image src={url} alt={descricao} height="260" width="420" />
                   </div>
                   <div className={styles.info}>
                     <span className={styles.date}>{data_hora}</span>
-                    <span className={styles.name}>{nome}</span>
+                    <span className={styles.name}>{descricao}</span>
                     <span className={styles.address}>
                       {bairro}, {rua}, {number}
                     </span>
