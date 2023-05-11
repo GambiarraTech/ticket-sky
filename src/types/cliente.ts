@@ -1,11 +1,14 @@
 import { query } from '@/lib/db'
 
 export type Cliente = {
+
     id: number,
     nome: string,
-    senha: string,
-    email: string,
+    sobrenome: string,
     cpf: string,
+    email: string,
+    senha: string,
+
 }
 
 

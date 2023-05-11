@@ -67,3 +67,7 @@
 .positionLinkButton {
   @apply flex justify-center text-black mt-5;
 }
+
+.mensagemErro {
+  @apply text-[red] pb-2 -mt-7 font-medium text-sm;
+}

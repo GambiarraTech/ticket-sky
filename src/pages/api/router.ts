@@ -6,7 +6,6 @@ export async function apiGet(endpoint: any) {
 }
 
 export async function apiPost(data: any, endpoint: any) {
-
     const response = await fetch(`../api/${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -60,6 +59,7 @@ export async function getUser(token: string) {
         }
         case '3': {
             const response = await fetch(`../api/cliente?id=${user_id}`);
+            return await response.json().then(data => (data))
         }
     }
 

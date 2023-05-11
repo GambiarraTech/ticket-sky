@@ -28,7 +28,6 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
     email: '',
     senha: '',
     service: '',
-    method: '',
   });
 
   const { login } = useContext(AuthContext);
@@ -38,10 +37,17 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
     cliente.service = e.target.name;
     const res = router.apiPost(cliente, 'cliente');
     let data;
+
+    console.log(e.target.name);
+
+    console.log('entrou');
+
     res.then((value) => {
       data = value.result;
       login(data);
     });
+
+    console.log(res);
 
     if (!data) {
       setShowErro(true);
@@ -104,10 +110,14 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                     onChange={(e) => (cliente.senha = e.target.value)}
                   />
                 </div>
-                <button onClick={variant === 'signIn' ? loginCliente : cadastroCliente} className={style.loginButton}>
+                <button
+                  name="loginCliente"
+                  onClick={variant === 'signIn' ? loginCliente : cadastroCliente}
+                  className={style.loginButton}
+                >
                   {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
                 </button>
-
+                <p className={style.mensagemErro}>{showErro ? 'Usuario ou senha incorreta!' : ''}</p>
                 <p className={style.positionLinkButton}>
                   {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
                   <span onClick={changeVariant} className={style.linkButton}>

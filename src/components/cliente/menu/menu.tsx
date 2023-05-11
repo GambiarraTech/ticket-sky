@@ -1,13 +1,14 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import style from '@/styles/cliente/menu.module.css';
 import CartaoCredito from './cartaoCredito';
 import MeuPerfil from './meuPerfil';
 
+import { AuthContext } from '@/contexts/AuthContext';
 import { BiCreditCard } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
-import { IoTicket } from 'react-icons/io5';
+import { IoLogOutOutline, IoTicket } from 'react-icons/io5';
 
 interface MenuButton {
   label: string | JSX.Element; // Nome do botão no menu
@@ -23,6 +24,7 @@ interface MenuDropDownProps {
 
 export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownProps) {
   const [activeModal, setActiveModal] = useState<JSX.Element | null>(null);
+  const { user, logout } = useContext(AuthContext);
 
   const handleClick = (component: JSX.Element) => {
     console.log(component);
@@ -66,6 +68,10 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
               </li>
             </ul>
           ))}
+          <button className={style.button} onClick={logout}>
+            <IoLogOutOutline size={24} className={style.icone} />
+            Logout
+          </button>
         </div>
       )}
       {activeModal && (

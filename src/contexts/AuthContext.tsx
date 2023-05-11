@@ -6,6 +6,8 @@ import { createContext, useEffect, useState } from 'react';
 type User = {
   email: string;
   nome: string;
+  sobrenome: string;
+  cpf: string | undefined;
   role: string;
 };
 
@@ -62,8 +64,16 @@ export function AuthProvider({ children }: any) {
         destroyCookie(undefined, 'ticketsky-token');
 
         setUser(null);
-
-        Router.push(`/${response.user.role}/login`);
+        Router.push(`/`);
+        //erro
+        // if (response.user.role == 'cliente') {
+        //   Router.push(`/admin`); //alterar para index geral
+        // } else if (response.user.role == 'promoter') {
+        //   Router.push(`/${response.user.role}`);
+        // } else {
+        //   Router.push(`/${response.user.role}/login`);
+        // }
+        console.log(response);
       });
     }
   }

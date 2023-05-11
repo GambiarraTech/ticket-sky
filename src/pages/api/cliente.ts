@@ -24,6 +24,9 @@ export default async (req: any, res: any) => {
                         user: {
                             email: checkLogin.email,
                             nome: checkLogin.nome,
+                            sobrenome: checkLogin.sobrenome,
+                            senha: checkLogin.senha,
+                            cpf: checkLogin.cpf,
                             role: 'cliente'
                         }
                     }
