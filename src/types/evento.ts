@@ -8,6 +8,6 @@ export async function fillCatalog() {
     if (Object.keys(itens).length > 0) {
         return itens
     } else {
-        return "Catálogo vazio."
+        return null
     }
 }

@@ -39,7 +39,6 @@ export default function Carousel({ title, page }: CarouselProps) {
     e.preventDefault();
     if (carousel.current != null) {
       carousel.current.scrollLeft += carousel.current.offsetWidth;
-      console.log(carousel.current.offsetWidth);
     }
   };
 
