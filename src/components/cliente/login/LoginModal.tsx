@@ -1,5 +1,6 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import style from '@/styles/cliente/login.module.css';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import * as router from '../../../pages/api/router';
 import LogoModal from './LogoModal';
@@ -11,7 +12,6 @@ interface LoginModalProps {
 
 export default function LoginModal({ showModal, handleClick }: LoginModalProps) {
   const [variant, setVariant] = useState('signIn');
-  const [logado, setLogado] = useState(false);
 
   const changeVariant = useCallback(() => {
     setVariant((currentvariant) => (currentvariant === 'signIn' ? 'signUp' : 'signIn'));
@@ -22,16 +22,35 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
     handleClick();
   };
 
-  const handleLogado = () => {
-    setLogado(true);
-  };
-
-  const [cliente, setCliente] = useState({
+  const [cliente] = useState({
     nome: '',
     sobrenome: '',
     email: '',
     senha: '',
+    service: '',
+    method: '',
   });
+
+  const { login } = useContext(AuthContext);
+  const [showErro, setShowErro] = useState(false);
+
+  async function loginCliente(e: any) {
+    cliente.service = e.target.name;
+    const res = router.apiPost(cliente, 'cliente');
+    let data;
+    res.then((value) => {
+      data = value.result;
+      login(data);
+    });
+
+    if (!data) {
+      setShowErro(true);
+    }
+  }
+
+  async function cadastroCliente(e: any) {
+    router.apiPost(cliente, 'cadastroCliente');
+  }
 
   return (
     <>
@@ -52,53 +71,49 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                 </h3>
                 <h4 className={style.title}>{variant === 'signIn' ? 'Faça Login' : 'Faça seu Cadastro'}</h4>
                 <p className={style.description}>Bem-vindo ao TicketSky, preencha os campos abaixo para continuar.</p>
-                <form onSubmit={handleLogin}>
-                  <div className="">
-                    {variant === 'signUp' && (
-                      <div className={style.inputPosition}>
-                        <input
-                          className={style.inputSignUp}
-                          placeholder="Nome"
-                          type="text"
-                          onChange={(e) => (cliente.nome = e.target.value)}
-                        />
-                        <input
-                          className={style.inputSignUp}
-                          placeholder="Sobrenome"
-                          type="text"
-                          onChange={(e) => (cliente.sobrenome = e.target.value)}
-                        />
-                      </div>
-                    )}
-                    <input
-                      className={style.inputSignUp}
-                      placeholder="E-mail"
-                      type="email"
-                      onChange={(e) => (cliente.email = e.target.value)}
-                    />
-                  </div>
-                  <div className="">
-                    <input
-                      className={style.inputSignUp}
-                      placeholder="Senha"
-                      type="password"
-                      onChange={(e) => (cliente.senha = e.target.value)}
-                    />
-                  </div>
-                  <button
-                    onSubmit={handleLogado}
-                    onClick={() => router.apiPost(cliente, 'cadastroCliente')}
-                    className={style.loginButton}
-                  >
-                    {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
-                  </button>
-                  <p className={style.positionLinkButton}>
-                    {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
-                    <span onClick={changeVariant} className={style.linkButton}>
-                      {variant === 'signIn' ? 'Criar Conta' : 'Fazer Login'}
-                    </span>
-                  </p>
-                </form>
+
+                <div className="">
+                  {variant === 'signUp' && (
+                    <div className={style.inputPosition}>
+                      <input
+                        className={style.inputSignUp}
+                        placeholder="Nome"
+                        type="text"
+                        onChange={(e) => (cliente.nome = e.target.value)}
+                      />
+                      <input
+                        className={style.inputSignUp}
+                        placeholder="Sobrenome"
+                        type="text"
+                        onChange={(e) => (cliente.sobrenome = e.target.value)}
+                      />
+                    </div>
+                  )}
+                  <input
+                    className={style.inputSignUp}
+                    placeholder="E-mail"
+                    type="email"
+                    onChange={(e) => (cliente.email = e.target.value)}
+                  />
+                </div>
+                <div className="">
+                  <input
+                    className={style.inputSignUp}
+                    placeholder="Senha"
+                    type="password"
+                    onChange={(e) => (cliente.senha = e.target.value)}
+                  />
+                </div>
+                <button onClick={variant === 'signIn' ? loginCliente : cadastroCliente} className={style.loginButton}>
+                  {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
+                </button>
+
+                <p className={style.positionLinkButton}>
+                  {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
+                  <span onClick={changeVariant} className={style.linkButton}>
+                    {variant === 'signIn' ? 'Criar Conta' : 'Fazer Login'}
+                  </span>
+                </p>
               </div>
             </div>
           </div>

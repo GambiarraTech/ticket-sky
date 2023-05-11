@@ -1,29 +1,71 @@
-import { cadastroCliente, loginCliente } from '../../types/cliente'
+import { v4 as uuid } from 'uuid'
+import * as cliente from '../../types/cliente'
 
 export default async (req: any, res: any) => {
 
     const { nome, sobrenome, email, senha, cpf, service } = req.body
 
-    switch (service) {
-        case 'loginCliente': {
-            const checkLogin = await loginCliente(email, senha)
-            res.json({ result: checkLogin })
-            break
+    if (service) {
+        switch (service) {
+            case 'loginCliente': {
+                const checkLogin: cliente.Cliente = await cliente.loginCliente(email, senha)
+
+                if (checkLogin != null) {
+
+                    //O token criando aqui segue a seguinte lógica:
+                    //os primeiros digitos do token antes do primeiro hifen representa o usuario logado
+                    //o primeiro digito representa o tipo do usuario:
+                    //1 = admin 2 = promotor e 3 = cliente
+                    //e o restante o id dele na sua respectiva tabela
+                    const token = '3' + checkLogin.id + '-' + uuid()
+
+                    const data = {
+                        token: token,
+                        user: {
+                            email: checkLogin.email,
+                            nome: checkLogin.nome,
+                            role: 'cliente'
+                        }
+                    }
+
+                    res.json({ result: data })
+
+                } else {
+                    console.log('Não logado')
+                }
+
+                break
+
+            }
+            case 'cadastroCliente': {
+                const createCliente = await cliente.cadastroCliente(nome, sobrenome, email, senha, cpf)
+                res.json({ result: createCliente })
+                break
+            }
+            // case 'PUT': {
+            //     // this is second case block
+            //     // and there can be any number of cases
+            //     break
+            // }
+            // case 'DELETE': {
+            //     const deletarCliente = await deleteCliente(email, senha)
+            //     res.json({ result: deletarCliente })
+            //     break
+            // }
         }
-        case 'cadastroCliente': {
-            const createCliente = await cadastroCliente(nome, sobrenome, email, senha, cpf)
-            res.json({ result: createCliente })
-            break
+    } else {
+        if (req.query.id) {
+
+            const checkLogin: cliente.Cliente = await cliente.getCliente(req.query.id)
+
+            const data = {
+                email: checkLogin.email,
+                nome: checkLogin.nome,
+                role: 'cliente'
+            }
+
+            res.json({ user: data })
         }
-        // case 'PUT': {
-        //     // this is second case block
-        //     // and there can be any number of cases
-        //     break
-        // }
-        // case 'DELETE': {
-        //     const deletarCliente = await deleteCliente(email, senha)
-        //     res.json({ result: deletarCliente })
-        //     break
-        // }
     }
+
 }

@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import { useState } from 'react';
 
 import style from '@/styles/cliente/menu.module.css';
 import CartaoCredito from './cartaoCredito';
 import MeuPerfil from './meuPerfil';
 
-import Link from 'next/link';
 import { BiCreditCard } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { IoTicket } from 'react-icons/io5';
@@ -25,6 +25,7 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
   const [activeModal, setActiveModal] = useState<JSX.Element | null>(null);
 
   const handleClick = (component: JSX.Element) => {
+    console.log(component);
     setActiveModal(component);
   };
 
@@ -53,20 +54,16 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
     },
   ];
 
-  const handleButtonClick = (button: MenuButton) => {
-    handleClick(button.component);
-  };
-
   return (
     <>
       {showModalMenu && (
         <div className={style.dropdown}>
           {menuButtons.map((button) => (
-            <ul onClick={() => handleButtonClick(button)}>
-              <button className={style.button}>
+            <ul className={style.wFull} onClick={() => handleClick(button.component)}>
+              <li className={style.button}>
                 {button.icon}
                 {button.label}
-              </button>
+              </li>
             </ul>
           ))}
         </div>

@@ -1,7 +1,15 @@
 import { query } from '@/lib/db'
 
-export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string) {
+export type Cliente = {
+    id: number,
+    nome: string,
+    senha: string,
+    email: string,
+    cpf: string,
+}
 
+
+export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string) {
     if (cpf == undefined) {
         cpf = ""
     }
@@ -22,17 +30,31 @@ export async function deleteCliente(email: string, senha: string) {
 }
 
 export async function loginCliente(email: string, senha: string) {
-
-    const cliente = await query({
+    const cliente: any = await query({
         query: "SELECT * FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
         values: [email, senha]
     })
 
     if (Object.keys(cliente).length > 0) {
-        return cliente
+        return cliente[0]
     } else {
-        return "Cliente não encontrado."
+        return null
+    }
+}
+
+export async function getCliente(id: string) {
+
+    const cliente: any = await query({
+        query: "SELECT * FROM cliente WHERE cliente.id = (?)",
+        values: [id],
+    })
+
+    if (Object.keys(cliente).length > 0) {
+        return cliente[0]
+    } else {
+        return null
     }
 
-
 }
+
+
