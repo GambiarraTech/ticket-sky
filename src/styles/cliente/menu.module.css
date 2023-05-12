@@ -18,6 +18,9 @@
 .button {
   @apply mr-4 flex;
 }
+.wFull {
+  @apply w-full;
+}
 
 .icone {
   @apply mr-4 text-[#0013a6];

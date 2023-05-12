@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import style from '../../../styles/cliente/navbar.module.css';
 
+import { AuthContext } from '@/contexts/AuthContext';
 import LoginModal from '../login/LoginModal';
 import MenuDropDown from '../menu/menu';
 import LogoNavbar from './LogoNavbar';
@@ -13,9 +14,10 @@ interface NavbarClienteProps {
   Logado: boolean;
 }
 
-export default function NavbarCliente({ Logado }: NavbarClienteProps) {
+export default function NavbarCliente() {
   const [showModal, setShowModal] = useState(false);
   const [showModalMenu, setShowModalMenu] = useState(false);
+  const { user, isLogged } = useContext(AuthContext);
 
   const handleClick = () => {
     setShowModal(!showModal);
@@ -39,7 +41,7 @@ export default function NavbarCliente({ Logado }: NavbarClienteProps) {
             <input className={style.input} placeholder="Pesquisar" type="text" />
           </div>
         </nav>
-        {Logado ? (
+        {isLogged ? (
           <>
             <div className={style.position} />
             <button className={style.positionIcons}>

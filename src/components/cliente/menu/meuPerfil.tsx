@@ -1,5 +1,6 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import style from '@/styles/cliente/login.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 interface MeuPerfilProps {
@@ -8,13 +9,14 @@ interface MeuPerfilProps {
 }
 
 export default function MeuPerfil({ handleClick, handleClose }: MeuPerfilProps) {
+  const { user } = useContext(AuthContext);
   const [cliente, setCliente] = useState({
     nome: '',
     sobrenome: '',
+    cpf: '',
     email: '',
     senha: '',
     alterPassword: '',
-    cpf: '',
   });
 
   return (
@@ -35,26 +37,26 @@ export default function MeuPerfil({ handleClick, handleClose }: MeuPerfilProps) 
               <div className={style.inputPosition}>
                 <input
                   className={style.inputSignUp}
-                  placeholder="Nome"
+                  placeholder={user?.nome}
                   type="text"
                   onChange={(e) => (cliente.nome = e.target.value)}
                 />
                 <input
                   className={style.inputSignUp}
-                  placeholder="Sobrenome"
+                  placeholder={user?.sobrenome}
                   type="text"
                   onChange={(e) => (cliente.sobrenome = e.target.value)}
                 />
               </div>
               <input
                 className={style.inputSignUp}
-                placeholder="CPF"
+                placeholder={user?.cpf}
                 type="text"
                 onChange={(e) => (cliente.cpf = e.target.value)}
               />
               <input
                 className={style.inputSignUp}
-                placeholder="E-mail"
+                placeholder={user?.email}
                 type="email"
                 onChange={(e) => (cliente.email = e.target.value)}
               />
