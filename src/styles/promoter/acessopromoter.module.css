@@ -1,11 +1,11 @@
 .bg {
   @apply w-full h-full flex flex-col items-center justify-center bg-ticket-sky-blue sm:px-4;
 }
-
+/*não usa*/
 .generalText {
   @apply w-full space-y-6 text-[#4b5563] sm:max-w-md;
 }
-
+/*não usa*/
 .arrowIcon {
   @apply absolute top-8 left-10 rounded-lg text-[#f5f5f5] hover:text-gray-900;
 }
@@ -17,7 +17,7 @@
 .logo {
   @apply mx-auto;
 }
-
+/*não usa*/
 .positionTitle {
   @apply mt-2 space-y-2;
 }
@@ -26,18 +26,25 @@
   @apply text-white text-xl font-bold sm:text-2xl;
 }
 
-.bgContent {
-  @apply bg-white shadow p-4 py-6 sm:p-6 sm:rounded-lg;
+.card {
+  @apply bg-white flex rounded-lg gap-7 p-9 mb-11 ;
 }
 
+.form {
+  @apply font-serif flex-col flex gap-4 h-full mt-auto mb-auto;
+}
+.areaInput {
+  @apply flex flex-col;
+}
+
+.divisor{
+    @apply w-1 h-64 bg-blue-200 rounded-lg flex mt-auto mb-auto
+}
+/*não usa*/
 .formSpace {
   @apply space-y-5;
 }
 
 .input {
-  @apply w-full my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
-}
-
-.button {
-  @apply w-full py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg;
+  @apply bg-blue-100 rounded-lg p-2;
 }
