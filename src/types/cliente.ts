@@ -1,4 +1,4 @@
-import { query } from '@/lib/db'
+import { query } from '@/lib/db';
 
 export type Cliente = {
 
@@ -12,15 +12,33 @@ export type Cliente = {
 }
 
 
-export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string) {
+export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string | null) {
     if (cpf == undefined) {
-        cpf = ""
+        cpf = null;
     }
 
-    await query({
-        query: "INSERT INTO cliente (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
-        values: [nome, sobrenome, email, senha, cpf]
-    })
+    try {
+        const insertResult = await query({
+            query: "INSERT INTO cliente (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
+            values: [nome, sobrenome, email, senha, cpf]
+        })
+        if ('insertId' in insertResult) {
+            const idNovoCliente = insertResult.insertId;
+
+            const novoCliente: any = await query({
+                query: "SELECT email, senha FROM cliente WHERE cliente.id = (?)",
+                values: [idNovoCliente]
+            })
+
+            if (Object.keys(novoCliente).length > 0) {
+                return novoCliente[0]
+            } else {
+                return null
+            }
+        }
+    } catch (err) {
+        console.log(null);
+    };
 
 }
 
