@@ -1,15 +1,44 @@
-import { query } from '@/lib/db'
+import { query } from '@/lib/db';
 
-export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string) {
+export type Cliente = {
 
+    id: number,
+    nome: string,
+    sobrenome: string,
+    cpf: string,
+    email: string,
+    senha: string,
+
+}
+
+
+export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string | null) {
     if (cpf == undefined) {
-        cpf = ""
+        cpf = null;
     }
 
-    await query({
-        query: "INSERT INTO cliente (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
-        values: [nome, sobrenome, email, senha, cpf]
-    })
+    try {
+        const insertResult = await query({
+            query: "INSERT INTO cliente (nome, sobrenome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)",
+            values: [nome, sobrenome, email, senha, cpf]
+        })
+        if ('insertId' in insertResult) {
+            const idNovoCliente = insertResult.insertId;
+
+            const novoCliente: any = await query({
+                query: "SELECT email, senha FROM cliente WHERE cliente.id = (?)",
+                values: [idNovoCliente]
+            })
+
+            if (Object.keys(novoCliente).length > 0) {
+                return novoCliente[0]
+            } else {
+                return null
+            }
+        }
+    } catch (err) {
+        console.log(null);
+    };
 
 }
 
@@ -22,17 +51,31 @@ export async function deleteCliente(email: string, senha: string) {
 }
 
 export async function loginCliente(email: string, senha: string) {
-
-    const cliente = await query({
+    const cliente: any = await query({
         query: "SELECT * FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
         values: [email, senha]
     })
 
     if (Object.keys(cliente).length > 0) {
-        return cliente
+        return cliente[0]
     } else {
-        return "Cliente não encontrado."
+        return null
+    }
+}
+
+export async function getCliente(id: string) {
+
+    const cliente: any = await query({
+        query: "SELECT * FROM cliente WHERE cliente.id = (?)",
+        values: [id],
+    })
+
+    if (Object.keys(cliente).length > 0) {
+        return cliente[0]
+    } else {
+        return null
     }
 
-
 }
+
+
