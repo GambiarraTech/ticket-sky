@@ -9,16 +9,13 @@ export default async (req: any, res: any) => {
         switch (service) {
             case 'loginCliente': {
                 const checkLogin: cliente.Cliente = await cliente.loginCliente(email, senha)
-
                 if (checkLogin != null) {
-
                     //O token criando aqui segue a seguinte lógica:
                     //os primeiros digitos do token antes do primeiro hifen representa o usuario logado
                     //o primeiro digito representa o tipo do usuario:
                     //1 = admin 2 = promotor e 3 = cliente
                     //e o restante o id dele na sua respectiva tabela
                     const token = '3' + checkLogin.id + '-' + uuid()
-
                     const data = {
                         token: token,
                         user: {
@@ -30,15 +27,11 @@ export default async (req: any, res: any) => {
                             role: 'cliente'
                         }
                     }
-
                     res.json({ result: data })
-
                 } else {
                     console.log('Não logado')
                 }
-
                 break
-
             }
             case 'cadastroCliente': {
                 const createCliente = await cliente.cadastroCliente(nome, sobrenome, email, senha, cpf)

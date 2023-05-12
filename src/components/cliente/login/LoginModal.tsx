@@ -31,31 +31,43 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
   });
 
   const { login } = useContext(AuthContext);
-  const [showErro, setShowErro] = useState(false);
+  const [showErroLogin, setShowErroLogin] = useState(false);
 
   async function loginCliente(e: any) {
     cliente.service = e.target.name;
     const res = router.apiPost(cliente, 'cliente');
     let data;
 
-    console.log(e.target.name);
-
-    console.log('entrou');
-
     res.then((value) => {
       data = value.result;
       login(data);
     });
 
-    console.log(res);
-
     if (!data) {
-      setShowErro(true);
+      setShowErroLogin(true);
+    } else {
+      setShowErroLogin(false);
     }
   }
 
   async function cadastroCliente(e: any) {
-    router.apiPost(cliente, 'cadastroCliente');
+    cliente.service = e.target.name;
+    const res = router.apiPost(cliente, 'cliente');
+    let data;
+
+    res.then((value) => {
+      data = value.result;
+      if (data) {
+        cliente.service = 'loginCliente';
+        const res = router.apiPost(cliente, 'cliente');
+        let data;
+
+        res.then((value) => {
+          data = value.result;
+          login(data);
+        });
+      }
+    });
   }
 
   return (
@@ -111,13 +123,13 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                   />
                 </div>
                 <button
-                  name="loginCliente"
+                  name={variant === 'signIn' ? 'loginCliente' : 'cadastroCliente'}
                   onClick={variant === 'signIn' ? loginCliente : cadastroCliente}
                   className={style.loginButton}
                 >
                   {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
                 </button>
-                <p className={style.mensagemErro}>{showErro ? 'Usuario ou senha incorreta!' : ''}</p>
+                <p className={style.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
                 <p className={style.positionLinkButton}>
                   {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
                   <span onClick={changeVariant} className={style.linkButton}>
