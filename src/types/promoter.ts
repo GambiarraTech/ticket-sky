@@ -26,11 +26,27 @@ export async function loginPromoter(email: string, senha: string) {
 
 export async function getPromoter(id: string) {
 
-    const promoter : any = await query({
+    const promoter: any = await query({
         query: "SELECT * FROM promoter WHERE promoter.id = (?)",
         values: [id],
     })
 
+    if (Object.keys(promoter).length > 0) {
+        return promoter[0]
+    } else {
+        return null
+    }
+
+}
+export async function cadastroPromoter(nome: string, email: string, senha: string, cpf_cnpj: string) {
+    await query({
+        query: "INSERT INTO promoter (nome, email, senha, cpf_cnpj, aprovado) VALUES (?, ?, ?, ?, ?)",
+        values: [nome, email, senha, cpf_cnpj, 0]
+    })
+    const promoter: any = await query({
+        query: "SELECT * FROM promoter WHERE promoter.email = (?)",
+        values: [email],
+    })
     if (Object.keys(promoter).length > 0) {
         return promoter[0]
     } else {

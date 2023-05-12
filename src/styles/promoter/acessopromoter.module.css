@@ -1,15 +1,17 @@
-
 .form {
-  @apply font-serif flex-col flex gap-4 h-full mt-auto mb-auto;
+  @apply flex-col flex gap-4 h-full mt-auto mb-auto;
 }
 .areaInput {
   @apply flex flex-col;
 }
 
 .input {
-  @apply bg-blue-100 rounded-lg p-2;
+  @apply bg-gray-200 rounded-lg p-2 shadow-md shadow-gray-700 focus:outline-none hover:bg-gray-300;
 }
 
-.button{
-    @apply p-2 rounded-lg bg-azul-ticket text-white
+.button {
+  @apply p-5 rounded-lg bg-ticket-sky-blue text-white hover:bg-azul-ticket shadow-sm shadow-gray-700;
+}
+.mensagemErro {
+  @apply text-[red]  font-medium text-sm;
 }
