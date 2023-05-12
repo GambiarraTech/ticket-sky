@@ -26,15 +26,18 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
   const [activeModal, setActiveModal] = useState<JSX.Element | null>(null);
   const { user, logout } = useContext(AuthContext);
 
+  //Muda estado do componente - ativo
   const handleClick = (component: JSX.Element) => {
     console.log(component);
     setActiveModal(component);
   };
 
+  //Estado do componente = null
   const handleClose = () => {
     setActiveModal(null);
   };
 
+  //Map dos botões
   const menuButtons: MenuButton[] = [
     {
       label: 'Ver Perfil',
@@ -61,7 +64,8 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
       {showModalMenu && (
         <div className={style.dropdown}>
           {menuButtons.map((button) => (
-            <ul className={style.wFull} onClick={() => handleClick(button.component)}>
+            <ul onClick={() => handleClick(button.component)}>
+              <button className={style.button}>
               <li className={style.button}>
                 {button.icon}
                 {button.label}

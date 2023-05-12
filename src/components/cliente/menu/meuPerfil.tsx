@@ -1,5 +1,8 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import style from '@/styles/cliente/login.module.css';
+import styles from '@/styles/cliente/meuPerfil.module.css';
+import { useContext, useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
@@ -21,18 +24,48 @@ export default function MeuPerfil({ handleClick, handleClose }: MeuPerfilProps) 
 
   return (
     <>
-      <div className={style.modal}>
-        <div onClick={handleClose} className={style.bgBlur} aria-hidden="true"></div>
-        <div className={style.modalBg}>
-          <div className={style.closeButtonPosition}>
-            {/* Botão de fechar */}
-            <button onClick={handleClose} className={style.closeButton}>
-              <span className={style.hideFechar}>Fechar</span>
-              <IoClose />
-            </button>
+      <div className={styles.modal}>
+        <div onClick={handleClose} className={styles.bgBlur} aria-hidden="true"></div>
+        <div className={styles.modalBg}>
+          <div className={styles.head}>
+            <FaUserCircle size={68} className={styles.icone} />
+            <h1 className={styles.meuperfil}>Meu Perfil</h1>
+            <div className={styles.closeButtonPosition}>
+              {/* Botão de fechar */}
+              <button onClick={handleClose} className={styles.closeButton}>
+                <span className={style.hideFechar}>Fechar</span>
+                <IoClose />
+              </button>
+            </div>
           </div>
-          <h1>Meu perfil</h1>
           <form onSubmit={handleClose}>
+            <div className={styles.inputPosition}>
+              <div className={styles.inputPositionLeft}>
+                <label className={styles.label} htmlFor="Nome">
+                  Nome:
+                </label>
+                <input className={styles.input} type="text" onChange={(e) => (cliente.nome = e.target.value)} />
+                <label className={styles.label} htmlFor="Sobrenome">
+                  Sobrenome:
+                </label>
+                <input className={styles.input} type="text" onChange={(e) => (cliente.sobrenome = e.target.value)} />
+                <label className={styles.label} htmlFor="Email">
+                  E-mail:
+                </label>
+                <input className={styles.input} type="email" onChange={(e) => (cliente.email = e.target.value)} />
+                <label className={styles.label} htmlFor="CPF">
+                  CPF:
+                </label>
+                <input className={styles.input} type="text" onChange={(e) => (cliente.cpf = e.target.value)} />
+              </div>
+              <div className={styles.inputPositionRight}>
+                <label className={styles.label} htmlFor="AlterarSenha">
+                  Alterar Senha:
+                </label>
+                <input
+                  className={styles.input}
+                  type="alterPassword"
+                  onChange={(e) => (cliente.alterPassword = e.target.value)}
             <div className="">
               <div className={style.inputPosition}>
                 <input
@@ -47,6 +80,12 @@ export default function MeuPerfil({ handleClick, handleClose }: MeuPerfilProps) 
                   type="text"
                   onChange={(e) => (cliente.sobrenome = e.target.value)}
                 />
+                <label className={styles.label} htmlFor="Senha">
+                  Senha:
+                </label>
+                <input className={styles.input} type="password" onChange={(e) => (cliente.senha = e.target.value)} />
+                <button className={styles.salvarAlt}>Salvar Alterações</button>
+                <button className={styles.cancelar}>Cancelar</button>
               </div>
               <input
                 className={style.inputSignUp}
