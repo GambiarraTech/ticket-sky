@@ -19,7 +19,7 @@
 }
 
 .eventName {
-  @apply text-ticket-sky-blue text-3xl font-medium mb-1 flex mb-4;
+  @apply text-ticket-sky-blue text-3xl font-medium flex mb-4;
 }
 
 .description {
