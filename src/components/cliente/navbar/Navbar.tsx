@@ -1,21 +1,18 @@
+import { AuthContext } from '@/contexts/AuthContext';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
+import { useContext, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import style from '../../../styles/cliente/navbar.module.css';
-
 import LoginModal from '../login/LoginModal';
 import MenuDropDown from '../menu/menu';
-import LogoNavbar from './LogoNavbar';
 
-interface NavbarClienteProps {
-  Logado: boolean;
-}
-
-export default function NavbarCliente({ Logado }: NavbarClienteProps) {
+export default function NavbarCliente({ children }: any) {
   const [showModal, setShowModal] = useState(false);
   const [showModalMenu, setShowModalMenu] = useState(false);
+  const { user, isLogged } = useContext(AuthContext);
 
   const handleClick = () => {
     setShowModal(!showModal);
@@ -27,41 +24,46 @@ export default function NavbarCliente({ Logado }: NavbarClienteProps) {
 
   return (
     <header aria-label="NavbarCliente" className={style.header}>
-      <div className={style.navbar}>
-        <Link href="http://localhost:3000/cliente">
-          <LogoNavbar />
-        </Link>
-        <nav className={style.centerNav}>
-          <div className={style.searchIconPosition}>
-            <span className={style.searchBar}>
-              <BiSearch className={style.colorIcon} />
+      <nav className={style.navbarFormat}>
+        <div className={style.navbarDiv}>
+          <Link href="/">
+            <Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" />
+          </Link>
+        </div>
+        <div className={style.searchBarFormat}>
+          <div className={style.searchStyle1}>
+            <span>
+              <FiSearch className={style.searchIcon} />
             </span>
-            <input className={style.input} placeholder="Pesquisar" type="text" />
+            <input className={style.searchStyle2} type="text" placeholder="Pesquisar" />
           </div>
-        </nav>
-        {Logado ? (
+        </div>
+        {isLogged ? (
           <>
             <div className={style.position} />
             <button className={style.positionIcons}>
-              <IoNotificationsSharp size="28" className={style.colorIcon} />
+              <IoNotificationsSharp size="18" className={style.colorIcon} />
             </button>
             <button onClick={whenClick} className={style.positionIcons}>
-              <FaUserCircle size="28" className={style.colorIcon} />
+              <FaUserCircle size="32" className={style.colorIcon} />
               <MenuDropDown showModalMenu={showModalMenu} whenClick={whenClick} />
             </button>
           </>
         ) : (
           <>
-            <Link href="http://localhost:3000/promoter/acessopromoter">
-              <button className={style.lightbutton}>Torne-se Promoter</button>
-            </Link>
-            <button onClick={handleClick} className={style.bluebutton}>
-              Fazer Login
-            </button>
-            <LoginModal showModal={showModal} handleClick={handleClick} />
+            <div className={style.buttonDiv}>
+              <Link href="http://localhost:3000/promoter/cadastro">
+                <button className={style.promoterButton}>Acesso Promoter</button>
+              </Link>
+              <button onClick={handleClick} className={style.clienteButton}>
+                Fazer Login
+              </button>
+            </div>
           </>
         )}
-      </div>
+      </nav>
+      <LoginModal showModal={showModal} handleClick={handleClick} />
+      {children}
     </header>
   );
 }

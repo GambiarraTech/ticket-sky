@@ -11,10 +11,11 @@ export default function Home() {
       <Head>
         <title>TicketSky - Página Inicial</title>
       </Head>
-      <NavbarCliente Logado={true} />
-      <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
-      <Carousel title="Vistos Recentemente"></Carousel>
-      <Carousel title="Pra você"></Carousel>
+      <NavbarCliente>
+        <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
+        <Carousel title="Vistos Recentemente"></Carousel>
+        <Carousel title="Pra você"></Carousel>
+      </NavbarCliente>
     </main>
   );
 }

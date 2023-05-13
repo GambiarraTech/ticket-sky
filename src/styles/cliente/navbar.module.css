@@ -1,43 +1,39 @@
-.header {
-  @apply shadow-xl h-auto;
+.navbarFormat {
+  @apply flex items-center justify-between flex-wrap bg-white p-6 shadow-md;
 }
 
-.navbar {
-  @apply container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center;
+.navbarDiv {
+  @apply flex items-center flex-shrink-0 text-ticket-sky-blue mr-6 ml-4;
 }
 
-.centerNav {
-  @apply md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center;
+.searchIcon {
+  @apply absolute ml-2 left-0 top-0 bottom-0 h-full w-4 items-center justify-center text-ticket-sky-blue;
 }
 
-.searchBar {
-  @apply absolute inset-y-0 left-0 flex items-center pl-3;
+.searchBarFormat {
+  @apply flex flex-row items-center w-auto;
 }
 
-.searchIconPosition {
-  @apply relative ml-40;
+.searchStyle1 {
+  @apply text-white mr-4 relative;
 }
 
-.input {
-  @apply bg-[#dfe0ff] rounded-lg ps-10 pe-5 text-[#0013a6] py-2.5 text-sm placeholder-[#0013a6];
+.searchStyle2 {
+  @apply bg-blue-200 text-ticket-sky-blue rounded-lg py-2 px-4 placeholder:text-ticket-sky-blue focus:outline-none focus:ring-2 pl-8;
 }
 
-.position {
-  @apply ml-auto;
+.buttonDiv {
+  @apply hidden md:block;
 }
 
-.positionIcons {
-  @apply ml-2.5 mr-2.5;
+.relativeDiv {
+  @apply relative;
 }
 
-.colorIcon {
-  @apply text-[#0013a6];
+.promoterButton {
+  @apply rounded-lg bg-gray-300 text-ticket-sky-blue hover:bg-gray-400 mr-4 px-4 py-2;
 }
 
-.lightbutton {
-  @apply rounded-lg bg-[#dfe0ff] hover:bg-[#e0e0e0] px-5 py-2.5 text-sm text-[#0013a6];
-}
-
-.bluebutton {
-  @apply ml-5 rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff];
+.clienteButton {
+  @apply rounded-lg bg-ticket-sky-blue text-white hover:bg-hoover-blue mr-4 px-4 py-2;
 }
