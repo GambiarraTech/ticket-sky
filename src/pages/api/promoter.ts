@@ -12,7 +12,7 @@ export default async (req: any, res: any) => {
     if (body.service) {
         switch (body.service) {
             case 'loginPromoter': {
-                const[email,senha] = body;
+                const{email,senha} = body;
                 const checkLogin: Promoter = await loginPromoter(email, senha)
 
                 if (checkLogin != null) {
@@ -42,7 +42,7 @@ export default async (req: any, res: any) => {
                 break
             }
             case 'cadastroPromoter':{
-                const [nome,email,senha,cpf_cnpj] = body
+                const {nome,email,senha,cpf_cnpj} = body
                 const checkLogin: Promoter = await cadastroPromoter(nome,email, senha,cpf_cnpj)
                 if (checkLogin != null) {
 

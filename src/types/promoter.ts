@@ -11,7 +11,7 @@ export type Promoter = {
 export async function loginPromoter(email: string, senha: string) {
 
     const promoter: any = await query({
-        query: "SELECT * FROM promoter WHERE prmoter.email = (?) AND prmoter.senha = (?)",
+        query: "SELECT * FROM promoter WHERE promoter.email = (?) AND promoter.senha = (?)",
         values: [email, senha],
     })
 
