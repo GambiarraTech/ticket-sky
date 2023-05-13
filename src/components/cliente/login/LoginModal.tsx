@@ -40,14 +40,11 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
 
     res.then((value) => {
       data = value.result;
+      setShowErroLogin(false);
       login(data);
     });
 
-    if (!data) {
-      setShowErroLogin(true);
-    } else {
-      setShowErroLogin(false);
-    }
+    setShowErroLogin(true);
   }
 
   async function cadastroCliente(e: any) {

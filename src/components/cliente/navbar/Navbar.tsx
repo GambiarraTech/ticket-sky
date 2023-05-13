@@ -30,7 +30,7 @@ export default function NavbarCliente() {
   return (
     <header aria-label="NavbarCliente" className={style.header}>
       <div className={style.navbar}>
-        <Link href="http://localhost:3000/cliente">
+        <Link href="http://localhost:3000/">
           <LogoNavbar />
         </Link>
         <nav className={style.centerNav}>
@@ -54,7 +54,7 @@ export default function NavbarCliente() {
           </>
         ) : (
           <>
-            <Link href="http://localhost:3000/promoter/acessopromoter">
+            <Link href="http://localhost:3000/promoter/cadastro">
               <button className={style.lightbutton}>Torne-se Promoter</button>
             </Link>
             <button onClick={handleClick} className={style.bluebutton}>
