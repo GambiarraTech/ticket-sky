@@ -50,10 +50,7 @@ export default function cadastroPromoter() {
                   Senha:
                   <input className={style.input} type="password" required  onChange={(e)=>(promoter.senha = e.target.value)}/>
               </div>
-              <div className={style.areaInput}>
-                  Confirmar senha:
-                  <input className={style.input} type="password" />
-              </div>
+             
               <div className={style.areaInput}>
                   CPF/CNPJ:
                   <input className={style.input} type="text" required  onChange={(e)=>(promoter.cpf_cnpj = e.target.value)}/>
