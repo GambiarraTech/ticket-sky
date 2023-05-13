@@ -39,6 +39,14 @@ export async function getPromoter(id: string) {
 
 }
 export async function cadastroPromoter(nome: string, email: string, senha: string, cpf_cnpj: string) {
+    const verificaPromoter: any = await query({
+        query: "SELECT * FROM promoter WHERE promoter.email = (?)",
+        values: [email],
+    })
+    if (Object.keys(verificaPromoter).length > 0) {
+        return null
+    }
+
     await query({
         query: "INSERT INTO promoter (nome, email, senha, cpf_cnpj, aprovado) VALUES (?, ?, ?, ?, ?)",
         values: [nome, email, senha, cpf_cnpj, 0]
