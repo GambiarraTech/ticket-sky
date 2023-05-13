@@ -24,14 +24,17 @@ export default function CriarEvento() {
 
   const [selectedFile, setSelectedFile] = useState<File>();
 
-  const { user, logout, autenticar } = useContext(AuthContext);
-  autenticar('/promoter/cadastro');
+ //* const { user, logout, autenticar } = useContext(AuthContext);
+ //* autenticar('/promoter/cadastro');
 
   const cookies = parseCookies.get();
 
     const token = cookies['ticketsky-token'];
+let id =''
+    if(token){
+         id = token.split('-')[1]
+    }
 
-    const id = token.split('-')[1]
 
   const handleForm = (event: any) => {
     event.preventDefault();
@@ -60,7 +63,7 @@ export default function CriarEvento() {
     })
 
 
-    
+
     console.log(JSON.stringify(evento));
     for (const [chave, valor] of data.entries()) {
         console.log(chave, valor);

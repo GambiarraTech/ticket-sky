@@ -1,63 +1,64 @@
 import style from '@/styles/promoter/acessoPromoter.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import Footer from '@/components/admin/Footer';
+import card from '../../components/promoter/card'
+import Card from '../../components/promoter/card';
+import { useContext, useState } from 'react';
+import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '../api/router'
 
-export default function PromoterSignUp() {
+export default function cadastroPromoter() {
+
+    const[promoter] = useState({
+        nome:'',
+        email:'',
+        senha:'',
+        cpf_cnpj:'',
+        service:'',
+    })
+
+    const { login } = useContext(AuthContext);
+    const [showErro, setShowErro] = useState(false);
+    async function cadastroPromoter(e:any) {
+        e.preventDefault();
+        console.log(promoter)
+        promoter.service = 'cadastroPromoter';
+        const res = router.apiPost(promoter,'promoter')
+        let data
+        res.then((value) => {
+            data = value.result;
+            login(data);
+          });
+          if(!data){
+            setShowErro(true);
+        };
+    }
   return (
-    <main className={style.bg}>
-      <Head>
-        <title>Cadastro de Promoter</title>
-      </Head>
-      <div className={style.generalText}>
-        <Link href="http://localhost:3000/cliente">
-          <AiOutlineArrowLeft size="55" className={style.arrowIcon} />
-        </Link>
-        <div className={style.centerText}>
-          <Image
-            className={style.logo}
-            src="/images/logo-complete-white.png"
-            alt="Logo White"
-            height="200"
-            width="200"
-          />
-          <div className={style.positionPromoter}>
-            <h3 className={style.title}>Torne-se Promoter</h3>
-          </div>
-        </div>
+    <><Card titulo='Cadastro Promoter'>
 
-        <div className={style.bgContent}>
-          <form className={style.formSpace} onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <label>CPF ou CNPJ:</label>
-              <input className={style.input} required type="text" />
-            </div>
-
-            <div>
-              <label>Nome:</label>
-              <input className={style.input} required type="text" />
-            </div>
-
-            <div>
-              <label>E-mail:</label>
-              <input className={style.input} required type="email" />
-            </div>
-
-            <div>
-              <label>Senha:</label>
-              <input className={style.input} required type="password" />
-            </div>
-
-            <div>
-              <label>Confirmar a Senha:</label>
-              <input className={style.input} required type="password" />
-            </div>
-
-            <button className={style.button}>Solicitar Acesso Promoter</button>
+          <form className={style.form}>
+              <div className={style.areaInput}>
+                  Nome:
+                  <input className={style.input} type="text" required  onChange={(e)=>(promoter.nome = e.target.value)} />
+              </div>
+              <div className={style.areaInput}>
+                  Email:
+                  <input className={style.input} type="email" required  onChange={(e)=>(promoter.email = e.target.value)} />
+              </div>
+              <div className={style.areaInput}>
+                  Senha:
+                  <input className={style.input} type="password" required  onChange={(e)=>(promoter.senha = e.target.value)}/>
+              </div>
+             
+              <div className={style.areaInput}>
+                  CPF/CNPJ:
+                  <input className={style.input} type="text" required  onChange={(e)=>(promoter.cpf_cnpj = e.target.value)}/>
+              </div>
+              <p className={style.mensagemErro}>{showErro ? "Email já cadastrado!":""}</p>
+              <button className={style.button} onClick={cadastroPromoter}>Cadastrar</button>
           </form>
-        </div>
-      </div>
-    </main>
+
+    </ Card></>
   );
 }

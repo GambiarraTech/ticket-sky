@@ -1,0 +1,12 @@
+.card {
+  @apply bg-white flex flex-col -mt-6 mb-10 border-white rounded-lg gap-7 p-6  w-96 shadow-2xl shadow-gray-950 ;
+}
+.bg {
+  @apply w-full min-h-screen font-serif font-semibold text-gray-700   flex flex-col items-center justify-center bg-ticket-sky-blue ;
+}
+.logo {
+  @apply mx-auto;
+}
+.centerText {
+  @apply text-center text-2xl;
+}

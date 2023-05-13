@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { Promoter, getPromoter, loginPromoter } from '../../types/promoter'
+import { Promoter, cadastroPromoter, getPromoter, loginPromoter } from '../../types/promoter'
 // import { AuthContext } from '@/contexts/AuthContext';
 // import { useContext } from 'react';
 
@@ -12,7 +12,7 @@ export default async (req: any, res: any) => {
     if (body.service) {
         switch (body.service) {
             case 'loginPromoter': {
-                const[email,senha] = body;
+                const{email,senha} = body;
                 const checkLogin: Promoter = await loginPromoter(email, senha)
 
                 if (checkLogin != null) {
@@ -22,7 +22,31 @@ export default async (req: any, res: any) => {
                     //o primeiro digito representa o tipo do usuario:
                     //1 = admin 2 = promotor e 3 = cliente
                     //e o restante o id dele na sua respectiva tabela
-                    const token = '1' +'-' + checkLogin.id + '-' + uuid()
+                    const token = '2' +'-' + checkLogin.id + '-' + uuid()
+
+                    const data = {
+                        token: token,
+                        user: {
+                            email: checkLogin.email,
+                            nome: checkLogin.nome,
+                            role: 'promoter'
+                        }
+                    }
+
+                    res.json({ result: data })
+
+                } else {
+                    console.log('Não logado')
+                }
+
+                break
+            }
+            case 'cadastroPromoter':{
+                const {nome,email,senha,cpf_cnpj} = body
+                const checkLogin: Promoter = await cadastroPromoter(nome,email, senha,cpf_cnpj)
+                if (checkLogin != null) {
+
+                    const token = '2' +'-' + checkLogin.id + '-' + uuid()
 
                     const data = {
                         token: token,
