@@ -1,13 +1,13 @@
-.header {
-  @apply shadow-xl h-auto;
-}
-
 .navbar {
-  @apply container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center;
+  @apply shadow-xl h-24 w-full flex flex-row justify-between items-center px-[2%];
 }
 
-.centerNav {
-  @apply md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center;
+.navbar nav {
+  @apply flex justify-center;
+}
+
+.image {
+  @apply flex justify-center w-[20%];
 }
 
 .searchBar {
@@ -15,19 +15,15 @@
 }
 
 .searchIconPosition {
-  @apply relative ml-40;
+  @apply relative;
 }
 
 .input {
-  @apply bg-[#dfe0ff] rounded-lg ps-10 pe-5 text-[#0013a6] py-2.5 text-sm placeholder-[#0013a6];
+  @apply bg-[#dfe0ff] rounded-lg px-10 text-[#0013a6] py-2.5 text-sm placeholder-[#0013a6];
 }
 
-.position {
-  @apply ml-auto;
-}
-
-.positionIcons {
-  @apply ml-2.5 mr-2.5;
+.options {
+  @apply flex flex-row h-full items-center gap-x-5 justify-center w-[20%];
 }
 
 .colorIcon {
@@ -35,9 +31,9 @@
 }
 
 .lightbutton {
-  @apply rounded-lg bg-[#dfe0ff] hover:bg-[#e0e0e0] px-5 py-2.5 text-sm text-[#0013a6];
+  @apply flex rounded-lg bg-[#dfe0ff] hover:bg-[#e0e0e0] px-5 py-2.5 text-sm text-[#0013a6];
 }
 
 .bluebutton {
-  @apply ml-5 rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff];
+  @apply flex rounded-lg bg-[#0013a6] hover:bg-[#0028be] px-5 py-2.5 text-sm text-[#ffffff];
 }
