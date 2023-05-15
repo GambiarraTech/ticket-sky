@@ -1,9 +1,5 @@
 import { v4 as uuid } from 'uuid'
 import { Admin, getAdmin, loginAdmin } from '../../types/admin'
-// import { AuthContext } from '@/contexts/AuthContext';
-// import { useContext } from 'react';
-
-// const { login } = useContext(AuthContext)
 
 export default async (req: any, res: any) => {
 

@@ -2,11 +2,11 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import Layout from '@/components/admin/Layout';
 import { useContext } from 'react';
+import { getServerSideProps } from '@/lib/auth';
 
 export default function Admin() {
-  const { user, logout, autenticar } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
-  autenticar('/admin/login');
 
   return (
     <>
@@ -18,3 +18,5 @@ export default function Admin() {
     </>
   );
 }
+
+export { getServerSideProps };

@@ -8,9 +8,8 @@ import { useContext } from 'react';
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function Home() {
-  const { user, isLogged, logout, autenticar } = useContext(AuthContext);
+  const { user, isLogged, logout } = useContext(AuthContext);
 
-  autenticar('/');
   return (
     <main className={`${font.className}`}>
       <Head>

@@ -21,7 +21,6 @@ type AuthContextType = {
   isLogged: boolean;
   login: ({ token, user }: loginData) => Promise<void>;
   logout: () => Promise<void>;
-  autenticar: (path: string) => Promise<void>;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -84,18 +83,7 @@ export function AuthProvider({ children }: any) {
     }
   }
 
-  //Funçao que checa se existe um usuario logado e caso nao exista redireciona o usuario ao caminho inserido nos parametros
-  async function autenticar(path: string) {
-    const cookies = parseCookies();
-
-    const token = cookies['ticketsky-token'];
-
-    if (!token) {
-      Router.push(path);
-    }
-  }
-
   return (
-    <AuthContext.Provider value={{ user: user!, isLogged, login, logout, autenticar }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user: user!, isLogged, login, logout }}>{children}</AuthContext.Provider>
   );
 }
