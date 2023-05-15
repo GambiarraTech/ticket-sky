@@ -5,7 +5,7 @@ export async function meusIngressos(idCliente: number) {
 
     const sql = `
         SELECT
-            ev.banner
+            ev.banner,
             ev.descricao as descricao_evento,
             ev.data_hora,
             ig.valor as valor_ingresso,
@@ -35,5 +35,56 @@ export async function meusIngressos(idCliente: number) {
         return meusIngressos
     } else {
         return "Nenhum pedido encontrado."
+    }
+}
+
+export async function meusEventos(idPromoter: number) {
+    const sql = `
+        SELECT
+            ev.id,
+            
+            ev.descricao as descricao_evento,
+            s.descricao as setor,
+            SUM(p.quantidade) as quantidade_vendida,
+            (ig.quantidade - SUM(p.quantidade)) as quantidade_disponivel,
+            (SUM(p.quantidade) * ig.valor) AS quantidade_arrecadada
+        FROM
+            evento ev,
+            ingresso ig,
+            setor s,
+            pedido p
+        WHERE
+            ev.id_promoter = 1 AND
+            ig.id_evento = ev.id AND
+            s.id = ig.id_setor AND
+            p.id_ingresso = ig.id      
+        GROUP BY 
+            p.id_ingresso;
+    `;
+
+    const meusEventos: any = await query({
+        query: sql,
+        values: [idPromoter],
+    })
+
+    if (Object.keys(meusEventos).length > 0) {
+        return meusEventos
+    } else {
+        return "Nenhum evento encontrado."
+    }
+}
+
+export async function todosEventos() {
+    const sql = "SELECT * from evento";
+
+    const eventos: any = await query({
+        query: sql,
+        values: [],
+    })
+
+    if (Object.keys(eventos).length > 0) {
+        return eventos
+    } else {
+        return "Nenhum evento encontrado."
     }
 }
