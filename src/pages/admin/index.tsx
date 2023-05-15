@@ -4,7 +4,6 @@ import { getServerSideProps } from '@/lib/auth';
 import Card from '@/components/admin/Card';
 import { useContext } from 'react';
 import styles from '@/styles/admin/Admin.module.css';
-import Layout from '@/components/admin/Layout';
 
 export default function Admin() {
   const { user, logout } = useContext(AuthContext);

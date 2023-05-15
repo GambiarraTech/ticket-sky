@@ -1,5 +1,6 @@
 import Layout from '@/components/admin/Layout';
 import DataTable from '@/components/table/DataTable';
+import { getServerSideProps } from '@/lib/auth';
 
 export interface IPromotersProps {
   id: number;
@@ -30,3 +31,5 @@ export default function Promoters() {
     </Layout>
   );
 }
+
+export { getServerSideProps }

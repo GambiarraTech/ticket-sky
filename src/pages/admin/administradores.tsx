@@ -1,5 +1,6 @@
 import Layout from '@/components/admin/Layout';
 import DataTable from '@/components/table/DataTable';
+import { getServerSideProps } from '@/lib/auth';
 
 export interface IAdminProps {
   id: number;
@@ -29,3 +30,5 @@ export default function Administradores() {
     </Layout>
   );
 }
+
+export { getServerSideProps }
