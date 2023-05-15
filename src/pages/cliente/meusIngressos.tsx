@@ -1,8 +1,17 @@
 import NavbarCliente from '@/components/cliente/navbar/Navbar';
 import Table, { meusIngressosType } from '@/components/cliente/table/TableIngressos';
+import { AuthContext } from '@/contexts/AuthContext';
 import Head from 'next/head';
+import { useContext } from 'react';
+
+// function getMeusIngressos(id){
+
+// }
 
 export default function meusIngressos() {
+  
+  const { user } = useContext(AuthContext);
+
   const data: meusIngressosType[] = [
     {
       img: 'a',
@@ -23,7 +32,7 @@ export default function meusIngressos() {
       <Head>
         <title>TicketSky - Meus Ingressos</title>
       </Head>
-      <NavbarCliente Logado={true} />
+      <NavbarCliente />
       <Table data={data} />
     </div>
   );

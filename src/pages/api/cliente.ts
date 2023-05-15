@@ -55,6 +55,7 @@ export default async (req: any, res: any) => {
             const checkLogin: cliente.Cliente = await cliente.getCliente(req.query.id)
 
             const data = {
+                id: checkLogin.id,
                 email: checkLogin.email,
                 nome: checkLogin.nome,
                 role: 'cliente'
