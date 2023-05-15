@@ -15,10 +15,16 @@ export default async (req: any, res: any) => {
                     //o primeiro digito representa o tipo do usuario:
                     //1 = admin 2 = promotor e 3 = cliente
                     //e o restante o id dele na sua respectiva tabela
-                    const token = '3' + checkLogin.id + '-' + uuid()
+                    const dataUser = '3' + checkLogin.id
+
+                    const encodedData = Buffer.from(dataUser, 'utf8').toString('base64')
+
+                    const token = encodedData + '-' + uuid()
+
                     const data = {
                         token: token,
                         user: {
+                            id: checkLogin.id,
                             email: checkLogin.email,
                             nome: checkLogin.nome,
                             sobrenome: checkLogin.sobrenome,
@@ -55,12 +61,16 @@ export default async (req: any, res: any) => {
             const checkLogin: cliente.Cliente = await cliente.getCliente(req.query.id)
 
             const data = {
+                id: checkLogin.id,
                 email: checkLogin.email,
                 nome: checkLogin.nome,
+                sobrenome: checkLogin.sobrenome,
                 role: 'cliente'
             }
 
             res.json({ user: data })
+        } else {
+            res.status(200).send('')
         }
     }
 
