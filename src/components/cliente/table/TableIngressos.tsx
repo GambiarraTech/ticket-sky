@@ -31,7 +31,7 @@ const Table: FC<TableProps> = ({ data }) => {
                 <td>
                   <div className={style.tableContent}>
                     <div>
-                      <Image className={style.imgBorder} src="/quadrado.png" alt="ingresso" height="120" width="120" />
+                      <Image className={style.imgBorder} src="/../public/images/quadrado.png" alt="ingresso" height="120" width="120" />
                     </div>
 
                     <div className={style.contentText}>
