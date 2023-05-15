@@ -7,10 +7,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SideMenu>
-        <div className={styles.children}>
-          <NavBar />
-          {children}
-        </div>
+        <NavBar />
+        <div className={styles.children}>{children}</div>
         <Footer bgcolor="#F6F6F5" color="#888181" />
       </SideMenu>
     </>

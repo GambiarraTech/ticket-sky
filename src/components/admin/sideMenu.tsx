@@ -5,7 +5,9 @@ export default function SideMenu({ children }: { children: React.ReactNode }) {
     <>
       <div className={styles.sideMenu}>
         <div className={styles.logo}>
-          <img src="../images/logo-ticket-sky-light.png" />
+          <Link href="/admin">
+            <img src="../images/logo-ticket-sky-light.png" />
+          </Link>
         </div>
         <hr className={styles.hr} />
 

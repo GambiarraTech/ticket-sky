@@ -1,0 +1,75 @@
+.dataTable {
+  @apply flex flex-col w-[70%] h-[90%] rounded-xl bg-[#DFE0FF] items-center border border-gray-400;
+}
+
+.searchIconPosition {
+  @apply relative m-9 border rounded-lg border-gray-400;
+}
+
+.searchBar {
+  @apply absolute inset-y-0 left-0 flex items-center pl-3;
+}
+
+.colorIcon {
+  @apply text-[#0013a6];
+}
+
+.input {
+  @apply bg-[#F6F6F5] rounded-lg ps-10 pe-5 text-[#0013a6] py-2.5 text-sm placeholder-[#0013a6] w-72;
+}
+
+.title {
+  @apply items-center justify-center flex text-white font-medium h-[8%] bg-ticket-sky-blue rounded-t-xl w-full text-xl;
+}
+
+.tableBackground {
+  @apply w-[90%] h-[80%] mb-9 overflow-y-auto pl-4 pr-4 bg-[#F6F6F5] border-x-[1rem] border-y-[1rem] border-[#F6F6F5] rounded-xl;
+}
+
+.table {
+  @apply w-full h-full table-auto;
+}
+
+.tableHeader {
+  @apply divide-x divide-gray-400 text-ticket-sky-blue table-header-group h-14 sticky top-0 border-b;
+}
+
+.tableCellHeader {
+  @apply divide-x border-gray-400 table-cell font-medium bg-[#F6F6F5];
+}
+
+.tableCellIcon {
+  @apply border-y border-gray-400 table-cell text-center;
+}
+
+.tableRow {
+  @apply divide-x divide-gray-400 table-row;
+}
+
+.tableRowGroup {
+  @apply table-row-group;
+}
+
+.tableCell {
+  @apply border-y border-gray-400 table-cell pl-2 h-14;
+}
+
+/* width */
+.tableBackground::-webkit-scrollbar {
+  @apply w-[10px];
+}
+
+/* Track */
+.tableBackground::-webkit-scrollbar-track {
+  @apply bg-white rounded-lg;
+}
+
+/* Handle */
+.tableBackground::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-lg;
+}
+
+/* Handle on hover */
+.tableBackground::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
