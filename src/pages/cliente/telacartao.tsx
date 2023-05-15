@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import NavbarCliente from '../../components/cliente/navbar/Navbar';
 import style from '../../styles/cliente/telaCartao.module.css';
@@ -7,6 +8,14 @@ import style from '../../styles/cliente/telaCartao.module.css';
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaCartao() {
+  const [cartao, setCartao] = useState({
+    titular: '',
+    cpf: '',
+    numero: '',
+    validade: '',
+    cvv: '',
+  });
+
   return (
     <main className={font.className}>
       <section>
@@ -22,24 +31,49 @@ export default function TelaCartao() {
             <form className={style.formStyle}>
               <div className={style.inputFormat}>
                 Nome do Titular
-                <input type="text" className={style.primaryInputStyle} placeholder="Nome do Titular" />
+                <input
+                  type="text"
+                  className={style.primaryInputStyle}
+                  placeholder="Nome do Titular"
+                  onChange={(e) => (cartao.titular = e.target.value)}
+                />
               </div>
               <div className={style.inputFormat}>
                 CPF do Titular
-                <input type="text" className={style.primaryInputStyle} placeholder="CPF do Titular" />
+                <input
+                  type="text"
+                  className={style.primaryInputStyle}
+                  placeholder="CPF do Titular"
+                  onChange={(e) => (cartao.cpf = e.target.value)}
+                />
               </div>
               <div className={style.inputFormat}>
                 Número do Cartão
-                <input type="text" className={style.primaryInputStyle} placeholder="Número do Cartão" />
+                <input
+                  type="text"
+                  className={style.primaryInputStyle}
+                  placeholder="Número do Cartão"
+                  onChange={(e) => (cartao.numero = e.target.value)}
+                />
               </div>
               <div className={style.secondFormat}>
                 <div className={style.inputFormat}>
                   Validade
-                  <input type="text" className={style.secondInputStyle} placeholder="Validade" />
+                  <input
+                    type="text"
+                    className={style.secondInputStyle}
+                    placeholder="Validade"
+                    onChange={(e) => (cartao.validade = e.target.value)}
+                  />
                 </div>
                 <div className={style.inputFormat}>
                   CVV
-                  <input type="text" className={style.secondInputStyle} placeholder="CVV" />
+                  <input
+                    type="text"
+                    className={style.secondInputStyle}
+                    placeholder="CVV"
+                    onChange={(e) => (cartao.cvv = e.target.value)}
+                  />
                 </div>
               </div>
             </form>
