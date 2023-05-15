@@ -49,9 +49,11 @@ export async function getUser(token: string) {
 
     const user = token_splitted[0]
 
-    const role = user[0]
+    const decoded = Buffer.from(user, 'base64').toString('ascii')
 
-    const user_id = user.slice(1,)
+    const role = decoded[0]
+
+    const user_id = decoded.slice(1,)
 
     switch (role) {
         case '1': {
@@ -65,6 +67,7 @@ export async function getUser(token: string) {
         }
         case '3': {
             const response = await fetch(`../api/cliente?id=${user_id}`);
+            
             return await response.json().then(data => (data))
         }
     }
