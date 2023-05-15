@@ -6,7 +6,7 @@ import { IoNotificationsSharp } from 'react-icons/io5';
 import style from '../../../styles/cliente/navbar.module.css';
 
 import LoginModal from '../login/LoginModal';
-import MenuDropDown from '../menu/Menu';
+import MenuDropDown from '../menu/menu';
 import LogoNavbar from './LogoNavbar';
 
 interface NavbarClienteProps {

@@ -1,55 +1,74 @@
-import { FC } from 'react';
+import { IAdminProps } from '@/pages/admin/administradores';
+import { IPromotersProps } from '@/pages/admin/promoters';
+import styles from '@/styles/table/DataTable.module.css';
+import React, { FC } from 'react';
+import { BiSearch } from 'react-icons/bi';
+import { FaTrash } from 'react-icons/fa';
 
 interface TableProps {
-  data: Map<number, Array<string>>,
-  columns: any[],
+  title: string;
+  //   Adicionar os outros tipos
+  data: IAdminProps[] | IPromotersProps[];
+  columns: string[];
+  props: string[];
 }
 
-const DataTable: FC<TableProps> = ({ data, columns}) => {
-    const mapData: any[][] = [];
-    const mapRows: number[] = [];
+const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
+  const [search, setSearch] = React.useState('');
+  //   Adicionar os outros tipos
+  const fixedData: Array<IAdminProps | IPromotersProps> = data;
 
-    Array.from(data.entries()).map(([key, value]) => {
-        mapRows.push(key);
-        mapData.push(value);
-    });
-  
+  const handleSearch = (event: any) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredData = fixedData.filter(
+    (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
+  );
+
   return (
-    <div className="flex flex-col">
-    <div className="overflow-x-auto">
-        <div className="p-1.5 w-full inline-block align-middle">
-            <div className="overflow-hidden border rounded-lg">
-                <table id="tblUsers"className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            {columns.map((item) => (
-                                <th
-                                 scope="col"
-                                 className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                                >
-                                {item}
-                                </th>
-                            ))}
-                           
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                        {mapRows.map((item, index) => (
-                            <tr key={index}>
-                                {mapData[index].map((item) => (
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                        {item}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div className={styles.dataTable}>
+      <h1 className={styles.title}>{title}</h1>
+
+      <div className={styles.searchIconPosition}>
+        <span className={styles.searchBar}>
+          <BiSearch className={styles.colorIcon} />
+        </span>
+        <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
+      </div>
+
+      <div className={styles.tableBackground}>
+        <table id="tblUsers" className={styles.table}>
+          <thead className={styles.tableHeader}>
+            <tr className={styles.tableRow}>
+              {columns.map((item) => (
+                <th scope="col" className={styles.tableCellHeader}>
+                  {item}
+                </th>
+              ))}
+              <th scope="col" className={styles.tableCellHeader} style={{ color: 'red' }}>
+                Excluir
+              </th>
+            </tr>
+          </thead>
+          <tbody className={styles.tableRowGroup}>
+            {filteredData.map((endPoint, index) => (
+              <tr key={index} className={styles.tableRow}>
+                {props.map((values) => (
+                  <td className={styles.tableCell}>{endPoint[values as keyof typeof endPoint]}</td>
+                ))}
+                <td className={styles.tableCellIcon}>
+                  <button>
+                    <FaTrash color={'red'} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-</div>
-  )
+  );
 };
 
 export default DataTable;
