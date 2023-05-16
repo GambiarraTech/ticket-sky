@@ -33,7 +33,7 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    console.log('Não logado')
+                    res.json({ error: 'Administrador não encontrado.'})
                 }
 
                 break

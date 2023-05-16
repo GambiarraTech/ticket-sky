@@ -40,11 +40,15 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
     event.preventDefault();
 
     const res = router.apiPost(inputValues, endPoint);
+
     let data;
 
     res.then((value) => {
-      data = value.result;
-      login(data);
+      data = value;
+      if( !value.error ){
+        login(value.result)
+      }
+      ;
     });
   }
 
