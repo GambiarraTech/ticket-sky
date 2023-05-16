@@ -1,8 +1,8 @@
 import Layout from '@/components/admin/Layout';
 import DataTable from '@/components/table/DataTable';
 import { getServerSideProps } from '@/lib/auth';
-import * as router from '../api/router'
 import { useEffect, useState } from 'react';
+import * as router from '../api/router';
 
 export interface IPromotersProps {
   id: number;
@@ -13,29 +13,22 @@ export interface IPromotersProps {
 }
 
 export default function Promoters() {
-    const [promoters, setPromoters] = useState<IPromotersProps[]>([]);
-    const [columns, setColumns] = useState<string[]>([]);
-    const [props, setProps] = useState<string[]>([]);
+  const [promoters, setPromoters] = useState<IPromotersProps[]>([]);
+  const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ', 'Telefone'];
+  const props = ['id', 'nome', 'email', 'cpf_cnpj', 'telefone'];
 
-    useEffect(() => {
-      router.apiPost({ service: 'getPromoters' }, 'promoter')
-        .then(data => {
-          const promotersData = data.promoters;
+  useEffect(() => {
+    router
+      .apiPost({ service: 'getPromoters' }, 'promoter')
+      .then((data) => {
+        const promotersData = data.promoters;
 
-          const dynamicColumns = promotersData.length > 0 ? Object.keys(promotersData[0]) : [];
-          setColumns(dynamicColumns);
-
-          const dynamicProps = dynamicColumns;
-          setProps(dynamicProps);
-
-          setPromoters(promotersData);
-        })
-        .catch(error => {
-          console.error('Erro ao obter os promoters:', error);
-        });
-
-    }, []);
-
+        setPromoters(promotersData);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os promoters:', error);
+      });
+  }, []);
 
   return (
     <Layout>
@@ -44,4 +37,4 @@ export default function Promoters() {
   );
 }
 
-export { getServerSideProps }
+export { getServerSideProps };

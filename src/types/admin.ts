@@ -5,12 +5,12 @@ export type Admin = {
     nome: string,
     senha: string,
     email: string,
-    super_admin: number
+    super_adm: number
 }
 
 export async function loginAdmin(email: string, senha: string) {
 
-    const admin : any = await query({
+    const admin: any = await query({
         query: "SELECT * FROM administrador WHERE administrador.email = (?) AND administrador.senha = (?)",
         values: [email, senha],
     })
@@ -26,7 +26,7 @@ export async function loginAdmin(email: string, senha: string) {
 
 export async function getAdmin(id: string) {
 
-    const admin : any = await query({
+    const admin: any = await query({
         query: "SELECT * FROM administrador WHERE administrador.id = (?)",
         values: [id],
     })
@@ -39,10 +39,10 @@ export async function getAdmin(id: string) {
 
 }
 
-export async function getAllAdmins(){
+export async function getAllAdmins() {
 
     const admins: any = await query({
-        query: "SELECT id,nome,email,super_admin FROM administrador",
+        query: "SELECT id,nome,email,super_adm FROM administrador",
     })
 
     if (Object.keys(admins).length > 0) {
