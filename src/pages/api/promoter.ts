@@ -66,7 +66,7 @@ export default async (req: any, res: any) => {
             case 'getPromoters': {
                 const promoters: Promoter[] = await getAllPromoters();
 
-                if (promoters.length > 0) {
+                if (promoters && promoters.length > 0 ) {
                     const data = promoters
 
                     console.log(data)

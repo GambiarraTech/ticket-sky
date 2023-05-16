@@ -39,7 +39,7 @@ export default function NavbarCliente() {
           <input className={style.input} placeholder="Pesquisar" type="text" />
         </div>
       </nav>
-      {isLogged ? (
+      {isLogged && user.role == 'cliente' ? (
         <div className={style.options}>
           <button className={style.positionIcons}>
             <IoNotificationsSharp size="28" className={style.colorIcon} />

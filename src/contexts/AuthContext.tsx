@@ -58,7 +58,7 @@ export function AuthProvider({ children }: any) {
 
     setUser(user);
 
-    Router.push(`/admin`);
+    Router.push(`/${user.role == 'cliente' ? '' : user.role}`);
   }
 
   //Funçao que faz o logout do usuario do sistema, destrói o token, seta o usuario da aplicaçao como null
