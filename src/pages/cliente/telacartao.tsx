@@ -27,6 +27,16 @@ export default function TelaCartao() {
     }
   }
 
+  async function deletarCartao(cpf: string, numero: string) {
+    try {
+      await router.apiDelete(cartao, 'cartao');
+      return { success: true };
+    } catch (error) {
+      console.error('Erro ao remover cartão:', error);
+      return { success: false };
+    }
+  }
+
   return (
     <main className={font.className}>
       <section>
