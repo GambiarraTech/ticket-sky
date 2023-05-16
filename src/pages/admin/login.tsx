@@ -1,16 +1,27 @@
 import Footer from '@/components/admin/Footer';
-import TitleLogin from '@/components/admin/TitleLogin';
-import styles from '@/styles/admin/loginAdmin.module.css';
-import FormLogin from '../../components/admin/FormLogin';
+import FormCard from '@/components/FormCard';
+import styles from '@/styles/promoter/cadastro.module.css';
+import Image from 'next/image';
 
-export default function loginAdmin() {
+const listaInputs = [
+  { id: 'email', label: 'Digite seu email:' },
+  { id: 'senha', label: 'Digite sua senha:' },
+];
+
+export default function Login() {
   return (
-    <main className={styles.background}>
+    <div className={styles.background}>
       <div className={styles.container}>
-        <TitleLogin />
-        <FormLogin />
+        <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
+        <FormCard
+          titulo={'Login Administrador'}
+          inputs={listaInputs}
+          buttonText={'Entrar'}
+          service="loginAdmin"
+          endPoint="admin"
+        />
       </div>
       <Footer />
-    </main>
+    </div>
   );
 }
