@@ -1,0 +1,7 @@
+.background {
+  @apply bg-ticket-sky-blue h-screen;
+}
+
+.container {
+  @apply pt-8 flex flex-col items-center;
+}

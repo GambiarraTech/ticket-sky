@@ -1,0 +1,19 @@
+.title {
+  @apply font-sans text-white text-2xl py-6;
+}
+
+.card {
+  @apply bg-white flex flex-col px-6 py-4 rounded-md w-96;
+}
+
+.card label {
+  @apply text-base text-black mt-3 mb-1;
+}
+
+.card input {
+  @apply border rounded-md h-8 pl-2;
+}
+
+.card button {
+  @apply text-white rounded-md bg-azul-ticket h-9 mt-14;
+}
