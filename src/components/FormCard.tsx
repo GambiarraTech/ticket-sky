@@ -13,10 +13,10 @@ type FormCardProps = {
 };
 
 export default function FormCard({ inputs, titulo, buttonText, service, endPoint }: FormCardProps) {
-  // Cria o estado inputValues inicialmente vazio.
+  // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
+  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({ service: service });
 
   // (event: React.ChangeEvent<HTMLInputElement>) Define uma função callback que é chamada sempre que ocorre uma alteração no input.
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,12 +35,6 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
-    // Adiciona o service passado no FormCardProps ao inputValues (Conteúdo passado para a API)
-    setInputValues((prevInputValues) => ({
-      ...prevInputValues,
-      service: service,
-    }));
 
     const res = router.apiPost(inputValues, endPoint);
     let data;
