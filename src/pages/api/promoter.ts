@@ -1,9 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { Promoter, cadastroPromoter, getPromoter, loginPromoter } from '../../types/promoter';
-// import { AuthContext } from '@/contexts/AuthContext';
-// import { useContext } from 'react';
-
-// const { login } = useContext(AuthContext)
+import { Promoter, cadastroPromoter, getAllPromoters, getPromoter, loginPromoter } from '../../types/promoter';
 
 export default async (req: any, res: any) => {
 
@@ -22,11 +18,13 @@ export default async (req: any, res: any) => {
                     //o primeiro digito representa o tipo do usuario:
                     //1 = admin 2 = promotor e 3 = cliente
                     //e o restante o id dele na sua respectiva tabela
-                    const token = '2' + '-' + checkLogin.id + '-' + uuid()
-
+                    const dataUser = '2' + checkLogin.id
+                    const encodedData = Buffer.from(dataUser, 'utf8').toString('base64')
+                    const token = encodedData + '-' + uuid()
                     const data = {
                         token: token,
                         user: {
+                            id: checkLogin.id,
                             email: checkLogin.email,
                             nome: checkLogin.nome,
                             role: 'promoter'
@@ -65,6 +63,26 @@ export default async (req: any, res: any) => {
 
                 break
             }
+            case 'getPromoters': {
+                const promoters: Promoter[] = await getAllPromoters();
+
+                if (promoters.length > 0) {
+                    const data = promoters
+
+                    console.log(data)
+
+                    res.json({ promoters: data });
+                } else {
+                    console.log('Nenhum promoter encontrado');
+                    res.json({ promoters: [] });
+                }
+
+                break;
+            }
+            default: {
+                console.log('Serviço inválido');
+                break;
+            }
         }
     } else {
         if (req.query.id) {
@@ -72,6 +90,7 @@ export default async (req: any, res: any) => {
             const checkLogin: Promoter = await getPromoter(req.query.id)
 
             const data = {
+                id: checkLogin.id,
                 email: checkLogin.email,
                 nome: checkLogin.nome,
                 role: 'promoter'

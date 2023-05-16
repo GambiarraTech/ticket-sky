@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import { Admin, getAdmin, loginAdmin } from '../../types/admin'
+import { Admin, getAdmin, loginAdmin, getAllAdmins } from '../../types/admin'
 
 export default async (req: any, res: any) => {
 
@@ -37,6 +37,26 @@ export default async (req: any, res: any) => {
                 }
 
                 break
+            }
+            case 'getAdmins': {
+                const admins: Admin[] = await getAllAdmins();
+
+                if (admins.length > 0) {
+                    const data = admins
+
+                    console.log(data)
+
+                    res.json({ admins: data });
+                } else {
+                    console.log('Nenhum admin encontrado');
+                    res.json({ admins: [] });
+                }
+
+                break;
+            }
+            default: {
+                console.log('Serviço inválido');
+                break;
             }
         }
     } else {

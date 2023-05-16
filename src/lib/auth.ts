@@ -33,12 +33,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 function switchCodRole(url: string) {
-    switch (url) {
-        case '/admin':
+    const urlSplitted = url.split('/')
+    switch (urlSplitted[1]) {
+        case 'admin':
             return '1';
-        case '/promoter':
+        case 'promoter':
             return '2';
-        case '/cliente':
+        case 'cliente':
             return '3';
         default:
             throw new Error('Invalid URL');

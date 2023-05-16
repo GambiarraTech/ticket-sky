@@ -60,18 +60,18 @@ export default function MenuDropDown({ showModalMenu, whenClick }: MenuDropDownP
     <>
       {showModalMenu && (
         <div className={style.dropdown}>
-          {menuButtons.map((button) => (
-            <ul className={style.wFull} onClick={() => handleClick(button.component)}>
-              <li className={style.button}>
+          <ul>
+            {menuButtons.map((button) => (
+              <li className={style.button} onClick={() => handleClick(button.component)}>
                 {button.icon}
                 {button.label}
               </li>
-            </ul>
-          ))}
-          <button className={style.button} onClick={logout}>
-            <IoLogOutOutline size={24} className={style.icone} />
-            Logout
-          </button>
+            ))}
+            <button className={style.button} onClick={logout}>
+              <IoLogOutOutline size={24} className={style.iconeLogout} />
+              Logout
+            </button>
+          </ul>
         </div>
       )}
       {activeModal && (
