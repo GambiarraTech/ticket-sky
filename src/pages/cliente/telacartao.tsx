@@ -3,18 +3,29 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import NavbarCliente from '../../components/cliente/navbar/Navbar';
+import * as router from '../../pages/api/router';
 import style from '../../styles/cliente/telaCartao.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaCartao() {
-  const [cartao, setCartao] = useState({
+  const [cartao] = useState({
     titular: '',
     cpf: '',
     numero: '',
     validade: '',
     cvv: '',
   });
+
+  async function cadastrarCartao() {
+    const res = await router.apiPost(cartao, 'cartao');
+
+    if (res.success) {
+      console.log('Cartão cadastrado com sucesso!');
+    } else {
+      console.log('Erro ao cadastrar cartão!');
+    }
+  }
 
   return (
     <main className={font.className}>
@@ -79,7 +90,9 @@ export default function TelaCartao() {
             </form>
             <div className={style.buttonDiv}>
               <button className={style.buttonDelete}>Remover</button>
-              <button className={style.buttonSave}>Salvar</button>
+              <button className={style.buttonSave} onClick={cadastrarCartao}>
+                Salvar
+              </button>
             </div>
           </div>
         </div>
