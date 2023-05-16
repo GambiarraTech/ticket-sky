@@ -18,7 +18,7 @@ export default function Cadastro() {
         <FormCard
           titulo={'Torne-se um Promoter'}
           inputs={listaInputs}
-          buttonText={'Cadastrar'}
+          buttonText={'Solicitar acesso promoter'}
           service="cadastroPromoter"
           endPoint="promoter"
         />
