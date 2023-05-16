@@ -20,3 +20,15 @@
 .card button {
   @apply text-white rounded-md bg-azul-ticket h-9 mt-8;
 }
+
+.footer {
+  @apply self-center mt-4;
+}
+
+.footer p {
+  @apply text-black;
+}
+
+.footer a {
+  @apply text-ticket-sky-blue hover:underline cursor-pointer;
+}
