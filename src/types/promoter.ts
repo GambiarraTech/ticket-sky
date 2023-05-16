@@ -5,6 +5,7 @@ export type Promoter = {
     nome: string,
     senha: string,
     email: string,
+    cpf_cnpj: string,
     aprovado: number
 }
 
@@ -61,4 +62,17 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
         return null
     }
 
+}
+
+export async function getAllPromoters(){
+
+    const promoters: any = await query({
+        query: "SELECT id,nome,email,cpf_cnpj,aprovado FROM promoter",
+    })
+
+    if (Object.keys(promoters).length > 0) {
+        return promoters
+    } else {
+        return null
+    }
 }

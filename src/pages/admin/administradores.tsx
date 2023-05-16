@@ -1,6 +1,8 @@
 import Layout from '@/components/admin/Layout';
 import DataTable from '@/components/table/DataTable';
 import { getServerSideProps } from '@/lib/auth';
+import { useEffect, useState } from 'react';
+import * as router from '../api/router'
 
 export interface IAdminProps {
   id: number;
@@ -10,20 +12,28 @@ export interface IAdminProps {
 }
 
 export default function Administradores() {
-  const columns = ['Código', 'Nome', 'Email'];
-  const props = ['id', 'nome', 'email'];
-  const admins: IAdminProps[] = [
-    { id: 1, nome: 'Luana', email: 'luana@gmail.com', super_admin: 1 },
-    { id: 2, nome: 'Davi', email: 'davi@gmail.com', super_admin: 0 },
-    { id: 3, nome: 'João', email: 'joao@gmail.com', super_admin: 0 },
-    { id: 4, nome: 'Filipe', email: 'filipe@gmail.com', super_admin: 0 },
-    { id: 5, nome: 'Júlia', email: 'julia@gmail.com', super_admin: 0 },
-    { id: 6, nome: 'Humberto', email: 'humberto@gmail.com', super_admin: 0 },
-    { id: 7, nome: 'Ribeiro', email: 'ribeiro@gmail.com', super_admin: 0 },
-    { id: 8, nome: 'Israel', email: 'israel@gmail.com', super_admin: 0 },
-    { id: 9, nome: 'Thiago', email: 'thiago@gmail.com', super_admin: 0 },
-    { id: 10, nome: 'Luan', email: 'luan@gmail.com', super_admin: 0 },
-  ];
+    const [admins, setAdmins] = useState<IAdminProps[]>([]);
+    const [columns, setColumns] = useState<string[]>([]);
+    const [props, setProps] = useState<string[]>([]);
+
+    useEffect(() => {
+      router.apiPost({ service: 'getAdmins' }, 'admin')
+        .then(data => {
+          const adminsData = data.admins;
+
+          const dynamicColumns = adminsData.length > 0 ? Object.keys(adminsData[0]) : [];
+          setColumns(dynamicColumns);
+
+          const dynamicProps = dynamicColumns;
+          setProps(dynamicProps);
+
+          setAdmins(adminsData);
+        })
+        .catch(error => {
+          console.error('Erro ao obter os administradores:', error);
+        });
+
+    }, []);
   return (
     <Layout>
       <DataTable title="Administradores" data={admins} columns={columns} props={props}></DataTable>

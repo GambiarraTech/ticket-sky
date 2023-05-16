@@ -38,3 +38,16 @@ export async function getAdmin(id: string) {
     }
 
 }
+
+export async function getAllAdmins(){
+
+    const admins: any = await query({
+        query: "SELECT id,nome,email,super_admin FROM administrador",
+    })
+
+    if (Object.keys(admins).length > 0) {
+        return admins
+    } else {
+        return null
+    }
+}
