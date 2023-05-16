@@ -19,6 +19,7 @@ export default function Cadastro() {
           buttonText={'Entrar'}
           service="loginPromoter"
           endPoint="promoter"
+          subtitulo=""
         />
       </div>
       <Footer />
