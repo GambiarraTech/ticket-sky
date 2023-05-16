@@ -1,7 +1,7 @@
-import styles from '@/styles/promoter/formCard.module.css';
+import * as router from '@/pages/api/router';
+import styles from '@/styles/formCard.module.css';
 import { Input } from '@/types/components/input';
 import React, { useState } from 'react';
-import * as router from '../../pages/api/router';
 
 type FormCardProps = {
   inputs: Input[];
@@ -31,17 +31,23 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
     }));
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
+    // Adiciona o service passado no FormCardProps ao inputValues (Conteúdo passado para a API)
     setInputValues((prevInputValues) => ({
       ...prevInputValues,
       service: service,
     }));
 
     const res = router.apiPost(inputValues, endPoint);
-    console.log(res);
-  };
+    let data;
+
+    res.then((value) => {
+      data = value.result;
+      console.log(data);
+    });
+  }
 
   return (
     <>

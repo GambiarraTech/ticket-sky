@@ -1,4 +1,5 @@
-import FormCard from '@/components/promoter/FormCard';
+import Footer from '@/components/admin/Footer';
+import FormCard from '@/components/FormCard';
 import styles from '@/styles/promoter/cadastro.module.css';
 import Image from 'next/image';
 
@@ -15,13 +16,14 @@ export default function Cadastro() {
       <div className={styles.container}>
         <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
         <FormCard
-          titulo={'Cadastro de Promoter'}
+          titulo={'Torne-se um Promoter'}
           inputs={listaInputs}
-          buttonText={'Entrar'}
+          buttonText={'Cadastrar'}
           service="cadastroPromoter"
           endPoint="promoter"
         />
       </div>
+      <Footer />
     </div>
   );
 }
