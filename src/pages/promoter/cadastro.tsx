@@ -21,6 +21,7 @@ export default function Cadastro() {
           buttonText={'Solicitar acesso promoter'}
           service="cadastroPromoter"
           endPoint="promoter"
+          subtitulo={''}
         />
       </div>
       <Footer />

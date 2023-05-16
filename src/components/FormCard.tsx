@@ -7,12 +7,13 @@ import React, { useContext, useState } from 'react';
 type FormCardProps = {
   inputs: Input[];
   titulo: string;
+  subtitulo: string;
   buttonText: string;
   service: string;
   endPoint: string;
 };
 
-export default function FormCard({ inputs, titulo, buttonText, service, endPoint }: FormCardProps) {
+export default function FormCard({ inputs, titulo, buttonText, service, endPoint, subtitulo }: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
@@ -47,7 +48,8 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
 
   return (
     <>
-      <h2 className={styles.title}>{titulo}</h2>
+      {titulo ? <h2 className={styles.title}>{titulo}</h2> : null}
+      {subtitulo ? <h3 className={styles.subtitulo}>{subtitulo}</h3> : null}
       <div className={styles.card}>
         {inputs.map((input) => (
           // A key serve para garantir que cada fragmento tenha uma chave exclusiva com base no input.id

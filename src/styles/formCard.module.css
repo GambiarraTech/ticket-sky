@@ -1,9 +1,12 @@
-.title {
-  @apply font-sans text-white text-2xl py-6;
-}
-
 .card {
   @apply bg-white flex flex-col px-6 py-4 rounded-md w-96;
+}
+
+.title {
+  @apply font-sans text-white text-2xl py-4;
+}
+.subtitulo {
+  @apply font-sans text-white text-base py-4;
 }
 
 .card label {
