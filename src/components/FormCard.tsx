@@ -2,18 +2,20 @@ import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/formCard.module.css';
 import { Input } from '@/types/components/input';
+import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 
 type FormCardProps = {
   inputs: Input[];
-  titulo: string;
-  subtitulo: string;
+  titulo?: string;
+  subtitulo?: string;
   buttonText: string;
   service: string;
   endPoint: string;
+  footer?: { message: string; linkMessage: string; link: string };
 };
 
-export default function FormCard({ inputs, titulo, buttonText, service, endPoint, subtitulo }: FormCardProps) {
+export default function FormCard({ inputs, titulo, buttonText, service, endPoint, subtitulo, footer }: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
@@ -65,6 +67,12 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
           </React.Fragment>
         ))}
         <button onClick={handleSubmit}>{buttonText}</button>
+        {footer && (
+          <p className={styles.footer}>
+            {footer.message}
+            <Link href={footer.link}>{footer.linkMessage}</Link>
+          </p>
+        )}
       </div>
     </>
   );

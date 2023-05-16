@@ -8,7 +8,7 @@ const listaInputs = [
   { id: 'senha', label: 'Digite sua senha:' },
 ];
 
-export default function Cadastro() {
+export default function Login() {
   return (
     <div className={styles.background}>
       <div className={styles.container}>
@@ -19,7 +19,7 @@ export default function Cadastro() {
           buttonText={'Entrar'}
           service="loginPromoter"
           endPoint="promoter"
-          subtitulo=""
+          footer={{ message: 'Não possui conta? ', linkMessage: 'Cadastre-se', link: '/promoter/cadastro' }}
         />
       </div>
       <Footer />

@@ -21,7 +21,7 @@ export default function Cadastro() {
           buttonText={'Solicitar acesso promoter'}
           service="cadastroPromoter"
           endPoint="promoter"
-          subtitulo={''}
+          footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
         />
       </div>
       <Footer />
