@@ -1,7 +1,8 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/formCard.module.css';
 import { Input } from '@/types/components/input';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 type FormCardProps = {
   inputs: Input[];
@@ -13,7 +14,6 @@ type FormCardProps = {
 
 export default function FormCard({ inputs, titulo, buttonText, service, endPoint }: FormCardProps) {
   // Cria o estado inputValues inicialmente vazio.
-
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
@@ -31,6 +31,8 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
     }));
   };
 
+  const { login } = useContext(AuthContext);
+
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
@@ -45,7 +47,7 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
 
     res.then((value) => {
       data = value.result;
-      console.log(data);
+      login(data);
     });
   }
 
