@@ -23,7 +23,7 @@
 }
 
 .contentText {
-  @apply text-center space-y-2 sm:text-left space-y-0.5;
+  @apply text-center space-y-2 sm:text-left;
 }
 
 .spaceText {
