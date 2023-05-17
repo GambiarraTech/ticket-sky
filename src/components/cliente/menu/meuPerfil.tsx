@@ -1,6 +1,7 @@
 import { AuthContext } from '@/contexts/AuthContext';
-import style from '@/styles/cliente/login.module.css';
+import styles from '@/styles/cliente/MeuPerfil.module.css';
 import { useContext, useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 
 interface MeuPerfilProps {
@@ -13,67 +14,97 @@ export default function MeuPerfil({ handleClick, handleClose }: MeuPerfilProps) 
   const [cliente, setCliente] = useState({
     nome: '',
     sobrenome: '',
-    cpf: '',
     email: '',
     senha: '',
     alterPassword: '',
+    cpf: '',
   });
 
   return (
     <>
-      <div className={style.modal}>
-        <div onClick={handleClose} className={style.bgBlur} aria-hidden="true"></div>
-        <div className={style.modalBg}>
-          <div className={style.closeButtonPosition}>
-            {/* Botão de fechar */}
-            <button onClick={handleClose} className={style.closeButton}>
-              <span className={style.hideFechar}>Fechar</span>
-              <IoClose />
-            </button>
-          </div>
-          <h1>Meu perfil</h1>
-          <form onSubmit={handleClose}>
-            <div className="">
-              <div className={style.inputPosition}>
-                <input
-                  className={style.inputSignUp}
-                  placeholder={user?.nome}
-                  type="text"
-                  onChange={(e) => (cliente.nome = e.target.value)}
-                />
-                <input
-                  className={style.inputSignUp}
-                  placeholder={user?.sobrenome}
-                  type="text"
-                  onChange={(e) => (cliente.sobrenome = e.target.value)}
-                />
-              </div>
-              <input
-                className={style.inputSignUp}
-                placeholder={user?.cpf}
-                type="text"
-                onChange={(e) => (cliente.cpf = e.target.value)}
-              />
-              <input
-                className={style.inputSignUp}
-                placeholder={user?.email}
-                type="email"
-                onChange={(e) => (cliente.email = e.target.value)}
-              />
+      <div className={styles.modal}>
+        <div onClick={handleClose} className={styles.bgBlur} aria-hidden="true"></div>
+        <div className={styles.modalBg}>
+          <div className={styles.head}>
+            <FaUserCircle size={68} className={styles.icone} />
+            <h1 className={styles.meuperfil}>Meu Perfil</h1>
+            <div className={styles.closeButtonPosition}>
+              {/* Botão de fechar */}
+              <button onClick={handleClose} className={styles.closeButton}>
+                <IoClose />
+              </button>
             </div>
-            <div className="">
-              <input
-                className={style.inputSignUp}
-                placeholder="Alterar Senha"
-                type="alterPassword"
-                onChange={(e) => (cliente.alterPassword = e.target.value)}
-              />
-              <input
-                className={style.inputSignUp}
-                placeholder="Senha"
-                type="password"
-                onChange={(e) => (cliente.senha = e.target.value)}
-              />
+          </div>
+          <form onSubmit={handleClose}>
+            <div className={styles.inputPosition}>
+              <div className={styles.inputPositionLeft}>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="Nome">
+                    Nome:
+                  </label>
+                  <input
+                    className={styles.input}
+                    value={user.nome}
+                    type="text"
+                    onChange={(e) => (cliente.nome = e.target.value)}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="Sobrenome">
+                    Sobrenome:
+                  </label>
+                  <input
+                    className={styles.input}
+                    value={user.sobrenome}
+                    type="text"
+                    onChange={(e) => (cliente.sobrenome = e.target.value)}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="Email">
+                    E-mail:
+                  </label>
+                  <input
+                    className={styles.input}
+                    value={user.email}
+                    type="email"
+                    onChange={(e) => (cliente.email = e.target.value)}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="CPF">
+                    CPF:
+                  </label>
+                  <input
+                    className={styles.input}
+                    value={user.cpf}
+                    type="text"
+                    onChange={(e) => (cliente.cpf = e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className={styles.inputPositionRight}>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="AlterarSenha">
+                    Alterar Senha:
+                  </label>
+                  <input
+                    className={styles.input}
+                    type="alterPassword"
+                    onChange={(e) => (cliente.alterPassword = e.target.value)}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <label className={styles.label} htmlFor="Senha">
+                    Senha:
+                  </label>
+                  <input className={styles.input} type="password" onChange={(e) => (cliente.senha = e.target.value)} />
+                </div>
+                <div className={styles.row}>
+                  <button className={styles.salvarAlt}>Salvar Alterações</button>
+                  <a className={styles.cancelar}>Cancelar</a>
+                </div>
+              </div>
             </div>
           </form>
         </div>

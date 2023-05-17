@@ -41,8 +41,8 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
         <table id="tblUsers" className={styles.table}>
           <thead className={styles.tableHeader}>
             <tr className={styles.tableRow}>
-              {columns.map((item) => (
-                <th scope="col" className={styles.tableCellHeader}>
+              {columns.map((item, index) => (
+                <th key={index} scope="col" className={styles.tableCellHeader}>
                   {item}
                 </th>
               ))}
@@ -54,8 +54,10 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
           <tbody className={styles.tableRowGroup}>
             {filteredData.map((endPoint, index) => (
               <tr key={index} className={styles.tableRow}>
-                {props.map((values) => (
-                  <td className={styles.tableCell}>{endPoint[values as keyof typeof endPoint]}</td>
+                {props.map((values, key) => (
+                  <td key={key} className={styles.tableCell}>
+                    {endPoint[values as keyof typeof endPoint]}
+                  </td>
                 ))}
                 <td className={styles.tableCellIcon}>
                   <button>
