@@ -1,11 +1,11 @@
+import { AuthContext } from '@/contexts/AuthContext';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
 import style from '../../../styles/cliente/navbar.module.css';
-import Image from 'next/image';
-import { AuthContext } from '@/contexts/AuthContext';
 import LoginModal from '../login/LoginModal';
 import MenuDropDown from '../menu/menu';
 
@@ -39,7 +39,7 @@ export default function NavbarCliente() {
           <input className={style.input} placeholder="Pesquisar" type="text" />
         </div>
       </nav>
-      {isLogged ? (
+      {isLogged && user.role == 'cliente' ? (
         <div className={style.options}>
           <button className={style.positionIcons}>
             <IoNotificationsSharp size="28" className={style.colorIcon} />
@@ -51,8 +51,8 @@ export default function NavbarCliente() {
         </div>
       ) : (
         <div className={style.options}>
-          <Link className={style.lightbutton} href="/promoter/cadastro">
-            Torne-se Promoter
+          <Link className={style.lightbutton} href="/promoter/login">
+            Área do promoter
           </Link>
           <button onClick={handleClick} className={style.bluebutton}>
             Fazer Login

@@ -69,8 +69,6 @@ export default async (req: any, res: any) => {
             }
 
             res.json({ user: data })
-        } else {
-            res.status(200).send('')
         }
     }
 

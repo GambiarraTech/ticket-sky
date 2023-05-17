@@ -1,0 +1,51 @@
+.pagePos {
+  @apply fixed mt-8 ml-8;
+}
+
+.pageFormat {
+  @apply inset-0 z-10 mt-14 overflow-y-auto flex items-center h-full px-4 py-8;
+}
+
+.pageStyle {
+  @apply flex flex-col w-full max-w-lg p-4 mx-auto bg-[#ffffff] justify-center items-center rounded-lg shadow-md border-solid;
+}
+
+.title {
+  @apply text-xl font-bold sm:text-2xl mb-6 mt-6 text-ticket-sky-blue;
+}
+
+.primaryInputStyle {
+  @apply w-full my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
+}
+
+.inputFormat {
+  @apply flex flex-col mb-2;
+}
+
+.secondFormat {
+  @apply flex flex-row gap-5;
+}
+
+.formStyle {
+  @apply text-ticket-sky-blue;
+}
+
+.secondInputStyle {
+  @apply w-1/2 my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm focus:text-ticket-sky-blue;
+}
+
+.buttonDiv {
+  @apply w-full flex flex-row mt-3 justify-between gap-4;
+}
+
+.buttonSave {
+  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg;
+}
+
+.buttonDelete {
+  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-[#da2424] hover:bg-[#911717] rounded-lg;
+}
+
+.arrowIconCartao {
+  @apply top-8 left-10 justify-end  rounded-lg text-[#0013a6] hover:text-gray-900;
+}

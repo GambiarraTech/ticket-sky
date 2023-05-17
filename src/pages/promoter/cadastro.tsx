@@ -18,9 +18,10 @@ export default function Cadastro() {
         <FormCard
           titulo={'Torne-se um Promoter'}
           inputs={listaInputs}
-          buttonText={'Cadastrar'}
+          buttonText={'Solicitar acesso promoter'}
           service="cadastroPromoter"
           endPoint="promoter"
+          footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
         />
       </div>
       <Footer />

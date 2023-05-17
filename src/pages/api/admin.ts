@@ -33,7 +33,7 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    console.log('Não logado')
+                    res.json({ error: 'Administrador não encontrado.'})
                 }
 
                 break
@@ -41,7 +41,7 @@ export default async (req: any, res: any) => {
             case 'getAdmins': {
                 const admins: Admin[] = await getAllAdmins();
 
-                if (admins.length > 0) {
+                if (admins && admins.length > 0) {
                     const data = admins
 
                     console.log(data)

@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import { Promoter, cadastroPromoter, getAllPromoters, getPromoter, loginPromoter } from '../../types/promoter';
+import * as promoter from '../../types/promoter';
+import Router from 'next/router';
 
 export default async (req: any, res: any) => {
 
@@ -9,7 +10,7 @@ export default async (req: any, res: any) => {
         switch (body.service) {
             case 'loginPromoter': {
                 const { email, senha } = body;
-                const checkLogin: Promoter = await loginPromoter(email, senha)
+                const checkLogin: promoter.Promoter = await promoter.loginPromoter(email, senha)
 
                 if (checkLogin != null) {
 
@@ -34,18 +35,20 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    console.log('Não logado')
+                    res.json({ error: 'Promoter não encontrado.' })
                 }
 
                 break
             }
             case 'cadastroPromoter': {
                 const { nome, email, senha, cpf_cnpj } = body
-                const checkLogin: Promoter = await cadastroPromoter(nome, email, senha, cpf_cnpj)
+                const checkLogin: promoter.Promoter = await promoter.cadastroPromoter(nome, email, senha, cpf_cnpj)
+
                 if (checkLogin != null) {
 
-                    const token = '2' + '-' + checkLogin.id + '-' + uuid()
-
+                    const dataUser = '2' + checkLogin.id
+                    const encodedData = Buffer.from(dataUser, 'utf8').toString('base64')
+                    const token = encodedData + '-' + uuid()
                     const data = {
                         token: token,
                         user: {
@@ -58,18 +61,16 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    console.log('Não logado')
+                    res.json({ error: 'Promoter já cadastrado.' })
                 }
 
                 break
             }
             case 'getPromoters': {
-                const promoters: Promoter[] = await getAllPromoters();
+                const promoters: promoter.Promoter[] = await promoter.getAllPromoters();
 
-                if (promoters.length > 0) {
+                if (promoters && promoters.length > 0 ) {
                     const data = promoters
-
-                    console.log(data)
 
                     res.json({ promoters: data });
                 } else {
@@ -79,6 +80,34 @@ export default async (req: any, res: any) => {
 
                 break;
             }
+            case 'getPromotersAguardandoAprov': {
+                const promoters: promoter.Promoter[] = await promoter.getPromotersAguardandoAprov();
+
+                if (promoters && promoters.length > 0 ) {
+                    const data = promoters
+
+                    res.json({ promoters: data });
+                } else {
+                    console.log('Nenhum promoter encontrado');
+                    res.json({ promoters: [], error: 'Nenhum promoter encontrado' });
+                }
+
+                break;
+
+            }
+            case 'aprovarPromoter': {
+                const id = body.idPromoter
+                const aprovarPromoter = await promoter.aprovarPromoter(id)
+
+                if(aprovarPromoter != null){
+                    res.json({ message: aprovarPromoter });
+
+                }else{  
+                    res.json({ error: 'Houve algum erro durante a aprovação'})
+                }
+
+                break
+            }
             default: {
                 console.log('Serviço inválido');
                 break;
@@ -87,7 +116,7 @@ export default async (req: any, res: any) => {
     } else {
         if (req.query.id) {
 
-            const checkLogin: Promoter = await getPromoter(req.query.id)
+            const checkLogin: promoter.Promoter = await promoter.getPromoter(req.query.id)
 
             const data = {
                 id: checkLogin.id,

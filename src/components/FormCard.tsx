@@ -2,17 +2,20 @@ import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/formCard.module.css';
 import { Input } from '@/types/components/input';
+import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 
 type FormCardProps = {
   inputs: Input[];
-  titulo: string;
+  titulo?: string;
+  subtitulo?: string;
   buttonText: string;
   service: string;
   endPoint: string;
+  footer?: { message: string; linkMessage: string; link: string };
 };
 
-export default function FormCard({ inputs, titulo, buttonText, service, endPoint }: FormCardProps) {
+export default function FormCard({ inputs, titulo, buttonText, service, endPoint, subtitulo, footer }: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
@@ -37,17 +40,22 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
     event.preventDefault();
 
     const res = router.apiPost(inputValues, endPoint);
+
     let data;
 
     res.then((value) => {
-      data = value.result;
-      login(data);
+      data = value;
+      if( !value.error ){
+        login(value.result)
+      }
+      ;
     });
   }
 
   return (
     <>
-      <h2 className={styles.title}>{titulo}</h2>
+      {titulo ? <h2 className={styles.title}>{titulo}</h2> : null}
+      {subtitulo ? <h3 className={styles.subtitulo}>{subtitulo}</h3> : null}
       <div className={styles.card}>
         {inputs.map((input) => (
           // A key serve para garantir que cada fragmento tenha uma chave exclusiva com base no input.id
@@ -63,6 +71,12 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
           </React.Fragment>
         ))}
         <button onClick={handleSubmit}>{buttonText}</button>
+        {footer && (
+          <p className={styles.footer}>
+            {footer.message}
+            <Link href={footer.link}>{footer.linkMessage}</Link>
+          </p>
+        )}
       </div>
     </>
   );
