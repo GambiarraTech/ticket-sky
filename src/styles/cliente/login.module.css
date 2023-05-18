@@ -37,7 +37,7 @@
 }
 
 .title {
-  @apply text-lg font-medium text-[#2d3748];
+  @apply text-3xl font-medium text-[#2d3748];
 }
 
 /* Descrição abaixo da logo  */
@@ -51,7 +51,7 @@
 }
 
 .inputSignUp {
-  @apply w-full my-3 pl-3 pr-3 py-2 text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
+  @apply w-full my-3 pl-3 pr-3 py-2  text-[#718096] outline-none border-[1px]  rounded-lg shadow-sm;
 }
 
 /* Botão fazer login/fazer cadastro */
