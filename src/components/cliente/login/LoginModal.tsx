@@ -1,9 +1,9 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import style from '@/styles/cliente/login.module.css';
+import Image from 'next/image';
 import { useCallback, useContext, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import * as router from '../../../pages/api/router';
-import LogoModal from './LogoModal';
 
 interface LoginModalProps {
   showModal: boolean;
@@ -82,7 +82,7 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
               </div>
               <div className={style.centerText}>
                 <h3 className={style.centerLogo}>
-                  <LogoModal />
+                  <Image src="/images/logo-minimal.png" alt="Logo" height="100" width="100" />
                 </h3>
                 <h4 className={style.title}>{variant === 'signIn' ? 'Faça Login' : 'Faça seu Cadastro'}</h4>
                 <p className={style.description}>Bem-vindo ao TicketSky, preencha os campos abaixo para continuar.</p>
