@@ -4,29 +4,31 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { getServerSideProps } from '@/lib/auth';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/admin/Admin.module.css';
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { IPromotersProps } from './promoters';
 
 export default function Admin() {
   const { user, logout } = useContext(AuthContext);
   const [promotersNaoAprovados, setPromotersNaoAprovados] = useState<IPromotersProps[]>([]);
 
+    function getPromoter(){
+      router.apiPost({ service: 'getPromotersAguardandoAprov' }, 'promoter').then((data) => {
+            const promotersData = data.promoters;
+            setPromotersNaoAprovados(promotersData);
+        })
+        .catch((error) => {
+            console.error('Erro ao obter os promoters:', error);
+      });
+    }
   function aprovarPromoter(id: number){
     router.apiPost({idPromoter: id, service: 'aprovarPromoter'}, 'promoter').then((data) =>{
-        console.log(data)
+        getPromoter()
     })
+
   }
 
   useEffect(() => {
-    router
-      .apiPost({ service: 'getPromotersAguardandoAprov' }, 'promoter')
-      .then((data) => {
-        const promotersData = data.promoters;
-        setPromotersNaoAprovados(promotersData);
-      })
-      .catch((error) => {
-        console.error('Erro ao obter os promoters:', error);
-      });
+    getPromoter()
   }, []);
 
   return (
