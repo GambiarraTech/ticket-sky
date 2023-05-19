@@ -19,6 +19,7 @@ export default function Login() {
           buttonText={'Entrar'}
           service="loginPromoter"
           endPoint="promoter"
+          errorMessage="Usuário ou senha incorreta."
           footer={{ message: 'Não possui conta? ', linkMessage: 'Cadastre-se', link: '/promoter/cadastro' }}
         />
       </div>

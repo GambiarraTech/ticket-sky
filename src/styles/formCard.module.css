@@ -3,7 +3,7 @@
 }
 
 .title {
-  @apply font-sans text-white text-2xl py-4;
+  @apply font-sans text-white text-3xl py-4;
 }
 .subtitulo {
   @apply font-sans text-white text-base py-4;
@@ -19,6 +19,10 @@
 
 .card button {
   @apply text-white rounded-md bg-azul-ticket h-9 mt-8;
+}
+
+.mensagemErro {
+  @apply text-[red] my-2  font-medium text-sm;
 }
 
 .footer {
