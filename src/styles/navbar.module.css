@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex w-full;
+  @apply h-20 flex w-full;
 }
 
 .container {
@@ -7,9 +7,9 @@
 }
 
 .container:first-child {
-  @apply justify-start;
+  @apply justify-start ml-10;
 }
 
 .container:last-child {
-  @apply justify-end;
+  @apply justify-end mr-10;
 }
