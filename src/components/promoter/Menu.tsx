@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import style from '../../styles/promoter/menu.module.css'
 
 interface MenuProps {
   showmenu: Boolean;
@@ -9,42 +10,42 @@ export default function Menu({ showmenu, whenclick }: MenuProps) {
   return (
     <>
       {showmenu && (
-        <div className=" absolute right-5 z-20 w-56 py-2 mt-1  bg-white rounded-lg shadow-xl border-[1px] ">
+        <div className={style.menu}>
           <div
             onClick={whenclick}
-            className="flex items-center p-3 -mt-2 text-sm font-bold text-black transition-colors duration-200 transform  justify-center"
+            className={style.menuTitulo}
           >
             Menu
           </div>
 
-          <hr className="border-gray-200 " />
+          <hr className={style.divisao} />
 
           <Link
             href="#"
-            className="block px-4 py-3 font-bold text-sm text-black capitalize transition-colors duration-200 transform hover:bg-gray-100"
+            className={style.item}
           >
             Ver perfil
           </Link>
-          <hr className="border-gray-200 " />
+          <hr className={style.divisao} />
           <Link
-            href="#"
-            className="block px-4 py-3 font-bold text-sm  text-black capitalize transition-colors duration-200 transform hover:bg-gray-100 "
+            href="/promoter/criarEvento"
+            className={style.item}
           >
             Criar eventos
           </Link>
 
-          <hr className="border-gray-200" />
+          <hr className={style.divisao}/>
 
           <Link
             href="#"
-            className="block px-4 py-3 text-sm font-bold text-black capitalize transition-colors duration-200 transform  hover:bg-gray-100 "
+            className={style.item}
           >
             Meus eventos
           </Link>
-          <hr className="border-gray-200 " />
+          <hr className={style.divisao}/>
           <Link
             href="#"
-            className="block px-4 py-3 text-sm font-bold text-black capitalize transition-colors duration-200 transform  hover:bg-gray-100 "
+            className={style.item}
           >
             Sair
           </Link>
