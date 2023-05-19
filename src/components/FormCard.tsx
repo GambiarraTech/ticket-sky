@@ -40,15 +40,16 @@ export default function FormCard(props: FormCardProps) {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+    setShowErroLogin(false);
 
     const res = router.apiPost(inputValues, props.endPoint);
 
     res.then((value) => {
       if (!value.error) {
-        setShowErroLogin(false);
         login(value.result);
+      } else {
+        setShowErroLogin(true);
       }
-      setShowErroLogin(true);
     });
   }
 
