@@ -7,9 +7,9 @@
 }
 
 .container:first-child {
-  @apply justify-start ml-10;
+  @apply justify-start ml-24;
 }
 
 .container:last-child {
-  @apply justify-end mr-10;
+  @apply justify-end mr-24;
 }
