@@ -19,17 +19,14 @@ export default function TelaEvento() {
   return (
     <main className={font.className}>
       <section className={style.section}>
-        <NavbarCliente Logado={true} />
+        <NavbarCliente />
         <div>
           <div className={style.containerGeral}>
             <Image alt="Banner do Evento" className={style.imgBanner} width="400" height="400" src="/quadrado.png" />
             <div className={style.content}>
               <h2 className={style.promoterName}>Nome do Promoter</h2>
               <h1 className={style.eventName}>Nome do Evento</h1>
-              <p className={style.description}>
-                Aqui está a porra da descrição do krl do evento, não aguento mais esse PBL. Não aguento mais essa vida,
-                meu pai do céu, eu só quero ser rico. Por que Deus? tu me fizeste pobre?
-              </p>
+              <p className={style.description}>TEXTO DA DESCRIÇÃO DO EVENTO texto da descrição do evento</p>
               <div className={style.eventInfo}>
                 <div className={style.countPosition}>
                   <div className={style.eventInfoIndividual}>
