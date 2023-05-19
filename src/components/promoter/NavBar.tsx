@@ -16,7 +16,7 @@ export default function NavBar({ children }: any) {
       <div className={style.navbar}>
         <nav className={style.title}>
           <div className={style.logo}>
-            <Link href="">
+            <Link href="/promoter">
               <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />
             </Link>
           </div>
