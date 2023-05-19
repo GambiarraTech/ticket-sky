@@ -1,0 +1,15 @@
+.navbar {
+  @apply flex w-full;
+}
+
+.container {
+  @apply flex w-full items-center justify-center;
+}
+
+.container:first-child {
+  @apply justify-start;
+}
+
+.container:last-child {
+  @apply justify-end;
+}
