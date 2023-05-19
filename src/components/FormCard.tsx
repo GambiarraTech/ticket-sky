@@ -35,6 +35,7 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
   };
 
   const { login } = useContext(AuthContext);
+  const [showErroLogin, setShowErroLogin] = useState(false);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -43,9 +44,10 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
 
     res.then((value) => {
       if( !value.error ){
+       // setShowErroLogin(false);
         login(value.result)
-      }
-      ;
+      };
+      //setShowErroLogin(true);
     });
   }
 
@@ -64,9 +66,13 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
               type={input.id}
               value={inputValues[input.id] || ''}
               onChange={handleChange}
+              maxLength={50}
+              required
             />
           </React.Fragment>
         ))}
+        <p className={styles.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
+
         <button onClick={handleSubmit}>{buttonText}</button>
         {footer && (
           <p className={styles.footer}>
