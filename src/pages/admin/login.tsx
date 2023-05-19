@@ -18,6 +18,7 @@ export default function Login() {
           inputs={listaInputs}
           buttonText={'Entrar'}
           service="loginAdmin"
+          errorMessage="Usuário ou senha incorreta."
           endPoint="admin"
         />
       </div>

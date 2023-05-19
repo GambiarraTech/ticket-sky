@@ -13,13 +13,14 @@ type FormCardProps = {
   service: string;
   endPoint: string;
   footer?: { message: string; linkMessage: string; link: string };
+  errorMessage: string;
 };
 
-export default function FormCard({ inputs, titulo, buttonText, service, endPoint, subtitulo, footer }: FormCardProps) {
+export default function FormCard(props: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
   // valores associados a essas chaves também são do tipo string.
-  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({ service: service });
+  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({ service: props.service });
 
   // (event: React.ChangeEvent<HTMLInputElement>) Define uma função callback que é chamada sempre que ocorre uma alteração no input.
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,23 +41,23 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    const res = router.apiPost(inputValues, endPoint);
+    const res = router.apiPost(inputValues, props.endPoint);
 
     res.then((value) => {
-      if( !value.error ){
-       // setShowErroLogin(false);
-        login(value.result)
-      };
-      //setShowErroLogin(true);
+      if (!value.error) {
+        setShowErroLogin(false);
+        login(value.result);
+      }
+      setShowErroLogin(true);
     });
   }
 
   return (
     <>
-      {titulo ? <h2 className={styles.title}>{titulo}</h2> : null}
-      {subtitulo ? <h3 className={styles.subtitulo}>{subtitulo}</h3> : null}
+      {props.titulo ? <h2 className={styles.title}>{props.titulo}</h2> : null}
+      {props.subtitulo ? <h3 className={styles.subtitulo}>{props.subtitulo}</h3> : null}
       <div className={styles.card}>
-        {inputs.map((input) => (
+        {props.inputs.map((input) => (
           // A key serve para garantir que cada fragmento tenha uma chave exclusiva com base no input.id
           <React.Fragment key={input.id}>
             <label htmlFor={input.id}>{input.label}</label>
@@ -71,13 +72,13 @@ export default function FormCard({ inputs, titulo, buttonText, service, endPoint
             />
           </React.Fragment>
         ))}
-        <p className={styles.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
+        <p className={styles.mensagemErro}>{showErroLogin ? props.errorMessage : ''}</p>
 
-        <button onClick={handleSubmit}>{buttonText}</button>
-        {footer && (
+        <button onClick={handleSubmit}>{props.buttonText}</button>
+        {props.footer && (
           <p className={styles.footer}>
-            {footer.message}
-            <Link href={footer.link}>{footer.linkMessage}</Link>
+            {props.footer.message}
+            <Link href={props.footer.link}>{props.footer.linkMessage}</Link>
           </p>
         )}
       </div>
