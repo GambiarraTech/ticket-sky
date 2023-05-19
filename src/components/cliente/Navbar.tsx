@@ -1,13 +1,13 @@
 import { AuthContext } from '@/contexts/AuthContext';
+import style from '@/styles/cliente/navbar.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
-import style from '../../../styles/cliente/navbar.module.css';
-import LoginModal from '../login/LoginModal';
-import MenuDropDown from '../menu/menu';
+import LoginModal from './LoginModal';
+import MenuDropDown from './Menu';
 
 interface NavbarClienteProps {
   Logado: boolean;

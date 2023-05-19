@@ -1,5 +1,5 @@
-import NavbarCliente from '@/components/cliente/navbar/Navbar';
-import Table, { meusIngressosType } from '@/components/cliente/table/TableIngressos';
+import NavbarCliente from '@/components/cliente/Navbar';
+import Table, { meusIngressosType } from '@/components/cliente/TableIngressos';
 import { AuthContext } from '@/contexts/AuthContext';
 import Head from 'next/head';
 import { useContext } from 'react';
@@ -9,7 +9,6 @@ import { useContext } from 'react';
 // }
 
 export default function meusIngressos() {
-  
   const { user } = useContext(AuthContext);
 
   const data: meusIngressosType[] = [

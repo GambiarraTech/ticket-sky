@@ -1,10 +1,10 @@
+import NavbarCliente from '@/components/cliente/Navbar';
+import style from '@/styles/cliente/telaCartao.module.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import { useState } from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import NavbarCliente from '../../components/cliente/navbar/Navbar';
-import * as router from '../../pages/api/router';
-import style from '../../styles/cliente/telaCartao.module.css';
+import * as router from '../api/router';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 

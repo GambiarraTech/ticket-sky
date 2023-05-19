@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MdOutlineLocationCity } from 'react-icons/md';
-import CountInput from '../../components/cliente/input/CountInput';
-import NavbarCliente from '../../components/cliente/navbar/Navbar';
+import CountInput from '../../components/cliente/CountInput';
+import NavbarCliente from '../../components/cliente/Navbar';
 import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });

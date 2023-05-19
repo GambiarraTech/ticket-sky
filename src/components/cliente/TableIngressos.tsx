@@ -1,6 +1,6 @@
+import style from '@/styles/cliente/table.module.css';
 import Image from 'next/image';
 import { FC } from 'react';
-import style from '../../../styles/cliente/table.module.css';
 
 export type meusIngressosType = {
   img: string;
@@ -31,7 +31,13 @@ const Table: FC<TableProps> = ({ data }) => {
                 <td>
                   <div className={style.tableContent}>
                     <div>
-                      <Image className={style.imgBorder} src="/../public/images/quadrado.png" alt="ingresso" height="120" width="120" />
+                      <Image
+                        className={style.imgBorder}
+                        src="/../public/images/quadrado.png"
+                        alt="ingresso"
+                        height="120"
+                        width="120"
+                      />
                     </div>
 
                     <div className={style.contentText}>

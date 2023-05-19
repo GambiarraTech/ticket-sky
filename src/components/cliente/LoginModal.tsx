@@ -1,9 +1,9 @@
 import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '@/pages/api/router';
 import style from '@/styles/cliente/login.module.css';
 import Image from 'next/image';
 import { useCallback, useContext, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import * as router from '../../../pages/api/router';
 
 interface LoginModalProps {
   showModal: boolean;
@@ -29,7 +29,6 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
     senha: '',
     service: '',
   });
-
 
   const { login } = useContext(AuthContext);
   const [showErroLogin, setShowErroLogin] = useState(false);
@@ -98,7 +97,7 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                         onChange={(e) => (cliente.nome = e.target.value)}
                         maxLength={20}
                         required
-                     />
+                      />
                       <input
                         className={style.inputSignUp}
                         placeholder="Sobrenome"
@@ -111,24 +110,24 @@ export default function LoginModal({ showModal, handleClick }: LoginModalProps) 
                   )}
                   <div className={style.inputPosition}>
                     <input
-                        className={style.inputSignUp}
-                        placeholder="E-mail"
-                        type="email"
-                        onChange={(e) => (cliente.email = e.target.value)}
-                        maxLength={50}
-                        required
+                      className={style.inputSignUp}
+                      placeholder="E-mail"
+                      type="email"
+                      onChange={(e) => (cliente.email = e.target.value)}
+                      maxLength={50}
+                      required
                     />
-                    </div>
-                    <div className="">
+                  </div>
+                  <div className="">
                     <input
-                        className={style.inputSignUp}
-                        placeholder="Senha"
-                        type="password"
-                        onChange={(e) => (cliente.senha = e.target.value)}
-                        maxLength={30}
-                        required
+                      className={style.inputSignUp}
+                      placeholder="Senha"
+                      type="password"
+                      onChange={(e) => (cliente.senha = e.target.value)}
+                      maxLength={30}
+                      required
                     />
-                    </div>
+                  </div>
                 </div>
                 <button
                   name={variant === 'signIn' ? 'loginCliente' : 'cadastroCliente'}

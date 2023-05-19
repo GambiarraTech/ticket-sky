@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 
 import style from '@/styles/cliente/menu.module.css';
-import CartaoCredito from './cartaoCredito';
-import MeuPerfil from './meuPerfil';
+import CartaoCredito from './CartaoCredito';
+import MeuPerfil from './MeuPerfil';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import { BiCreditCard } from 'react-icons/bi';

@@ -1,4 +1,4 @@
-import NavbarCliente from '@/components/cliente/navbar/Navbar';
+import NavbarCliente from '@/components/cliente/Navbar';
 import Carousel from '@/components/promoter/Carousel';
 import { AuthContext } from '@/contexts/AuthContext';
 import { Inter } from 'next/font/google';
@@ -19,7 +19,6 @@ export default function Home() {
       <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
       <Carousel title="Vistos Recentemente"></Carousel>
       <Carousel title="Pra você"></Carousel>
-
     </main>
   );
 }
