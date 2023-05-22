@@ -1,5 +1,5 @@
 import styles from '../styles/warningModal.module.css';
-import CustomModal from './modal';
+import CustomModal from './Modal';
 
 interface AlertaModalProps {
   isOpen: boolean;

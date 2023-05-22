@@ -27,7 +27,7 @@ export default function CustomModal({
   rightButton,
 }: ModalProps) {
   {
-    /* A FUNÇÃO DE FECHAR O MODAL QUE PODE SER USADA EM QUALQUER 'onClick' */
+    /* Função de fechar o modal que pode ser usada em qualquer 'onClick' */
   }
   const closeModal = () => {
     onClose();
@@ -37,10 +37,10 @@ export default function CustomModal({
     <>
       {isOpen && (
         <>
-          {/* A DIV DO BACKGROUND*/}
+          {/* Div do background*/}
           <div className={styles.background} />
 
-          {/* O MODAL EM SI */}
+          {/* O componente modal em si */}
           <div className={styles.cardPos}>
             <div className={styles.cardBody}>
               <div className={styles.warningPos}>
@@ -51,10 +51,10 @@ export default function CustomModal({
                 )}
               </div>
 
-              {/* CABEÇALHO DO CARD, ONDE TEM O AVATAR OPCIONAL, O TÍTULO, E O BOTÃO DE FECHAR */}
+              {/* Cabeçalho do card, onde tem o avatar opcional, o título, e o botão de fechar */}
               <div className={`${styles.cardHeaderWithClose} ${!haveClose && styles.cardHeaderWithoutClose}`}>
-                {/* O AVATAR É OPCIONAL PRO CASO DE SER USADO NO 'MEU PERFIL', DAÍ NOS PARAMETROS DE QUANDO O MODAL FOR CHAMADO, 
-                VOCÊ COLOCA O 'haveAvatar' COMO TRUE */}
+                {/* O avatar é opcional pro caso de ser usado no 'meu perfil', daí nos parametros de quando o modal for chamado,
+                você coloca o 'haveAvatar' como True */}
 
                 {haveAvatar && (
                   <div className={styles.avatar}>
@@ -62,12 +62,12 @@ export default function CustomModal({
                   </div>
                 )}
 
-                {/* O TITULO DO CARD */}
+                {/* Título do card */}
                 <div className={`${styles.titleDiv} ${!haveAvatar && styles.titleCenter}`}>
                   <h2 className={styles.titleStyle}>{title}</h2>
                 </div>
 
-                {/* O BOTÃO DE FECHAR O MODAL */}
+                {/* Botão de fechar do modal */}
                 {haveClose && (
                   <div className={styles.margin3}>
                     <button onClick={closeModal}>
@@ -77,7 +77,7 @@ export default function CustomModal({
                 )}
               </div>
 
-              {/* O CORPO DO CARD ONDE VAI O CHIDREN E TUDO QUE VOCÊ QUISER COLOCAR */}
+              {/* O corpo do card onde vai o children e todo conteúdo do modal*/}
               <div className={styles.padding4}>{children}</div>
               {leftButton || rightButton ? (
                 <div className={styles.buttonDiv}>
