@@ -1,0 +1,67 @@
+.background {
+  @apply fixed inset-0 z-50  bg-opacity-50 bg-black
+}
+
+.cardPos {
+  @apply fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+}
+
+.cardBody {
+  @apply overflow-hidden rounded-lg shadow-lg bg-white ml-10 mr-10
+}
+
+.cardHeaderWithClose {
+  @apply flex flex-row w-full justify-between
+}
+
+.cardHeaderWithoutClose {
+  @apply flex flex-row w-full justify-center
+}
+
+.warningPos {
+  @apply flex justify-center items-center
+}
+
+.warningStyle {
+  @apply text-red-800 w-20 h-20
+}
+
+.avatar {
+  @apply relative text-blue-900 top-5 left-8 mb-10
+}
+
+.titleDiv {
+  @apply relative p-4 justify-center top-1/2
+}
+
+.titleCenter {
+  @apply flex justify-center items-center
+}
+
+.titleStyle {
+  @apply flex justify-center items-center text-lg font-medium mt-2
+}
+
+.margin3 {
+  @apply m-3
+}
+
+.marginTop10 {
+  @apply mt-6
+}
+
+.xButton {
+  @apply w-6 h-6 text-gray-500 hover:text-gray-800
+}
+
+.padding4 {
+  @apply p-4
+}
+
+.buttonDiv {
+  @apply flex justify-center p-4
+}
+
+.rightButtonCenter {
+  @apply flex justify-center
+}
