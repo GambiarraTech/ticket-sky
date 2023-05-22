@@ -1,0 +1,11 @@
+.confirmButton {
+  @apply mr-2 border rounded-lg px-4 py-2 bg-ticket-sky-blue text-white;
+}
+
+.cancelButton {
+  @apply mr-2 border rounded-lg px-4 py-2 bg-red-800 text-white;
+}
+
+.warningText {
+  @apply flex justify-center items-center ml-5 mr-5;
+}
