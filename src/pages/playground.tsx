@@ -5,6 +5,7 @@ import Image from 'next/image';
 const listaButtons = [
   { id: 'modal1', text: 'modal1' },
   { id: 'modal2', text: 'modal2' },
+  { id: 'modal3', text: 'modal3' },
 ];
 
 export default function Playground() {
@@ -16,7 +17,9 @@ export default function Playground() {
         centerComponent={<div style={{ color: '#fff' }}>Teste</div>}
         rightComponent={<IconMenuButton menuButtons={listaButtons} />}
       />
-      <button>Teste</button>
+      <button>Teste1</button>
+      <button>Teste2</button>
+      <button>Teste3</button>
     </>
   );
 }
