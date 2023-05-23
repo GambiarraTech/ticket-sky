@@ -5,9 +5,12 @@ import Dropzone from '../../components/promoter/Dropzone';
 import parseCookies from 'nookies';
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '../api/router'
+import { getServerSideProps } from '@/lib/auth';
 
 export default function CriarEvento() {
+
   const [evento, setEvento] = useState({
+    promoter: '',
     nome: '',
     cidade: '',
     bairro: '',
@@ -20,6 +23,8 @@ export default function CriarEvento() {
     vip: 0,
     pista: 0,
     backstage: 0,
+    service: '',
+    imagem: '',
   });
 
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -27,58 +32,36 @@ export default function CriarEvento() {
  //* const { user, logout, autenticar } = useContext(AuthContext);
  //* autenticar('/promoter/cadastro');
 
-  const cookies = parseCookies.get();
-
-    const token = cookies['ticketsky-token'];
-let id =''
-    if(token){
-         id = token.split('-')[1]
-    }
+ const { user } = useContext(AuthContext);
 
 
-  const handleForm = (event: any) => {
-    event.preventDefault();
-    const data = new FormData();
-    data.append('nome',evento.nome);
-    data.append('cidade',evento.cidade);
-    data.append('bairro',evento.bairro);
-    data.append('cep',evento.cep);
-    data.append('categoria',evento.categoria);
-    data.append('local',evento.local);
-    data.append('data',evento.data);
-    data.append('descricao',evento.descricao);
-    data.append('vip',`${evento.vip}`); //*formData só aceita strig ou arquivo
-    data.append('pista',`${evento.pista}`);
-    data.append('backstage',`${evento.backstage}`);
-    data.append('idPromoter',id)
-    data.append('service','criarEvento')
+  async function criarEvento(e: any){
+    evento.service = e.target.name;
+    evento.promoter = user.id
     if(selectedFile){
-        data.append('imagem',selectedFile);
+        const imgBlob: Blob = selectedFile!
+        var reader = new FileReader();
+        reader.readAsDataURL(imgBlob);
+        reader.onloadend = function() {
+            var base64data = reader.result;
+            if (typeof base64data === 'string') {
+                evento.imagem = base64data
+              }
+        }
     }
+    console.log(evento)
 
-    const res = router.apiPost(data, 'evento');
-    let dado;
-    res.then((value) => {
-      dado = value.result;
+    router.apiPost(evento, 'evento').then((value) => {
+
     })
 
-
-
-    console.log(JSON.stringify(evento));
-    for (const [chave, valor] of data.entries()) {
-        console.log(chave, valor);
-      }
-    /*const objeto = Object.fromEntries(data.entries());
-    const jsonString = JSON.stringify(objeto);
-
-    console.log(jsonString);*/
   };
 
   return (
     <NavBar>
       <div className={style.header}>
         <div className={style.title}>Criar Evento</div>
-        <form className={style.formulario} onSubmit={handleForm}>
+        <div className={style.formulario}>
           <div className={style.partes}>
             <div className={style.campo}>
               Nome do evento:
@@ -89,6 +72,19 @@ let id =''
                 required
                 onChange={(e) => {
                   evento.nome = e.target.value;
+                }}
+              />
+            </div>
+
+            <div className={style.campo}>
+              Estado:
+              <input
+                className={style.input}
+                name="cidade"
+                type="text"
+                required
+                onChange={(e) => {
+                  evento.cidade = e.target.value;
                 }}
               />
             </div>
@@ -206,7 +202,7 @@ let id =''
                 }}
               />
             </div>
-            <button className={style.button} type="submit">
+            <button className={style.button} name='criarEvento' onClick={criarEvento}>
               Criar evento
             </button>
           </div>
@@ -261,8 +257,10 @@ let id =''
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </NavBar>
   );
 }
+
+export { getServerSideProps };

@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import style from '../../styles/promoter/menu.module.css'
+import { AuthContext } from '@/contexts/AuthContext';
+import { useContext } from 'react';
 
 interface MenuProps {
   showmenu: Boolean;
@@ -7,6 +9,7 @@ interface MenuProps {
 }
 
 export default function Menu({ showmenu, whenclick }: MenuProps) {
+    const { logout } = useContext(AuthContext);
   return (
     <>
       {showmenu && (
@@ -43,12 +46,12 @@ export default function Menu({ showmenu, whenclick }: MenuProps) {
             Meus eventos
           </Link>
           <hr className={style.divisao}/>
-          <Link
-            href="#"
+          <li
+            onClick={logout}
             className={style.item}
           >
             Sair
-          </Link>
+          </li>
         </div>
       )}
     </>

@@ -10,5 +10,5 @@
 }
 
 .item{
-    @apply block px-4 py-3 font-bold text-sm text-black hover:bg-white
+    @apply block px-4 py-3 font-bold text-sm text-black hover:bg-white cursor-pointer
 }
