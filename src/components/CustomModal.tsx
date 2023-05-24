@@ -1,4 +1,4 @@
-import styles from '@/styles/modal.module.css';
+import styles from '@/styles/customModal.module.css';
 import { AiOutlineWarning } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { HiX } from 'react-icons/hi';
