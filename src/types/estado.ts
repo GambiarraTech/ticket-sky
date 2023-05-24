@@ -8,7 +8,7 @@ export type Estado = {
 
 export async function getAllEstados() {
     const estados: any = await query({
-        query: "SELECT * FROM estado",
+        query: "SELECT nome, uf FROM estado",
     })
 
     if (Object.keys(estados).length > 0) {
