@@ -1,10 +1,10 @@
 import style from '@/styles/IconMenuButton.module.css';
-import { MenuButtons } from '@/types/components/menuButtons';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
 type IconMenuButtonProps = {
-  menuButtons: MenuButtons[];
+  children: React.ReactNode;
+  color: string;
 };
 
 export default function IconMenuButton(props: IconMenuButtonProps) {
@@ -20,18 +20,11 @@ export default function IconMenuButton(props: IconMenuButtonProps) {
     <>
       <div className={style.container}>
         {/* Ícone do usuário */}
-        <FaUserCircle size="36" color="white" onClick={toggleMenu} cursor="pointer"></FaUserCircle>
+        <FaUserCircle size="36" color={props.color} onClick={toggleMenu} cursor="pointer"></FaUserCircle>
         {/* Renderiza o menu apenas se o estado 'menuOpen' for verdadeiro */}
         {menuOpen && (
           <div className={style.menu}>
-            <ul>
-              {props.menuButtons.map((button) => (
-                // A key serve para garantir que cada fragmento tenha uma chave exclusiva com base no input.id
-                <React.Fragment key={button.id}>
-                  <li>{button.text}</li>
-                </React.Fragment>
-              ))}
-            </ul>
+            <ul>{props.children}</ul>
           </div>
         )}
       </div>
