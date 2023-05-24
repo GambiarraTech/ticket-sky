@@ -25,6 +25,9 @@ export default function NavbarCliente() {
             <IconMenuButton color="#0013a6">
               <li onClick={() => setOpenModalMeuPerfil(true)}>Meu Perfil</li>
               <li>
+                <Link href="/cliente/meuCartao">Meu Cartão</Link>
+              </li>
+              <li>
                 <Link href="/cliente/meusIngressos">Meus Ingressos</Link>
               </li>
               <li onClick={logout}>Logout</li>
