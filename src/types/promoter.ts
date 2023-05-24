@@ -114,3 +114,21 @@ export async function aprovarPromoter(id: number){
         return null
     }
 }
+
+export async function reprovarPromoter(id: number){
+    await query({
+        query: "DELETE FROM promoter WHERE id = (?)",
+        values: [id]
+    })
+
+    const promoter: any = await query({
+        query: "SELECT * FROM promoter WHERE id = (?)",
+        values: [id]
+    })
+
+    if (Object.keys(promoter).length > 0) {
+        return null
+    } else {
+        return 'Promoter reprovado.'
+    }
+}

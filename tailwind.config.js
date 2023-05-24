@@ -29,6 +29,8 @@ module.exports = {
       'blue-200': '#bfdbfe',
       'blue-700': '#1d4ed8',
       'slate-500': '#64748b',
+      'red-600': '#dc2626',
+      'red-700': '#b91c1c',
       black: colors.black,
       white: colors.white,
     },
