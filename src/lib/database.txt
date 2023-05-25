@@ -1,0 +1,157 @@
+DROP TABLE IF EXISTS cliente CASCADE;
+CREATE TABLE cliente (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(20) NOT NULL,
+	sobrenome varchar(30) NOT NULL,
+	email varchar(30) NOT NULL,
+	senha varchar(16) NOT NULL,
+	cpf char(11),
+	CONSTRAINT cliente_pk PRIMARY KEY (id),
+	CONSTRAINT cliente_email_uk UNIQUE (email),
+	CONSTRAINT cliente_cpf_uk UNIQUE (cpf)
+
+);
+
+DROP TABLE IF EXISTS cartao CASCADE;
+CREATE TABLE cartao (
+	id int NOT NULL AUTO_INCREMENT ,
+	numero varchar(16) NOT NULL,
+	vencimento char(5) NOT NULL,
+	id_cliente int NOT NULL,
+	CONSTRAINT cartao_pk PRIMARY KEY (id),
+	CONSTRAINT numero_uk UNIQUE (numero),
+	CONSTRAINT id_cliente_uk UNIQUE (id_cliente)
+
+);
+
+DROP TABLE IF EXISTS evento CASCADE;
+CREATE TABLE evento (
+	id int NOT NULL AUTO_INCREMENT ,
+	descricao varchar(256) NOT NULL,
+	data_hora timestamp NOT NULL,
+	banner varchar(128) NOT NULL,
+	id_endereco int NOT NULL,
+	id_categoria int NOT NULL,
+	id_promoter int NOT NULL,
+	CONSTRAINT evento_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS endereco CASCADE;
+CREATE TABLE endereco (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(40),
+	cep char(8),
+	id_estado int NOT NULL,
+	id_cidade int NOT NULL,
+	bairro varchar(30) NOT NULL,
+	rua varchar(30) NOT NULL,
+	number varchar(10) NOT NULL,
+	CONSTRAINT endereco_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS estado CASCADE;
+CREATE TABLE estado (
+	id int NOT NULL,
+	nome varchar(20) NOT NULL,
+	CONSTRAINT estado_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS cidade CASCADE;
+CREATE TABLE cidade (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(20) NOT NULL,
+	id_estado int NOT NULL,
+	CONSTRAINT cidade_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS administrador CASCADE;
+CREATE TABLE administrador (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(20) NOT NULL,
+	sobrenome varchar(30) NOT NULL,
+	senha varchar(16) NOT NULL,
+	email varchar(30) ,
+	super_adm bool NOT NULL DEFAULT false,
+	CONSTRAINT administrador_pk PRIMARY KEY (id),
+	CONSTRAINT administrador_email_uk UNIQUE (email)
+
+);
+
+DROP TABLE IF EXISTS categoria CASCADE;
+CREATE TABLE categoria (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(20) NOT NULL,
+	descricao varchar(30) NOT NULL,
+	CONSTRAINT categoria_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS promoter CASCADE;
+CREATE TABLE promoter (
+	id int NOT NULL AUTO_INCREMENT ,
+	nome varchar(30) NOT NULL,
+	email varchar(30) NOT NULL,
+	senha varchar(16) NOT NULL,
+	cpf_cnpj varchar(14) NOT NULL,
+	aprovado boolean NOT NULL,
+	CONSTRAINT promoter_pk PRIMARY KEY (id),
+	CONSTRAINT nome_uk UNIQUE (nome),
+	CONSTRAINT email_uk UNIQUE (email),
+	CONSTRAINT cpf_cnpj_uk UNIQUE (cpf_cnpj)
+
+);
+
+DROP TABLE IF EXISTS ingresso CASCADE;
+CREATE TABLE ingresso (
+	id int NOT NULL AUTO_INCREMENT ,
+	quantidade int NOT NULL,
+	valor numeric NOT NULL,
+	id_evento int NOT NULL,
+	id_setor int NOT NULL,
+	CONSTRAINT ingresso_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS pedido CASCADE;
+CREATE TABLE pedido (
+	id int NOT NULL AUTO_INCREMENT ,
+	numero char(16) NOT NULL,
+	id_cliente int NOT NULL,
+	id_tipo_ingresso int NOT NULL,
+	id_ingresso int NOT NULL,
+	quantidade int NOT NULL,
+	CONSTRAINT pedido_pk PRIMARY KEY (id)
+
+);
+
+DROP TABLE IF EXISTS tipo_ingresso CASCADE;
+CREATE TABLE tipo_ingresso (
+	id int NOT NULL AUTO_INCREMENT ,
+	descricao varchar(20) NOT NULL,
+	CONSTRAINT tipo_ingresso_pk PRIMARY KEY (id),
+	CONSTRAINT descricao_tipo_ingresso_uk UNIQUE (descricao)
+
+);
+
+DROP TABLE IF EXISTS setor CASCADE;
+CREATE TABLE setor (
+	id int NOT NULL AUTO_INCREMENT ,
+	descricao varchar(20) NOT NULL,
+	CONSTRAINT setor_pk PRIMARY KEY (id),
+	CONSTRAINT descricao_setor_uk UNIQUE (descricao)
+
+);
+
+DROP TABLE IF EXISTS solicitacao CASCADE;
+CREATE TABLE solicitacao (
+	id int NOT NULL AUTO_INCREMENT ,
+	id_promoter int NOT NULL,
+	status varchar(16) NOT NULL,
+	id_administrador int,
+	CONSTRAINT solicitacao_pk PRIMARY KEY (id)
+
+);
