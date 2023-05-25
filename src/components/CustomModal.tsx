@@ -1,4 +1,4 @@
-import styles from '@/styles/modal.module.css';
+import styles from '@/styles/customModal.module.css';
 import { AiOutlineWarning } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { HiX } from 'react-icons/hi';
@@ -12,7 +12,7 @@ interface ModalProps {
   title: string;
   children: React.ReactNode;
   leftButton?: React.ReactNode;
-  rightButton: React.ReactNode;
+  rightButton?: React.ReactNode;
 }
 
 export default function CustomModal({

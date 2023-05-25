@@ -1,0 +1,8 @@
+.menu {
+  @apply absolute w-48 bg-white rounded-lg  border border-gray-700 p-2 right-[4.62rem] mt-[0.7rem];
+}
+
+.menu::before {
+  @apply absolute top-[-0.42rem] right-[1.1rem] w-[12px] h-[12px] transform rotate-45 bg-white border-t border-l border-gray-700;
+  content: '';
+}

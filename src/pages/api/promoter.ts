@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid';
 import * as promoter from '../../types/promoter';
-import Router from 'next/router';
 
 export default async (req: any, res: any) => {
 
@@ -69,7 +68,7 @@ export default async (req: any, res: any) => {
             case 'getPromoters': {
                 const promoters: promoter.Promoter[] = await promoter.getAllPromoters();
 
-                if (promoters && promoters.length > 0 ) {
+                if (promoters && promoters.length > 0) {
                     const data = promoters
 
                     res.json({ promoters: data });
@@ -83,7 +82,7 @@ export default async (req: any, res: any) => {
             case 'getPromotersAguardandoAprov': {
                 const promoters: promoter.Promoter[] = await promoter.getPromotersAguardandoAprov();
 
-                if (promoters && promoters.length > 0 ) {
+                if (promoters && promoters.length > 0) {
                     const data = promoters
 
                     res.json({ promoters: data });
@@ -99,11 +98,24 @@ export default async (req: any, res: any) => {
                 const id = body.idPromoter
                 const aprovarPromoter = await promoter.aprovarPromoter(id)
 
-                if(aprovarPromoter != null){
+                if (aprovarPromoter != null) {
                     res.json({ message: aprovarPromoter });
 
-                }else{  
-                    res.json({ error: 'Houve algum erro durante a aprovação'})
+                } else {
+                    res.json({ error: 'Houve algum erro durante a aprovação' })
+                }
+
+                break
+            }
+            case 'reprovarPromoter': {
+                const id = body.idPromoter
+                const reprovarPromoter = await promoter.reprovarPromoter(id)
+
+                if (reprovarPromoter != null) {
+                    res.json({ message: reprovarPromoter });
+
+                } else {
+                    res.json({ error: 'Houve algum erro durante a reprovação' })
                 }
 
                 break
