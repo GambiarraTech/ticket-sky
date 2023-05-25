@@ -10,13 +10,15 @@ import InputSelect from '@/components/InputSelect';
 
 export default function CriarEvento() {
 
+    const [categoria,setCategoria] = useState<number>(0)
+
   const [evento, setEvento] = useState({
     promoter: '',
     nome: '',
     cidade: '',
     bairro: '',
     cep: '',
-    categoria: '',
+    categoria: 0,
     local: '',
     data: '',
     hora: '',
@@ -39,6 +41,8 @@ export default function CriarEvento() {
   async function criarEvento(e: any){
     evento.service = e.target.name;
     evento.promoter = user.id
+    evento.categoria = categoria;
+    console.log(typeof(categoria))
     if(selectedFile){
         const imgBlob: Blob = selectedFile!
         var reader = new FileReader();
@@ -90,7 +94,7 @@ export default function CriarEvento() {
               />
 
             </div>
-            < InputSelect  />
+
             <div className={style.campo}>
               Cidade:
               <input
@@ -138,15 +142,7 @@ export default function CriarEvento() {
 
             <div className={style.campo}>
               Categoria:
-              <input
-                className={style.input}
-                name="categoria"
-                type="text"
-                required
-                onChange={(e) => {
-                  evento.categoria = e.target.value;
-                }}
-              />
+              < InputSelect endpoint='categoria' onItemSelected={setCategoria}/>
             </div>
 
             <div className={style.campo}>
