@@ -1,4 +1,5 @@
 export async function apiGet(endpoint: any) {
+    
     const response = await fetch(`../api/${endpoint}`, {
         method: 'GET',
         headers: {
