@@ -1,3 +1,8 @@
+-- ESSE É Ó CÓDIGO PARA CRIAR O BANCO DO ZERO DE FORMA ATUALIZADA E POPULADO COM ALGUNS VALORES COLOQUEI NA MAIN MAS NÃO USA AINDA POIS VOU DEIXAR ELE SHOW AINDA
+
+
+-- Create schema
+
 DROP TABLE IF EXISTS cliente CASCADE;
 CREATE TABLE cliente (
 	id int NOT NULL AUTO_INCREMENT ,
@@ -155,3 +160,74 @@ CREATE TABLE solicitacao (
 	CONSTRAINT solicitacao_pk PRIMARY KEY (id)
 
 );
+
+-- Database development default values
+
+INSERT INTO `administrador` (`nome`, `sobrenome`, `email`, `super_admin`) VALUES ('Davi', 'Jatoba', 'davijatoba@uefs.com', 1);
+INSERT INTO `administrador` (`nome`, `sobrenome`, `email`, `super_admin`) VALUES ('Joao', 'Victor', 'joao@uefs.com', 0);
+INSERT INTO `administrador` (`nome`, `sobrenome`, `email`, `super_admin`) VALUES ('Humberto', 'Bandeira', 'betinho@uefs.com', 0);
+
+INSERT INTO `cliente` (`nome`, `sobrenome`, `email`, `senha`, `cpf`) VALUES ('Roberto', 'Baggio', 'roberto@gmail.com', '987456123', '22369857489');
+INSERT INTO `cliente` (`nome`, `sobrenome`, `email`, `senha`, `cpf`) VALUES ('Luiz', 'Adriano', 'luizadriano@gmail.com', '332145698', '32165498778');
+INSERT INTO `cliente` (`nome`, `sobrenome`, `email`, `senha`, `cpf`) VALUES ('Ronaldo', 'Nazario', 'ronaldo@gmail.com', '9885545465', '56987456921');
+
+INSERT INTO `promoter` (`nome`, `email`, `senha`, `cpf_cnpj`, `aprovado`) VALUES ('Israel', 'rael@gmail.com', 'w34234', '05745500000176', 1);
+INSERT INTO `promoter` (`nome`, `email`, `senha`, `cpf_cnpj`, `aprovado`) VALUES ('Julia', 'julha123@gmail.com', '5121jhbuh', '09654200000183', 1);
+INSERT INTO `promoter` (`nome`, `email`, `senha`, `cpf_cnpj`, `aprovado`) VALUES ('Jose', 'zeroberto@hotmail.com', 'akdsj2325', '20789500000206', 0);
+
+INSERT INTO `cartao` (`id`, `numero`, `vencimento`, `id_cliente`) VALUES (1, '1234567899874532', '03/31', 1);
+INSERT INTO `cartao` (`id`, `numero`, `vencimento`, `id_cliente`) VALUES (2, '2321323142343245', '12/29', 2);
+INSERT INTO `cartao` (`id`, `numero`, `vencimento`, `id_cliente`) VALUES (3, '6515989748946556', '09/27', 3);
+
+INSERT INTO `estado` (`id`, `nome`) VALUES (1, 'Bahia');
+INSERT INTO `estado` (`id`, `nome`) VALUES (2, 'São Paulo');
+INSERT INTO `estado` (`id`, `nome`) VALUES (3, 'Pará');
+
+INSERT INTO `cidade` (`id`, `id_estado`, `nome`) VALUES (1, 1, 'Salvador');
+INSERT INTO `cidade` (`id`, `id_estado`, `nome`) VALUES (2, 3, 'Belém');
+INSERT INTO `cidade` (`id`, `id_estado`, `nome`) VALUES (3, 2, 'Guarulhos');
+
+INSERT INTO `endereco` (`id`, `id_cidade`, `id_estado`, `nome`, `cep`, `bairro`, `rua`, `numero`) VALUES (1, 1, 1, 'Prime', '44091166', 'Rio Vermelho', 'Florianopolis', '537');
+INSERT INTO `endereco` (`id`, `id_cidade`, `id_estado`, `nome`, `cep`, `bairro`, `rua`, `numero`) VALUES (2, 3, 2, 'Fly', '54154556', 'Avenida', 'Lauro', '321');
+INSERT INTO `endereco` (`id`, `id_cidade`, `id_estado`, `nome`, `cep`, `bairro`, `rua`, `numero`) VALUES (3, 2, 3, 'Armazem', '34242343', 'Ipanema', 'Pelé', '324');
+
+INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (1, 'Stand-Up', 'Evento de comedia');
+INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (2, 'Esportivo', 'Evento de esporte');
+INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (3, 'Cultural', 'Entretenimento ao publico');
+
+
+
+INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (1, 1, 1, 'APROVADO');
+INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (2, 2, 3, 'APROVADO');
+INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (3, 3, 2, 'NEGADO');
+
+
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (1, 1, 3, 3, 'Numanice', 'Foto', '2023-05-14 21:59:43');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (2, 1, 2, 2, 'Flamengo x Bahia', 'Foto', '2023-09-20 19:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (3, 2, 2, 1, 'Whindersson Nunes', 'Foto', '2023-06-15 00:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (4, 2, 1, 2, 'Corinthians x Sao Paulo', 'Foto', '2023-09-30 21:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (5, 1, 2, 3, 'Belo', 'Foto', '2023-05-30 22:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (6, 2, 2, 3, 'Sorriso Maroto', 'Foto', '2023-07-21 00:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (7, 1, 3, 2, 'Lakers x Celtics', 'Foto', '2023-11-20 22:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (8, 1, 3, 1, 'Serginho Malandro', 'Foto', '2023-06-13 18:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (9, 2, 2, 3, 'Nadson o Ferinha', 'Foto', '2023-07-10 22:00:00');
+INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (10, 1, 1, 3, 'Filipe Ret', 'Foto', '2023-12-26 03:00:00');
+
+
+INSERT INTO `setor` (`id`, `descricao`) VALUES (2, 'BackStage');
+INSERT INTO `setor` (`id`, `descricao`) VALUES (1, 'Pista');
+INSERT INTO `setor` (`id`, `descricao`) VALUES (3, 'Vip');
+
+
+INSERT INTO `tipo_ingresso` (`id`, `descricao`) VALUES (1, 'Inteira');
+INSERT INTO `tipo_ingresso` (`id`, `descricao`) VALUES (2, 'Meia');
+
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (1, 2, 1, 1, '4569874532145698');
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (2, 1, 2, 2, '2324234324234234');
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (3, 3, 2, 3, '4353456456453432');
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (4, 2, 1, 5, '2342353454567889');
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (5, 1, 2, 4, '1321432534657788');
+INSERT INTO `pedido` (`id`, `id_cliente`, `id_tipo_ingresso`, `id_ingresso`, `numero`) VALUES (6, 3, 1, 6, '2342345677889001');
+
+
+-- Database default values
