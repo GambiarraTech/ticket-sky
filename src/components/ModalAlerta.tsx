@@ -1,6 +1,7 @@
 import styles from '../styles/warningModal.module.css';
 import CustomModal from './CustomModal';
 
+
 interface AlertaModalProps {
   isOpen: boolean;
   onClose: () => void;
