@@ -6,7 +6,6 @@ import parseCookies from 'nookies';
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '../api/router'
 import { getServerSideProps } from '@/lib/auth';
-import InputSelect from '@/components/InputSelect';
 
 export default function CriarEvento() {
 
@@ -88,9 +87,8 @@ export default function CriarEvento() {
                   evento.cidade = e.target.value;
                 }}
               />
-
             </div>
-            < InputSelect  />
+
             <div className={style.campo}>
               Cidade:
               <input
