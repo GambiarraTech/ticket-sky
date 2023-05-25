@@ -1,20 +1,48 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import { getServerSideProps } from '@/lib/auth';
-import { useContext, useState } from 'react';
+
+import { useContext, useEffect, useState } from 'react';
+
 import Dropzone from '../../components/promoter/Dropzone';
 import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
 import * as router from '../api/router';
 
 export default function CriarEvento() {
+
+    const [estados, setEstados] = useState<{ nome: string, uf: string }[]>([]);
+    const [cidades, setCidades] = useState<{ nome: string }[]>([]);
+    const [categorias, setCategorias] = useState<{ id: number,nome: string }[]>([]);
+
+    useEffect(() => {
+        router.apiGet('estado').then((data) => {
+            setEstados(data.result)
+          })
+          .catch((error) => {
+            console.error('Erro ao obter os estados:', error);
+          });
+
+
+        router.apiGet('categoria').then((data) => {
+            setCategorias(data.result)
+          })
+          .catch((error) => {
+            console.error('Erro ao obter os categorias:', error);
+          });
+      }, []);
+
+
   const [evento, setEvento] = useState({
     promoter: '',
     nome: '',
+    estado: '',
     cidade: '',
     bairro: '',
     cep: '',
     categoria: '',
     local: '',
+    rua: '',
+    numero: '',
     data: '',
     hora: '',
     descricao: '',
@@ -27,29 +55,63 @@ export default function CriarEvento() {
 
   const [selectedFile, setSelectedFile] = useState<File>();
 
-  //* const { user, logout, autenticar } = useContext(AuthContext);
-  //* autenticar('/promoter/cadastro');
-
   const { user } = useContext(AuthContext);
+
+  function convertByteArrayToString(byteArray: number[]): string {
+    const chunkSize = 65536; // Tamanho do chunk (ajuste conforme necessário)
+    let byteString = '';
+
+    for (let i = 0; i < byteArray.length; i += chunkSize) {
+      const chunk = byteArray.slice(i, i + chunkSize);
+      byteString += String.fromCharCode.apply(null, chunk);
+    }
+
+    return byteString;
+  }
 
   async function criarEvento(e: any) {
     evento.service = e.target.name;
     evento.promoter = user.id;
+
     if (selectedFile) {
-      const imgBlob: Blob = selectedFile!;
-      var reader = new FileReader();
-      reader.readAsDataURL(imgBlob);
-      reader.onloadend = function () {
-        var base64data = reader.result;
-        if (typeof base64data === 'string') {
-          evento.imagem = base64data;
-        }
-      };
-    }
+        const imgBlob: Blob = selectedFile!;
+        const reader = new FileReader();
 
-    console.log(evento);
+        reader.onloadend = function () {
+          if (reader.readyState === FileReader.DONE) {
+            const arrayBuffer = reader.result as ArrayBuffer;
+            const uintArray = new Uint8Array(arrayBuffer);
+            const byteArray = Array.from(uintArray);
 
-    router.apiPost(evento, 'evento').then((value) => {});
+            const byteString = convertByteArrayToString(byteArray);
+            const base64data = btoa(byteString);
+
+            evento.imagem = base64data;
+
+            router.apiPost(evento, 'evento').then((value) => {
+              // ...
+            });
+          }
+        };
+
+        reader.readAsArrayBuffer(imgBlob);
+      }
+  }
+
+  async function handleEstado(e: any){
+    evento.estado = e.target.value;
+
+    const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${evento.estado}/municipios`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+    const cidades = await response.json();
+
+    setCidades(cidades)
+
   }
 
   return (
@@ -73,28 +135,26 @@ export default function CriarEvento() {
 
             <div className={style.campo}>
               Estado:
-              <input
-                className={style.input}
-                name="cidade"
-                type="text"
-                required
-                onChange={(e) => {
-                  evento.cidade = e.target.value;
-                }}
-              />
+              <select onChange={(e) => { handleEstado(e) }}>
+                <option selected disabled hidden> Estado </option>
+                {estados.map((estado) => (
+                <option key={estado.uf} value={estado.uf}>
+                    {estado.nome}
+                </option>
+                ))}
+              </select>
             </div>
 
             <div className={style.campo}>
               Cidade:
-              <input
-                className={style.input}
-                name="cidade"
-                type="text"
-                required
-                onChange={(e) => {
-                  evento.cidade = e.target.value;
-                }}
-              />
+              <select onChange={(e) => {evento.cidade = e.target.value;}}>
+                <option selected disabled hidden > Cidade </option>
+                {cidades.map((cidades) => (
+                <option key={cidades.nome} value={cidades.nome}>
+                    {cidades.nome}
+                </option>
+                ))}
+              </select>
             </div>
 
             <div className={style.campo}>
@@ -134,16 +194,14 @@ export default function CriarEvento() {
           <div className={style.partes}>
             <div className={style.campo}>
               Categoria:
-              <input
-                className={style.input}
-                name="categoria"
-                type="text"
-                required
-                onChange={(e) => {
-                  evento.categoria = e.target.value;
-                }}
-                maxLength={245}
-              />
+              <select onChange={(e) => { evento.categoria = e.target.value }}>
+                <option selected disabled hidden> Categoria: </option>
+                {categorias.map((categoria) => (
+                <option key={categoria.nome} value={categoria.id}>
+                    {categoria.nome}
+                </option>
+                ))}
+              </select>
             </div>
             <div className={style.campo}>
               Nome do local:
@@ -158,6 +216,36 @@ export default function CriarEvento() {
                 maxLength={245}
               />
             </div>
+
+            <div className={style.campo}>
+              rua:
+              <input
+                className={style.input}
+                name="rua"
+                type="text"
+                required
+                onChange={(e) => {
+                  evento.rua = e.target.value;
+                }}
+              />
+            </div>
+
+            <div className={style.campo}>
+              numero:
+              <input
+                className={style.input}
+                name="numero"
+                type="text"
+                required
+                onChange={(e) => {
+                  evento.numero = e.target.value;
+                }}
+              />
+            </div>
+          </div>
+
+          <div className={style.partes}>
+
             <div className={style.data}>
               <div className={style.campo}>
                 Data:

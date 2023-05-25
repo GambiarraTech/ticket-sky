@@ -1,11 +1,11 @@
 .card {
-  @apply h-64 w-80 rounded-lg flex flex-col bg-[#DFE0FF];
+  @apply h-96 w-[39.406rem] rounded-lg flex flex-col bg-[#DFE0FF];
 }
 
 .header {
-  @apply h-12 bg-ticket-sky-blue flex justify-center rounded-t-lg text-white items-center;
+  @apply min-w-full min-h-[3rem] bg-ticket-sky-blue flex justify-center rounded-t-lg text-white items-center;
 }
 
 .body {
-  @apply flex justify-start p-2;
+  @apply flex min-w-full h-[21rem] justify-start p-2;
 }

@@ -1,4 +1,4 @@
-import NavbarCliente from '@/components/cliente/Navbar';
+import NavbarCliente from '@/components/cliente/NavbarCliente';
 import style from '@/styles/cliente/telaCartao.module.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';

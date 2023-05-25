@@ -1,18 +1,46 @@
-import Footer from '@/components/admin/Footer';
 import FormCard from '@/components/FormCard';
+import Footer from '@/components/admin/Footer';
 import styles from '@/styles/promoter/cadastro.module.css';
 import Image from 'next/image';
+import * as router from '../api/router';
+import Link from 'next/link';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+
+
 
 const listaInputs = [
-  { id: 'nome', label: 'Digite seu nome:' },
-  { id: 'email', label: 'Digite seu email:' },
-  { id: 'senha', label: 'Digite sua senha:' },
-  { id: 'cpf_cnpj', label: 'Digite seu CPF ou CNPJ:' },
+  { id: 'nome', label: 'Digite seu nome:', length:20},
+  { id: 'email', label: 'Digite seu email:', length: 50},
+  { id: 'password', label: 'Digite sua senha:', length:30},
+  { id: 'cpf_cnpj', label: 'Digite seu CPF ou CNPJ:', length: 14},
+
 ];
+
+
+
+//Chamar função após dar a confirmação de cadastro na tela
+async function enviaEmailConfirmacao(emailPromoter: string){
+    let data;
+    const res = router.apiPost({
+      destinatario: emailPromoter,
+      assunto: "Confirmação de cadastro",
+      mensagem: "Cadastro realizado com sucesso! Aguarde a confirmação de acesso! Não se preocupe você receberá um e-mail quando isso acontecer.",
+      anexos: null
+
+    }, 'services/emailService');
+    res.then((value) => {
+
+    });
+}
 
 export default function Cadastro() {
   return (
     <div className={styles.background}>
+        <div className={styles.botaoVoltar}>
+            <Link href={'/'} >
+                <AiOutlineArrowLeft size={32} color='grey'/>
+            </Link>
+        </div>
       <div className={styles.container}>
         <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
         <FormCard
