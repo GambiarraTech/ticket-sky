@@ -9,28 +9,29 @@ import style from '../../styles/promoter/criarEvento.module.css';
 import * as router from '../api/router';
 
 export default function CriarEvento() {
+  const [estados, setEstados] = useState<{ nome: string; uf: string }[]>([]);
+  const [cidades, setCidades] = useState<{ nome: string }[]>([]);
+  const [categorias, setCategorias] = useState<{ id: number; nome: string }[]>([]);
 
-    const [estados, setEstados] = useState<{ nome: string, uf: string }[]>([]);
-    const [cidades, setCidades] = useState<{ nome: string }[]>([]);
-    const [categorias, setCategorias] = useState<{ id: number,nome: string }[]>([]);
+  useEffect(() => {
+    router
+      .apiGet('estado')
+      .then((data) => {
+        setEstados(data.result);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os estados:', error);
+      });
 
-    useEffect(() => {
-        router.apiGet('estado').then((data) => {
-            setEstados(data.result)
-          })
-          .catch((error) => {
-            console.error('Erro ao obter os estados:', error);
-          });
-
-
-        router.apiGet('categoria').then((data) => {
-            setCategorias(data.result)
-          })
-          .catch((error) => {
-            console.error('Erro ao obter os categorias:', error);
-          });
-      }, []);
-
+    router
+      .apiGet('categoria')
+      .then((data) => {
+        setCategorias(data.result);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os categorias:', error);
+      });
+  }, []);
 
   const [evento, setEvento] = useState({
     promoter: '',
@@ -74,44 +75,46 @@ export default function CriarEvento() {
     evento.promoter = user.id;
 
     if (selectedFile) {
-        const imgBlob: Blob = selectedFile!;
-        const reader = new FileReader();
+      const imgBlob: Blob = selectedFile!;
+      const reader = new FileReader();
 
-        reader.onloadend = function () {
-          if (reader.readyState === FileReader.DONE) {
-            const arrayBuffer = reader.result as ArrayBuffer;
-            const uintArray = new Uint8Array(arrayBuffer);
-            const byteArray = Array.from(uintArray);
+      reader.onloadend = function () {
+        if (reader.readyState === FileReader.DONE) {
+          const arrayBuffer = reader.result as ArrayBuffer;
+          const uintArray = new Uint8Array(arrayBuffer);
+          const byteArray = Array.from(uintArray);
 
-            const byteString = convertByteArrayToString(byteArray);
-            const base64data = btoa(byteString);
+          const byteString = convertByteArrayToString(byteArray);
+          const base64data = btoa(byteString);
 
-            evento.imagem = base64data;
+          evento.imagem = base64data;
 
-            router.apiPost(evento, 'evento').then((value) => {
-              // ...
-            });
-          }
-        };
+          router.apiPost(evento, 'evento').then((value) => {
+            // ...
+          });
+        }
+      };
 
-        reader.readAsArrayBuffer(imgBlob);
-      }
+      reader.readAsArrayBuffer(imgBlob);
+    }
   }
 
-  async function handleEstado(e: any){
+  async function handleEstado(e: any) {
     evento.estado = e.target.value;
 
-    const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${evento.estado}/municipios`, {
+    const response = await fetch(
+      `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${evento.estado}/municipios`,
+      {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-    })
+      }
+    );
 
     const cidades = await response.json();
 
-    setCidades(cidades)
-
+    setCidades(cidades);
   }
 
   return (
@@ -135,24 +138,38 @@ export default function CriarEvento() {
 
             <div className={style.campo}>
               Estado:
-              <select onChange={(e) => { handleEstado(e) }}>
-                <option selected disabled hidden> Estado </option>
-                {estados.map((estado) => (
-                <option key={estado.uf} value={estado.uf}>
-                    {estado.nome}
+              <select
+                onChange={(e) => {
+                  handleEstado(e);
+                }}
+              >
+                <option selected disabled hidden>
+                  {' '}
+                  Estado{' '}
                 </option>
+                {estados.map((estado) => (
+                  <option key={estado.uf} value={estado.uf}>
+                    {estado.nome}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className={style.campo}>
               Cidade:
-              <select onChange={(e) => {evento.cidade = e.target.value;}}>
-                <option selected disabled hidden > Cidade </option>
-                {cidades.map((cidades) => (
-                <option key={cidades.nome} value={cidades.nome}>
-                    {cidades.nome}
+              <select
+                onChange={(e) => {
+                  evento.cidade = e.target.value;
+                }}
+              >
+                <option selected disabled hidden>
+                  {' '}
+                  Cidade{' '}
                 </option>
+                {cidades.map((cidades) => (
+                  <option key={cidades.nome} value={cidades.nome}>
+                    {cidades.nome}
+                  </option>
                 ))}
               </select>
             </div>
@@ -194,12 +211,19 @@ export default function CriarEvento() {
           <div className={style.partes}>
             <div className={style.campo}>
               Categoria:
-              <select onChange={(e) => { evento.categoria = e.target.value }}>
-                <option selected disabled hidden> Categoria: </option>
-                {categorias.map((categoria) => (
-                <option key={categoria.nome} value={categoria.id}>
-                    {categoria.nome}
+              <select
+                onChange={(e) => {
+                  evento.categoria = e.target.value;
+                }}
+              >
+                <option selected disabled hidden>
+                  {' '}
+                  Categoria:{' '}
                 </option>
+                {categorias.map((categoria) => (
+                  <option key={categoria.nome} value={categoria.id}>
+                    {categoria.nome}
+                  </option>
                 ))}
               </select>
             </div>
@@ -245,7 +269,6 @@ export default function CriarEvento() {
           </div>
 
           <div className={style.partes}>
-
             <div className={style.data}>
               <div className={style.campo}>
                 Data:
