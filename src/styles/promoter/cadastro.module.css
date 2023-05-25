@@ -5,3 +5,7 @@
 .container {
   @apply pt-8 flex flex-col items-center;
 }
+
+.botaoVoltar {
+  @apply cursor-pointer  p-4 text-center  w-16 hover:bg-azul-ticket;
+}

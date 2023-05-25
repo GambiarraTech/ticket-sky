@@ -35,13 +35,19 @@ export default async (req: any, res: any) => {
                     }
                     res.json({ result: data })
                 } else {
-                    console.log('Não logado')
+                    res.json({ error: 'Cliente não encontrado.' })
                 }
                 break
             }
             case 'cadastroCliente': {
                 const createCliente = await cliente.cadastroCliente(nome, sobrenome, email, senha, cpf)
-                res.json({ result: createCliente })
+                if (createCliente != undefined) {
+
+                    res.json({ result: createCliente })
+                } else {
+
+                    res.json({ error: 'Email já cadastrado.' })
+                }
                 break
             }
             // case 'PUT': {

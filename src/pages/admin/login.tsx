@@ -4,8 +4,8 @@ import styles from '@/styles/promoter/cadastro.module.css';
 import Image from 'next/image';
 
 const listaInputs = [
-  { id: 'email', label: 'Digite seu email:' },
-  { id: 'senha', label: 'Digite sua senha:' },
+  { id: 'email', label: 'Digite seu email:', length: 50},
+  { id: 'password', label: 'Digite sua senha:', length: 30},
 ];
 
 export default function Login() {
