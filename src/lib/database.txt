@@ -195,12 +195,9 @@ INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (1, 'Stand-Up', 'Even
 INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (2, 'Esportivo', 'Evento de esporte');
 INSERT INTO `categoria` (`id`, `nome`, `descricao`) VALUES (3, 'Cultural', 'Entretenimento ao publico');
 
-
-
 INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (1, 1, 1, 'APROVADO');
 INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (2, 2, 3, 'APROVADO');
 INSERT INTO `solicitacao` (`id`, `id_promoter`, `id_adm`, `status`) VALUES (3, 3, 2, 'NEGADO');
-
 
 INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (1, 1, 3, 3, 'Numanice', 'Foto', '2023-05-14 21:59:43');
 INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (2, 1, 2, 2, 'Flamengo x Bahia', 'Foto', '2023-09-20 19:00:00');
@@ -213,11 +210,9 @@ INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descr
 INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (9, 2, 2, 3, 'Nadson o Ferinha', 'Foto', '2023-07-10 22:00:00');
 INSERT INTO `evento` (`id`, `id_promoter`, `id_endereco`, `id_categoria`, `descricao`, `banner`, `data_hora`) VALUES (10, 1, 1, 3, 'Filipe Ret', 'Foto', '2023-12-26 03:00:00');
 
-
 INSERT INTO `setor` (`id`, `descricao`) VALUES (2, 'BackStage');
 INSERT INTO `setor` (`id`, `descricao`) VALUES (1, 'Pista');
 INSERT INTO `setor` (`id`, `descricao`) VALUES (3, 'Vip');
-
 
 INSERT INTO `tipo_ingresso` (`id`, `descricao`) VALUES (1, 'Inteira');
 INSERT INTO `tipo_ingresso` (`id`, `descricao`) VALUES (2, 'Meia');
