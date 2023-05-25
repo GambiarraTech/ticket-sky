@@ -1,14 +1,12 @@
-import { useContext, useEffect,useState } from 'react';
+import { AuthContext } from '@/contexts/AuthContext';
+import { getServerSideProps } from '@/lib/auth';
+import { useContext, useState } from 'react';
+import Dropzone from '../../components/promoter/Dropzone';
 import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
-import Dropzone from '../../components/promoter/Dropzone';
-import parseCookies from 'nookies';
-import { AuthContext } from '@/contexts/AuthContext';
-import * as router from '../api/router'
-import { getServerSideProps } from '@/lib/auth';
+import * as router from '../api/router';
 
 export default function CriarEvento() {
-
   const [evento, setEvento] = useState({
     promoter: '',
     nome: '',
@@ -29,33 +27,30 @@ export default function CriarEvento() {
 
   const [selectedFile, setSelectedFile] = useState<File>();
 
- //* const { user, logout, autenticar } = useContext(AuthContext);
- //* autenticar('/promoter/cadastro');
+  //* const { user, logout, autenticar } = useContext(AuthContext);
+  //* autenticar('/promoter/cadastro');
 
- const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-
-  async function criarEvento(e: any){
+  async function criarEvento(e: any) {
     evento.service = e.target.name;
-    evento.promoter = user.id
-    if(selectedFile){
-        const imgBlob: Blob = selectedFile!
-        var reader = new FileReader();
-        reader.readAsDataURL(imgBlob);
-        reader.onloadend = function() {
-            var base64data = reader.result;
-            if (typeof base64data === 'string') {
-                evento.imagem = base64data
-              }
+    evento.promoter = user.id;
+    if (selectedFile) {
+      const imgBlob: Blob = selectedFile!;
+      var reader = new FileReader();
+      reader.readAsDataURL(imgBlob);
+      reader.onloadend = function () {
+        var base64data = reader.result;
+        if (typeof base64data === 'string') {
+          evento.imagem = base64data;
         }
+      };
     }
-    console.log(evento)
 
-    router.apiPost(evento, 'evento').then((value) => {
+    console.log(evento);
 
-    })
-
-  };
+    router.apiPost(evento, 'evento').then((value) => {});
+  }
 
   return (
     <NavBar>
@@ -114,6 +109,7 @@ export default function CriarEvento() {
                     evento.bairro = e.target.value;
                   }
                 }}
+                maxLength={245}
               />
             </div>
 
@@ -133,7 +129,9 @@ export default function CriarEvento() {
                 }}
               ></input>
             </div>
+          </div>
 
+          <div className={style.partes}>
             <div className={style.campo}>
               Categoria:
               <input
@@ -144,9 +142,9 @@ export default function CriarEvento() {
                 onChange={(e) => {
                   evento.categoria = e.target.value;
                 }}
+                maxLength={245}
               />
             </div>
-
             <div className={style.campo}>
               Nome do local:
               <input
@@ -157,11 +155,9 @@ export default function CriarEvento() {
                 onChange={(e) => {
                   evento.local = e.target.value;
                 }}
+                maxLength={245}
               />
             </div>
-          </div>
-
-          <div className={style.partes}>
             <div className={style.data}>
               <div className={style.campo}>
                 Data:
@@ -175,8 +171,7 @@ export default function CriarEvento() {
                   }}
                 />
               </div>
-            </div>
-            <div className={style.data}>
+
               <div className={style.campo}>
                 Horário:
                 <input
@@ -200,18 +195,18 @@ export default function CriarEvento() {
                 onChange={(e) => {
                   evento.descricao = e.target.value;
                 }}
+                maxLength={320}
               />
             </div>
-            <button className={style.button} name='criarEvento' onClick={criarEvento}>
+            <button className={style.button} name="criarEvento" onClick={criarEvento}>
               Criar evento
             </button>
           </div>
 
           <div className={style.partes}>
-
             <div className={style.campo}>
               Banner do evento:
-              <Dropzone onFileUploaded = {setSelectedFile} />
+              <Dropzone onFileUploaded={setSelectedFile} />
             </div>
 
             <div className={style.data}>Quantidade de ingressos disponiveis:</div>
