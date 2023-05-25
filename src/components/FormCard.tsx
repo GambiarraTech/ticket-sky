@@ -68,13 +68,12 @@ export default function FormCard(props: FormCardProps) {
               type={input.id}
               value={inputValues[input.id] || ''}
               onChange={handleChange}
-              maxLength={50}
+              maxLength={input.length}
               required
             />
           </React.Fragment>
         ))}
         <p className={styles.mensagemErro}>{showErroLogin ? props.errorMessage : ''}</p>
-
         <button onClick={handleSubmit}>{props.buttonText}</button>
         {props.footer && (
           <p className={styles.footer}>
