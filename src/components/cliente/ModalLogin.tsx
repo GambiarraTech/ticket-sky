@@ -64,70 +64,72 @@ export default function ModalLogin(props: ModalLoginProps) {
 
   return (
     <>
-      <div className={style.centerText}>
-        <h3 className={style.centerLogo}>
-          <Image src="/images/logo-minimal.png" alt="Logo" height="100" width="100" />
-        </h3>
-        <h4 className={style.title}>{variant === 'signIn' ? 'Faça Login' : 'Faça seu cadastro'}</h4>
-        <p className={style.description}>Bem-vindo ao TicketSky, preencha os campos abaixo para continuar.</p>
+    <form action="">
+        <div className={style.centerText}>
+            <h3 className={style.centerLogo}>
+            <Image src="/images/logo-minimal.png" alt="Logo" height="100" width="100" />
+            </h3>
+            <h4 className={style.title}>{variant === 'signIn' ? 'Faça Login' : 'Faça seu cadastro'}</h4>
+            <p className={style.description}>Bem-vindo ao TicketSky, preencha os campos abaixo para continuar.</p>
 
-        <div className="">
-          {variant === 'signUp' && (
+            <div className="">
+            {variant === 'signUp' && (
+                <div className={style.inputPosition}>
+                <input
+                    className={style.inputSignUp}
+                    placeholder="Nome"
+                    type="text"
+                    onChange={(e) => (cliente.nome = e.target.value)}
+                    maxLength={20}
+                    required
+                />
+                <input
+                    className={style.inputSignUp}
+                    placeholder="Sobrenome"
+                    type="text"
+                    onChange={(e) => (cliente.sobrenome = e.target.value)}
+                    maxLength={50}
+                    required
+                />
+                </div>
+            )}
             <div className={style.inputPosition}>
-              <input
+                <input
                 className={style.inputSignUp}
-                placeholder="Nome"
-                type="text"
-                onChange={(e) => (cliente.nome = e.target.value)}
-                maxLength={20}
-                required
-              />
-              <input
-                className={style.inputSignUp}
-                placeholder="Sobrenome"
-                type="text"
-                onChange={(e) => (cliente.sobrenome = e.target.value)}
+                placeholder="E-mail"
+                type="email"
+                onChange={(e) => (cliente.email = e.target.value)}
                 maxLength={50}
                 required
-              />
+                />
             </div>
-          )}
-          <div className={style.inputPosition}>
-            <input
-              className={style.inputSignUp}
-              placeholder="E-mail"
-              type="email"
-              onChange={(e) => (cliente.email = e.target.value)}
-              maxLength={50}
-              required
-            />
-          </div>
-          <div className="">
-            <input
-              className={style.inputSignUp}
-              placeholder="Senha"
-              type="password"
-              onChange={(e) => (cliente.senha = e.target.value)}
-              maxLength={30}
-              required
-            />
-          </div>
+            <div className="">
+                <input
+                className={style.inputSignUp}
+                placeholder="Senha"
+                type="password"
+                onChange={(e) => (cliente.senha = e.target.value)}
+                maxLength={30}
+                required
+                />
+            </div>
+            </div>
+            <button
+            name={variant === 'signIn' ? 'loginCliente' : 'cadastroCliente'}
+            onClick={variant === 'signIn' ? loginCliente : cadastroCliente}
+            className={style.loginButton}
+            >
+            {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
+            </button>
+            <p className={style.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
+            <p className={style.positionLinkButton}>
+            {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
+            <span onClick={changeVariant} className={style.linkButton}>
+                {variant === 'signIn' ? 'Criar Conta' : 'Fazer Login'}
+            </span>
+            </p>
         </div>
-        <button
-          name={variant === 'signIn' ? 'loginCliente' : 'cadastroCliente'}
-          onClick={variant === 'signIn' ? loginCliente : cadastroCliente}
-          className={style.loginButton}
-        >
-          {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
-        </button>
-        <p className={style.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
-        <p className={style.positionLinkButton}>
-          {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
-          <span onClick={changeVariant} className={style.linkButton}>
-            {variant === 'signIn' ? 'Criar Conta' : 'Fazer Login'}
-          </span>
-        </p>
-      </div>
+      </form>
     </>
   );
 }
