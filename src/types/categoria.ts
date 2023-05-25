@@ -1,15 +1,12 @@
-import { query } from "@/lib/db"
+import { query } from '@/lib/db'
 
-
-export type Categoria ={
+export type Categoria = {
     id: number,
     nome: string,
-    descricao: string,
+    descricao: string
 }
 
-
-export async function getAll() {
-
+export async function getAllCategorias() {
     const categorias: any = await query({
         query: "SELECT * FROM categoria",
     })
@@ -20,4 +17,3 @@ export async function getAll() {
         return null
     }
 }
-
