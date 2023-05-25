@@ -22,6 +22,10 @@
   @apply flex flex-col max-w-full items-center justify-center gap-[6rem];
 }
 
+.infoItem {
+  @apply cursor-pointer;
+}
+
 .txt {
   @apply flex flex-col whitespace-nowrap;
 }
@@ -32,6 +36,10 @@
 
 .buttons {
   @apply flex w-[45%] items-center justify-center;
+}
+
+.buttonsModal {
+  @apply flex min-w-full items-center justify-center mt-6;
 }
 
 .buttonAprovar {
