@@ -23,7 +23,7 @@
 }
 
 .optionsList {
-  @apply flex flex-col w-full h-72 justify-center;
+  @apply flex flex-col w-full h-56 justify-center;
 }
 
 .optionsItem {

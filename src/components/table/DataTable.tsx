@@ -1,4 +1,5 @@
 import { IAdminProps } from '@/pages/admin/administradores';
+import { IEventosProps } from '@/pages/admin/eventos';
 import { IPromotersProps } from '@/pages/admin/promoters';
 import styles from '@/styles/table/DataTable.module.css';
 import React, { FC } from 'react';
@@ -8,7 +9,7 @@ import { FaTrash } from 'react-icons/fa';
 interface TableProps {
   title: string;
   //   Adicionar os outros tipos
-  data: IAdminProps[] | IPromotersProps[];
+  data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
 }
@@ -16,7 +17,7 @@ interface TableProps {
 const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
   const [search, setSearch] = React.useState('');
   //   Adicionar os outros tipos
-  const fixedData: Array<IAdminProps | IPromotersProps> = data;
+  const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
 
   const handleSearch = (event: any) => {
     setSearch(event.target.value);

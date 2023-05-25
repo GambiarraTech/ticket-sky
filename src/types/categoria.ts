@@ -9,6 +9,7 @@ export type Categoria ={
 
 
 export async function getAll() {
+
     const categorias: any = await query({
         query: "SELECT * FROM categoria",
     })

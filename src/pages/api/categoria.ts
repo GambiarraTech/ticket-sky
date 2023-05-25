@@ -1,3 +1,4 @@
+
 import { Categoria, getAll } from '../../types/categoria';
 
 
@@ -16,4 +17,5 @@ export default async (req: any, res: any) => {
             res.json({ result: data });
         }
     }
+
 }
