@@ -37,9 +37,15 @@ export async function apiPut(data: any, endpoint: any) {
 
 
 export async function apiDelete(data: any, endpoint: any) {
-    await fetch(`../api/${endpoint}:${data.id}`, {
+    const response = await fetch(`../api/${endpoint}`, {
         method: 'DELETE',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
+
+    return response.json();
 }
 
 export async function getUser(token: string) {

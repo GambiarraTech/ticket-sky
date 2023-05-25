@@ -1,0 +1,51 @@
+.container {
+  @apply flex flex-col min-h-full min-w-full items-center justify-center;
+}
+
+.allContentContainer {
+  @apply max-w-full min-h-[93%];
+}
+
+.allContent {
+  @apply flex flex-row min-w-full min-h-full overflow-auto scroll-smooth;
+}
+
+.allContent::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.item {
+  @apply flex justify-center min-h-full min-w-[11.802rem] border-l-2 border-[#d1d5db] mr-2 ml-2;
+}
+
+.contentItem {
+  @apply flex flex-col max-w-full items-center justify-center gap-[6rem];
+}
+
+.txt {
+  @apply flex flex-col whitespace-nowrap;
+}
+
+.txtImg {
+  @apply flex justify-center;
+}
+
+.buttons {
+  @apply flex w-[45%] items-center justify-center;
+}
+
+.buttonAprovar {
+  @apply bg-green-600 cursor-pointer rounded-lg m-2 hover:bg-green-700;
+}
+
+.buttonReprovar {
+  @apply bg-red-600 cursor-pointer rounded-lg m-2 hover:bg-red-700;
+}
+
+.buttonsScroll {
+  @apply flex text-center border-none;
+}
+
+.txtNullPromoters {
+  @apply flex min-w-full min-h-full items-center justify-center;
+}
