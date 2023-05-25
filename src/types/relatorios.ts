@@ -34,7 +34,7 @@ export async function meusIngressos(idCliente: number) {
     if (Object.keys(meusIngressos).length > 0) {
         return meusIngressos
     } else {
-        return "Nenhum pedido encontrado."
+        return null
     }
 }
 
@@ -42,7 +42,7 @@ export async function meusEventos(idPromoter: number) {
     const sql = `
         SELECT
             ev.id,
-            
+
             ev.descricao as descricao_evento,
             s.descricao as setor,
             SUM(p.quantidade) as quantidade_vendida,
@@ -57,8 +57,8 @@ export async function meusEventos(idPromoter: number) {
             ev.id_promoter = 1 AND
             ig.id_evento = ev.id AND
             s.id = ig.id_setor AND
-            p.id_ingresso = ig.id      
-        GROUP BY 
+            p.id_ingresso = ig.id
+        GROUP BY
             p.id_ingresso;
     `;
 
@@ -70,12 +70,26 @@ export async function meusEventos(idPromoter: number) {
     if (Object.keys(meusEventos).length > 0) {
         return meusEventos
     } else {
-        return "Nenhum evento encontrado."
+        return null
     }
 }
 
 export async function todosEventos() {
-    const sql = "SELECT * from evento";
+    const sql = `
+        SELECT
+            even.id,
+            even.descricao as nome,
+            even.data_hora,
+            cat.nome as categoria,
+            prom.nome as promoter
+        FROM
+            evento even,
+            promoter prom,
+            categoria cat
+        WHERE
+            even.id_promoter = prom.id AND
+            even.id_categoria = cat.id;
+    `;
 
     const eventos: any = await query({
         query: sql,
@@ -85,6 +99,6 @@ export async function todosEventos() {
     if (Object.keys(eventos).length > 0) {
         return eventos
     } else {
-        return "Nenhum evento encontrado."
+        return null
     }
 }
