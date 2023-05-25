@@ -12,7 +12,7 @@ interface ModalProps {
   title: string;
   children: React.ReactNode;
   leftButton?: React.ReactNode;
-  rightButton: React.ReactNode;
+  rightButton?: React.ReactNode;
 }
 
 export default function CustomModal({

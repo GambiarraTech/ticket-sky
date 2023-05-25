@@ -1,8 +1,8 @@
+import CustomModal from '@/components/CustomModal';
 import Card from '@/components/admin/Card';
 import { IPromotersProps } from '@/pages/admin/promoters';
 import { apiPost } from '@/pages/api/router';
 import styles from '@/styles/admin/CardAprovarPromoter.module.css';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaUserClock } from 'react-icons/fa';
 import { HiXMark } from 'react-icons/hi2';
@@ -10,6 +10,8 @@ import { IoIosArrowBack, IoIosArrowForward, IoMdCheckmark } from 'react-icons/io
 
 export default function CardAprovarPromoter() {
   const [promotersNaoAprovados, setData] = useState<IPromotersProps[]>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [promoterData, setDataPromoter] = useState<IPromotersProps>();
   let carousel = useRef<HTMLInputElement>(null);
 
   function getPromotersAguardandoAprov() {
@@ -75,14 +77,20 @@ export default function CardAprovarPromoter() {
                   return (
                     <div id="itemID" className={styles.item} key={promoter.id}>
                       <div className={styles.contentItem}>
-                        <Link href={`/`}>
+                        <div
+                          className={styles.infoItem}
+                          onClick={() => {
+                            setDataPromoter(promoter);
+                            setOpenModal(true);
+                          }}
+                        >
                           <div className={styles.txt}>
                             <div className={styles.txtImg}>
                               <FaUserClock size={60} />
                             </div>
                             <div>{`Nome: ${promoter.nome}`}</div>
                           </div>
-                        </Link>
+                        </div>
                         <div className={styles.buttons}>
                           <div className={styles.buttonAprovar}>
                             <IoMdCheckmark
@@ -109,6 +117,43 @@ export default function CardAprovarPromoter() {
                 <IoIosArrowForward size="20" />
               </button>
             </div>
+            <CustomModal
+              isOpen={openModal}
+              onClose={() => setOpenModal(false)}
+              haveClose={true}
+              haveWarning={false}
+              haveAvatar={false}
+              title={'Promoter'}
+            >
+              <div className={styles.txt}>
+                <div>{`Nome: ${promoterData?.nome}`}</div>
+                <div>{`Email: ${promoterData?.email}`}</div>
+                <div>{`CPF/CNPJ: ${promoterData?.cpf_cnpj}`}</div>
+              </div>
+
+              <div className={styles.buttonsModal}>
+                <div className={styles.buttonAprovar}>
+                  <IoMdCheckmark
+                    color="white"
+                    size={30}
+                    onClick={() => {
+                      aprovarPromoter(promoterData!.id);
+                      setOpenModal(false);
+                    }}
+                  ></IoMdCheckmark>
+                </div>
+                <div className={styles.buttonReprovar}>
+                  <HiXMark
+                    color="white"
+                    size={30}
+                    onClick={() => {
+                      reprovarPromoter(promoterData!.id);
+                      setOpenModal(false);
+                    }}
+                  ></HiXMark>
+                </div>
+              </div>
+            </CustomModal>
           </div>
         }
       />
