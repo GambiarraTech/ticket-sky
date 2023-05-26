@@ -1,6 +1,6 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import { getServerSideProps } from '@/lib/auth';
-
+import InputSelect from '@/components/InputSelect';
 import { useContext, useEffect, useState } from 'react';
 
 import Dropzone from '../../components/promoter/Dropzone';
@@ -11,7 +11,7 @@ import * as router from '../api/router';
 export default function CriarEvento() {
   const [estados, setEstados] = useState<{ nome: string; uf: string }[]>([]);
   const [cidades, setCidades] = useState<{ nome: string }[]>([]);
-  const [categorias, setCategorias] = useState<{ id: number; nome: string }[]>([]);
+  const [categoria,setCategoria] = useState<number>(0)
 
   useEffect(() => {
     router
@@ -23,14 +23,7 @@ export default function CriarEvento() {
         console.error('Erro ao obter os estados:', error);
       });
 
-    router
-      .apiGet('categoria')
-      .then((data) => {
-        setCategorias(data.result);
-      })
-      .catch((error) => {
-        console.error('Erro ao obter os categorias:', error);
-      });
+
   }, []);
 
   const [evento, setEvento] = useState({
@@ -40,7 +33,7 @@ export default function CriarEvento() {
     cidade: '',
     bairro: '',
     cep: '',
-    categoria: '',
+    categoria: 0,
     local: '',
     rua: '',
     numero: '',
@@ -73,7 +66,7 @@ export default function CriarEvento() {
   async function criarEvento(e: any) {
     evento.service = e.target.name;
     evento.promoter = user.id;
-
+    evento.categoria = categoria;
     if (selectedFile) {
       const imgBlob: Blob = selectedFile!;
       const reader = new FileReader();
@@ -211,21 +204,7 @@ export default function CriarEvento() {
           <div className={style.partes}>
             <div className={style.campo}>
               Categoria:
-              <select
-                onChange={(e) => {
-                  evento.categoria = e.target.value;
-                }}
-              >
-                <option selected disabled hidden>
-                  {' '}
-                  Categoria:{' '}
-                </option>
-                {categorias.map((categoria) => (
-                  <option key={categoria.nome} value={categoria.id}>
-                    {categoria.nome}
-                  </option>
-                ))}
-              </select>
+              < InputSelect endpoint='categoria' onItemSelected={setCategoria}/>
             </div>
             <div className={style.campo}>
               Nome do local:

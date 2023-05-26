@@ -1,8 +1,20 @@
-import * as categoria from '@/types/categoria'
-import * as relatorios from '../../types/relatorios'
+import { Categoria, getAll } from '../../types/categoria';
+
 
 export default async (req: any, res: any) => {
+    const { service } = req.body
 
-    const categorias: categoria.Categoria = await categoria.getAllCategorias()
-    res.json({ result: categorias})
+    if (service) { }
+    else {
+        const categorias: Categoria[] = await getAll();
+
+        if (categorias && categorias.length > 0) {
+            const data = categorias
+
+            console.log(data)
+
+            res.json({ result: data });
+        }
+    }
+
 }
