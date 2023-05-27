@@ -31,14 +31,14 @@ export default function Carousel({ title, page }: CarouselProps) {
   const handleLeftClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {
-      carousel.current.scrollLeft -= carousel.current.offsetWidth;
+      carousel.current.scrollLeft -= (document.getElementById('itemID')!.getBoundingClientRect().width + 20) * 3;
     }
   };
 
   const handleRightClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {
-      carousel.current.scrollLeft += carousel.current.offsetWidth;
+      carousel.current.scrollLeft += (document.getElementById('itemID')!.getBoundingClientRect().width + 20) * 3;
     }
   };
 
@@ -51,12 +51,16 @@ export default function Carousel({ title, page }: CarouselProps) {
           <p>{title}</p>
         </div>
         <div className={styles.buttons}>
-          <button onClick={handleLeftClick}>
-            <IoIosArrowBack size="32" />
-          </button>
-          <button onClick={handleRightClick}>
-            <IoIosArrowForward size="32" />
-          </button>
+          <div>
+            <button onClick={handleLeftClick}>
+              <IoIosArrowBack size="32" />
+            </button>
+          </div>
+          <div>
+            <button onClick={handleRightClick}>
+              <IoIosArrowForward size="32" />
+            </button>
+          </div>
         </div>
       </div>
       <div className={styles.container}>
@@ -65,8 +69,8 @@ export default function Carousel({ title, page }: CarouselProps) {
             const { id, descricao, banner, data_hora, nome, bairro, rua, number } = item;
             const url = 'data:image/png;base64,' + banner;
             return (
-              <Link href={`/${page}`} key={id}>
-                <div className={styles.item} key={id}>
+              <div id="itemID" className={styles.item} key={id}>
+                <Link href={`/${page}`} key={id}>
                   <div className={styles.image}>
                     <Image src={url} alt={descricao} height="260" width="420" />
                   </div>
@@ -77,8 +81,8 @@ export default function Carousel({ title, page }: CarouselProps) {
                       {bairro}, {rua}, {number}
                     </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
         </div>

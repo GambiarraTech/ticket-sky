@@ -6,6 +6,10 @@
   @apply max-w-[75%];
 }
 
+.container:after {
+  @apply w-[1360px];
+}
+
 .carousel {
   @apply flex overflow-x-auto scroll-smooth;
 }
@@ -15,7 +19,7 @@
 }
 
 .item {
-  @apply bg-white m-2.5 p-2.5 w-80 flex-none;
+  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg hover:bg-gray-100;
 }
 
 .image img {
@@ -35,7 +39,7 @@
 }
 
 .date {
-  @apply text-base text-green-500;
+  @apply text-base text-azul-ticket;
 }
 
 .address {
@@ -43,11 +47,16 @@
 }
 
 .buttons {
-  @apply flex text-center;
+  @apply flex text-center gap-1;
 }
 
 .buttons button {
-  @apply border-none;
+  @apply border rounded-full border-gray-300 bg-white hover:bg-gray-100 px-[2px] py-[2px];
+}
+
+.container:after,
+.container.hide-buttons ~ .buttons {
+  @apply flex-none;
 }
 
 .titleAndButtons {
