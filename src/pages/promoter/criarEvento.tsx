@@ -1,17 +1,17 @@
+import InputSelect from '@/components/InputSelect';
 import { AuthContext } from '@/contexts/AuthContext';
 import { getServerSideProps } from '@/lib/auth';
-import InputSelect from '@/components/InputSelect';
 import { useContext, useEffect, useState } from 'react';
 
+import NavbarPromoter from '@/components/promoter/NavbarPromoter';
 import Dropzone from '../../components/promoter/Dropzone';
-import NavBar from '../../components/promoter/NavBar';
 import style from '../../styles/promoter/criarEvento.module.css';
 import * as router from '../api/router';
 
 export default function CriarEvento() {
   const [estados, setEstados] = useState<{ nome: string; uf: string }[]>([]);
   const [cidades, setCidades] = useState<{ nome: string }[]>([]);
-  const [categoria,setCategoria] = useState<number>(0)
+  const [categoria, setCategoria] = useState<number>(0);
 
   useEffect(() => {
     router
@@ -22,8 +22,6 @@ export default function CriarEvento() {
       .catch((error) => {
         console.error('Erro ao obter os estados:', error);
       });
-
-
   }, []);
 
   const [evento, setEvento] = useState({
@@ -111,7 +109,8 @@ export default function CriarEvento() {
   }
 
   return (
-    <NavBar>
+    <>
+      <NavbarPromoter />
       <div className={style.header}>
         <div className={style.title}>Criar Evento</div>
         <div className={style.formulario}>
@@ -204,7 +203,7 @@ export default function CriarEvento() {
           <div className={style.partes}>
             <div className={style.campo}>
               Categoria:
-              < InputSelect endpoint='categoria' onItemSelected={setCategoria}/>
+              <InputSelect endpoint="categoria" onItemSelected={setCategoria} />
             </div>
             <div className={style.campo}>
               Nome do local:
@@ -344,7 +343,7 @@ export default function CriarEvento() {
           </div>
         </div>
       </div>
-    </NavBar>
+    </>
   );
 }
 
