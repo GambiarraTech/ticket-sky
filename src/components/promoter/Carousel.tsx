@@ -32,6 +32,7 @@ export default function Carousel({ title, page }: CarouselProps) {
     e.preventDefault();
     if (carousel.current != null) {
       carousel.current.scrollLeft -= (document.getElementById('itemID')!.getBoundingClientRect().width + 20) * 3;
+      console.log(carousel.current.scrollLeft);
     }
   };
 
@@ -39,54 +40,100 @@ export default function Carousel({ title, page }: CarouselProps) {
     e.preventDefault();
     if (carousel.current != null) {
       carousel.current.scrollLeft += (document.getElementById('itemID')!.getBoundingClientRect().width + 20) * 3;
+      console.log(carousel.current.scrollLeft);
     }
   };
 
   if (!data || !data.length) return null;
 
-  return (
-    <div className={styles.column}>
-      <div className={styles.titleAndButtons}>
-        <div>
-          <p>{title}</p>
-        </div>
-        <div className={styles.buttons}>
+  //Esconder os botões caso o carrossel não ultrapasse a tela
+  if (data.length < 4) {
+    return (
+      <div className={styles.column}>
+        <div className={styles.titleAndButtons}>
           <div>
-            <button onClick={handleLeftClick}>
-              <IoIosArrowBack size="32" />
-            </button>
+            <p>{title}</p>
           </div>
-          <div>
-            <button onClick={handleRightClick}>
-              <IoIosArrowForward size="32" />
-            </button>
+          <div id="buttons" className={styles.buttonsInative}>
+            <div>
+              <button>
+                <IoIosArrowBack size="32" color="#e5e7eb" />
+              </button>
+            </div>
+            <div>
+              <button>
+                <IoIosArrowForward size="32" color="#e5e7eb" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles.container}>
-        <div className={styles.carousel} ref={carousel}>
-          {data.map((item) => {
-            const { id, descricao, banner, data_hora, nome, bairro, rua, number } = item;
-            const url = 'data:image/png;base64,' + banner;
-            return (
-              <div id="itemID" className={styles.item} key={id}>
-                <Link href={`/${page}`} key={id}>
+        <div className={styles.container}>
+          <div className={styles.carousel} ref={carousel}>
+            {data.map((item) => {
+              const { id, nome, descricao, banner, data_hora, bairro, rua, number } = item;
+              const url = 'data:image/png;base64,' + banner;
+              return (
+                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
                   <div className={styles.image}>
                     <Image src={url} alt={descricao} height="260" width="420" />
                   </div>
                   <div className={styles.info}>
                     <span className={styles.date}>{data_hora}</span>
-                    <span className={styles.name}>{descricao}</span>
+                    <span className={styles.name}>{nome}</span>
                     <span className={styles.address}>
                       {bairro}, {rua}, {number}
                     </span>
                   </div>
-                </Link>
-              </div>
-            );
-          })}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.column}>
+        <div className={styles.titleAndButtons}>
+          <div>
+            <p>{title}</p>
+          </div>
+          <div id="buttons" className={styles.buttons}>
+            <div>
+              <button onClick={handleLeftClick}>
+                <IoIosArrowBack size="32" />
+              </button>
+            </div>
+            <div>
+              <button onClick={handleRightClick}>
+                <IoIosArrowForward size="32" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.container}>
+          <div className={styles.carousel} ref={carousel}>
+            {data.map((item) => {
+              const { id, descricao, banner, data_hora, nome, bairro, rua, number } = item;
+              const url = 'data:image/png;base64,' + banner;
+              return (
+                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
+                  <div className={styles.image}>
+                    <Image src={url} alt={descricao} height="260" width="420" />
+                  </div>
+                  <div className={styles.info}>
+                    <span className={styles.date}>{data_hora}</span>
+                    <span className={styles.name}>{nome}</span>
+                    <span className={styles.address}>
+                      {bairro}, {rua}, {number}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

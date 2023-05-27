@@ -65,7 +65,7 @@ export default function CardAprovarPromoter() {
         }
       />
     );
-  } else {
+  } else if (promotersNaoAprovados.length > 3) {
     return (
       <Card
         label="Promoters aguardando aprovação"
@@ -115,6 +115,99 @@ export default function CardAprovarPromoter() {
               </button>
               <button onClick={handleRightClick}>
                 <IoIosArrowForward size="20" />
+              </button>
+            </div>
+            <CustomModal
+              isOpen={openModal}
+              onClose={() => setOpenModal(false)}
+              haveClose={true}
+              haveWarning={false}
+              haveAvatar={false}
+              title={'Promoter'}
+            >
+              <div className={styles.txt}>
+                <div>{`Nome: ${promoterData?.nome}`}</div>
+                <div>{`Email: ${promoterData?.email}`}</div>
+                <div>{`CPF/CNPJ: ${promoterData?.cpf_cnpj}`}</div>
+              </div>
+
+              <div className={styles.buttonsModal}>
+                <div className={styles.buttonAprovar}>
+                  <IoMdCheckmark
+                    color="white"
+                    size={30}
+                    onClick={() => {
+                      aprovarPromoter(promoterData!.id);
+                      setOpenModal(false);
+                    }}
+                  ></IoMdCheckmark>
+                </div>
+                <div className={styles.buttonReprovar}>
+                  <HiXMark
+                    color="white"
+                    size={30}
+                    onClick={() => {
+                      reprovarPromoter(promoterData!.id);
+                      setOpenModal(false);
+                    }}
+                  ></HiXMark>
+                </div>
+              </div>
+            </CustomModal>
+          </div>
+        }
+      />
+    );
+  } else {
+    return (
+      <Card
+        label="Promoters aguardando aprovação"
+        content={
+          <div className={styles.container}>
+            <div className={styles.allContentContainer}>
+              <div id="allContentID" className={styles.allContent} ref={carousel}>
+                {promotersNaoAprovados.map((promoter) => {
+                  return (
+                    <div id="itemID" className={styles.item} key={promoter.id}>
+                      <div className={styles.contentItem}>
+                        <div
+                          className={styles.infoItem}
+                          onClick={() => {
+                            setDataPromoter(promoter);
+                            setOpenModal(true);
+                          }}
+                        >
+                          <div className={styles.txt}>
+                            <div className={styles.txtImg}>
+                              <FaUserClock size={60} />
+                            </div>
+                            <div>{`Nome: ${promoter.nome}`}</div>
+                          </div>
+                        </div>
+                        <div className={styles.buttons}>
+                          <div className={styles.buttonAprovar}>
+                            <IoMdCheckmark
+                              color="white"
+                              size={30}
+                              onClick={() => aprovarPromoter(promoter.id)}
+                            ></IoMdCheckmark>
+                          </div>
+                          <div className={styles.buttonReprovar}>
+                            <HiXMark color="white" size={30} onClick={() => reprovarPromoter(promoter.id)}></HiXMark>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className={styles.buttonsScrollInative}>
+              <button>
+                <IoIosArrowBack size="20" color="#9ca3af" />
+              </button>
+              <button>
+                <IoIosArrowForward size="20" color="#9ca3af" />
               </button>
             </div>
             <CustomModal

@@ -26,6 +26,10 @@
   @apply cursor-pointer;
 }
 
+.infoItem:hover {
+  @apply text-hoover-blue;
+}
+
 .txt {
   @apply flex flex-col whitespace-nowrap;
 }
@@ -52,6 +56,18 @@
 
 .buttonsScroll {
   @apply flex text-center border-none;
+}
+
+.buttonsScroll button {
+  @apply hover:bg-gray-100 hover:rounded-lg;
+}
+
+.buttonsScrollInative {
+  @apply flex text-center border-none;
+}
+
+.buttonsScrollInative button {
+  @apply cursor-default;
 }
 
 .txtNullPromoters {

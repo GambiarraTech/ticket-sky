@@ -6,10 +6,6 @@
   @apply max-w-[75%];
 }
 
-.container:after {
-  @apply w-[1360px];
-}
-
 .carousel {
   @apply flex overflow-x-auto scroll-smooth;
 }
@@ -19,7 +15,7 @@
 }
 
 .item {
-  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg hover:bg-gray-100;
+  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg cursor-pointer hover:bg-gray-100;
 }
 
 .image img {
@@ -51,12 +47,15 @@
 }
 
 .buttons button {
-  @apply border rounded-full border-gray-300 bg-white hover:bg-gray-100 px-[2px] py-[2px];
+  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] hover:bg-gray-100;
 }
 
-.container:after,
-.container.hide-buttons ~ .buttons {
-  @apply flex-none;
+.buttonsInative {
+  @apply flex text-center gap-1;
+}
+
+.buttonsInative button {
+  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] cursor-default;
 }
 
 .titleAndButtons {
