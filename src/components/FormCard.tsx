@@ -65,7 +65,7 @@ export default function FormCard(props: FormCardProps) {
             <input
               id={input.id}
               name={input.id}
-              type={input.id}
+              type={input.id === 'senha' ? 'password' : input.id}
               value={inputValues[input.id] || ''}
               onChange={handleChange}
               maxLength={input.length}
