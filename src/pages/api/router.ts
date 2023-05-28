@@ -11,7 +11,6 @@ export async function apiGet(endpoint: any) {
 }
 
 export async function apiPost(data: any, endpoint: any) {
-    console.log(data)
     const response = await fetch(`../api/${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(data),

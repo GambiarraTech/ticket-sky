@@ -37,20 +37,28 @@ export default function FormCard(props: FormCardProps) {
 
   const { login } = useContext(AuthContext);
   const [showErroLogin, setShowErroLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setShowErroLogin(false);
 
-    const res = router.apiPost(inputValues, props.endPoint);
+    const allInputsFilled = props.inputs.every((input) => inputValues[input.id]);
+    if (allInputsFilled) {
+        const res = router.apiPost(inputValues, props.endPoint);
 
-    res.then((value) => {
-      if (!value.error) {
-        login(value.result);
-      } else {
-        setShowErroLogin(true);
-      }
-    });
+        res.then((value) => {
+            if (!value.error) {
+            login(value.result);
+            } else {
+            setShowErroLogin(true);
+            setErrorMessage(props.errorMessage)
+            }
+        });
+    } else {
+        setShowErroLogin(true); // Exibe o erro caso algum campo não esteja preenchido
+        setErrorMessage('Preencha todos os campos.')
+    }
   }
 
   return (
@@ -73,7 +81,7 @@ export default function FormCard(props: FormCardProps) {
             />
           </React.Fragment>
         ))}
-        <p className={styles.mensagemErro}>{showErroLogin ? props.errorMessage : ''}</p>
+        <p className={styles.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>
         <button onClick={handleSubmit}>{props.buttonText}</button>
         {props.footer && (
           <p className={styles.footer}>
