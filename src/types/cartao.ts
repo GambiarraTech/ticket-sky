@@ -33,7 +33,6 @@ export async function insertCartao(titular: string, numero: string, vencimento: 
     }
 
   } catch (err) {
-    console.log(null)
   }
 }
 

@@ -11,7 +11,7 @@ export default async (req: any, res: any) => {
         if (categorias && categorias.length > 0) {
             const data = categorias
 
-            console.log(data)
+            
 
             res.json({ result: data });
         }

@@ -20,13 +20,13 @@ const InputSelect: React.FC<PropsSelect> =({onItemSelected, endpoint},)=> {
   useEffect(() => {
     router.apiGet(endpoint).then((value) => {
       setItens(value.result);
-      //*console.log(itens);
+
     });
   }, []);
   if(!itens || itens.length ==0) return null
 
 async function handleSelect(event:any){
-   //* console.log(typeof(event.target.value))
+
     onItemSelected(parseInt(event.target.value))
 }
 

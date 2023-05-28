@@ -14,7 +14,7 @@ export default async (req: any, res: any) => {
 
                     res.json({ meusPedidos: data });
                 } else {
-                    console.log('Nenhum Pedido encontrado');
+
                     res.json({ meusPedidos: [], error: 'Nenhum Pedido encontrado' });
                 }
                 break
@@ -26,7 +26,6 @@ export default async (req: any, res: any) => {
 
                     res.json({ meusEventos: data });
                 } else {
-                    console.log('Nenhum Evento encontrado');
                     res.json({ meusEventos: [], error: 'Nenhum Evento encontrado' });
                 }
                 break
@@ -38,7 +37,6 @@ export default async (req: any, res: any) => {
 
                     res.json({ todosEventos: data });
                 } else {
-                    console.log('Nenhum Evento encontrado');
                     res.json({ todosEventos: [], error: 'Nenhum Evento encontrado' });
                 }
                 break

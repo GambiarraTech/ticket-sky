@@ -180,7 +180,6 @@ export default function Carousel({ title, page }: CarouselProps) {
           <div className={styles.carousel} ref={carousel}>
             {data.map((item) => {
               const { id, descricao, banner, data_hora, evnome, bairro, rua, number } = item;
-              console.log(item);
               const url = 'data:image/png;base64,' + banner;
               const date = new Date(data_hora);
               let dia = date.getDate().toString();

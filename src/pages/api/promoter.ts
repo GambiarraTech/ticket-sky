@@ -73,7 +73,7 @@ export default async (req: any, res: any) => {
 
                     res.json({ promoters: data });
                 } else {
-                    console.log('Nenhum promoter encontrado');
+
                     res.json({ promoters: [] });
                 }
 
@@ -87,7 +87,6 @@ export default async (req: any, res: any) => {
 
                     res.json({ promoters: data });
                 } else {
-                    console.log('Nenhum promoter encontrado');
                     res.json({ promoters: [], error: 'Nenhum promoter encontrado' });
                 }
 
@@ -121,7 +120,7 @@ export default async (req: any, res: any) => {
                 break
             }
             default: {
-                console.log('Serviço inválido');
+                
                 break;
             }
         }

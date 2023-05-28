@@ -51,9 +51,8 @@ export default function ModalLogin(props: ModalLoginProps) {
     const resCadastro = router.apiPost(cliente, 'cliente');
 
     resCadastro.then((value) => {
-      console.log('cadastro');
+
       if (!value.error) {
-        console.log(value.error);
         cliente.service = 'loginCliente';
         const resLogin = router.apiPost(cliente, 'cliente');
 

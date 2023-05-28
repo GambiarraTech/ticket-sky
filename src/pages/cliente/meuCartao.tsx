@@ -21,9 +21,7 @@ export default function TelaCartao() {
     const res = await router.apiPost(cartao, 'cartao');
 
     if (res.success) {
-      console.log('Cartão cadastrado com sucesso!');
     } else {
-      console.log('Erro ao cadastrar cartão!');
     }
   }
 

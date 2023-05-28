@@ -44,18 +44,17 @@ export default async (req: any, res: any) => {
                 if (admins && admins.length > 0) {
                     const data = admins
 
-                    console.log(data)
 
                     res.json({ admins: data });
                 } else {
-                    console.log('Nenhum admin encontrado');
+
                     res.json({ admins: [] });
                 }
 
                 break;
             }
             default: {
-                console.log('Serviço inválido');
+               
                 break;
             }
         }
