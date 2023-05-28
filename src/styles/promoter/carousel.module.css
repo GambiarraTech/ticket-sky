@@ -15,7 +15,7 @@
 }
 
 .item {
-  @apply bg-white m-2.5 p-2.5 w-80 flex-none;
+  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg cursor-pointer hover:bg-gray-100 hover:scale-105;
 }
 
 .image img {
@@ -35,7 +35,7 @@
 }
 
 .date {
-  @apply text-base text-green-500;
+  @apply text-base text-azul-ticket;
 }
 
 .address {
@@ -43,11 +43,19 @@
 }
 
 .buttons {
-  @apply flex text-center;
+  @apply flex text-center gap-1;
 }
 
 .buttons button {
-  @apply border-none;
+  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] hover:bg-gray-100;
+}
+
+.buttonsInative {
+  @apply flex text-center gap-1;
+}
+
+.buttonsInative button {
+  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] cursor-default;
 }
 
 .titleAndButtons {
