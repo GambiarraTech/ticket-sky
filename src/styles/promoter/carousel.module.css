@@ -15,7 +15,7 @@
 }
 
 .item {
-  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg cursor-pointer hover:bg-gray-100;
+  @apply bg-white m-2.5 p-2.5 w-80 flex-none rounded-lg cursor-pointer hover:bg-gray-100 hover:scale-105;
 }
 
 .image img {
