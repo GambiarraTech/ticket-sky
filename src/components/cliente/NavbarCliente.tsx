@@ -20,7 +20,9 @@ export default function NavbarCliente() {
       {isLogged && user.role == 'cliente' ? (
         <Navbar
           backgroundColor="#fff"
-          leftComponent={<Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" />}
+          leftComponent={ <Link href="/" > 
+            <Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" /> 
+          </Link>}
           centerComponent={<div></div>}
           rightComponent={
             <IconMenuButton color="#0013a6">
@@ -43,7 +45,9 @@ export default function NavbarCliente() {
       ) : (
         <Navbar
           backgroundColor="#fff"
-          leftComponent={<Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" />}
+          leftComponent={ <Link href="/" > 
+          <Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" /> 
+        </Link>}
           centerComponent={<div></div>}
           rightComponent={
             <div className={style.buttonContainer}>
