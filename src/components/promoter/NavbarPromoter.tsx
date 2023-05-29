@@ -15,7 +15,9 @@ export default function NavbarPromoter() {
     <>
       <Navbar
         backgroundColor="#000D67"
-        leftComponent={<Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />}
+        leftComponent={<Link href='/promoter'> <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />
+        </Link>}
+        
         centerComponent={<div></div>}
         rightComponent={
           <IconMenuButton color="#fff">
@@ -38,3 +40,4 @@ export default function NavbarPromoter() {
 }
 
 export { getServerSideProps };
+
