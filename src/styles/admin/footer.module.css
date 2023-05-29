@@ -1,5 +1,5 @@
 .footer {
-  @apply fixed bottom-0 text-center w-full;
+  @apply py-10  text-center w-full;
 }
 .footer p {
   @apply flex justify-center;
