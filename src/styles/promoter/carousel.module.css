@@ -43,19 +43,19 @@
 }
 
 .buttons {
-  @apply flex text-center gap-1;
+  @apply flex text-center;
 }
 
 .buttons button {
-  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] hover:bg-gray-100;
+  @apply p-4 hover:bg-gray-100;
 }
 
 .buttonsInative {
-  @apply flex text-center gap-1;
+  @apply flex text-center;
 }
 
 .buttonsInative button {
-  @apply border rounded-full border-gray-300 bg-white px-[2px] py-[2px] cursor-default;
+  @apply p-4;
 }
 
 .titleAndButtons {
