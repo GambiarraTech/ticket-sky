@@ -2,8 +2,8 @@
   @apply bg-ticket-sky-blue  h-full;
 }
 
-.box{
-    @apply grid h-screen;
+.box {
+  @apply grid h-screen;
 }
 
 .container {
@@ -11,5 +11,5 @@
 }
 
 .botaoVoltar {
-  @apply cursor-pointer  p-4 text-center  w-16 hover:bg-azul-ticket;
+  @apply cursor-pointer  p-4 text-center  w-16 hover:bg-blue-hover;
 }

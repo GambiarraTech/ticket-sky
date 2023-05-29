@@ -14,6 +14,7 @@ module.exports = {
       'hoover-blue': '#0028be',
       'ciano-ticket': '#03f7ff',
       'ticket-sky-blue': '#000D67',
+      'blue-hover': '#06118d80',
       'green-500': '#22c55e',
       'green-600': '#16a34a',
       'green-700': '#15803d',

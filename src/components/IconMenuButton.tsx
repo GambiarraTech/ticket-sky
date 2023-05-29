@@ -20,11 +20,17 @@ export default function IconMenuButton(props: IconMenuButtonProps) {
     <>
       <div className={style.container}>
         {/* Ícone do usuário */}
-        <FaUserCircle size="36" color={props.color} onClick={toggleMenu} cursor="pointer"></FaUserCircle>
+        <FaUserCircle
+          className={props.color == '#fff' ? style.iconBlue : style.iconWhite}
+          size="5rem"
+          color={props.color}
+          onClick={toggleMenu}
+          cursor="pointer"
+        ></FaUserCircle>
         {/* Renderiza o menu apenas se o estado 'menuOpen' for verdadeiro */}
         {menuOpen && (
           <div className={style.menu}>
-            <ul>{props.children}</ul>
+            <ul className={style.content}>{props.children}</ul>
           </div>
         )}
       </div>
