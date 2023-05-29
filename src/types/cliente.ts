@@ -37,7 +37,6 @@ export async function cadastroCliente(nome: string, sobrenome: string, email: st
             }
         }
     } catch (err) {
-        console.log(null);
     };
 
 }

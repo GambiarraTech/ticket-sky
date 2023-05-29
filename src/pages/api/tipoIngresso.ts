@@ -11,7 +11,6 @@ export default async (req: any, res: any) => {
         if (ingressos && ingressos.length > 0) {
             const data = ingressos
 
-            console.log(data)
 
             res.json({ result: data });
         }
