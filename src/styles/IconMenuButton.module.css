@@ -1,5 +1,29 @@
 .menu {
-  @apply absolute w-48 bg-white rounded-lg  border border-gray-700 p-2 right-[4.62rem] mt-[0.7rem];
+  @apply absolute w-48 bg-white rounded-lg  border border-gray-700  right-[4.62rem] mt-[0.7rem];
+}
+
+.iconWhite {
+  @apply hover:bg-gray-100 p-4;
+}
+
+.iconBlue {
+  @apply hover:hover:bg-blue-hover p-4;
+}
+
+.content li {
+  @apply cursor-pointer p-2 hover:bg-gray-100;
+}
+
+.content li:first-child {
+  @apply border border-none rounded-t-lg;
+}
+
+.content li div {
+  @apply flex items-center justify-between;
+}
+
+.content li:last-child {
+  @apply border border-none rounded-b-lg;
 }
 
 .menu::before {

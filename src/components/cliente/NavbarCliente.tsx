@@ -4,6 +4,7 @@ import style from '@/styles/cliente/navbarCliente.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
+import { HiOutlineLogout } from 'react-icons/hi';
 import IconMenuButton from '../IconMenuButton';
 import Modal from '../Modal';
 import ModalLogin from './ModalLogin';
@@ -30,7 +31,12 @@ export default function NavbarCliente() {
               <li>
                 <Link href="/cliente/meusIngressos">Meus Ingressos</Link>
               </li>
-              <li onClick={logout}>Logout</li>
+              <li onClick={logout}>
+                <div>
+                  Sair
+                  <HiOutlineLogout />
+                </div>
+              </li>
             </IconMenuButton>
           }
         />
