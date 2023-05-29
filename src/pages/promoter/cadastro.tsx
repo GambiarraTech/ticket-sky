@@ -31,25 +31,27 @@ async function enviaEmailConfirmacao(emailPromoter: string) {
 
 export default function Cadastro() {
   return (
-    <div className={styles.background}>
-      <div className={styles.botaoVoltar}>
-        <Link href={'/'}>
-          <AiOutlineArrowLeft size={32} color="grey" />
-        </Link>
-      </div>
-      <div className={styles.container}>
-        <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
-        <FormCard
-          titulo={'Torne-se um Promoter'}
-          inputs={listaInputs}
-          buttonText={'Solicitar acesso promoter'}
-          service="cadastroPromoter"
-          endPoint="promoter"
-          errorMessage="Usuário ou senha incorreta."
-          footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
-        />
-      </div>
-      <Footer />
+    <div className={styles.box}>
+        <div className={styles.background}>
+        <div className={styles.botaoVoltar}>
+            <Link href={'/'}>
+            <AiOutlineArrowLeft size={32} color="grey" />
+            </Link>
+        </div>
+        <div className={styles.container}>
+            <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
+            <FormCard
+            titulo={'Torne-se um Promoter'}
+            inputs={listaInputs}
+            buttonText={'Solicitar acesso promoter'}
+            service="cadastroPromoter"
+            endPoint="promoter"
+            errorMessage="Usuário ou senha incorreta."
+            footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
+            />
+        </div>
+        <Footer />
+        </div>
     </div>
   );
 }

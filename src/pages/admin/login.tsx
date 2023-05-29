@@ -10,19 +10,21 @@ const listaInputs = [
 
 export default function Login() {
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
-        <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
-        <FormCard
-          titulo={'Login Administrador'}
-          inputs={listaInputs}
-          buttonText={'Entrar'}
-          service="loginAdmin"
-          errorMessage="Usuário ou senha incorreta."
-          endPoint="admin"
-        />
-      </div>
-      <Footer />
+    <div className={styles.box}>
+        <div className={styles.background}>
+        <div className={styles.container}>
+            <Image src="/images/logo-ticket-sky-light-cropped.png" width="200" height="200" alt="logo"></Image>
+            <FormCard
+            titulo={'Login Administrador'}
+            inputs={listaInputs}
+            buttonText={'Entrar'}
+            service="loginAdmin"
+            errorMessage="Usuário ou senha incorreta."
+            endPoint="admin"
+            />
+        </div>
+        <Footer />
+        </div>
     </div>
   );
 }
