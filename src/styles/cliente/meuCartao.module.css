@@ -1,17 +1,5 @@
-.pagePos {
-  @apply fixed mt-8 ml-8;
-}
-
-.pageFormat {
-  @apply inset-0 z-10 mt-14 overflow-y-auto flex items-center h-full px-4 py-8;
-}
-
-.pageStyle {
-  @apply flex flex-col w-full max-w-lg p-4 mx-auto bg-[#ffffff] justify-center items-center rounded-lg shadow-md border-solid;
-}
-
 .title {
-  @apply text-xl font-bold sm:text-2xl mb-6 mt-6 text-ticket-sky-blue;
+  @apply text-xl font-bold flex justify-center sm:text-2xl mb-6 text-ticket-sky-blue;
 }
 
 .primaryInputStyle {

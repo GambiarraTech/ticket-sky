@@ -3,7 +3,7 @@
 }
 
 .modalBg {
-  @apply relative w-full max-w-lg p-4 mx-auto bg-[#ffffff] rounded-lg shadow-lg;
+  @apply relative w-full max-w-lg p-6 mx-auto bg-[#ffffff] rounded-lg shadow-lg;
 }
 
 /* Blur do fundo */
