@@ -7,6 +7,7 @@ import { getServerSideProps } from '@/lib/auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
+import { HiOutlineLogout } from 'react-icons/hi';
 
 export default function NavbarPromoter() {
   const { user, isLogged, logout } = useContext(AuthContext);
@@ -15,9 +16,11 @@ export default function NavbarPromoter() {
     <>
       <Navbar
         backgroundColor="#000D67"
-        leftComponent={<Link href='/promoter'> <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />
-        </Link>}
-        
+        leftComponent={
+          <Link href="/promoter">
+            <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />
+          </Link>
+        }
         centerComponent={<div></div>}
         rightComponent={
           <IconMenuButton color="#fff">
@@ -28,7 +31,12 @@ export default function NavbarPromoter() {
             <li>
               <Link href="/promoter">Meus Eventos</Link>
             </li>
-            <li onClick={logout}>Logout</li>
+            <li onClick={logout}>
+              <div>
+                Sair
+                <HiOutlineLogout />
+              </div>
+            </li>
           </IconMenuButton>
         }
       />
@@ -40,4 +48,3 @@ export default function NavbarPromoter() {
 }
 
 export { getServerSideProps };
-
