@@ -1,5 +1,5 @@
 .header {
-  @apply w-full min-h-full justify-center items-center flex flex-col gap-5;
+  @apply w-full min-h-full justify-center items-center flex flex-col gap-3;
 }
 
 .title {
@@ -7,7 +7,7 @@
 }
 
 .formulario {
-  @apply flex gap-10 mb-5 text-gray-700;
+  @apply flex gap-9 mb-5 text-gray-700;
 }
 
 .partes {
@@ -40,7 +40,7 @@
 }
 
 .button {
-  @apply w-40 h-14 bg-green-700 text-white font-semibold text-lg rounded-lg mt-12 flex justify-center items-center m-auto hover:scale-105 hover:bg-green-600;
+  @apply w-40 h-14 bg-green-700 text-white font-semibold text-lg rounded-lg mb-7 flex justify-center items-center m-auto hover:scale-105 hover:bg-green-600;
 }
 
 .input_pequeno {
@@ -52,5 +52,13 @@
 }
 
 .mensagemErro {
-  @apply text-[red] pb-2 -mt-7 font-medium text-sm;
+  @apply text-[red] pb-2 -mt-7 font-bold text-sm;
+}
+
+.mensagemSucesso {
+  @apply text-[green] pb-2 -mt-7 font-bold text-sm;
+}
+
+.select {
+  @apply bg-[#dfe0ff] border border-gray-500 rounded-md h-9 pl-2 text-gray-500;
 }

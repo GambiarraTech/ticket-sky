@@ -1,6 +1,5 @@
 import InputSelect from '@/components/InputSelect';
 import { AuthContext } from '@/contexts/AuthContext';
-import { getServerSideProps } from '@/lib/auth';
 import { useContext, useEffect, useState } from 'react';
 
 import NavbarPromoter from '@/components/promoter/NavbarPromoter';
@@ -12,6 +11,8 @@ export default function CriarEvento() {
   const [estados, setEstados] = useState<{ nome: string; uf: string }[]>([]);
   const [cidades, setCidades] = useState<{ nome: string }[]>([]);
   const [categoria, setCategoria] = useState<number>(0);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     router
@@ -61,10 +62,35 @@ export default function CriarEvento() {
     return byteString;
   }
 
+  function clearErrorMessage() {
+    setErrorMessage('');
+    setSuccessMessage('');
+  }
+
   async function criarEvento(e: any) {
+    e.preventDefault();
+
+    if (
+      evento.nome === '' ||
+      evento.estado === '' ||
+      evento.cidade === '' ||
+      evento.bairro === '' ||
+      evento.cep === '' ||
+      evento.local === '' ||
+      evento.rua === '' ||
+      evento.numero === '' ||
+      evento.data === '' ||
+      evento.hora === '' ||
+      evento.descricao === ''
+    ) {
+      setErrorMessage('Por favor, preencha todos os campos.');
+      return;
+    }
+
     evento.service = e.target.name;
     evento.promoter = user.id;
     evento.categoria = categoria;
+
     if (selectedFile) {
       const imgBlob: Blob = selectedFile!;
       const reader = new FileReader();
@@ -80,9 +106,16 @@ export default function CriarEvento() {
 
           evento.imagem = base64data;
 
-          router.apiPost(evento, 'evento').then((value) => {
-            // ...
-          });
+          router
+            .apiPost(evento, 'evento')
+            .then((value) => {
+              setSuccessMessage('Evento criado com sucesso!');
+              setErrorMessage('');
+            })
+            .catch((error) => {
+              setErrorMessage('Erro ao criar evento: ' + error);
+              setSuccessMessage('');
+            });
         }
       };
 
@@ -107,7 +140,6 @@ export default function CriarEvento() {
 
     setCidades(cidades);
   }
-
   return (
     <>
       <NavbarPromoter />
@@ -124,6 +156,7 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.nome = e.target.value;
+                  clearErrorMessage();
                 }}
               />
             </div>
@@ -131,8 +164,10 @@ export default function CriarEvento() {
             <div className={style.campo}>
               Estado:
               <select
+                className={style.select}
                 onChange={(e) => {
                   handleEstado(e);
+                  clearErrorMessage();
                 }}
               >
                 <option selected disabled hidden>
@@ -150,8 +185,10 @@ export default function CriarEvento() {
             <div className={style.campo}>
               Cidade:
               <select
+                className={style.select}
                 onChange={(e) => {
                   evento.cidade = e.target.value;
+                  clearErrorMessage();
                 }}
               >
                 <option selected disabled hidden>
@@ -176,6 +213,7 @@ export default function CriarEvento() {
                 onChange={(e) => {
                   {
                     evento.bairro = e.target.value;
+                    clearErrorMessage();
                   }
                 }}
                 maxLength={245}
@@ -195,6 +233,7 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.cep = e.target.value;
+                  clearErrorMessage();
                 }}
               ></input>
             </div>
@@ -214,6 +253,7 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.local = e.target.value;
+                  clearErrorMessage();
                 }}
                 maxLength={245}
               />
@@ -228,6 +268,7 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.rua = e.target.value;
+                  clearErrorMessage();
                 }}
               />
             </div>
@@ -241,6 +282,7 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.numero = e.target.value;
+                  clearErrorMessage();
                 }}
               />
             </div>
@@ -257,6 +299,7 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.data = e.target.value;
+                    clearErrorMessage();
                   }}
                 />
               </div>
@@ -270,6 +313,7 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.hora = e.target.value;
+                    clearErrorMessage();
                   }}
                 />
               </div>
@@ -283,13 +327,11 @@ export default function CriarEvento() {
                 required
                 onChange={(e) => {
                   evento.descricao = e.target.value;
+                  clearErrorMessage();
                 }}
                 maxLength={320}
               />
             </div>
-            <button className={style.button} name="criarEvento" onClick={criarEvento}>
-              Criar evento
-            </button>
           </div>
 
           <div className={style.partes}>
@@ -310,6 +352,7 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.vip = Number(e.target.value);
+                    clearErrorMessage();
                   }}
                 />
               </div>
@@ -323,6 +366,7 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.pista = Number(e.target.value);
+                    clearErrorMessage();
                   }}
                 />
               </div>
@@ -336,16 +380,19 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.backstage = Number(e.target.value);
+                    clearErrorMessage();
                   }}
                 />
               </div>
             </div>
           </div>
         </div>
+        {errorMessage && <div className={style.mensagemErro}>{errorMessage}</div>}
+        {successMessage && <div className={style.mensagemSucesso}>{successMessage}</div>}
+        <button className={style.button} name="criarEvento" onClick={criarEvento}>
+          Criar evento
+        </button>
       </div>
     </>
   );
 }
-
-export { getServerSideProps };
-
