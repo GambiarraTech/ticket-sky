@@ -1,5 +1,8 @@
-.navbar {
-  @apply h-20 flex w-full shadow-xl mb-10;
+.navbarBlue {
+  @apply h-20 flex w-full shadow-xl mb-10 bg-ticket-sky-blue;
+}
+.navbarWhite {
+  @apply h-20 flex w-full shadow-xl mb-10 bg-white;
 }
 
 .container {

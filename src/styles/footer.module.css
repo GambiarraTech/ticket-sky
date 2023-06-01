@@ -1,0 +1,11 @@
+.footerBlue {
+  @apply flex flex-col items-center justify-end relative text-white bg-ticket-sky-blue w-full;
+}
+
+.footerWhite {
+  @apply flex flex-col items-center justify-end relative bg-white w-full;
+}
+
+.text {
+  @apply py-4;
+}

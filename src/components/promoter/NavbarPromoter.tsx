@@ -15,7 +15,7 @@ export default function NavbarPromoter() {
   return (
     <>
       <Navbar
-        backgroundColor="#000D67"
+        backgroundColor="blue"
         leftComponent={
           <Link href="/promoter">
             <Image src="/images/logo-navbar-white.png" alt="TicketSky - Logo" height="120" width="120" />

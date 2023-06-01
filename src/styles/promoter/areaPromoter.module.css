@@ -7,7 +7,7 @@
 }
 
 .container {
-  @apply pt-8 flex flex-col items-center;
+  @apply flex flex-col items-center;
 }
 
 .botaoVoltar {
