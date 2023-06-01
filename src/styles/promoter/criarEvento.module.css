@@ -1,9 +1,13 @@
 .header {
-  @apply w-full min-h-full justify-center items-center flex flex-col gap-3;
+  @apply justify-center items-center flex flex-col px-10;
+}
+
+.container {
+  @apply grid h-screen;
 }
 
 .title {
-  @apply text-4xl mt-6 text-gray-700 font-medium;
+  @apply text-4xl text-gray-700 font-medium;
 }
 
 .formulario {
@@ -11,15 +15,15 @@
 }
 
 .partes {
-  @apply py-3;
+  @apply flex flex-col justify-around py-3;
 }
 
 .campo {
-  @apply flex flex-col gap-2 font-semibold p-2;
+  @apply flex flex-col gap-2 font-semibold;
 }
 
 .input {
-  @apply w-96 bg-[#dfe0ff] rounded-lg ps-4 pe-5 text-left py-2.5 text-sm hover:bg-blue-200 hover:scale-105;
+  @apply w-64 bg-[#dfe0ff] rounded-lg ps-4 pe-5 text-left py-2 text-sm hover:bg-blue-200 hover:scale-105;
 }
 
 .data {
@@ -35,7 +39,7 @@
 }
 
 .input_imagem {
-  @apply block w-full  text-sm text-slate-500 file:py-2 file:rounded-lg file:border-0  file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700
+  @apply block w-full text-sm text-slate-500 file:py-2 file:rounded-lg file:border-0  file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700
     hover:file:bg-blue-200 hover:scale-105;
 }
 
@@ -48,7 +52,7 @@
 }
 
 .ingressos {
-  @apply flex text-sm gap-2 justify-center items-center;
+  @apply flex text-sm gap-2 justify-between items-center;
 }
 
 .mensagemErro {

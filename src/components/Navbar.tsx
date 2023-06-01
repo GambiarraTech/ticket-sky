@@ -9,12 +9,10 @@ type NavBarProps = {
 
 export default function Navbar(props: NavBarProps) {
   return (
-    <div style={{ backgroundColor: props.backgroundColor }}>
-      <nav className={style.navbar}>
-        <div className={style.container}>{props.leftComponent}</div>
-        <div className={style.container}>{props.centerComponent}</div>
-        <div className={style.container}>{props.rightComponent}</div>
-      </nav>
-    </div>
+    <nav className={props.backgroundColor == 'blue' ? style.navbarBlue : style.navbarWhite}>
+      <div className={style.container}>{props.leftComponent}</div>
+      <div className={style.container}>{props.centerComponent}</div>
+      <div className={style.container}>{props.rightComponent}</div>
+    </nav>
   );
 }

@@ -1,5 +1,5 @@
 .dropzone {
-  @apply h-64 w-64  bg-[#dfe0ff] flex justify-center items-center outline-0 rounded-lg cursor-pointer;
+  @apply h-64 bg-[#dfe0ff] flex justify-center items-center outline-0 rounded-lg cursor-pointer;
 }
 
 .dropzone img {
