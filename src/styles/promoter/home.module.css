@@ -1,5 +1,5 @@
 .container {
-  @apply w-full h-full;
+  @apply w-[100vw] h-[100vh];
 }
 
 .title {
