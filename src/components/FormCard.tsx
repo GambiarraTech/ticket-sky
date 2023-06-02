@@ -16,6 +16,22 @@ type FormCardProps = {
   errorMessage: string;
 };
 
+//Chamar função após dar a confirmação de cadastro na tela
+async function enviaEmailConfirmacao(emailPromoter: string) {
+  let data;
+  const res = router.apiPost(
+    {
+      destinatario: emailPromoter,
+      assunto: 'Confirmação de cadastro',
+      mensagem:
+        'Cadastro realizado com sucesso! Aguarde a confirmação de acesso! Não se preocupe você receberá um e-mail quando isso acontecer.',
+      anexos: null,
+    },
+    'services/emailService'
+  );
+  res.then((value) => {});
+}
+
 export default function FormCard(props: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
@@ -45,19 +61,22 @@ export default function FormCard(props: FormCardProps) {
 
     const allInputsFilled = props.inputs.every((input) => inputValues[input.id]);
     if (allInputsFilled) {
-        const res = router.apiPost(inputValues, props.endPoint);
+      const res = router.apiPost(inputValues, props.endPoint);
 
-        res.then((value) => {
-            if (!value.error) {
-            login(value.result);
-            } else {
-            setShowErroLogin(true);
-            setErrorMessage(props.errorMessage)
-            }
-        });
+      res.then((value) => {
+        if (!value.error) {
+          if (props.endPoint == 'promoter' && inputValues.service == 'cadastroPromoter') {
+            enviaEmailConfirmacao(inputValues.email);
+          }
+          login(value.result);
+        } else {
+          setShowErroLogin(true);
+          setErrorMessage(value.error);
+        }
+      });
     } else {
-        setShowErroLogin(true); // Exibe o erro caso algum campo não esteja preenchido
-        setErrorMessage('Preencha todos os campos.')
+      setShowErroLogin(true); // Exibe o erro caso algum campo não esteja preenchido
+      setErrorMessage('Preencha todos os campos.');
     }
   }
 
