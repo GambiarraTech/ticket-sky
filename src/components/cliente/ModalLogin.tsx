@@ -33,7 +33,17 @@ export default function ModalLogin(props: ModalLoginProps) {
     event.preventDefault();
     setShowErroLogin(false);
 
-    const res = router.apiPost(cliente, 'cliente');
+    const resLogin = router.apiPost(cliente, 'cliente');
+
+    resLogin.then((value) => {
+      if (!value.error) {
+        props.onSubmit();
+        login(value.result);
+      } else {
+        setErrorMessage(value.error);
+        setShowErroLogin(true);
+      }
+    });
   }
 
   async function cadastroCliente(event: React.FormEvent) {
@@ -48,7 +58,6 @@ export default function ModalLogin(props: ModalLoginProps) {
       setShowErroLogin(true);
     } else {
       resCadastro.then((value) => {
-        console.log(value.error);
         if (!value.error) {
           cliente.service = 'loginCliente';
           const resLogin = router.apiPost(cliente, 'cliente');
