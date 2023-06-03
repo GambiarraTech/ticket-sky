@@ -61,6 +61,42 @@ export async function loginCliente(email: string, senha: string) {
         return null
     }
 }
+export async function editarCliente(email: string, nome: string, sobrenome: string, cpf: string, id: number) {
+    const sql = `
+        UPDATE
+            cliente
+        SET
+            email = (?),
+            nome = (?),
+            sobrenome = (?),
+            cpf = (?)
+        WHERE
+            id = (?)
+    `;
+    const editaCliente: any = await query({
+        query: sql,
+        values: [email, nome, sobrenome, cpf, id]
+    });
+
+    return "Cliente alterado com sucesso!";
+}
+
+export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
+
+    const confirmaSenha = await loginCliente(email, senhaAntiga);
+
+    if (confirmaSenha != null) {
+
+        const alteraSenha: any = await query({
+            query: "UPDATE cliente SET senha = (?) WHERE email = (?)",
+            values: [novaSenha, email],
+        })
+
+        return "Senha alterada com sucesso!";
+    }
+
+    return 'Senha incorreta';
+}
 
 export async function getCliente(id: string) {
 
