@@ -1,7 +1,3 @@
-.container {
-  @apply grid h-screen;
-}
-
 .title {
   @apply text-center text-4xl text-gray-700 font-medium;
 }
