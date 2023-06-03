@@ -35,15 +35,20 @@ export default function ModalLogin(props: ModalLoginProps) {
 
     const resLogin = router.apiPost(cliente, 'cliente');
 
-    resLogin.then((value) => {
-      if (!value.error) {
-        props.onSubmit();
-        login(value.result);
-      } else {
-        setErrorMessage(value.error);
-        setShowErroLogin(true);
-      }
-    });
+    if (cliente.email == '' || cliente.senha == '') {
+      setErrorMessage('Preencha todos os campos.');
+      setShowErroLogin(true);
+    } else {
+      resLogin.then((value) => {
+        if (!value.error) {
+          props.onSubmit();
+          login(value.result);
+        } else {
+          setErrorMessage(value.error);
+          setShowErroLogin(true);
+        }
+      });
+    }
   }
 
   async function cadastroCliente(event: React.FormEvent) {
