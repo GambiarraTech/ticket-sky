@@ -6,7 +6,7 @@ import styles from '@/styles/promoter/home.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <NavbarPromoter />
       <p className={styles.title}>Meus Eventos</p>
       <div>
@@ -14,7 +14,7 @@ export default function Home() {
       </div>
 
       <Footer color="white" />
-    </div>
+    </>
   );
 }
 

@@ -25,6 +25,10 @@
   @apply text-[red] my-2  font-medium text-sm;
 }
 
+.mensagemInfo {
+  @apply text-azul-ticket my-2  font-medium text-sm;
+}
+
 .footer {
   @apply self-center mt-4;
 }

@@ -107,12 +107,12 @@ export default function Carousel({ title, page }: CarouselProps) {
           <div id="buttons" className={styles.buttonsInative}>
             <div>
               <button>
-                <IoIosArrowBack size="32" color="#e5e7eb" />
+                <IoIosArrowBack size="16" color="#e5e7eb" />
               </button>
             </div>
             <div>
               <button>
-                <IoIosArrowForward size="32" color="#e5e7eb" />
+                <IoIosArrowForward size="16" color="#e5e7eb" />
               </button>
             </div>
           </div>
