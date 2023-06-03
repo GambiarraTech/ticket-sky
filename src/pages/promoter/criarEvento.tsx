@@ -257,7 +257,7 @@ export default function CriarEvento() {
             </div>
 
             <div className={style.campo}>
-              rua:
+              Rua:
               <input
                 className={style.input}
                 name="rua"
@@ -271,7 +271,7 @@ export default function CriarEvento() {
             </div>
 
             <div className={style.campo}>
-              numero:
+              Número:
               <input
                 className={style.input}
                 name="numero"
