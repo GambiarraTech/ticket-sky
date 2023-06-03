@@ -1,5 +1,5 @@
 .column {
-  @apply flex flex-col font-bold text-xl w-full min-h-full justify-center items-center mb-4;
+  @apply flex flex-col font-bold text-xl w-full min-h-full items-center mb-4;
 }
 
 .container {

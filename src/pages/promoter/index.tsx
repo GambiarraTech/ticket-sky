@@ -9,7 +9,10 @@ export default function Home() {
     <>
       <NavbarPromoter />
       <p className={styles.title}>Meus Eventos</p>
-      <Carousel />
+      <div>
+        <Carousel />
+      </div>
+
       <Footer color="white" />
     </>
   );
