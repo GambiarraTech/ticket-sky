@@ -1,4 +1,5 @@
 import { AuthContext } from '@/contexts/AuthContext';
+import * as router from '@/pages/api/router';
 import styles from '@/styles/cliente/MeuPerfil.module.css';
 import { useContext, useState } from 'react';
 import Modal from '../Modal';
@@ -9,13 +10,18 @@ export default function MeuPerfil() {
   const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
   const [cliente, setCliente] = useState({
-    nome: '',
-    sobrenome: '',
-    email: '',
-    senha: '',
-    alterPassword: '',
-    cpf: '',
+    id: user.id,
+    nome: user.nome,
+    sobrenome: user.sobrenome,
+    email: user.email,
+    cpf: user.cpf,
+    service: "editarCliente"
   });
+  
+  async function editaCliente() {
+    const res = await router.apiPost(cliente, 'cliente');
+    alert(res.result);
+  }
 
   return (
     <>
@@ -27,7 +33,7 @@ export default function MeuPerfil() {
             </label>
             <input
               className={styles.input}
-              value={user.nome}
+              defaultValue={user.nome}
               type="text"
               onChange={(e) => (cliente.nome = e.target.value)}
             />
@@ -38,8 +44,8 @@ export default function MeuPerfil() {
             </label>
             <input
               className={styles.input}
-              value={user.email}
-              type="email"
+              defaultValue={user.email}
+              type="text"
               onChange={(e) => (cliente.email = e.target.value)}
             />
           </div>
@@ -51,7 +57,7 @@ export default function MeuPerfil() {
               </label>
               <input
                 className={styles.input}
-                value={user.sobrenome}
+                defaultValue={user.sobrenome}
                 type="text"
                 onChange={(e) => (cliente.sobrenome = e.target.value)}
               />
@@ -63,14 +69,15 @@ export default function MeuPerfil() {
               </label>
               <input
                 className={styles.input}
-                value={user.cpf}
+                defaultValue={user.cpf}
                 type="text"
+                maxLength={11}
                 onChange={(e) => (cliente.cpf = e.target.value)}
               />
             </div>
           <div>
             <div className={styles.row}>
-              <button className={styles.salvarAlt}>Salvar Alterações</button>
+              <button className={styles.salvarAlt} onClick={editaCliente}>Salvar Alterações</button>
               <a className={styles.cancelar}>Cancelar</a>
               <button className={styles.salvarAlt} onClick={() => setOpenModalAltSenha(true)}>Alterar Senha</button>
             </div>
