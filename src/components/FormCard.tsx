@@ -53,11 +53,13 @@ export default function FormCard(props: FormCardProps) {
 
   const { login } = useContext(AuthContext);
   const [showErroLogin, setShowErroLogin] = useState(false);
+  const [showInfoMessage, setShowInfoMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setShowErroLogin(false);
+    setShowInfoMessage(false);
 
     const allInputsFilled = props.inputs.every((input) => inputValues[input.id]);
     if (allInputsFilled) {
@@ -67,8 +69,12 @@ export default function FormCard(props: FormCardProps) {
         if (!value.error) {
           if (props.endPoint == 'promoter' && inputValues.service == 'cadastroPromoter') {
             enviaEmailConfirmacao(inputValues.email);
+            console.log('teste');
+            setShowInfoMessage(true);
+            setErrorMessage('Solicitação enviada. Verifique seu email.');
+          } else {
+            login(value.result);
           }
-          login(value.result);
         } else {
           setShowErroLogin(true);
           setErrorMessage(value.error);
@@ -101,6 +107,7 @@ export default function FormCard(props: FormCardProps) {
           </React.Fragment>
         ))}
         <p className={styles.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>
+        <p className={styles.mensagemInfo}>{showInfoMessage ? errorMessage : ''}</p>
         <button onClick={handleSubmit}>{props.buttonText}</button>
         {props.footer && (
           <p className={styles.footer}>
