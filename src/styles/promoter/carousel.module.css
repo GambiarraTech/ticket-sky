@@ -47,7 +47,7 @@
 }
 
 .buttons button {
-  @apply p-4 hover:bg-gray-100;
+  @apply p-2 hover:bg-gray-100;
 }
 
 .buttonsInative {
@@ -55,7 +55,7 @@
 }
 
 .buttonsInative button {
-  @apply p-4;
+  @apply p-2;
 }
 
 .titleAndButtons {
