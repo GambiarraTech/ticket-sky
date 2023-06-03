@@ -87,12 +87,18 @@ export async function alterarSenha(email: string, senhaAntiga: string, novaSenha
 
     if (confirmaSenha != null) {
 
-        const alteraSenha: any = await query({
-            query: "UPDATE cliente SET senha = (?) WHERE email = (?)",
-            values: [novaSenha, email],
-        })
+        if (novaSenha == senhaAntiga) {
+            return 'A nova senha não pode ser igual a atual';
+        }
+        else {
+            const alteraSenha: any = await query({
+                query: "UPDATE cliente SET senha = (?) WHERE email = (?)",
+                values: [novaSenha, email],
+            })
 
-        return "Senha alterada com sucesso!";
+            return "Senha alterada com sucesso!";
+        }
+
     }
 
     return 'Senha incorreta';
