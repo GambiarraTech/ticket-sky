@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { Admin, getAdmin, loginAdmin, getAllAdmins } from '../../types/admin'
+import md5 from "md5";
 
 export default async (req: any, res: any) => {
 
@@ -9,7 +10,8 @@ export default async (req: any, res: any) => {
         switch (service) {
             case 'loginAdmin': {
                 const { email, senha } = req.body
-                const checkLogin: Admin = await loginAdmin(email, senha)
+                const senhaHash = md5(senha)
+                const checkLogin: Admin = await loginAdmin(email, senhaHash)
 
                 if (checkLogin != null) {
                     //O token criando aqui segue a seguinte lógica:
@@ -54,7 +56,7 @@ export default async (req: any, res: any) => {
                 break;
             }
             default: {
-               
+
                 break;
             }
         }

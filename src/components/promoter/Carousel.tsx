@@ -1,9 +1,10 @@
 import { apiGet } from '@/pages/api/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from '../../styles/promoter/carousel.module.css';
+import { AuthContext } from '@/contexts/AuthContext';
 
 interface CarouselProps {
   title?: String;
@@ -71,13 +72,22 @@ function ConvertDate(data: Date, service: String) {
 }
 
 export default function Carousel({ title, page }: CarouselProps) {
+  const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
   let carousel = useRef<HTMLInputElement>(null);
 
+
   useEffect(() => {
-    apiGet('evento').then((value) => {
-      setData(value.result);
-    });
+    console.log(user)
+    if(isLogged && user.role == 'promoter'){
+        apiGet(`evento?id=${user.id}`).then((value) => {
+            setData(value.result);
+          });
+    }else{
+        apiGet('evento').then((value) => {
+            setData(value.result);
+          });
+    }
   }, []);
 
   const handleLeftClick = (e: any) => {
@@ -107,12 +117,12 @@ export default function Carousel({ title, page }: CarouselProps) {
           <div id="buttons" className={styles.buttonsInative}>
             <div>
               <button>
-                <IoIosArrowBack size="32" color="#e5e7eb" />
+                <IoIosArrowBack size="16" color="#e5e7eb" />
               </button>
             </div>
             <div>
               <button>
-                <IoIosArrowForward size="32" color="#e5e7eb" />
+                <IoIosArrowForward size="16" color="#e5e7eb" />
               </button>
             </div>
           </div>

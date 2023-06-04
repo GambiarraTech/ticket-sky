@@ -12,6 +12,7 @@ export default function ModalLogin(props: ModalLoginProps) {
   const [variant, setVariant] = useState('signIn');
 
   const changeVariant = useCallback(() => {
+    setShowErroLogin(false);
     setVariant((currentvariant) => (currentvariant === 'signIn' ? 'signUp' : 'signIn'));
   }, []);
 
@@ -25,22 +26,29 @@ export default function ModalLogin(props: ModalLoginProps) {
 
   const { login } = useContext(AuthContext);
   const [showErroLogin, setShowErroLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   async function loginCliente(event: React.FormEvent) {
     cliente.service = 'loginCliente';
     event.preventDefault();
+    setShowErroLogin(false);
 
-    const res = router.apiPost(cliente, 'cliente');
-    let data;
+    const resLogin = router.apiPost(cliente, 'cliente');
 
-    res.then((value) => {
-      data = value.result;
-      setShowErroLogin(false);
-      props.onSubmit();
-      login(data);
-    });
-
-    setShowErroLogin(true);
+    if (cliente.email == '' || cliente.senha == '') {
+      setErrorMessage('Preencha todos os campos.');
+      setShowErroLogin(true);
+    } else {
+      resLogin.then((value) => {
+        if (!value.error) {
+          props.onSubmit();
+          login(value.result);
+        } else {
+          setErrorMessage(value.error);
+          setShowErroLogin(true);
+        }
+      });
+    }
   }
 
   async function cadastroCliente(event: React.FormEvent) {
@@ -50,20 +58,25 @@ export default function ModalLogin(props: ModalLoginProps) {
 
     const resCadastro = router.apiPost(cliente, 'cliente');
 
-    resCadastro.then((value) => {
+    if (cliente.email == '' || cliente.senha == '' || cliente.nome == '' || cliente.sobrenome == '') {
+      setErrorMessage('Preencha todos os campos.');
+      setShowErroLogin(true);
+    } else {
+      resCadastro.then((value) => {
+        if (!value.error) {
+          cliente.service = 'loginCliente';
+          const resLogin = router.apiPost(cliente, 'cliente');
 
-      if (!value.error) {
-        cliente.service = 'loginCliente';
-        const resLogin = router.apiPost(cliente, 'cliente');
-
-        resLogin.then((value) => {
-          props.onSubmit();
-          login(value.result);
-        });
-      } else {
-        setShowErroLogin(true);
-      }
-    });
+          resLogin.then((value) => {
+            props.onSubmit();
+            login(value.result);
+          });
+        } else {
+          setErrorMessage(value.error);
+          setShowErroLogin(true);
+        }
+      });
+    }
   }
 
   return (
@@ -121,7 +134,7 @@ export default function ModalLogin(props: ModalLoginProps) {
           <button onClick={variant === 'signIn' ? loginCliente : cadastroCliente} className={style.loginButton}>
             {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
           </button>
-          <p className={style.mensagemErro}>{showErroLogin ? 'Usuário ou senha incorreta.' : ''}</p>
+          <p className={style.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>
           <p className={style.positionLinkButton}>
             {variant === 'signIn' ? 'Primeiro Acesso?' : 'Já Possui uma Conta?'}
             <span onClick={changeVariant} className={style.linkButton}>

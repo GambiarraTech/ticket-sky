@@ -1,5 +1,5 @@
+import Footer from '@/components/Footer';
 import FormCard from '@/components/FormCard';
-import Footer from '@/components/admin/Footer';
 import styles from '@/styles/promoter/areaPromoter.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -50,8 +50,8 @@ export default function Cadastro() {
             footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
           />
         </div>
-        <Footer />
       </div>
+      <Footer color="blue" />
     </div>
   );
 }

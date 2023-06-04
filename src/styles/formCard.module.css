@@ -1,16 +1,16 @@
 .card {
-  @apply bg-white flex flex-col px-6 py-4 rounded-md w-80;
+  @apply bg-white flex flex-col px-6 py-4 rounded-md w-80 mb-4;
 }
 
 .title {
-  @apply font-sans text-white text-3xl py-4;
+  @apply font-sans text-white text-2xl py-4;
 }
 .subtitulo {
   @apply font-sans text-white text-base py-4;
 }
 
 .card label {
-  @apply text-base text-gray-500 mt-3 mb-1;
+  @apply text-sm text-gray-500 mt-2 mb-1;
 }
 
 .card input {
@@ -18,11 +18,15 @@
 }
 
 .card button {
-  @apply text-white rounded-md bg-azul-ticket h-9 mt-8;
+  @apply text-white rounded-md bg-azul-ticket h-9 mt-6;
 }
 
 .mensagemErro {
   @apply text-[red] my-2  font-medium text-sm;
+}
+
+.mensagemInfo {
+  @apply text-azul-ticket my-2  font-medium text-sm;
 }
 
 .footer {

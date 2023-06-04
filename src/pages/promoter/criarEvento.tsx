@@ -1,7 +1,8 @@
-import InputSelect from '@/components/InputSelect';
 import { AuthContext } from '@/contexts/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 
+import Footer from '@/components/Footer';
+import InputSelect from '@/components/InputSelect';
 import NavbarPromoter from '@/components/promoter/NavbarPromoter';
 import Dropzone from '../../components/promoter/Dropzone';
 import style from '../../styles/promoter/criarEvento.module.css';
@@ -141,7 +142,7 @@ export default function CriarEvento() {
     setCidades(cidades);
   }
   return (
-    <>
+    <div className={style.container}>
       <NavbarPromoter />
       <div className={style.header}>
         <div className={style.title}>Criar Evento</div>
@@ -159,6 +160,24 @@ export default function CriarEvento() {
                   clearErrorMessage();
                 }}
               />
+            </div>
+
+            <div className={style.campo}>
+              CEP:
+              <input
+                className={style.input}
+                name="cep"
+                type="text"
+                id="cep"
+                pattern="[0-9]+"
+                maxLength={8}
+                minLength={8}
+                required
+                onChange={(e) => {
+                  evento.cep = e.target.value;
+                  clearErrorMessage();
+                }}
+              ></input>
             </div>
 
             <div className={style.campo}>
@@ -202,6 +221,23 @@ export default function CriarEvento() {
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className={style.partes}>
+            <div className={style.campo}>
+              Nome do local:
+              <input
+                className={style.input}
+                name="local"
+                type="text"
+                required
+                onChange={(e) => {
+                  evento.local = e.target.value;
+                  clearErrorMessage();
+                }}
+                maxLength={245}
+              />
+            </div>
 
             <div className={style.campo}>
               Bairro:
@@ -221,46 +257,7 @@ export default function CriarEvento() {
             </div>
 
             <div className={style.campo}>
-              CEP:
-              <input
-                className={style.input}
-                name="cep"
-                type="text"
-                id="cep"
-                pattern="[0-9]+"
-                maxLength={8}
-                minLength={8}
-                required
-                onChange={(e) => {
-                  evento.cep = e.target.value;
-                  clearErrorMessage();
-                }}
-              ></input>
-            </div>
-          </div>
-
-          <div className={style.partes}>
-            <div className={style.campo}>
-              Categoria:
-              <InputSelect endpoint="categoria" onItemSelected={setCategoria} />
-            </div>
-            <div className={style.campo}>
-              Nome do local:
-              <input
-                className={style.input}
-                name="local"
-                type="text"
-                required
-                onChange={(e) => {
-                  evento.local = e.target.value;
-                  clearErrorMessage();
-                }}
-                maxLength={245}
-              />
-            </div>
-
-            <div className={style.campo}>
-              rua:
+              Rua:
               <input
                 className={style.input}
                 name="rua"
@@ -274,7 +271,7 @@ export default function CriarEvento() {
             </div>
 
             <div className={style.campo}>
-              numero:
+              Número:
               <input
                 className={style.input}
                 name="numero"
@@ -331,6 +328,10 @@ export default function CriarEvento() {
                 }}
                 maxLength={320}
               />
+            </div>
+            <div className={style.campo}>
+              Categoria:
+              <InputSelect endpoint="categoria" onItemSelected={setCategoria} />
             </div>
           </div>
 
@@ -393,6 +394,7 @@ export default function CriarEvento() {
           Criar evento
         </button>
       </div>
-    </>
+      <Footer color="white" />
+    </div>
   );
 }

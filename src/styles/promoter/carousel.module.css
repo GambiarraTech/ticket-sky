@@ -1,5 +1,5 @@
 .column {
-  @apply flex flex-col font-bold text-xl w-full min-h-full justify-center items-center;
+  @apply flex flex-col font-bold text-xl w-full min-h-full items-center mb-4;
 }
 
 .container {
@@ -47,7 +47,7 @@
 }
 
 .buttons button {
-  @apply p-4 hover:bg-gray-100;
+  @apply p-2 hover:bg-gray-100;
 }
 
 .buttonsInative {
@@ -55,7 +55,7 @@
 }
 
 .buttonsInative button {
-  @apply p-4;
+  @apply p-2;
 }
 
 .titleAndButtons {

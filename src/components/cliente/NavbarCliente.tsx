@@ -21,7 +21,7 @@ export default function NavbarCliente() {
     <>
       {isLogged && user.role == 'cliente' ? (
         <Navbar
-          backgroundColor="#fff"
+          backgroundColor="white"
           leftComponent={
             <Link href="/">
               <Image src="/images/logo-navbar.png" alt="TicketSky - Logo" height="120" width="120" />
