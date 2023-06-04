@@ -46,3 +46,16 @@ export async function fillCatalog() {
         return null
     }
 }
+
+export async function getEventosPromoter(id: string) {
+    const itens = await query({
+        query: "SELECT ev.*, end.*, ev.nome AS evnome, end.nome AS endnome FROM evento AS ev JOIN endereco AS end ON ev.id_endereco = end.id AND ev.id_promoter = (?)",
+        values: [id]
+    })
+
+    if (Object.keys(itens).length > 0) {
+        return itens
+    } else {
+        return null
+    }
+}

@@ -22,7 +22,13 @@ export default async (req: any, res: any) => {
             }
         }
     }else{
-        const itensCatalog = await evento.fillCatalog()
-        res.json({ result: itensCatalog })
+        if(req.query.id){
+            const itensCatalog = await evento.getEventosPromoter(req.query.id)
+            res.json({ result: itensCatalog })
+
+        }else{
+            const itensCatalog = await evento.fillCatalog()
+            res.json({ result: itensCatalog })
+        }
     }
 }
