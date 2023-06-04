@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import * as cliente from '../../types/cliente'
+import md5 from "md5";
 
 export default async (req: any, res: any) => {
 
@@ -8,7 +9,8 @@ export default async (req: any, res: any) => {
     if (service) {
         switch (service) {
             case 'loginCliente': {
-                const checkLogin: cliente.Cliente = await cliente.loginCliente(email, senha)
+                const senhaHash = md5(senha)
+                const checkLogin: cliente.Cliente = await cliente.loginCliente(email, senhaHash)
                 if (checkLogin != null) {
                     //O token criando aqui segue a seguinte lógica:
                     //os primeiros digitos do token antes do primeiro hifen representa o usuario logado
@@ -40,7 +42,8 @@ export default async (req: any, res: any) => {
                 break
             }
             case 'cadastroCliente': {
-                const createCliente = await cliente.cadastroCliente(nome, sobrenome, email, senha, cpf)
+                const senhaHash = md5(senha)
+                const createCliente = await cliente.cadastroCliente(nome, sobrenome, email, senhaHash, cpf)
                 if (createCliente != undefined) {
 
                     res.json({ result: createCliente })
@@ -50,16 +53,6 @@ export default async (req: any, res: any) => {
                 }
                 break
             }
-            // case 'PUT': {
-            //     // this is second case block
-            //     // and there can be any number of cases
-            //     break
-            // }
-            // case 'DELETE': {
-            //     const deletarCliente = await deleteCliente(email, senha)
-            //     res.json({ result: deletarCliente })
-            //     break
-            // }
         }
     } else {
         if (req.query.id) {
