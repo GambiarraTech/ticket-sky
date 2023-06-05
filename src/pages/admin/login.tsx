@@ -1,6 +1,6 @@
 import Footer from '@/components/admin/Footer';
 import FormCard from '@/components/FormCard';
-import styles from '@/styles/promoter/areaPromoter.module.css';
+import styles from '@/styles/admin/loginAdmin.module.css';
 import Image from 'next/image';
 
 const listaInputs = [
