@@ -7,7 +7,7 @@ interface CountInputProps {
   onChange: (valor: number) => void;
 }
 
-export default function CountInput({ valorInicial, onChange }: CountInputProps) {
+function CountInput({ valorInicial, onChange }: CountInputProps) {
   const [quantidade, setQuantidade] = useState(valorInicial);
 
   function adicionar() {
@@ -46,3 +46,5 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
     </div>
   );
 }
+
+export default CountInput;
