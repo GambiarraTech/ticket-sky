@@ -53,6 +53,27 @@ export default async (req: any, res: any) => {
                 }
                 break
             }
+            case 'editarCliente': {
+                const id = req.body.id;
+                const editaCliente = await cliente.editarCliente(email, nome, sobrenome, cpf, id);
+                if (editaCliente != undefined) {
+
+                    res.json({ result: editaCliente })
+                } else {
+
+                    res.json({ error: 'Erro ao editar cliente' })
+                }
+                break
+            }
+            case 'alterarSenha': {
+
+                const senhaAntiga = req.body.senhaAntiga;
+                const novaSenha = req.body.novaSenha;
+
+                const alteraSenha = await cliente.alterarSenha(email, senhaAntiga, novaSenha);
+                res.json({ result: alteraSenha })
+                break
+            }
         }
     } else {
         if (req.query.id) {

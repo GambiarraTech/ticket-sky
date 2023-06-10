@@ -1,7 +1,11 @@
 .background {
-  @apply bg-ticket-sky-blue h-screen;
+  @apply bg-ticket-sky-blue  h-full;
+}
+
+.box {
+  @apply grid h-screen;
 }
 
 .container {
-  @apply pt-24 flex flex-col items-center;
+  @apply flex flex-col items-center pt-12;
 }
