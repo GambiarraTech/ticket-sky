@@ -1,14 +1,15 @@
-import { apiGet } from '@/pages/api/router';
+import { AuthContext } from '@/contexts/AuthContext';
+import { apiGet, apiPost } from '@/pages/api/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from '../../styles/promoter/carousel.module.css';
-import { AuthContext } from '@/contexts/AuthContext';
 
 interface CarouselProps {
   title?: String;
   page?: String;
+  category?: String;
 }
 
 const handleClick = (page: any) => {
@@ -71,24 +72,39 @@ function ConvertDate(data: Date, service: String) {
   }
 }
 
-export default function Carousel({ title, page }: CarouselProps) {
+export default function Carousel({ title, page, category }: CarouselProps) {
   const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
   let carousel = useRef<HTMLInputElement>(null);
 
-
-  useEffect(() => {
-    console.log(user)
-    if(isLogged && user.role == 'promoter'){
+  if (category) {
+    title = category + 's';
+    useEffect(() => {
+      console.log(user);
+      if (isLogged && user.role == 'promoter') {
+        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
+          setData(value.result);
+        });
+      } else {
+        apiPost({ service: category }, 'evento').then((value) => {
+          setData(value.result);
+        });
+      }
+    }, []);
+  } else {
+    useEffect(() => {
+      console.log(user);
+      if (isLogged && user.role == 'promoter') {
         apiGet(`evento?id=${user.id}`).then((value) => {
-            setData(value.result);
-          });
-    }else{
+          setData(value.result);
+        });
+      } else {
         apiGet('evento').then((value) => {
-            setData(value.result);
-          });
-    }
-  }, []);
+          setData(value.result);
+        });
+      }
+    }, []);
+  }
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
