@@ -1,9 +1,17 @@
 .container {
-  @apply flex flex-col;
+  @apply flex flex-col gap-1;
 }
 
 .container label {
-  @apply my-2;
+  @apply my-2 text-ticket-sky-blue;
+}
+
+.container input {
+    @apply w-full text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
+}
+
+.title {
+  @apply text-xl font-bold flex justify-center sm:text-2xl mb-6 text-ticket-sky-blue;
 }
 
 .container input {
@@ -14,8 +22,8 @@
   @apply flex items-center justify-around mt-10;
 }
 .buttonSalvar {
-  @apply rounded-md text-center bg-green-700 h-10 text-white p-2;
+  @apply rounded-md text-center h-10 text-white p-2 bg-green-700 hover:bg-[#167f0e] rounded-lg;
 }
 .buttonAlterarSenha {
-  @apply rounded-md text-center bg-azul-ticket h-10 text-white p-2;
+  @apply rounded-md text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg h-10 text-white p-2;
 }

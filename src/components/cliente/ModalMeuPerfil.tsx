@@ -38,13 +38,18 @@ export default function ModalMeuPerfil() {
   return (
     <>
       <div className={styles.container}>
-        <label>Nome:</label>
-        <input type="text" defaultValue={cliente.nome} onChange={(e) => (cliente.nome = e.target.value)} />
-        <label>Sobrenome:</label>
-        <input type="text" defaultValue={cliente.sobrenome} onChange={(e) => (cliente.sobrenome = e.target.value)} />
-        <label>Email:</label>
-        <input type="email" defaultValue={cliente.email} onChange={(e) => (cliente.email = e.target.value)} />
-        <label>CPF:</label>
+        <div className={styles.title}>
+            <h1>
+                Meu Perfil
+            </h1>
+        </div>
+        <label>Nome</label>
+        <input type="text" defaultValue={cliente.nome} onChange={(e) => (cliente.nome = e.target.value)} required/>
+        <label>Sobrenome</label>
+        <input type="text" defaultValue={cliente.sobrenome} onChange={(e) => (cliente.sobrenome = e.target.value)} required/>
+        <label>Email</label>
+        <input type="email" defaultValue={cliente.email} onChange={(e) => (cliente.email = e.target.value)} required/>
+        <label>CPF</label>
         <input type="text" defaultValue={cliente.cpf} onChange={(e) => (cliente.cpf = e.target.value)} />
         <div className={styles.buttonsContainer}>
           <button className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
