@@ -2,7 +2,7 @@ import { apiPost } from '@/pages/api/router';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineLocationCity } from 'react-icons/md';
 import CountInput from '../../components/cliente/CountInput';
 import NavbarCliente from '../../components/cliente/NavbarCliente';
@@ -10,7 +10,7 @@ import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
-export default async function TelaEvento() {
+export default function TelaEvento() {
   const [quantidade, setQuantidade] = useState(1);
   const [evento, setEvento] = useState({
     nome: '',
@@ -19,16 +19,15 @@ export default async function TelaEvento() {
 
   const { query } = useRouter();
 
-  async function getEvento() {
-    const eventoGet = await apiPost({ id: query.id, service: 'getEvento' }, 'evento');
-
-    evento.nome = eventoGet.result.nome;
-    evento.descricao = eventoGet.result.descricao;
-  }
-
-  getEvento();
-
-  console.log(evento);
+  useEffect(() => {
+    apiPost({ id: query.id, service: 'getEvento' }, 'evento').then((value) => {
+      setEvento({
+        nome: value.result.nome,
+        descricao: value.result.descricao,
+      });
+      console.log(evento);
+    });
+  }, []);
 
   function handleQtdChange(value: number) {
     setQuantidade(value);
