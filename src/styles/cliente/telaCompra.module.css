@@ -35,7 +35,7 @@
 }
 
 .valorTotal {
-  @apply mt-1 text-sm text-gray-600;
+  @apply mt-1 text-sm text-gray-700;
 }
 
 .precoTotal {
@@ -51,7 +51,7 @@
 }
 
 .dldiv {
-  @apply mt-0.5 space-y-px text-md text-gray-600;
+  @apply mt-0.5 space-y-px text-md text-gray-700;
 }
 
 .h3div {
@@ -87,5 +87,5 @@
 }
 
 .botaoCompra {
-  @apply block px-4 py-4 w-full rounded-md bg-green-800 text-white transition hover:bg-green-900;
+  @apply block px-4 py-4 w-full rounded-md bg-green-500 text-white transition hover:bg-green-700;
 }
