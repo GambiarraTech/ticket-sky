@@ -1,8 +1,11 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import styles from '@/styles/admin/NavBar.module.css';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { FaHome, FaUserCircle } from 'react-icons/fa';
-import { IoNotificationsSharp } from 'react-icons/io5';
+import { IoLogOutOutline } from 'react-icons/io5';
 export default function NavBar() {
+  const { user, logout } = useContext(AuthContext);
   return (
     <>
       <div className={styles.navBar}>
@@ -13,11 +16,11 @@ export default function NavBar() {
         </div>
         <h1>Administrador</h1>
         <div className={styles.buttons}>
-          <button className="mr-2.5">
-            <IoNotificationsSharp size="20" className={styles.icon} />
-          </button>
           <button className="ml-2.5">
             <FaUserCircle size="35" className={styles.icon} />
+          </button>
+          <button className="ml-2.5">
+            <IoLogOutOutline size="35" onClick={logout} className={styles.icon} />
           </button>
         </div>
       </div>

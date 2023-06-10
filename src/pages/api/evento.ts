@@ -24,6 +24,14 @@ export default async (req: any, res: any) => {
                 res.json({ result: eventos })
                 break;
             }
+            case 'Show': {
+                const itensCatalog = await evento.fillCatalogCat('1')
+                res.json({ result: itensCatalog })
+            }
+            case 'Stand-up': {
+                const itensCatalog = await evento.fillCatalogCat('2')
+                res.json({ result: itensCatalog })
+            }
         }
     } else {
         if (req.query.id) {
