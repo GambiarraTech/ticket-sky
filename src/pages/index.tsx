@@ -19,7 +19,7 @@ export default function Home() {
         </Head>
         <NavbarCliente />
         <div>
-          <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
+          <Carousel title="Todos os eventos" page="cliente/telaevento"></Carousel>
           <Carousel category={'Show'}></Carousel>
           <Carousel category={'Stand-up'}></Carousel>
         </div>
