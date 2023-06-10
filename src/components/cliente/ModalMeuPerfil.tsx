@@ -1,7 +1,7 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/cliente/meuPerfil.module.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
 
@@ -10,19 +10,30 @@ export default function ModalMeuPerfil() {
 
   const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
-  const [cliente] = useState({
-    id: user.id,
-    nome: user.nome,
-    sobrenome: user.sobrenome,
-    email: user.email,
-    cpf: user.cpf,
-    service: 'editarCliente',
+  const [cliente, setCliente] = useState({
+    id: '',
+    nome: '',
+    sobrenome: '',
+    email: '',
+    cpf: '',
+    service: '',
   });
 
   async function editarCliente() {
+    cliente.service = 'editarCliente'
     const res = await router.apiPost(cliente, 'cliente');
     alert(res.result);
   }
+
+  useEffect(() => {
+    router.apiPost({service: 'getPerfil', id: user.id},'cliente').then((value) =>{
+        if( value.result != null){
+            setCliente(value.result);
+        }
+    }
+
+    )
+  }, []);
 
   return (
     <>

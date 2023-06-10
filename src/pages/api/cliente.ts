@@ -5,7 +5,7 @@ import md5 from "md5";
 export default async (req: any, res: any) => {
 
     const { nome, sobrenome, email, senha, cpf, service } = req.body
-
+    console.log(req.body)
     if (service) {
         switch (service) {
             case 'loginCliente': {
@@ -72,6 +72,12 @@ export default async (req: any, res: any) => {
 
                 const alteraSenha = await cliente.alterarSenha(email, senhaAntiga, novaSenha);
                 res.json({ result: alteraSenha })
+                break
+            }
+            case 'getPerfil':{
+                const id = req.body.id;
+                const checkLogin: cliente.Cliente = await cliente.getCliente(id)
+                res.json({ result: checkLogin })
                 break
             }
         }
