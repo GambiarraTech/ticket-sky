@@ -6,7 +6,7 @@ export default async (req: any, res: any) => {
     switch (service) {
       case 'saveCartao': {
         const { titular, cpf, numero, vencimento, id_cliente } = req.body;
-        const checkCartao = await selectCartao(cpf, id_cliente)
+        const checkCartao = await selectCartao(id_cliente)
 
         if(checkCartao != null){
             const cartao: boolean = await updateCartao(titular, numero, vencimento, cpf, id_cliente)
@@ -38,5 +38,9 @@ export default async (req: any, res: any) => {
         break;
       }
     }
+  }else{
+    const { id_cliente } = req.body;
+    const checkCartao = await selectCartao(id_cliente)
+    res.json({ result: checkCartao, success: true });
   }
 }

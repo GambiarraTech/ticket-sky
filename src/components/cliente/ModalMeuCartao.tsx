@@ -5,7 +5,7 @@ import { AuthContext } from '@/contexts/AuthContext';
 
 export default function MeuCartao() {
   const { user } = useContext(AuthContext);
-  const [cartao] = useState({
+  const [cartao, setCartao] = useState({
     titular: '',
     cpf: '',
     numero: '',
@@ -27,6 +27,16 @@ export default function MeuCartao() {
 
   }
 
+  useEffect(() => {
+    router.apiPost({id_cliente: user.id},'cartao').then((value) =>{
+        if( value.result != null){
+            setCartao(value.result);
+        }
+    }
+
+    )
+  }, []);
+
   return (
     <>
       <div className={style.title}>Meu Cartão</div>
@@ -37,6 +47,7 @@ export default function MeuCartao() {
             type="text"
             className={style.primaryInputStyle}
             placeholder="Nome do Titular"
+            defaultValue={cartao.titular}
             onChange={(e) => (cartao.titular = e.target.value)}
           />
         </div>
@@ -46,6 +57,7 @@ export default function MeuCartao() {
             type="text"
             className={style.primaryInputStyle}
             placeholder="CPF do Titular"
+            defaultValue={cartao.cpf}
             onChange={(e) => (cartao.cpf = e.target.value)}
           />
         </div>
@@ -55,6 +67,7 @@ export default function MeuCartao() {
             type="text"
             className={style.primaryInputStyle}
             placeholder="Número do Cartão"
+            defaultValue={cartao.numero}
             onChange={(e) => (cartao.numero = e.target.value)}
           />
         </div>
@@ -65,6 +78,7 @@ export default function MeuCartao() {
               type="text"
               className={style.secondInputStyle}
               placeholder="Validade"
+              defaultValue={cartao.vencimento}
               onChange={(e) => (cartao.vencimento = e.target.value)}
             />
           </div>
