@@ -61,14 +61,14 @@ export async function getEventosPromoter(id: string) {
 }
 
 
-export async function getEventos(id: string) {
-    const itens = await query({
+export async function getEventos(id: number) {
+    const itens: any = await query({
         query: "SELECT * FROM evento WHERE id=(?)",
         values: [id]
     })
 
     if (Object.keys(itens).length > 0) {
-        return itens
+        return itens[0]
     } else {
         return null
     }

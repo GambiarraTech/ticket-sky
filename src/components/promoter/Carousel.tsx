@@ -1,23 +1,21 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import { apiGet } from '@/pages/api/router';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from '../../styles/promoter/carousel.module.css';
-import { AuthContext } from '@/contexts/AuthContext';
 
 interface CarouselProps {
   title?: String;
   page?: String;
 }
 
-const handleClick = (page: any) => {
-  return (
-    <Link href={`${page}`}>
-      <a>Texto do link</a>
-    </Link>
-  );
-};
+function handleClick(id: any) {
+  //recebe a tela do 'page' quando chama o carrosel
+  const url = 'telaevento/' + id;
+  console.log(id);
+  //window.location.href = url;
+}
 
 function ConvertDate(data: Date, service: String) {
   if (service == 'day') {
@@ -145,7 +143,12 @@ export default function Carousel({ title, page }: CarouselProps) {
                 minutos = date.getMinutes().toString().padStart(2, '0');
               }
               return (
-                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
+                <div
+                  id="itemID"
+                  className={styles.item}
+                  key={id}
+                  onClick={() => (window.location.href = 'telaevento/' + id)}
+                >
                   <div className={styles.image}>
                     <Image src={url} alt={descricao} height="260" width="420" />
                   </div>
@@ -204,7 +207,12 @@ export default function Carousel({ title, page }: CarouselProps) {
                 minutos = date.getMinutes().toString().padStart(2, '0');
               }
               return (
-                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
+                <div
+                  id="itemID"
+                  className={styles.item}
+                  key={id}
+                  onClick={() => (window.location.href = 'telaevento/' + id)}
+                >
                   <div className={styles.image}>
                     <Image src={url} alt={descricao} height="260" width="420" />
                   </div>

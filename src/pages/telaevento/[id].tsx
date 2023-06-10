@@ -1,4 +1,4 @@
-import * as router from '@/pages/api/router';
+import { apiPost } from '@/pages/api/router';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -10,18 +10,28 @@ import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
-export default function TelaEvento() {
+export default async function TelaEvento() {
   const [quantidade, setQuantidade] = useState(1);
+  const [evento, setEvento] = useState({
+    nome: '',
+    descricao: '',
+  });
+
   const { query } = useRouter();
+
+  async function getEvento() {
+    const eventoGet = await apiPost({ id: query.id, service: 'getEvento' }, 'evento');
+
+    evento.nome = eventoGet.result.nome;
+    evento.descricao = eventoGet.result.descricao;
+  }
+
+  getEvento();
+
+  console.log(evento);
 
   function handleQtdChange(value: number) {
     setQuantidade(value);
-  }
-
-  async function getEventos() {
-    const res = await router.apiPost({ id: query.id, service: 'getEventos' }, 'evento');
-    alert(res.result);
-    console.log(res);
   }
 
   return (
@@ -33,7 +43,7 @@ export default function TelaEvento() {
             <Image alt="Banner do Evento" className={style.imgBanner} width="400" height="400" src="/quadrado.png" />
             <div className={style.content}>
               <h2 className={style.promoterName}>Nome do Promoter</h2>
-              <h1 className={style.eventName}>Nome do Evento</h1>
+              <h1 className={style.eventName}>{evento.nome}</h1>
               <p className={style.description}>TEXTO DA DESCRIÇÃO DO EVENTO texto da descrição do evento</p>
               <div className={style.eventInfo}>
                 <div className={style.countPosition}>
@@ -57,9 +67,7 @@ export default function TelaEvento() {
               <div className={style.flexEvent}>
                 <span className={style.price}>$58.00</span>
                 <div className={style.positionBuyButton}>
-                  <button onClick={getEventos} className={style.buyButton}>
-                    Comprar
-                  </button>
+                  <button className={style.buyButton}>Comprar</button>
                 </div>
               </div>
               <div className={style.eventLocation}>Local do Evento</div>
