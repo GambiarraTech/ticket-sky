@@ -20,8 +20,8 @@ export default function Home() {
         <NavbarCliente />
         <div>
           <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
-          <Carousel title="Vistos Recentemente"></Carousel>
-          <Carousel title="Pra você"></Carousel>
+          <Carousel category={'Show'}></Carousel>
+          <Carousel category={'Stand-up'}></Carousel>
         </div>
       </main>
       <Footer color="white" />
