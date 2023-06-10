@@ -27,7 +27,7 @@
 }
 
 .buttonSave {
-  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg;
+  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-green-700 hover:bg-[#167f0e] rounded-lg;
 }
 
 .buttonDelete {
