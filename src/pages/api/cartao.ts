@@ -1,33 +1,23 @@
-import { Cartao, deleteCartao, insertCartao, selectCartao, updateCartao } from '../../types/cartao';
+import { Cartao, deleteCartao, insertCartao } from '../../types/cartao';
 
 export default async (req: any, res: any) => {
   const { service } = req.body;
+
   if (service) {
     switch (service) {
-      case 'saveCartao': {
-        const { titular, cpf, numero, vencimento, id_cliente } = req.body;
-        const checkCartao = await selectCartao(id_cliente)
-
-        if(checkCartao != null){
-            const cartao: boolean = await updateCartao(titular, numero, vencimento, cpf, id_cliente)
-            if( cartao == true){
-                res.json({ success: true, cartao: cartao })
-            }else {
-                res.json({ success: false });
-            }
-        }else{
-            const cartao: Cartao = await insertCartao(titular, numero, vencimento, cpf, id_cliente);
-            if (cartao) {
-              res.json({ success: true, cartao: cartao });
-            } else {
-              res.json({ success: false });
-            }
+      case 'criarCartao': {
+        const { titular, cpf, numero, validade, cvv } = req.body;
+        const cartao: Cartao = await insertCartao(titular, cpf, numero, validade, cvv);
+        if (cartao) {
+          res.json({ success: true, cartao: cartao });
+        } else {
+          res.json({ success: false });
         }
         break;
       }
       case 'deletarCartao': {
-        const { id_cliente } = req.body;
-        const result: boolean = await deleteCartao(id_cliente);
+        const { cpf, numero } = req.body;
+        const result: boolean = await deleteCartao(cpf, numero);
 
         if (result) {
           res.json({ success: true });
@@ -38,9 +28,5 @@ export default async (req: any, res: any) => {
         break;
       }
     }
-  }else{
-    const { id_cliente } = req.body;
-    const checkCartao = await selectCartao(id_cliente)
-    res.json({ result: checkCartao, success: true });
   }
 }

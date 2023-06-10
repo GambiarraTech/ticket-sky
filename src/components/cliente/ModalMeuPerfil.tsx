@@ -1,58 +1,87 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
-import styles from '@/styles/cliente/meuPerfil.module.css';
-import { useContext, useEffect, useState } from 'react';
+import styles from '@/styles/cliente/MeuPerfil.module.css';
+import { useContext, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
 
-export default function ModalMeuPerfil() {
+export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
-
   const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
   const [cliente, setCliente] = useState({
-    id: '',
-    nome: '',
-    sobrenome: '',
-    email: '',
-    cpf: '',
-    service: '',
+    id: user.id,
+    nome: user.nome,
+    sobrenome: user.sobrenome,
+    email: user.email,
+    cpf: user.cpf,
+    service: "editarCliente"
   });
-
-  async function editarCliente() {
-    cliente.service = 'editarCliente'
+  
+  async function editaCliente() {
     const res = await router.apiPost(cliente, 'cliente');
     alert(res.result);
   }
 
-  useEffect(() => {
-    router.apiPost({service: 'getPerfil', id: user.id},'cliente').then((value) =>{
-        if( value.result != null){
-            setCliente(value.result);
-        }
-    }
-
-    )
-  }, []);
-
   return (
     <>
-      <div className={styles.container}>
-        <label>Nome:</label>
-        <input type="text" defaultValue={cliente.nome} onChange={(e) => (cliente.nome = e.target.value)} />
-        <label>Sobrenome:</label>
-        <input type="text" defaultValue={cliente.sobrenome} onChange={(e) => (cliente.sobrenome = e.target.value)} />
-        <label>Email:</label>
-        <input type="email" defaultValue={cliente.email} onChange={(e) => (cliente.email = e.target.value)} />
-        <label>CPF:</label>
-        <input type="text" defaultValue={cliente.cpf} onChange={(e) => (cliente.cpf = e.target.value)} />
-        <div className={styles.buttonsContainer}>
-          <button className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
-            Alterar Senha
-          </button>
-          <button className={styles.buttonSalvar} onClick={editarCliente}>
-            Salvar Alterações
-          </button>
+      <div className={styles.inputPosition}>
+        <div className={styles.inputPositionLeft}>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Nome">
+              Nome:
+            </label>
+            <input
+              className={styles.input}
+              defaultValue={user.nome}
+              type="text"
+              onChange={(e) => (cliente.nome = e.target.value)}
+            />
+          </div>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Email">
+              E-mail:
+            </label>
+            <input
+              className={styles.input}
+              defaultValue={user.email}
+              type="text"
+              onChange={(e) => (cliente.email = e.target.value)}
+            />
+          </div>
+        </div>
+        <div className={styles.inputPositionRight}>
+            <div className={styles.row}>
+              <label className={styles.label} htmlFor="Sobrenome">
+                Sobrenome:
+              </label>
+              <input
+                className={styles.input}
+                defaultValue={user.sobrenome}
+                type="text"
+                onChange={(e) => (cliente.sobrenome = e.target.value)}
+              />
+            </div>
+          
+            <div className={styles.row}>
+              <label className={styles.label} htmlFor="CPF">
+                CPF:
+              </label>
+              <input
+                className={styles.input}
+                defaultValue={user.cpf}
+                type="text"
+                maxLength={11}
+                onChange={(e) => (cliente.cpf = e.target.value)}
+              />
+            </div>
+          <div>
+            <div className={styles.row}>
+              <button className={styles.salvarAlt} onClick={editaCliente}>Salvar Alterações</button>
+              <a className={styles.cancelar}>Cancelar</a>
+              <button className={styles.salvarAlt} onClick={() => setOpenModalAltSenha(true)}>Alterar Senha</button>
+            </div>
+          </div>
         </div>
       </div>
       <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>

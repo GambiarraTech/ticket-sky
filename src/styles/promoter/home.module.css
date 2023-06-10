@@ -1,11 +1,3 @@
 .title {
   @apply text-center text-2xl text-gray-700 font-medium;
 }
-
-.msg {
-  @apply text-center  text-gray-200 font-bold  text-5xl;
-}
-
-.foter{
-    @apply fixed bottom-0 bg-azul-ticket left-0 right-0  justify-center items-center;
-}
