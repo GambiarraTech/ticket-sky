@@ -9,18 +9,17 @@ export type Cartao = {
   cvv: string,
 }
 
-export async function insertCartao(titular: string, numero: string, vencimento: string, cpf: string, cvv: string | null) {
+export async function insertCartao(titular: string, numero: string, vencimento: string, cpf: string, id_cliente: string) {
 
-  try {
     const insertResult = await query({
-      query: "INSERT INTO cartao (titular, numero, vencimento, cpf, cvv) VALUES (?, ?, ?, ?, ?)",
-      values: [titular, numero, vencimento, cpf, cvv]
+      query: "INSERT INTO cartao (titular, numero, vencimento, cpf, id_cliente) VALUES (?, ?, ?, ?, ?)",
+      values: [titular, numero, vencimento, cpf, id_cliente]
     })
     if ('insertId' in insertResult) {
       const idNovoCartao = insertResult.insertId;
 
       const novoCartao: any = await query({
-        query: "SELECT titular, numero, vencimento, cpf, cvv FROM cartao WHERE cartao.id = (?)",
+        query: "SELECT * FROM cartao WHERE cartao.id = (?)",
         values: [idNovoCartao]
       })
 
@@ -32,15 +31,14 @@ export async function insertCartao(titular: string, numero: string, vencimento: 
 
     }
 
-  } catch (err) {
-  }
+
 }
 
-export async function deleteCartao(cpf: string, numero: string): Promise<boolean> {
+export async function deleteCartao(id_cliente: string): Promise<boolean> {
   try {
     await query({
-      query: "DELETE FROM cartao WHERE cartao.cpf = (?) AND cartao.numero = (?)",
-      values: [cpf, numero]
+      query: "DELETE FROM cartao WHERE cartao.id_cliente = (?)",
+      values: [ id_cliente]
     })
     return true
 
@@ -50,10 +48,10 @@ export async function deleteCartao(cpf: string, numero: string): Promise<boolean
   }
 }
 
-export async function selectCartao(cpf: string, numero: string) {
+export async function selectCartao(cpf: string, id_cliente: string) {
   const cartao: any = await query({
-    query: "SELECT * FROM cartao WHERE cartao.cpf = (?) AND cartao.numero = (?)",
-    values: [cpf, numero],
+    query: "SELECT * FROM cartao WHERE cartao.cpf = (?) AND cartao.id_cliente = (?)",
+    values: [cpf, id_cliente],
   })
 
   if (Object.keys(cartao).length > 0) {
@@ -61,4 +59,20 @@ export async function selectCartao(cpf: string, numero: string) {
   } else {
     return null
   }
+}
+
+export async function updateCartao(titular: string, numero: string, vencimento: string, cpf: string, id_cliente: string) {
+    try{
+        const updatedCard: any = await query({
+            query: "UPDATE cartao SET titular = (?), numero = (?), vencimento = (?), cpf = (?) WHERE cpf = (?) AND id_cliente = (?)",
+            values: [titular, numero, vencimento, cpf, cpf, id_cliente],
+          })
+
+          const card: any = await selectCartao(cpf, id_cliente)
+        return card
+    }catch{
+        return false
+    }
+
+
 }
