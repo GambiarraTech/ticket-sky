@@ -13,7 +13,7 @@ interface CarouselProps {
 
 const handleClick = (page: any) => {
   return (
-    <Link href={`/${page}`}>
+    <Link href={`${page}`}>
       <a>Texto do link</a>
     </Link>
   );
@@ -76,17 +76,16 @@ export default function Carousel({ title, page }: CarouselProps) {
   const [data, setData] = useState([]);
   let carousel = useRef<HTMLInputElement>(null);
 
-
   useEffect(() => {
-    console.log(user)
-    if(isLogged && user.role == 'promoter'){
-        apiGet(`evento?id=${user.id}`).then((value) => {
-            setData(value.result);
-          });
-    }else{
-        apiGet('evento').then((value) => {
-            setData(value.result);
-          });
+    console.log(user);
+    if (isLogged && user.role == 'promoter') {
+      apiGet(`evento?id=${user.id}`).then((value) => {
+        setData(value.result);
+      });
+    } else {
+      apiGet('evento').then((value) => {
+        setData(value.result);
+      });
     }
   }, []);
 

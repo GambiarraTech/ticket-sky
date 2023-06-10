@@ -59,3 +59,17 @@ export async function getEventosPromoter(id: string) {
         return null
     }
 }
+
+
+export async function getEventos(id: string) {
+    const itens = await query({
+        query: "SELECT * FROM evento WHERE id=(?)",
+        values: [id]
+    })
+
+    if (Object.keys(itens).length > 0) {
+        return itens
+    } else {
+        return null
+    }
+}

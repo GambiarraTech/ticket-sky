@@ -1,6 +1,7 @@
+import * as router from '@/pages/api/router';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdOutlineLocationCity } from 'react-icons/md';
 import CountInput from '../../components/cliente/CountInput';
@@ -11,9 +12,16 @@ const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaEvento() {
   const [quantidade, setQuantidade] = useState(1);
+  const { query } = useRouter();
 
   function handleQtdChange(value: number) {
     setQuantidade(value);
+  }
+
+  async function getEventos() {
+    const res = await router.apiPost({ id: query.id, service: 'getEventos' }, 'evento');
+    alert(res.result);
+    console.log(res);
   }
 
   return (
@@ -49,9 +57,9 @@ export default function TelaEvento() {
               <div className={style.flexEvent}>
                 <span className={style.price}>$58.00</span>
                 <div className={style.positionBuyButton}>
-                  <Link href="">
-                    <button className={style.buyButton}>Comprar</button>
-                  </Link>
+                  <button onClick={getEventos} className={style.buyButton}>
+                    Comprar
+                  </button>
                 </div>
               </div>
               <div className={style.eventLocation}>Local do Evento</div>
