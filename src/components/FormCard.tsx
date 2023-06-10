@@ -77,7 +77,7 @@ export default function FormCard(props: FormCardProps) {
           }
         } else {
           setShowErroLogin(true);
-          setErrorMessage(value.error);
+          setErrorMessage(props.errorMessage);
         }
       });
     } else {

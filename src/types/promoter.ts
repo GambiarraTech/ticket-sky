@@ -71,7 +71,7 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
     }
 }
 
-export async function getAllPromoters(){
+export async function getAllPromoters() {
 
     const promoters: any = await query({
         query: "SELECT id,nome,email,cpf_cnpj,aprovado FROM promoter",
@@ -84,7 +84,7 @@ export async function getAllPromoters(){
     }
 }
 
-export async function getPromotersAguardandoAprov(){
+export async function getPromotersAguardandoAprov() {
 
     const promoters: any = await query({
         query: "SELECT id,nome,email,cpf_cnpj,aprovado FROM promoter WHERE aprovado = 0",
@@ -97,7 +97,7 @@ export async function getPromotersAguardandoAprov(){
     }
 }
 
-export async function aprovarPromoter(id: number){
+export async function aprovarPromoter(id: number) {
     await query({
         query: "UPDATE promoter SET aprovado = 1 WHERE id = (?)",
         values: [id]
@@ -115,9 +115,9 @@ export async function aprovarPromoter(id: number){
     }
 }
 
-export async function reprovarPromoter(id: number){
+export async function reprovarPromoter(id: number) {
     await query({
-        query: "DELETE FROM promoter WHERE id = (?)",
+        query: "UPDATE promoter SET aprovado = 2 WHERE id = (?)",
         values: [id]
     })
 

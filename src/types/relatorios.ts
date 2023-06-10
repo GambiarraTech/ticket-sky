@@ -78,7 +78,7 @@ export async function todosEventos() {
     const sql = `
         SELECT
             even.id,
-            even.descricao as nome,
+            even.nome,
             even.data_hora,
             cat.nome as categoria,
             prom.nome as promoter

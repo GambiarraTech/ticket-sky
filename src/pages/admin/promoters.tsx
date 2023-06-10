@@ -9,13 +9,12 @@ export interface IPromotersProps {
   nome: string;
   email: string;
   cpf_cnpj: string;
-  telefone: string;
 }
 
 export default function Promoters() {
   const [promoters, setPromoters] = useState<IPromotersProps[]>([]);
-  const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ', 'Telefone'];
-  const props = ['id', 'nome', 'email', 'cpf_cnpj', 'telefone'];
+  const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ'];
+  const props = ['id', 'nome', 'email', 'cpf_cnpj'];
 
   useEffect(() => {
     router
