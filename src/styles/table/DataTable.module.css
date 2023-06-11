@@ -31,7 +31,7 @@
 }
 
 .tableHeader {
-  @apply divide-x divide-gray-400 text-ticket-sky-blue table-header-group h-14 sticky top-0 border-b;
+  @apply divide-x divide-gray-400 text-ticket-sky-blue table-header-group h-14 sticky top-0;
 }
 
 .tableCellHeader {

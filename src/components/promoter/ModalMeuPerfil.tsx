@@ -1,5 +1,5 @@
 import { AuthContext } from '@/contexts/AuthContext';
-import styles from '@/styles/cliente/MeuPerfil.module.css';
+import styles from '@/styles/cliente/meuPerfil.module.css';
 import { useContext, useState } from 'react';
 
 export default function MeuPerfil() {
