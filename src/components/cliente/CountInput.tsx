@@ -4,7 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 interface CountInputProps {
   valorInicial: number;
-  onChange: (valor: number) => void;
+  onChange: (e: any) => any;
 }
 
 export default function CountInput({ valorInicial, onChange }: CountInputProps) {

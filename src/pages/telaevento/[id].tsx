@@ -11,9 +11,23 @@ import style from '../../styles/cliente/telaEvento.module.css';
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaEvento(){
-  
-  const [quantidade, setQuantidade] = useState(1);
+
+  const { query } = useRouter();
+
+  // Informações da compra para passar para a tela de pagamento
+  const [infosCompra] = useState({
+    qntVip: 0,
+    qntdBack: 0,
+    qntdCamarote: 0,
+    valorTotal: 0,
+    valorBack: 0,
+    valorVip: 0,
+    valorCamarote: 0
+  });
+
+  //Informações da tela
   const [evento, setEvento] = useState({
+    id: '',
     evnome: '',
     descricao: '',
     pronome: '',
@@ -23,23 +37,49 @@ export default function TelaEvento(){
     numero: ''
   });
 
-  const { query } = useRouter();
-  const data = useState({
-    service: "getEvento",
-    id: query.id
+
+  // Informações do ingresso vip
+  const [ingressoVip, setIngressoVip] = useState({
+    quantidade: '',
+    valor: ''
   });
 
-  function handleQtdChange(value: number) {
-    setQuantidade(value);
-  }
+  // Informações do ingresso camarote
+  const [ingressoCamarote, setIngressoCamarote] = useState({
+    quantidade: '',
+    valor: ''
+  });
 
+  // Informações do ingresso backstage
+  const [ingressoBack, setIngressoBack] = useState({
+    quantidade: '',
+    valor: ''
+  });
+
+  // Body requisições
+  const data = useState({
+    service: 'getEvento',
+    id: query.id
+  });
+  
+  // Puxa as informções do evento
   useEffect(() => {
     router.apiPost(data, 'evento').then((value) => {
       if (value.result != null) {
         setEvento(value.result[0]);
       }
+      router.apiGet(`ingresso?id=${query.id}`).then((value) => {
+        if (value.result != null) {
+          setIngressoBack(value.result);
+          setIngressoCamarote(value.result);
+          setIngressoVip(value.result);
+        }
+      });
     });
+    
   }, []);
+
+  console.log(ingressoBack)
   
   return (
     <main className={font.className}>
@@ -56,17 +96,17 @@ export default function TelaEvento(){
                 <div className={style.countPosition}>
                   <div className={style.eventInfoIndividual}>
                     VIP
-                    <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
+                    <CountInput valorInicial={0} onChange={(e) => (infosCompra.qntVip = e)} />
                   </div>
 
                   <div className={style.eventInfoIndividual}>
-                    Pista
-                    <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
+                    BackStage
+                    <CountInput valorInicial={0} onChange={(e) => (infosCompra.qntdBack = e)} />
                   </div>
 
                   <div className={style.eventInfoIndividual}>
                     Camarote
-                    <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
+                    <CountInput valorInicial={0} onChange={(e) => (infosCompra.qntdCamarote = e)} />
                   </div>
                 </div>
                 <div></div>
@@ -74,7 +114,7 @@ export default function TelaEvento(){
               <div className={style.flexEvent}>
                 <span className={style.price}>$58.00</span>
                 <div className={style.positionBuyButton}>
-                  <button className={style.buyButton} onClick={() => window.location.href = '../telaCompra/'+query.id}>Comprar</button>
+                  <button className={style.buyButton} >Comprar</button>
                 </div>
               </div>
               <div className={style.eventLocation}>{evento.endnome}</div>
