@@ -30,6 +30,17 @@ export default async (req: any, res: any) => {
                 }
                 break
             }
+            case 'eventosAlta': {
+                const eventosAlta = await relatorios.eventosAlta()
+                if (eventosAlta && eventosAlta.length > 0) {
+                    const data = eventosAlta
+
+                    res.json({ eventosAlta: data });
+                } else {
+                    res.json({ eventosAlta: [], error: 'Nenhum Evento encontrado' });
+                }
+                break
+            }
             case 'todosEventos': {
                 const todosEventos = await relatorios.todosEventos()
                 if (todosEventos && todosEventos.length > 0) {
