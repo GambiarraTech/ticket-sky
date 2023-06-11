@@ -73,7 +73,6 @@ export default async (req: any, res: any) => {
 
             case 'editarPromoter': {
                 const id = req.body.id;
-                console.log(req.body);
                 const editarPromoter = await promoter.editarPromoter(email, nome, cpf_cnpj, id);
                 if (editarPromoter != undefined) {
 

@@ -19,7 +19,6 @@ export default function MeuPerfil() {
 
   async function editarPromoter() {
     promoter.service = 'editarPromoter';
-    console.log(promoter);
     const res = await router.apiPost(promoter, 'promoter');
     alert(res.result);
   }
@@ -27,7 +26,6 @@ export default function MeuPerfil() {
   useEffect(() => {
     router.apiPost({ service: 'getPerfil', id: user.id }, 'promoter').then((value) => {
       if (value.result != null) {
-        console.log(value.result);
         setPromoter(value.result);
       }
     });
