@@ -1,6 +1,6 @@
-import { v4 as uuid } from 'uuid'
-import * as cliente from '../../types/cliente'
 import md5 from "md5";
+import { v4 as uuid } from 'uuid';
+import * as cliente from '../../types/cliente';
 
 export default async (req: any, res: any) => {
 
