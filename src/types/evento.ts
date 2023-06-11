@@ -76,7 +76,7 @@ export async function getEventosPromoter(id: string) {
 
 export async function getEventos(id: number) {
     const itens: any = await query({
-        query: "SELECT * FROM evento WHERE id=(?)",
+        query: "SELECT ev.*, end.*, ev.nome AS evnome, end.nome AS endnome, pro.nome as pronome FROM evento AS ev JOIN endereco AS end JOIN promoter as pro ON ev.id_endereco = end.id AND ev.id_promoter = pro.id AND ev.id = (?)",
         values: [id]
     })
 
