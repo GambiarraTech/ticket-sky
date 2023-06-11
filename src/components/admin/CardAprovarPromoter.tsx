@@ -68,7 +68,7 @@ export default function CardAprovarPromoter() {
   } else if (promotersNaoAprovados.length > 3) {
     return (
       <Card
-        label="Promoters aguardando aprovação"
+        label="Promoters Aguardando Aprovação"
         content={
           <div className={styles.container}>
             <div className={styles.allContentContainer}>
@@ -161,7 +161,7 @@ export default function CardAprovarPromoter() {
   } else {
     return (
       <Card
-        label="Promoters aguardando aprovação"
+        label="Promoters Aguardando Aprovação"
         content={
           <div className={styles.container}>
             <div className={styles.allContentContainer}>

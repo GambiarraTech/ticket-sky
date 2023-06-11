@@ -42,7 +42,7 @@ export async function meusEventos(idPromoter: number) {
     const sql = `
         SELECT
             ev.id,
-
+            ev.nome as nome,
             ev.descricao as descricao_evento,
             s.descricao as setor,
             SUM(p.quantidade) as quantidade_vendida,
@@ -72,6 +72,35 @@ export async function meusEventos(idPromoter: number) {
     } else {
         return null
     }
+}
+
+export async function eventosAlta() {
+    const sql = `
+        SELECT
+            ev.id,
+            ev.nome AS nome,
+            SUM(p.quantidade) AS quantidade_vendida
+        FROM
+            evento ev
+            JOIN ingresso ig ON ev.id = ig.id_evento
+            JOIN pedido p ON ig.id = p.id_ingresso
+        GROUP BY
+            ev.id, ev.nome
+        ORDER BY
+            quantidade_vendida DESC
+        LIMIT 5;
+    `;
+    const eventosAlta: any = await query({
+        query: sql,
+        values: [],
+    })
+
+    if (Object.keys(eventosAlta).length > 0) {
+        return eventosAlta
+    } else {
+        return null
+    }
+
 }
 
 export async function todosEventos() {

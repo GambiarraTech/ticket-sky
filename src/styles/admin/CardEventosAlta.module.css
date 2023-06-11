@@ -1,0 +1,26 @@
+.table {
+  @apply h-full w-full table-fixed;
+}
+.tableHeader {
+  @apply divide-gray-400 text-ticket-sky-blue table-header-group h-12 sticky top-0;
+}
+
+.tableCellHeader {
+  @apply border-gray-400 table-cell font-medium bg-[#DFE0FF] border-b;
+}
+
+.tableRow {
+  @apply divide-x divide-gray-400 table-row;
+}
+
+.tableRow:hover {
+  @apply bg-[#dbdcff];
+}
+
+.tableRowGroup {
+  @apply table-row-group;
+}
+
+.tableCell {
+  @apply border-y border-dotted border-gray-400 table-cell pl-2 h-6 font-medium;
+}
