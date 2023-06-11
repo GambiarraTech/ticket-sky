@@ -72,20 +72,21 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
 }
 
 
-export async function editarPromoter(email: string, nome: string, cpf: string, id: number) {
+export async function editarPromoter(email: string, nome: string, cpf_cnpj: string, id: number) {
+    console.log(cpf_cnpj);
     const sql = `
         UPDATE
             promoter
         SET
             email = (?),
             nome = (?),
-            cpf = (?)
+            cpf_cnpj = (?)
         WHERE
             id = (?)
     `;
     const editaPromoter: any = await query({
         query: sql,
-        values: [email, nome, cpf, id]
+        values: [email, nome, cpf_cnpj, id]
     });
 
     return "Promoter alterado com sucesso!";
