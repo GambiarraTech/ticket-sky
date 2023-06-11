@@ -73,7 +73,6 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
 
 
 export async function editarPromoter(email: string, nome: string, cpf_cnpj: string, id: number) {
-    console.log(cpf_cnpj);
     const sql = `
         UPDATE
             promoter
