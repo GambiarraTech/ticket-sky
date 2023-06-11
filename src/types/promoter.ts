@@ -71,6 +71,53 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
     }
 }
 
+
+export async function editarPromoter(email: string, nome: string, cpf: string, id: number) {
+    const sql = `
+        UPDATE
+            promoter
+        SET
+            email = (?),
+            nome = (?),
+            cpf = (?)
+        WHERE
+            id = (?)
+    `;
+    const editaPromoter: any = await query({
+        query: sql,
+        values: [email, nome, cpf, id]
+    });
+
+    return "Promoter alterado com sucesso!";
+}
+
+export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
+
+    const confirmaSenha = await loginPromoter(email, senhaAntiga);
+
+    if (confirmaSenha != null) {
+
+        if (novaSenha == senhaAntiga) {
+            return 'A nova senha não pode ser igual a atual';
+        }
+        else {
+            const alteraSenha: any = await query({
+                query: "UPDATE promoter SET senha = (?) WHERE email = (?)",
+                values: [novaSenha, email],
+            })
+
+            return "Senha alterada com sucesso!";
+        }
+
+    }
+
+    return 'Senha incorreta';
+}
+
+
+
+
+
 export async function getAllPromoters() {
 
     const promoters: any = await query({
