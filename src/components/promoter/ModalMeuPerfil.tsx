@@ -1,9 +1,9 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
+import styles from '@/styles/cliente/meuPerfil.module.css';
 import { useContext, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
-import styles from '@/styles/cliente/meuPerfil.module.css';
 
 export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
@@ -48,7 +48,12 @@ export default function MeuPerfil() {
         <label>Nome</label>
         <input type="text" defaultValue={promoter.nome} onChange={(e) => (promoter.nome = e.target.value)} required />
         <label>CPF/CNPJ</label>
-        <input type="text" defaultValue={promoter.cpf_cnpj} onChange={(e) => (promoter.cpf_cnpj = e.target.value)} />
+        <input
+          type="text"
+          defaultValue={promoter.cpf_cnpj}
+          onChange={(e) => (promoter.cpf_cnpj = e.target.value)}
+          readOnly
+        />
         <div className={styles.buttonsContainer}>
           <button className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
             Alterar Senha
