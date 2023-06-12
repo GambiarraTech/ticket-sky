@@ -75,30 +75,37 @@ export default function Carousel({ title, page, category }: CarouselProps) {
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    let isMounted = true; // Variável de controle para verificar se o componente está montado
+
     if (category) {
       title = category + 's';
 
-      if (isLogged && user.role == 'promoter') {
-        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
-          setData(value.result);
-        });
-      } else {
         apiPost({ service: category }, 'evento').then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
-      }
+      
     } else {
-      if (isLogged && user.role == 'promoter') {
+      if (isLogged && user.role === 'promoter') {
         apiGet(`evento?id=${user.id}`).then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
       } else {
         apiGet('evento').then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
       }
     }
-  }, [user]);
+
+    return () => {
+      isMounted = false; // Define a variável para false quando o componente for desmontado
+    };
+  }, [isLogged, user, category]);
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
@@ -140,7 +147,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
         <div className={styles.container}>
           <div className={styles.carousel} ref={carousel}>
             {data.map((item) => {
-              const { id, evnome, descricao, banner, data_hora, bairro, rua, number } = item;
+              const { id, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
               const url = 'data:image/png;base64,' + banner;
               const date = new Date(data_hora);
               let dia = date.getDate().toString();
@@ -171,7 +178,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                     </span>
                     <span className={styles.name}>{evnome}</span>
                     <span className={styles.address}>
-                      {bairro}, {rua}, {number}
+                      {bairro}, {rua}, {numero}
                     </span>
                   </div>
                 </div>
@@ -204,7 +211,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
         <div className={styles.container}>
           <div className={styles.carousel} ref={carousel}>
             {data.map((item) => {
-              const { id, descricao, banner, data_hora, evnome, bairro, rua, number } = item;
+              const { id, descricao, banner, data_hora, evnome, bairro, rua, numero } = item;
               const url = 'data:image/png;base64,' + banner;
               const date = new Date(data_hora);
               let dia = date.getDate().toString();
@@ -235,7 +242,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                     </span>
                     <span className={styles.name}>{evnome}</span>
                     <span className={styles.address}>
-                      {bairro}, {rua}, {number}
+                      {bairro}, {rua}, {numero}
                     </span>
                   </div>
                 </div>

@@ -25,22 +25,28 @@ export default function CardEventosAlta() {
     <Card
       label="Eventos em Destaque"
       content={
-        <table className={styles.table}>
-          <thead className={styles.tableHeader}>
-            <tr className={styles.tableRow}>
-              <th className={styles.tableCellHeader}>Nome</th>
-              <th className={styles.tableCellHeader}>Vendidos</th>
-            </tr>
-          </thead>
-          <tbody className={styles.tableRowGroup}>
-            {eventos.map((evento) => (
+        eventos.length > 0 ? (
+          <table className={styles.table}>
+            <thead className={styles.tableHeader}>
               <tr className={styles.tableRow}>
-                <th className={styles.tableCell}>{evento.nome}</th>
-                <th className={styles.tableCell}>{evento.quantidade_vendida}</th>
+                <th className={styles.tableCellHeader}>Nome</th>
+                <th className={styles.tableCellHeader}>Vendidos</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className={styles.tableRowGroup}>
+              {eventos.map((evento) => (
+                <tr className={styles.tableRow}>
+                  <th className={styles.tableCell}>{evento.nome}</th>
+                  <th className={styles.tableCell}>{evento.quantidade_vendida}</th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className={styles.txtNullEventos}>
+            <p> Nenhum evento cadastrado </p>
+          </div>
+        )
       }
     />
   );

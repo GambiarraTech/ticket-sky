@@ -24,3 +24,7 @@
 .tableCell {
   @apply border-y border-dotted border-gray-400 table-cell pl-2 h-6 font-medium;
 }
+
+.txtNullEventos {
+  @apply flex min-w-full min-h-full items-center justify-center;
+}
