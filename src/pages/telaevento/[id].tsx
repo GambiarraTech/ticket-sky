@@ -105,8 +105,11 @@ export default function TelaEvento() {
     valorBack: 0,
     valorVip: 0,
     valorCamarote: 0,
+    valorUnBack: 0,
+    valorUnVip: 0,
+    valorUnCamarote: 0,
     nomePromoter: '',
-    nomeEvento: ''
+    nomeEvento: '',
   });
    
   const handleChange = (e: any, valor: any, tipo: string) => {
@@ -132,8 +135,13 @@ export default function TelaEvento() {
   }
   const handleClick = (e: any) => {
     e.preventDefault()
+
     infosCompra.nomePromoter = evento.pronome;
     infosCompra.nomeEvento = evento.evnome;
+    infosCompra.valorUnBack = ingressoBack.valor;
+    infosCompra.valorUnCamarote = ingressoCamarote.valor;
+    infosCompra.valorUnVip = ingressoVip.valor;
+    
     router.push({
       pathname: '/telaCompra/'+ JSON.stringify(infosCompra)
     })

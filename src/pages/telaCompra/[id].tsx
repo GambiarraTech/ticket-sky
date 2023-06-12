@@ -39,7 +39,7 @@ export default function CheckoutPage() {
                         <dl className={style.dlvid}>
                           <div>
                             <dt className={style.inline}>Valor Unitário: </dt>
-                            <dd className={style.inline}>R$ 50.00</dd>
+                            <dd className={style.inline}>{'$'+ obj.valorUnVip}</dd>
                           </div>
 
                           <div>
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
                         <dl className={style.dlvid}>
                           <div>
                             <dt className={style.inline}>Valor Unitário: </dt>
-                            <dd className={style.inline}>R$ 20.00</dd>
+                            <dd className={style.inline}>{'$'+ obj.valorUnBack}</dd>
                           </div>
 
                           <div>
@@ -75,7 +75,7 @@ export default function CheckoutPage() {
                         <dl className={style.dlvid}>
                           <div>
                             <dt className={style.inline}>Valor Unitário: </dt>
-                            <dd className={style.inline}>R$ 10.00</dd>
+                            <dd className={style.inline}>{'$'+ obj.valorUnCamarote}</dd>
                           </div>
 
                           <div>
