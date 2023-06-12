@@ -1,12 +1,30 @@
 import CustomModal from '@/components/CustomModal';
 import Card from '@/components/admin/Card';
 import { IPromotersProps } from '@/pages/admin/promoters';
+import * as router from '@/pages/api/router';
 import { apiPost } from '@/pages/api/router';
 import styles from '@/styles/admin/CardAprovarPromoter.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { FaUserClock } from 'react-icons/fa';
 import { HiXMark } from 'react-icons/hi2';
 import { IoIosArrowBack, IoIosArrowForward, IoMdCheckmark } from 'react-icons/io';
+
+async function enviaEmail(emailPromoter: string, status: number) {
+  let data;
+  const res = router.apiPost(
+    {
+      destinatario: emailPromoter,
+      assunto: 'Confirmação de cadastro - Status Atualizado',
+      mensagem:
+        status == 1
+          ? 'Seu Cadastro como Promoter foi Aprovado! Agora você pode acessar a Área Promoter para promover seus eventos!'
+          : 'Infelizmente seu Cadastro Promoter foi Recusado :( Você pode atualizar seus dados de Promoter e tentar realizar o cadastro novamente!',
+      anexos: null,
+    },
+    'services/emailService'
+  );
+  res.then((value) => {});
+}
 
 export default function CardAprovarPromoter() {
   const [promotersNaoAprovados, setData] = useState<IPromotersProps[]>([]);
@@ -28,14 +46,16 @@ export default function CardAprovarPromoter() {
     getPromotersAguardandoAprov();
   }, []);
 
-  function aprovarPromoter(id: number) {
+  function aprovarPromoter(id: number, email: string) {
     apiPost({ idPromoter: id, service: 'aprovarPromoter' }, 'promoter').then(() => {
+      enviaEmail(email, 1);
       getPromotersAguardandoAprov();
     });
   }
 
-  function reprovarPromoter(id: number) {
+  function reprovarPromoter(id: number, email: string) {
     apiPost({ idPromoter: id, service: 'reprovarPromoter' }, 'promoter').then(() => {
+      enviaEmail(email, 2);
       getPromotersAguardandoAprov();
     });
   }
@@ -61,99 +81,6 @@ export default function CardAprovarPromoter() {
         content={
           <div className={styles.txtNullPromoters}>
             <p>Nenhum promoter aguardando aprovação.</p>
-          </div>
-        }
-      />
-    );
-  } else if (promotersNaoAprovados.length > 3) {
-    return (
-      <Card
-        label="Promoters Aguardando Aprovação"
-        content={
-          <div className={styles.container}>
-            <div className={styles.allContentContainer}>
-              <div id="allContentID" className={styles.allContent} ref={carousel}>
-                {promotersNaoAprovados.map((promoter) => {
-                  return (
-                    <div id="itemID" className={styles.item} key={promoter.id}>
-                      <div className={styles.contentItem}>
-                        <div
-                          className={styles.infoItem}
-                          onClick={() => {
-                            setDataPromoter(promoter);
-                            setOpenModal(true);
-                          }}
-                        >
-                          <div className={styles.txt}>
-                            <div className={styles.txtImg}>
-                              <FaUserClock size={60} />
-                            </div>
-                            <div>{`Nome: ${promoter.nome}`}</div>
-                          </div>
-                        </div>
-                        <div className={styles.buttons}>
-                          <div className={styles.buttonAprovar}>
-                            <IoMdCheckmark
-                              color="white"
-                              size={30}
-                              onClick={() => aprovarPromoter(promoter.id)}
-                            ></IoMdCheckmark>
-                          </div>
-                          <div className={styles.buttonReprovar}>
-                            <HiXMark color="white" size={30} onClick={() => reprovarPromoter(promoter.id)}></HiXMark>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className={styles.buttonsScroll}>
-              <button onClick={handleLeftClick}>
-                <IoIosArrowBack size="20" />
-              </button>
-              <button onClick={handleRightClick}>
-                <IoIosArrowForward size="20" />
-              </button>
-            </div>
-            <CustomModal
-              isOpen={openModal}
-              onClose={() => setOpenModal(false)}
-              haveClose={true}
-              haveWarning={false}
-              haveAvatar={false}
-              title={'Promoter'}
-            >
-              <div className={styles.txt}>
-                <div>{`Nome: ${promoterData?.nome}`}</div>
-                <div>{`Email: ${promoterData?.email}`}</div>
-                <div>{`CPF/CNPJ: ${promoterData?.cpf_cnpj}`}</div>
-              </div>
-
-              <div className={styles.buttonsModal}>
-                <div className={styles.buttonAprovar}>
-                  <IoMdCheckmark
-                    color="white"
-                    size={30}
-                    onClick={() => {
-                      aprovarPromoter(promoterData!.id);
-                      setOpenModal(false);
-                    }}
-                  ></IoMdCheckmark>
-                </div>
-                <div className={styles.buttonReprovar}>
-                  <HiXMark
-                    color="white"
-                    size={30}
-                    onClick={() => {
-                      reprovarPromoter(promoterData!.id);
-                      setOpenModal(false);
-                    }}
-                  ></HiXMark>
-                </div>
-              </div>
-            </CustomModal>
           </div>
         }
       />
@@ -189,11 +116,15 @@ export default function CardAprovarPromoter() {
                             <IoMdCheckmark
                               color="white"
                               size={30}
-                              onClick={() => aprovarPromoter(promoter.id)}
+                              onClick={() => aprovarPromoter(promoter.id, promoter.email)}
                             ></IoMdCheckmark>
                           </div>
                           <div className={styles.buttonReprovar}>
-                            <HiXMark color="white" size={30} onClick={() => reprovarPromoter(promoter.id)}></HiXMark>
+                            <HiXMark
+                              color="white"
+                              size={30}
+                              onClick={() => reprovarPromoter(promoter.id, promoter.email)}
+                            ></HiXMark>
                           </div>
                         </div>
                       </div>
@@ -202,14 +133,25 @@ export default function CardAprovarPromoter() {
                 })}
               </div>
             </div>
-            <div className={styles.buttonsScrollInative}>
-              <button>
-                <IoIosArrowBack size="20" color="#9ca3af" />
-              </button>
-              <button>
-                <IoIosArrowForward size="20" color="#9ca3af" />
-              </button>
-            </div>
+            {promotersNaoAprovados.length > 3 ? (
+              <div className={styles.buttonsScroll}>
+                <button onClick={handleLeftClick}>
+                  <IoIosArrowBack size="20" />
+                </button>
+                <button onClick={handleRightClick}>
+                  <IoIosArrowForward size="20" />
+                </button>
+              </div>
+            ) : (
+              <div className={styles.buttonsScrollInative}>
+                <button>
+                  <IoIosArrowBack size="20" color="#9ca3af" />
+                </button>
+                <button>
+                  <IoIosArrowForward size="20" color="#9ca3af" />
+                </button>
+              </div>
+            )}
             <CustomModal
               isOpen={openModal}
               onClose={() => setOpenModal(false)}
@@ -230,7 +172,7 @@ export default function CardAprovarPromoter() {
                     color="white"
                     size={30}
                     onClick={() => {
-                      aprovarPromoter(promoterData!.id);
+                      aprovarPromoter(promoterData!.id, promoterData!.email);
                       setOpenModal(false);
                     }}
                   ></IoMdCheckmark>
@@ -240,7 +182,7 @@ export default function CardAprovarPromoter() {
                     color="white"
                     size={30}
                     onClick={() => {
-                      reprovarPromoter(promoterData!.id);
+                      reprovarPromoter(promoterData!.id, promoterData!.email);
                       setOpenModal(false);
                     }}
                   ></HiXMark>

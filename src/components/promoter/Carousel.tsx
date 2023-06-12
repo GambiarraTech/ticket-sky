@@ -75,30 +75,37 @@ export default function Carousel({ title, page, category }: CarouselProps) {
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    let isMounted = true; // Variável de controle para verificar se o componente está montado
+
     if (category) {
       title = category + 's';
 
-      if (isLogged && user.role == 'promoter') {
-        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
-          setData(value.result);
-        });
-      } else {
         apiPost({ service: category }, 'evento').then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
-      }
+      
     } else {
-      if (isLogged && user.role == 'promoter') {
+      if (isLogged && user.role === 'promoter') {
         apiGet(`evento?id=${user.id}`).then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
       } else {
         apiGet('evento').then((value) => {
-          setData(value.result);
+          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+            setData(value.result);
+          }
         });
       }
     }
-  }, [user]);
+
+    return () => {
+      isMounted = false; // Define a variável para false quando o componente for desmontado
+    };
+  }, [isLogged, user, category]);
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
