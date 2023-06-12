@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 
 export default function Home() {
   const [eventos, setEventos] = useState([]);
-  const [teste, setTeste] = useState(false);
+  let condicaoEventos: boolean;
   const { user, isLogged } = useContext(AuthContext);
 
   useEffect(() => {
@@ -18,25 +18,26 @@ export default function Home() {
         setEventos(value.result);
       });
     }
-    if (eventos.length == 0) {
-      setTeste(true);
-    } else {
-      setTeste(false);
-    }
   }, [user]);
 
+  if (!eventos) {
+    condicaoEventos = true;
+  } else {
+    condicaoEventos = false;
+  }
+
   return (
-    <>
+    <div className={styles.box}>
       <NavbarPromoter />
       <p className={styles.title}>Meus Eventos</p>
-      <p className={styles.msg}>{teste ? 'Nenhum Evento Cadastrado' : ''}</p>
+      <p className={styles.msg}>{condicaoEventos ? 'Nenhum evento cadastrado' : ''}</p>
       <div>
         <Carousel />
       </div>
       <div className={styles.foter}>
         <Footer color="white" />
       </div>
-    </>
+    </div>
   );
 }
 export { getServerSideProps };

@@ -3,9 +3,17 @@
 }
 
 .msg {
-  @apply text-center  text-gray-200 font-bold  text-5xl;
+  @apply flex mt-52 text-center text-gray-200 font-bold text-6xl;
 }
 
-.foter{
-    @apply fixed bottom-0 bg-azul-ticket left-0 right-0  justify-center items-center;
+.foter {
+  @apply fixed bottom-0 bg-azul-ticket left-0 right-0  justify-center items-center;
+}
+
+.box {
+  @apply max-w-full max-h-full w-screen h-screen;
+}
+
+.box p {
+  @apply flex justify-center;
 }
