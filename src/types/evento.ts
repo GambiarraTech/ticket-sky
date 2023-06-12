@@ -72,3 +72,17 @@ export async function getEventosPromoter(id: string) {
         return null
     }
 }
+
+
+export async function getEventos(id: number) {
+    const itens: any = await query({
+        query: "SELECT ev.*, end.*, ev.nome AS evnome, end.nome AS endnome, pro.nome as pronome FROM evento AS ev JOIN endereco AS end JOIN promoter as pro ON ev.id_endereco = end.id AND ev.id_promoter = pro.id AND ev.id = (?)",
+        values: [id]
+    })
+
+    if (Object.keys(itens).length > 0) {
+        return itens[0]
+    } else {
+        return null
+    }
+}

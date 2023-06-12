@@ -1,9 +1,9 @@
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
-import styles from '@/styles/cliente/MeuPerfil.module.css';
 import { useContext, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
+import styles from '@/styles/cliente/meuPerfil.module.css';
 
 export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
