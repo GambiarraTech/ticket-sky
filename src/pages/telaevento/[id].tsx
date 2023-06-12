@@ -15,18 +15,8 @@ export default function TelaEvento() {
   const api = axios.create({
     baseURL: 'http://localhost:3000/api'
   });
-  const { query } = useRouter();
- 
-  // Informações da compra para passar para a tela de pagamento
-  const [infosCompra] = useState({
-    qntVip: 0,
-    qntdBack: 0,
-    qntdCamarote: 0,
-    valorTotal: 0,
-    valorBack: 0,
-    valorVip: 0,
-    valorCamarote: 0,
-  });
+  const {query} = useRouter();
+  const router = useRouter();
 
   //Informações da tela
   const [evento, setEvento] = useState({
@@ -105,7 +95,20 @@ export default function TelaEvento() {
     }
     
   }, [query.id])
-  
+
+  // Informações da compra para passar para a tela de pagamento
+  const [infosCompra] = useState({
+    qntVip: 0,
+    qntdBack: 0,
+    qntdCamarote: 0,
+    valorTotal: 0,
+    valorBack: 0,
+    valorVip: 0,
+    valorCamarote: 0,
+    nomePromoter: '',
+    nomeEvento: ''
+  });
+   
   const handleChange = (e: any, valor: any, tipo: string) => {
     if(tipo == 'vip'){
       infosCompra.qntVip = e;
@@ -125,8 +128,16 @@ export default function TelaEvento() {
 
       document.getElementById('total')!.innerHTML = '$' + infosCompra.valorTotal as unknown as string;
     }
+
   }
-  
+  const handleClick = (e: any) => {
+    e.preventDefault()
+    infosCompra.nomePromoter = evento.pronome;
+    infosCompra.nomeEvento = evento.evnome;
+    router.push({
+      pathname: '/telaCompra/'+ JSON.stringify(infosCompra)
+    })
+  }
   return (
     <main className={font.className}>
       <section className={style.section}>
@@ -168,7 +179,7 @@ export default function TelaEvento() {
               <div className={style.flexEvent}>
                 <span id= 'total' className={style.price}></span>
                 <div className={style.positionBuyButton}>
-                  <button className={style.buyButton} onClick={() => console.log(infosCompra)}>Comprar</button>
+                  <button className={style.buyButton} onClick={handleClick}>Comprar</button>
                 </div>
               </div>
               <div className={style.eventLocation}>{evento.endnome}</div>

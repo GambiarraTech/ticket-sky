@@ -1,8 +1,13 @@
 import NavbarCliente from '@/components/cliente/NavbarCliente';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import style from '../../styles/cliente/telaCompra.module.css';
 
 export default function CheckoutPage() {
+  const {query} = useRouter();
+
+  const obj = JSON.parse(query.id as string);
+  
   return (
     <>
       <Head>
@@ -15,13 +20,13 @@ export default function CheckoutPage() {
             <div className={style.leftdiv}>
               <h1 className={style.detalheEvento}>Detalhes do Evento:</h1>
               <div className={style.nomediv}>
-                <h2 className={style.nome}>Nome do Evento</h2>
+                <h2 className={style.nome}>{obj.nomeEvento}</h2>
               </div>
-              <h1 className={style.textsm}>Nome do Promoter</h1>
+              <h1 className={style.textsm}>{obj.nomePromoter}</h1>
 
               <div>
                 <p className={style.valorTotal}>Valor Total: </p>
-                <p className={style.precoTotal}>R$120.00</p>
+                <p className={style.precoTotal}>{'$'+ obj.valorTotal}</p>
               </div>
 
               <div>
@@ -39,7 +44,7 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>2</dd>
+                            <dd className={style.inline}>{obj.qntVip}</dd>
                           </div>
                         </dl>
                       </div>
@@ -57,7 +62,7 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>1</dd>
+                            <dd className={style.inline}>{obj.qntdBack}</dd>
                           </div>
                         </dl>
                       </div>
@@ -75,7 +80,7 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>0</dd>
+                            <dd className={style.inline}>{obj.qntdCamarote}</dd>
                           </div>
                         </dl>
                       </div>
