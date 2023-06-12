@@ -66,7 +66,7 @@ function ConvertDate(data: Date, service: String) {
 
 export default function Eventos() {
   const [eventos, setEventos] = useState<IEventosProps[]>([]);
-  const columns = ['Código', 'Descrição', 'Data/ Hora', 'Categoria', 'Promoter'];
+  const columns = ['Código', 'Nome', 'Data/ Hora', 'Categoria', 'Promoter'];
   const props = ['id', 'nome', 'data_hora', 'categoria', 'promoter'];
   useEffect(() => {
     router
