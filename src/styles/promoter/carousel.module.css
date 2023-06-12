@@ -55,7 +55,7 @@
 }
 
 .buttonsInative button {
-  @apply p-2;
+  @apply p-2 cursor-auto;
 }
 
 .titleAndButtons {
