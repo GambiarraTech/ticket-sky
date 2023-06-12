@@ -72,5 +72,13 @@
 }
 
 .centerQuant {
-  @apply px-3 py-2 w-16 text-center;
+  @apply px-3 py-2 w-16 text-center  bg-gray-200;
+}
+
+.countWrapper {
+  @apply bg-gray-200 p-4 rounded-md mb-4;
+}
+
+.tipoIngresso {
+  @apply text-lg font-bold mb-5 mt-5;
 }
