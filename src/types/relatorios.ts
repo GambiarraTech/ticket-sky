@@ -5,6 +5,7 @@ export async function meusIngressos(idCliente: number) {
 
     const sql = `
         SELECT
+            ig.id,
             ev.banner,
             ev.descricao as descricao_evento,
             ev.data_hora,

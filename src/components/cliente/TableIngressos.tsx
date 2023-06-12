@@ -29,9 +29,9 @@ const Table: FC<TableProps> = ({ data }) => {
           {data.map((item) => {
             const date = new Date(item.data_hora);
             return(
-              <tr key={item.nome}>
+              <tr key={item.id+1}>
                 <td>
-                  <div className={style.tableContent}>
+                  <div  className={style.tableContent}>
                     <div>
                       <Image
                         className={style.imgBorder}

@@ -17,7 +17,7 @@ export default function meusIngressos() {
   const [data, setData] = useState([{
   }]);
 
-
+  
   
   useEffect(() => {
     if(user != undefined){
