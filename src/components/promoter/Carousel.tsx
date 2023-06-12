@@ -72,32 +72,41 @@ function ConvertDate(data: Date, service: String) {
 export default function Carousel({ title, page, category }: CarouselProps) {
   const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [titulo, setTitulo] = useState< String | null >()
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let isMounted = true; // Variável de controle para verificar se o componente está montado
+    let isMounted = true;
+
+    setTitulo(title)
+    if (category) {
+      setTitulo(category + 's')
+    }
 
     if (category) {
-      title = category + 's';
-
-      apiPost({ service: category }, 'evento').then((value) => {
-        if (isMounted) {
-          // Verifica se o componente ainda está montado antes de atualizar o estado
-          setData(value.result);
-        }
-      });
+      if (isLogged && user.role === 'promoter') {
+        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      } else {
+        apiPost({ service: category }, 'evento').then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      }
     } else {
       if (isLogged && user.role === 'promoter') {
         apiGet(`evento?id=${user.id}`).then((value) => {
           if (isMounted) {
-            // Verifica se o componente ainda está montado antes de atualizar o estado
             setData(value.result);
           }
         });
       } else {
         apiGet('evento').then((value) => {
           if (isMounted) {
-            // Verifica se o componente ainda está montado antes de atualizar o estado
             setData(value.result);
           }
         });
@@ -105,11 +114,11 @@ export default function Carousel({ title, page, category }: CarouselProps) {
     }
 
     return () => {
-      isMounted = false; // Define a variável para false quando o componente for desmontado
+      isMounted = false;
     };
   }, [isLogged, user, category]);
 
-  console.log(title);
+
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
@@ -131,7 +140,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
     <div className={styles.column}>
       <div className={styles.titleAndButtons}>
         <div>
-          <p>{title}</p>
+          <p>{titulo}</p>
         </div>
         {data.length <= 4 ? (
           <div id="buttons" className={styles.buttonsInative}>
