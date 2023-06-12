@@ -14,10 +14,8 @@ interface CarouselProps {
 function handleClick(id: any) {
   //recebe a tela do 'page' quando chama o carrosel
   const url = 'telaevento/' + id;
-  console.log(id);
   //window.location.href = url;
 }
-
 
 function ConvertDate(data: Date, service: String) {
   if (service == 'day') {
@@ -68,42 +66,39 @@ function ConvertDate(data: Date, service: String) {
       default:
         return '';
     }
-}
+  }
 }
 
 export default function Carousel({ title, page, category }: CarouselProps) {
-    const { user, isLogged } = useContext(AuthContext);
+  const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (category) {
-        title = category + 's';
+      title = category + 's';
 
-        if (isLogged && user.role == 'promoter') {
-            apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
-            setData(value.result);
-            });
-        } else {
-            apiPost({ service: category }, 'evento').then((value) => {
-            setData(value.result);
-            });
-        }
-
+      if (isLogged && user.role == 'promoter') {
+        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
+          setData(value.result);
+        });
+      } else {
+        apiPost({ service: category }, 'evento').then((value) => {
+          setData(value.result);
+        });
+      }
     } else {
-
-
-        if (isLogged && user.role == 'promoter') {
-            apiGet(`evento?id=${user.id}`).then((value) => {
-            setData(value.result);
-            });
-        } else {
-            apiGet('evento').then((value) => {
-            setData(value.result);
-            });
-        }
-        }
-    }, [user]);
+      if (isLogged && user.role == 'promoter') {
+        apiGet(`evento?id=${user.id}`).then((value) => {
+          setData(value.result);
+        });
+      } else {
+        apiGet('evento').then((value) => {
+          setData(value.result);
+        });
+      }
+    }
+  }, [user]);
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();

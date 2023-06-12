@@ -9,7 +9,6 @@ export default async (req: any, res: any) => {
     }
     else {
         if (req.query.id) {
-            console.log(req.query);
             const ingressos = await ingresso.getIngressosEvento(req.query.id)
             res.json({ result: ingressos })
         }

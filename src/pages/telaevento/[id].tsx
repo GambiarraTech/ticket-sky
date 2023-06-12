@@ -10,8 +10,7 @@ import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
-export default function TelaEvento(){
-
+export default function TelaEvento() {
   const { query } = useRouter();
 
   // Informações da compra para passar para a tela de pagamento
@@ -22,7 +21,7 @@ export default function TelaEvento(){
     valorTotal: 0,
     valorBack: 0,
     valorVip: 0,
-    valorCamarote: 0
+    valorCamarote: 0,
   });
 
   //Informações da tela
@@ -34,34 +33,33 @@ export default function TelaEvento(){
     banner: '',
     endnome: '',
     rua: '',
-    numero: ''
+    numero: '',
   });
-
 
   // Informações do ingresso vip
   const [ingressoVip, setIngressoVip] = useState({
     quantidade: '',
-    valor: ''
+    valor: '',
   });
 
   // Informações do ingresso camarote
   const [ingressoCamarote, setIngressoCamarote] = useState({
     quantidade: '',
-    valor: ''
+    valor: '',
   });
 
   // Informações do ingresso backstage
   const [ingressoBack, setIngressoBack] = useState({
     quantidade: '',
-    valor: ''
+    valor: '',
   });
 
   // Body requisições
   const data = useState({
     service: 'getEvento',
-    id: query.id
+    id: query.id,
   });
-  
+
   // Puxa as informções do evento
   useEffect(() => {
     router.apiPost(data, 'evento').then((value) => {
@@ -76,18 +74,21 @@ export default function TelaEvento(){
         }
       });
     });
-    
   }, []);
 
-  console.log(ingressoBack)
-  
   return (
     <main className={font.className}>
       <section className={style.section}>
         <NavbarCliente />
         <div>
           <div className={style.containerGeral}>
-            <Image alt="Banner do Evento" className={style.imgBanner} width="400" height="400" src={'data:image/png;base64,' + evento.banner} />
+            <Image
+              alt="Banner do Evento"
+              className={style.imgBanner}
+              width="400"
+              height="400"
+              src={'data:image/png;base64,' + evento.banner}
+            />
             <div className={style.content}>
               <h2 className={style.promoterName}>{evento.pronome}</h2>
               <h1 className={style.eventName}>{evento.evnome}</h1>
@@ -114,7 +115,7 @@ export default function TelaEvento(){
               <div className={style.flexEvent}>
                 <span className={style.price}>$58.00</span>
                 <div className={style.positionBuyButton}>
-                  <button className={style.buyButton} >Comprar</button>
+                  <button className={style.buyButton}>Comprar</button>
                 </div>
               </div>
               <div className={style.eventLocation}>{evento.endnome}</div>

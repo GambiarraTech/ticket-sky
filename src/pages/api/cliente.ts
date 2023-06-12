@@ -5,7 +5,6 @@ import * as cliente from '../../types/cliente';
 export default async (req: any, res: any) => {
 
     const { nome, sobrenome, email, senha, cpf, service } = req.body
-    console.log(req.body)
     if (service) {
         switch (service) {
             case 'loginCliente': {
@@ -74,7 +73,7 @@ export default async (req: any, res: any) => {
                 res.json({ result: alteraSenha })
                 break
             }
-            case 'getPerfil':{
+            case 'getPerfil': {
                 const id = req.body.id;
                 const checkLogin: cliente.Cliente = await cliente.getCliente(id)
                 res.json({ result: checkLogin })

@@ -69,7 +69,6 @@ export default function FormCard(props: FormCardProps) {
         if (!value.error) {
           if (props.endPoint == 'promoter' && inputValues.service == 'cadastroPromoter') {
             enviaEmailConfirmacao(inputValues.email);
-            console.log('teste');
             setShowInfoMessage(true);
             setErrorMessage('Solicitação enviada. Verifique seu email.');
           } else {
