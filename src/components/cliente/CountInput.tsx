@@ -7,7 +7,7 @@ interface CountInputProps {
   onChange: (valor: number) => void;
 }
 
-function CountInput({ valorInicial, onChange }: CountInputProps) {
+export default function CountInput({ valorInicial, onChange }: CountInputProps) {
   const [quantidade, setQuantidade] = useState(valorInicial);
 
   function adicionar() {
@@ -24,7 +24,7 @@ function CountInput({ valorInicial, onChange }: CountInputProps) {
 
   return (
     <div className={style.countInput}>
-      <button type="button" onClick={reduzir} className={style.buttonCount}>
+      <button aria-label='reduzir' type="button" onClick={reduzir} className={style.buttonCount}>
         <AiOutlineMinus size="10" />
       </button>
       <input
@@ -40,11 +40,9 @@ function CountInput({ valorInicial, onChange }: CountInputProps) {
         }}
         className={style.centerQuant}
       />
-      <button type="button" onClick={adicionar} className={style.buttonCount}>
+      <button aria-label='adicionar' type="button" onClick={adicionar} className={style.buttonCount}>
         <AiOutlinePlus size="10" />
       </button>
     </div>
   );
 }
-
-export default CountInput;

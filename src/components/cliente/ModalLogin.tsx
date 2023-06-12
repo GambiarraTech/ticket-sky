@@ -99,6 +99,7 @@ export default function ModalLogin(props: ModalLoginProps) {
                   onChange={(e) => (cliente.nome = e.target.value)}
                   maxLength={20}
                   required
+                  aria-label='Nome'
                 />
                 <input
                   className={style.inputSignUp}

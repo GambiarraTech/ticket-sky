@@ -2,6 +2,7 @@ import styles from '@/styles/admin/NavBar.module.css';
 import Link from 'next/link';
 import { FaHome, FaUserCircle } from 'react-icons/fa';
 import { IoNotificationsSharp } from 'react-icons/io5';
+
 export default function NavBar() {
   return (
     <>
