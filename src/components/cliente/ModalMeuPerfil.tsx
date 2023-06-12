@@ -22,6 +22,8 @@ export default function ModalMeuPerfil() {
   async function editarCliente() {
     cliente.service = 'editarCliente';
     const res = await router.apiPost(cliente, 'cliente');
+ 
+
     alert(res.result);
   }
 
