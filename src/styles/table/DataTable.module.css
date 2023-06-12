@@ -46,6 +46,10 @@
   @apply divide-x divide-gray-400 table-row;
 }
 
+.tableRow:hover {
+  @apply bg-[#f1f2f2];
+}
+
 .tableRowGroup {
   @apply table-row-group;
 }
