@@ -81,7 +81,7 @@ export default function ModalLogin(props: ModalLoginProps) {
 
   return (
     <>
-      <form action="">
+      <form onSubmit={variant === 'signIn' ? loginCliente : cadastroCliente} >
         <div className={style.centerText}>
           <h3 className={style.centerLogo}>
             <Image src="/images/logo-minimal.png" alt="Logo" height="100" width="100" />
@@ -131,7 +131,7 @@ export default function ModalLogin(props: ModalLoginProps) {
               />
             </div>
           </div>
-          <button onClick={variant === 'signIn' ? loginCliente : cadastroCliente} className={style.loginButton}>
+          <button className={style.loginButton}>
             {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
           </button>
           <p className={style.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>
