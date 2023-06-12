@@ -81,10 +81,8 @@ export default function Eventos() {
   }, []);
 
   {
-    console.log(eventos);
     eventos.map((item) => {
       const evento: IEventosProps = item;
-      console.log(evento.data_hora);
       const date = new Date(evento.data_hora);
       let dia = date.getDate().toString();
       let horas = date.getHours().toString();
