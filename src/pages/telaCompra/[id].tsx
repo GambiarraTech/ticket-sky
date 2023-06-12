@@ -47,7 +47,7 @@ export default function CheckoutPage() {
 
                     <li className={style.lidiv}>
                       <div>
-                        <h3 className={style.h3div}>Ingresso Pista</h3>
+                        <h3 className={style.h3div}>Ingresso Backstage</h3>
 
                         <dl className={style.dlvid}>
                           <div>
@@ -65,7 +65,7 @@ export default function CheckoutPage() {
 
                     <li className={style.lidiv}>
                       <div>
-                        <h3 className={style.h3div}>Ingresso Backstage</h3>
+                        <h3 className={style.h3div}>Ingresso Camarote</h3>
 
                         <dl className={style.dlvid}>
                           <div>

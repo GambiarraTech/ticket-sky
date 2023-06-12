@@ -35,7 +35,7 @@ export default function TelaEvento() {
                   </div>
 
                   <div className={style.eventInfoIndividual}>
-                    Pista
+                    Backstage
                     <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
                   </div>
 

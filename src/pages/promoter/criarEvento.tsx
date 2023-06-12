@@ -41,8 +41,8 @@ export default function CriarEvento() {
     hora: '',
     descricao: '',
     vip: 0,
-    pista: 0,
     backstage: 0,
+    camarote: 0,
     service: '',
     imagem: '',
   });
@@ -358,20 +358,6 @@ export default function CriarEvento() {
                 />
               </div>
               <div className={style.campo}>
-                Pista:
-                <input
-                  className={style.input_pequeno}
-                  name="pista"
-                  type="number"
-                  min={0}
-                  required
-                  onChange={(e) => {
-                    evento.pista = Number(e.target.value);
-                    clearErrorMessage();
-                  }}
-                />
-              </div>
-              <div className={style.campo}>
                 Backstage:
                 <input
                   className={style.input_pequeno}
@@ -381,6 +367,20 @@ export default function CriarEvento() {
                   required
                   onChange={(e) => {
                     evento.backstage = Number(e.target.value);
+                    clearErrorMessage();
+                  }}
+                />
+              </div>
+              <div className={style.campo}>
+                Camarote:
+                <input
+                  className={style.input_pequeno}
+                  name="camarote"
+                  type="number"
+                  min={0}
+                  required
+                  onChange={(e) => {
+                    evento.camarote = Number(e.target.value);
                     clearErrorMessage();
                   }}
                 />
