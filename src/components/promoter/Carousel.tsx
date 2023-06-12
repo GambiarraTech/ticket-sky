@@ -140,7 +140,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
         <div className={styles.container}>
           <div className={styles.carousel} ref={carousel}>
             {data.map((item) => {
-              const { id, evnome, descricao, banner, data_hora, bairro, rua, number } = item;
+              const { id, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
               const url = 'data:image/png;base64,' + banner;
               const date = new Date(data_hora);
               let dia = date.getDate().toString();
@@ -171,7 +171,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                     </span>
                     <span className={styles.name}>{evnome}</span>
                     <span className={styles.address}>
-                      {bairro}, {rua}, {number}
+                      {bairro}, {rua}, {numero}
                     </span>
                   </div>
                 </div>
@@ -204,7 +204,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
         <div className={styles.container}>
           <div className={styles.carousel} ref={carousel}>
             {data.map((item) => {
-              const { id, descricao, banner, data_hora, evnome, bairro, rua, number } = item;
+              const { id, descricao, banner, data_hora, evnome, bairro, rua, numero } = item;
               const url = 'data:image/png;base64,' + banner;
               const date = new Date(data_hora);
               let dia = date.getDate().toString();
@@ -235,7 +235,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                     </span>
                     <span className={styles.name}>{evnome}</span>
                     <span className={styles.address}>
-                      {bairro}, {rua}, {number}
+                      {bairro}, {rua}, {numero}
                     </span>
                   </div>
                 </div>
