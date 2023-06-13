@@ -134,6 +134,30 @@ export default function TelaEvento() {
     var diminui = false;
 
     if (tipo == 'vip') {
+
+      if (pag == 'meia') {
+        if ((infosCompra.qntVipMeia == undefined ? 0 : infosCompra.qntVipMeia) > e) {
+          diminui = true;
+        }
+
+        infosCompra.qntVipMeia = e;
+      } else if (pag == 'int') {
+        if ((infosCompra.qntVipInt == undefined ? 0 : infosCompra.qntVipInt) > e) {
+          diminui = true;
+        }
+        infosCompra.qntVipInt = e;
+      } else if (pag == 'grat') {
+        infosCompra.qntVipGrat = e;
+      }
+
+      if (pag != 'grat') {
+        if (!diminui) {
+          infosCompra.valorVip += typeof valor == 'string' ? parseInt(valor, 10) : valor;
+        } else {
+          infosCompra.valorVip -= typeof valor == 'string' ? parseInt(valor, 10) : valor;
+        }
+      }
+
     } else if (tipo == 'cam') {
       if (pag == 'meia') {
         if ((infosCompra.qntdCamaroteMeia == undefined ? 0 : infosCompra.qntdCamaroteMeia) > e) {
