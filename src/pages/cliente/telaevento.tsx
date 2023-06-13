@@ -29,7 +29,6 @@ export default function TelaEvento() {
               <p className={style.description}>TEXTO DA DESCRIÇÃO DO EVENTO texto da descrição do evento</p>
               <div className={style.eventInfo}>
                 <div className={style.countPosition}>
-                  <div className="tipoIngresso">Inteira</div>
                   <div className={style.eventInfoIndividual}>
                     VIP
                     <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
@@ -44,8 +43,6 @@ export default function TelaEvento() {
                     Camarote
                     <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
                   </div>
-                  <div className="tipoIngresso">Meia</div>
-                  <div className="tipoIngresso">Inteira</div>
                 </div>
                 <div></div>
               </div>
