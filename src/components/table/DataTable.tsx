@@ -6,6 +6,7 @@ import styles from '@/styles/table/DataTable.module.css';
 import React, { FC } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
+import { IoIosAddCircle } from 'react-icons/io';
 
 interface TableProps {
   title: string;
@@ -22,6 +23,10 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
   const [forceUpdate, setForceUpdate] = React.useState(false);
   //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
+
+  function deletarAdmin(id: number) {
+    apiPost({ idPromoter: id, service: 'deleteAdmin' }, 'admin').then(() => {});
+  }
 
   const handleSearch = (event: any) => {
     setSearch(event.target.value);
@@ -51,11 +56,21 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
     <div className={styles.dataTable}>
       <h1 className={styles.title}>{title}</h1>
 
-      <div className={styles.searchIconPosition}>
-        <span className={styles.searchBar}>
-          <BiSearch className={styles.colorIcon} />
-        </span>
-        <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
+      <div className={styles.topContent}>
+        <div></div>
+        <div className={styles.searchIconPosition}>
+          <span className={styles.searchBar}>
+            <BiSearch className={styles.colorIcon} />
+          </span>
+          <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
+        </div>
+        {title == 'Administradores' ? (
+          <button>
+            <IoIosAddCircle color="white" size={'25'} />
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
 
       <div className={styles.tableBackground}>
@@ -67,9 +82,13 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
                   {item}
                 </th>
               ))}
-              <th scope="col" className={styles.tableCellHeader} style={{ color: 'red' }}>
-                Excluir
-              </th>
+              {title == 'Administradores' ? (
+                <th scope="col" className={styles.tableCellHeader} style={{ color: 'red' }}>
+                  Excluir
+                </th>
+              ) : (
+                <></>
+              )}
             </tr>
           </thead>
           <tbody className={styles.tableRowGroup}>
@@ -80,11 +99,21 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
                     {endPoint[values as keyof typeof endPoint]}
                   </td>
                 ))}
-                <td className={styles.tableCellIcon}>
-                  <button onClick={() => excluir(endpoint,data[index].id)}>
-                    <FaTrash color={'red'} />
-                  </button>
-                </td>
+                {title == 'Administradores' ? (
+                  <td className={styles.tableCellIcon}>
+                    {endPoint.id == 1 ? (
+                      <button disabled={true}>
+                        <FaTrash color={'grey'} />
+                      </button>
+                    ) : (
+                      <button onClick={() => excluir(endpoint,data[index].id)}>
+                        <FaTrash color={'red'} />
+                      </button>
+                    )}
+                  </td>
+                ) : (
+                  <></>
+                )}
               </tr>
             ))}
           </tbody>

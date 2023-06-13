@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { Admin, getAdmin, loginAdmin, getAllAdmins, excluirAdmin } from '../../types/admin'
 import md5 from "md5";
+import { v4 as uuid } from 'uuid';
 
 export default async (req: any, res: any) => {
 
@@ -35,7 +36,7 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    res.json({ error: 'Administrador não encontrado.'})
+                    res.json({ error: 'Administrador não encontrado.' })
                 }
 
                 break
