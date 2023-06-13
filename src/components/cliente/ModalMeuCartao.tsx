@@ -1,7 +1,7 @@
+import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import style from '@/styles/cliente/meuCartao.module.css';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '@/contexts/AuthContext';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 
 export default function MeuCartao() {
   const { user } = useContext(AuthContext);
@@ -11,85 +11,107 @@ export default function MeuCartao() {
     numero: '',
     vencimento: '',
     id_cliente: '',
-    service: ''
+    service: '',
   });
 
-  async function cadastrarCartao() {
-
-    cartao.id_cliente = user.id
-    cartao.service = 'saveCartao'
-    await router.apiPost(cartao, 'cartao');
-
+  async function cadastrarCartao(event: FormEvent) {
+    event.preventDefault();
+    cartao.id_cliente = user.id;
+    cartao.service = 'saveCartao';
+    const res = await router.apiPost(cartao, 'cartao');
+    alert(res.result);
   }
 
   async function deletarCartao() {
-      await router.apiPost({id_cliente: user.id, service: 'deletarCartao'}, 'cartao');
+    const res = await router.apiPost({ id_cliente: user.id, service: 'deletarCartao' }, 'cartao');
 
+    setCartao({
+      titular: '',
+      cpf: '',
+      numero: '',
+      vencimento: '',
+      id_cliente: '',
+      service: '',
+    });
+
+    alert(res.result);
   }
 
   useEffect(() => {
-    router.apiPost({id_cliente: user.id},'cartao').then((value) =>{
-        if( value.result != null){
-            setCartao(value.result);
-        }
-    }
-
-    )
+    router.apiPost({ id_cliente: user.id }, 'cartao').then((value) => {
+      if (value.result != null) {
+        setCartao(value.result);
+      }
+    });
   }, []);
 
   return (
     <>
       <div className={style.title}>Meu Cartão</div>
-      <form className={style.formStyle}>
+      <form onSubmit={cadastrarCartao} className={style.formStyle}>
         <div className={style.inputFormat}>
           Nome do Titular
           <input
+            id="titular"
             type="text"
+            maxLength={50}
             className={style.primaryInputStyle}
             placeholder="Nome do Titular"
-            defaultValue={cartao.titular}
-            onChange={(e) => (cartao.titular = e.target.value)}
+            value={cartao.titular}
+            required
+            onChange={(e) => setCartao({ ...cartao, titular: e.target.value })}
           />
         </div>
         <div className={style.inputFormat}>
           CPF do Titular
           <input
+            id="cpf"
             type="text"
+            maxLength={11}
             className={style.primaryInputStyle}
             placeholder="CPF do Titular"
-            defaultValue={cartao.cpf}
-            onChange={(e) => (cartao.cpf = e.target.value)}
+            value={cartao.cpf}
+            required
+            onChange={(e) => setCartao({ ...cartao, cpf: e.target.value })}
           />
         </div>
         <div className={style.inputFormat}>
           Número do Cartão
           <input
+            id="numero"
             type="text"
+            maxLength={16}
             className={style.primaryInputStyle}
             placeholder="Número do Cartão"
-            defaultValue={cartao.numero}
-            onChange={(e) => (cartao.numero = e.target.value)}
+            value={cartao.numero}
+            required
+            onChange={(e) => setCartao({ ...cartao, numero: e.target.value })}
           />
         </div>
         <div className={style.secondFormat}>
           <div className={style.inputFormat}>
-            Validade
+            Validade (mm/aa)
             <input
+              id="validade"
               type="text"
+              maxLength={5}
               className={style.secondInputStyle}
               placeholder="Validade"
-              defaultValue={cartao.vencimento}
-              onChange={(e) => (cartao.vencimento = e.target.value)}
+              value={cartao.vencimento}
+              required
+              onChange={(e) => setCartao({ ...cartao, vencimento: e.target.value })}
             />
           </div>
         </div>
+        <div className={style.buttonDiv}>
+          <button type="button" name="remover" className={style.buttonDelete} onClick={deletarCartao}>
+            Remover
+          </button>
+          <button type="submit" name="salvar" className={style.buttonSave}>
+            Salvar
+          </button>
+        </div>
       </form>
-      <div className={style.buttonDiv}>
-        <button className={style.buttonDelete} onClick={deletarCartao}>Remover</button>
-        <button className={style.buttonSave} onClick={cadastrarCartao}>
-          Salvar
-        </button>
-      </div>
     </>
   );
 }

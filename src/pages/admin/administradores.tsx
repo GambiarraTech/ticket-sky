@@ -16,6 +16,21 @@ export default function Administradores() {
   const columns = ['Código', 'Nome', 'Email'];
   const props = ['id', 'nome', 'email'];
 
+  const handleUpdateData = () => {
+    fetchData(); // Atualiza os dados da tabela
+  };
+
+  const fetchData = () => {
+    router
+      .apiPost({ service: 'getAdmins' }, 'admin')
+      .then((data) => {
+        const adminsData = data.admins;
+        setAdmins(adminsData);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os administradores:', error);
+      });
+  }
   useEffect(() => {
     router
       .apiPost({ service: 'getAdmins' }, 'admin')
@@ -27,9 +42,10 @@ export default function Administradores() {
         console.error('Erro ao obter os administradores:', error);
       });
   }, []);
+
   return (
     <Layout>
-      <DataTable title="Administradores" data={admins} columns={columns} props={props}></DataTable>
+      <DataTable title="Administradores" data={admins} columns={columns} props={props} endpoint='admin' updateData={handleUpdateData}></DataTable>
     </Layout>
   );
 }

@@ -14,11 +14,13 @@ interface TableProps {
   data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
-  addButton?: boolean;
+  endpoint: string,
+  updateData: () => void;
 }
 
-const DataTable: FC<TableProps> = ({ data, columns, title, props, addButton = false }) => {
+const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, updateData }) => {
   const [search, setSearch] = React.useState('');
+  const [forceUpdate, setForceUpdate] = React.useState(false);
   //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
 
@@ -34,6 +36,22 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, addButton = fa
     (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
   );
 
+  function upper(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function excluir(endpoint: any, id: any){
+    if( endpoint == 'admin'){
+        apiPost({service: 'excluir'+ upper(endpoint), id: id}, endpoint)
+        .then(() => {
+            updateData(); // Atualiza os dados da tabela após excluir o dado
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir:', error);
+          });
+    }
+
+  }
   return (
     <div className={styles.dataTable}>
       <h1 className={styles.title}>{title}</h1>
@@ -88,7 +106,7 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, addButton = fa
                         <FaTrash color={'grey'} />
                       </button>
                     ) : (
-                      <button onClick={() => deletarAdmin(endPoint.id)}>
+                      <button onClick={() => excluir(endpoint,data[index].id)}>
                         <FaTrash color={'red'} />
                       </button>
                     )}

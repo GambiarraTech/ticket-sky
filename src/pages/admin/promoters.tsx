@@ -16,6 +16,19 @@ export default function Promoters() {
   const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ'];
   const props = ['id', 'nome', 'email', 'cpf_cnpj'];
 
+  const fetchData = () => {
+    router
+      .apiPost({ service: 'getPromoters' }, 'promoter')
+      .then((data) => {
+        const promotersData = data.promoters;
+
+        setPromoters(promotersData);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os promoters:', error);
+      });
+  }
+
   useEffect(() => {
     router
       .apiPost({ service: 'getPromoters' }, 'promoter')
@@ -31,7 +44,7 @@ export default function Promoters() {
 
   return (
     <Layout>
-      <DataTable title="Promoters" data={promoters} columns={columns} props={props}></DataTable>
+      <DataTable title="Promoters" data={promoters} columns={columns} props={props} endpoint='promoter' updateData={fetchData}></DataTable>
     </Layout>
   );
 }

@@ -41,6 +41,17 @@ export async function getPromoter(id: string) {
 
 }
 
+export async function checkCpfCnpj(cpf_cnpj: string) {
+    const verificaPromoterCpf = await query({
+        query: "SELECT * FROM promoter WHERE promoter.cpf_cnpj = (?)",
+        values: [cpf_cnpj],
+    });
+
+    if (Object.keys(verificaPromoterCpf).length > 0) {
+        return null;
+    }
+}
+
 export async function cadastroPromoter(nome: string, email: string, senha: string, cpf_cnpj: string) {
     try {
         const verificaPromoter = await query({
@@ -67,6 +78,7 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
         } else {
             throw new Error('Falha ao cadastrar o promoter.');
         }
+
     } catch (error: any) {
         throw new Error('Erro ao cadastrar o promoter: ' + error.message);
     }

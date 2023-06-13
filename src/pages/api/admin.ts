@@ -1,6 +1,7 @@
+import { v4 as uuid } from 'uuid'
+import { Admin, getAdmin, loginAdmin, getAllAdmins, excluirAdmin } from '../../types/admin'
 import md5 from "md5";
 import { v4 as uuid } from 'uuid';
-import { Admin, deleteAdmin, getAdmin, getAllAdmins, loginAdmin } from '../../types/admin';
 
 export default async (req: any, res: any) => {
 
@@ -55,20 +56,19 @@ export default async (req: any, res: any) => {
 
                 break;
             }
+            case 'excluirAdmin': {
+                const id = req.body.id
+
+                const excluir: boolean = await excluirAdmin(id)
+
+                if( excluir == true){
+                    res.json({ success: true });
+                }else{
+                    res.json({ success: false });
+                }
+            }
             default: {
 
-                break;
-            }
-            case 'deleteAdmin': {
-                const id = req.body.id
-                const excluirAdmin = await deleteAdmin(id)
-
-                if (excluirAdmin != null) {
-                    res.json({ message: excluirAdmin });
-
-                } else {
-                    res.json({ error: 'Houve algum erro durante a exclusão' })
-                }
                 break;
             }
         }
