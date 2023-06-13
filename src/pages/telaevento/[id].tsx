@@ -38,18 +38,21 @@ export default function TelaEvento() {
 
   // Informações do ingresso vip
   const [ingressoVip, setIngressoVip] = useState({
+    id: 0,
     quantidade: 0,
     valor: 0
   });
 
   // Informações do ingresso camarote
   const [ingressoCamarote, setIngressoCamarote] = useState({
+    id: 0,
     quantidade:0,
     valor:0
   });
 
   // Informações do ingresso backstage
   const [ingressoBack, setIngressoBack] = useState({
+    id: 0,
     quantidade: 0,
     valor: 0
   });
@@ -104,12 +107,15 @@ export default function TelaEvento() {
 
   // Informações da compra para passar para a tela de pagamento
   const [infosCompra] = useState({
+    idVip: 0,
     qntVipInt: 0,
     qntVipMeia: 0,
     qntVipGrat: 0,
+    idBack: 0,
     qntdBackInt: 0,
     qntdBackMeia: 0,
     qntdBackGrat: 0,
+    idCamarote: 0,
     qntdCamaroteInt: 0,
     qntdCamaroteMeia: 0,
     qntdCamaroteGrat: 0,
@@ -243,12 +249,15 @@ export default function TelaEvento() {
 
     infosCompra.nomePromoter = evento.pronome;
     infosCompra.nomeEvento = evento.evnome;
+    infosCompra.idVip = ingressoVip.id;
+    infosCompra.idBack = ingressoBack.id;
+    infosCompra.idCamarote = ingressoCamarote.id;
     infosCompra.valorUnBack = ingressoBack.valor;
     infosCompra.valorUnCamarote = ingressoCamarote.valor;
     infosCompra.valorUnVip = ingressoVip.valor;
     
     router.push({
-      pathname: '/telaCompra/'+ JSON.stringify(infosCompra)
+      pathname: '/telaCompra/'+JSON.stringify(infosCompra)
     })
   }
 
