@@ -5,18 +5,22 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 interface CountInputProps {
   valorInicial: number;
   onChange: (e: any) => any;
+  max: number
 }
 
-export default function CountInput({ valorInicial, onChange }: CountInputProps) {
+export default function CountInput({ valorInicial, onChange, max }: CountInputProps) {
   const [quantidade, setQuantidade] = useState(valorInicial);
 
   function adicionar() {
-    setQuantidade((qtAtual) => qtAtual + 1);
-    onChange(quantidade + 1);
+    if(quantidade < max){
+      setQuantidade((qtAtual) => qtAtual + 1);
+      onChange(quantidade + 1);
+    }
+    
   }
 
   function reduzir() {
-    if (quantidade > 1) {
+    if (quantidade > 0) {
       setQuantidade((qtAtual) => qtAtual - 1);
       onChange(quantidade - 1);
     }
@@ -29,8 +33,9 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
       </button>
       <input
         type="quantity"
-        min="1"
+        min="0"
         value={quantidade}
+        max={max}
         onChange={(event) => {
           const value = parseInt(event.target.value, 10);
           if (!isNaN(value) && value >= 1) {
