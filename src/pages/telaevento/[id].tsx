@@ -12,13 +12,15 @@ const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaEvento() {
   
+  //Configuração axios
   const api = axios.create({
     baseURL: 'http://localhost:3000/api'
   });
+  
   const {query} = useRouter();
   const router = useRouter();
 
-  //Informações da tela
+  //Informações da tela (referente ao evento)
   const [evento, setEvento] = useState({
     id: '',
     evnome: '',
@@ -33,28 +35,19 @@ export default function TelaEvento() {
   // Informações do ingresso vip
   const [ingressoVip, setIngressoVip] = useState({
     quantidade: 0,
-    valor: 0,
-    qntMeia: 0,
-    qntInt: 0,
-    qntGrat: 0
+    valor: 0
   });
 
   // Informações do ingresso camarote
   const [ingressoCamarote, setIngressoCamarote] = useState({
     quantidade:0,
-    valor:0,
-    qntMeia: 0,
-    qntInt: 0,
-    qntGrat: 0
+    valor:0
   });
 
   // Informações do ingresso backstage
   const [ingressoBack, setIngressoBack] = useState({
     quantidade: 0,
-    valor: 0,
-    qntMeia: 0,
-    qntInt: 0,
-    qntGrat: 0
+    valor: 0
   });
   
   useEffect(() => {
@@ -107,9 +100,15 @@ export default function TelaEvento() {
 
   // Informações da compra para passar para a tela de pagamento
   const [infosCompra] = useState({
-    qntVip: 0,
-    qntdBack: 0,
-    qntdCamarote: 0,
+    qntVipInt: 0,
+    qntVipMeia: 0,
+    qntVipGrat: 0,
+    qntdBackInt: 0,
+    qntdBackMeia: 0,
+    qntdBackGrat: 0,
+    qntdCamaroteInt: 0,
+    qntdCamaroteMeia: 0,
+    qntdCamaroteGrat: 0,
     valorTotal: 0,
     valorBack: 0,
     valorVip: 0,
@@ -129,22 +128,22 @@ export default function TelaEvento() {
 
       if(pag == 'meia'){
         
-        if((ingressoVip.qntMeia == undefined? 0 : ingressoVip.qntMeia) > e){
+        if((infosCompra.qntVipMeia == undefined? 0 : infosCompra.qntVipMeia) > e){
           diminui = true;
         }
 
-        ingressoVip.qntMeia = e;
+        infosCompra.qntVipMeia = e;
       }
       else if(pag == 'int'){
         
-        if((ingressoVip.qntInt == undefined? 0 : ingressoVip.qntInt) > e){
+        if((infosCompra.qntVipInt == undefined? 0 : infosCompra.qntVipInt) > e){
           diminui = true;
         }
-        ingressoVip.qntInt = e;
+        infosCompra.qntVipInt = e;
       }
       else if(pag == 'grat'){
         
-        ingressoVip.qntGrat = e;
+        infosCompra.qntVipGrat = e;
       }
       
       if(pag != 'grat'){
@@ -155,28 +154,28 @@ export default function TelaEvento() {
           infosCompra.valorVip -= (typeof valor == 'string'? parseInt(valor, 10) : valor);
         }
       }
-      infosCompra.qntVip = (ingressoVip.qntMeia == undefined? 0 : ingressoVip.qntMeia) + (ingressoVip.qntInt == undefined? 0 : ingressoVip.qntInt) + (ingressoVip.qntGrat == undefined? 0 : ingressoVip.qntGrat);
+
     }
 
     else if(tipo == 'cam'){
       if(pag == 'meia'){
         
-        if((ingressoCamarote.qntMeia == undefined? 0 : ingressoCamarote.qntMeia) > e){
+        if((infosCompra.qntdCamaroteMeia == undefined? 0 : infosCompra.qntdCamaroteMeia ) > e){
           diminui = true;
         }
 
-        ingressoCamarote.qntMeia = e;
+        infosCompra.qntdCamaroteMeia  = e;
       }
       else if(pag == 'int'){
         
-        if((ingressoCamarote.qntInt == undefined? 0 : ingressoCamarote.qntInt) > e){
+        if((infosCompra.qntdCamaroteInt == undefined? 0 : infosCompra.qntdCamaroteInt) > e){
           diminui = true;
         }
-        ingressoCamarote.qntInt = e;
+        infosCompra.qntdCamaroteInt = e;
       }
       else if(pag == 'grat'){
         
-        ingressoCamarote.qntGrat = e;
+        infosCompra.qntdCamaroteGrat = e;
       }
       
       if(pag != 'grat'){
@@ -187,28 +186,26 @@ export default function TelaEvento() {
           infosCompra.valorCamarote -= (typeof valor == 'string'? parseInt(valor, 10) : valor);
         }
       }
-
-      infosCompra.qntdCamarote = (ingressoCamarote.qntMeia == undefined? 0 : ingressoCamarote.qntMeia) + (ingressoCamarote.qntInt == undefined? 0 : ingressoCamarote.qntInt) + (ingressoCamarote.qntGrat == undefined? 0 : ingressoCamarote.qntGrat);
       
     }else{
       if(pag == 'meia'){
         
-        if((ingressoBack.qntMeia == undefined? 0 : ingressoBack.qntMeia) > e){
+        if((infosCompra.qntdBackMeia == undefined? 0 : infosCompra.qntdBackMeia) > e){
           diminui = true;
         }
 
-        ingressoBack.qntMeia = e;
+        infosCompra.qntdBackMeia = e;
       }
       else if(pag == 'int'){
         
-        if((ingressoBack.qntInt == undefined? 0 : ingressoBack.qntInt) > e){
+        if((infosCompra.qntdBackInt == undefined? 0 : infosCompra.qntdBackInt ) > e){
           diminui = true;
         }
-        ingressoBack.qntInt = e;
+        infosCompra.qntdBackInt = e;
       }
       else if(pag == 'grat'){
         
-        ingressoBack.qntGrat = e;
+        infosCompra.qntdBackGrat = e;
       }
       
       if(pag != 'grat'){
@@ -219,7 +216,7 @@ export default function TelaEvento() {
           infosCompra.valorBack -= (typeof valor == 'string'? parseInt(valor, 10) : valor);
         }
       }
-      infosCompra.qntdBack = (ingressoBack.qntMeia == undefined? 0 : ingressoBack.qntMeia) + (ingressoBack.qntInt == undefined? 0 : ingressoBack.qntInt) + (ingressoBack.qntGrat == undefined? 0 : ingressoBack.qntGrat);
+      
     }
 
     infosCompra.valorTotal = infosCompra.valorVip + infosCompra.valorCamarote + infosCompra.valorBack;
