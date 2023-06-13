@@ -24,6 +24,25 @@ export async function loginAdmin(email: string, senha: string) {
 
 }
 
+export async function deleteAdmin(id: number) {
+    await query({
+        query: "DELETE FROM administrador WHERE administrador.id = (?)",
+        values: [id]
+    })
+
+    const admin: any = await query({
+        query: "SELECT * FROM administrador WHERE id = (?)",
+        values: [id]
+    })
+
+
+    if (Object.keys(admin).length > 0) {
+        return null
+    } else {
+        return 'Administrador removido.'
+    }
+}
+
 export async function getAdmin(id: string) {
 
     const admin: any = await query({

@@ -19,7 +19,15 @@
 }
 
 .title {
-  @apply items-center justify-center flex text-white font-medium h-[8%] bg-ticket-sky-blue rounded-t-xl w-full text-xl;
+  @apply items-center flex justify-center text-white font-medium h-[8%] bg-ticket-sky-blue rounded-t-xl w-full text-xl;
+}
+
+.topContent {
+  @apply grid grid-cols-3;
+}
+
+.topContent button {
+  @apply bg-ticket-sky-blue h-10 rounded-xl w-20 justify-self-center text-white self-center text-xl border border-gray-400 flex justify-center items-center;
 }
 
 .tableBackground {
