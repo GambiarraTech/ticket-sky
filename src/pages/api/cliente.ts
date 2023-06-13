@@ -2,6 +2,11 @@ import md5 from "md5";
 import { v4 as uuid } from 'uuid';
 import * as cliente from '../../types/cliente';
 
+/**
+ * Função que trata as solicitações relacionadas a clientes.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
 
     const { nome, sobrenome, email, senha, cpf, service } = req.body

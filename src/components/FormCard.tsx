@@ -5,6 +5,9 @@ import { Input } from '@/types/components/input';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 
+/**
+ * Propriedades do componente FormCardProps.
+ */
 type FormCardProps = {
   inputs: Input[];
   titulo?: string;
@@ -16,7 +19,10 @@ type FormCardProps = {
   errorMessage: string;
 };
 
-//Chamar função após dar a confirmação de cadastro na tela
+/**
+ * Função assíncrona para enviar um email de confirmação após o cadastro.
+ * @param emailPromoter O email do promotor para envio da confirmação.
+ */
 async function enviaEmailConfirmacao(emailPromoter: string) {
   let data;
   const res = router.apiPost(
@@ -32,6 +38,9 @@ async function enviaEmailConfirmacao(emailPromoter: string) {
   res.then((value) => {});
 }
 
+/**
+ * Componente para exibir um formulário personalizável.
+ */
 export default function FormCard(props: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os

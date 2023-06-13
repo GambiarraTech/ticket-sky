@@ -1,5 +1,10 @@
 import * as relatorios from '../../types/relatorios'
 
+/**
+ * Função que lida com as solicitações relacionadas a relatórios.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
 
     // O id equivale ao id do usuario

@@ -1,5 +1,8 @@
 import { query } from '@/lib/db';
 
+/**
+ * Tipo de dados para um cliente.
+ */
 export type Cliente = {
 
     id: number,
@@ -11,7 +14,15 @@ export type Cliente = {
 
 }
 
-
+/**
+ * Função assíncrona para cadastrar um novo cliente.
+ * @param nome O nome do cliente.
+ * @param sobrenome O sobrenome do cliente.
+ * @param email O email do cliente.
+ * @param senha A senha do cliente.
+ * @param cpf O CPF do cliente (opcional).
+ * @returns Um objeto contendo o email e a senha do novo cliente cadastrado, ou null se ocorrer algum erro.
+ */
 export async function cadastroCliente(nome: string, sobrenome: string, email: string, senha: string, cpf: string | null) {
     if (cpf == undefined) {
         cpf = null;
@@ -41,6 +52,11 @@ export async function cadastroCliente(nome: string, sobrenome: string, email: st
 
 }
 
+/**
+ * Função assíncrona para excluir um cliente.
+ * @param email O email do cliente.
+ * @param senha A senha do cliente.
+ */
 export async function deleteCliente(email: string, senha: string) {
     await query({
         query: "DELETE FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
@@ -49,6 +65,12 @@ export async function deleteCliente(email: string, senha: string) {
 
 }
 
+/**
+ * Função assíncrona para realizar o login de um cliente.
+ * @param email O email do cliente.
+ * @param senha A senha do cliente.
+ * @returns Um objeto contendo os dados do cliente logado, ou null se as credenciais estiverem incorretas.
+ */
 export async function loginCliente(email: string, senha: string) {
     const cliente: any = await query({
         query: "SELECT * FROM cliente WHERE cliente.email = (?) AND cliente.senha = (?)",
@@ -61,6 +83,16 @@ export async function loginCliente(email: string, senha: string) {
         return null
     }
 }
+
+/**
+ * Função assíncrona para editar os dados de um cliente.
+ * @param email O novo email do cliente.
+ * @param nome O novo nome do cliente.
+ * @param sobrenome O novo sobrenome do cliente.
+ * @param cpf O novo CPF do cliente.
+ * @param id O ID do cliente a ser editado.
+ * @returns Uma mensagem informando que o cliente foi alterado com sucesso.
+ */
 export async function editarCliente(email: string, nome: string, sobrenome: string, cpf: string, id: number) {
     const sql = `
         UPDATE
@@ -81,6 +113,15 @@ export async function editarCliente(email: string, nome: string, sobrenome: stri
     return "Cliente alterado com sucesso!";
 }
 
+/**
+ * Função assíncrona para editar os dados de um cliente.
+ * @param email O novo email do cliente.
+ * @param nome O novo nome do cliente.
+ * @param sobrenome O novo sobrenome do cliente.
+ * @param cpf O novo CPF do cliente.
+ * @param id O ID do cliente a ser editado.
+ * @returns Uma mensagem informando que o cliente foi alterado com sucesso.
+ */
 export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
 
     const confirmaSenha = await loginCliente(email, senhaAntiga);
@@ -104,6 +145,11 @@ export async function alterarSenha(email: string, senhaAntiga: string, novaSenha
     return 'Senha incorreta';
 }
 
+/**
+ * Função assíncrona para obter os dados de um cliente pelo seu ID.
+ * @param id O ID do cliente a ser obtido.
+ * @returns Um objeto contendo os dados do cliente encontrado, ou null se o cliente não for encontrado.
+ */
 export async function getCliente(id: string) {
 
     const cliente: any = await query({

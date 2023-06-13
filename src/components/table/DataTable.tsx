@@ -6,23 +6,34 @@ import React, { FC } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
 
+/**
+ * Props do componente `DataTable`.
+ */
 interface TableProps {
   title: string;
-  //   Adicionar os outros tipos
   data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
 }
 
+/**
+ * Componente de tabela de dados genérica.
+ */
 const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
   const [search, setSearch] = React.useState('');
-  //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
 
-  const handleSearch = (event: any) => {
+  /**
+   * Manipulador para a pesquisa de dados na tabela.
+   * @param event - O evento de mudança no campo de pesquisa.
+   */
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
+  /**
+   * Filtra os dados com base no termo de pesquisa.
+   */
   const filteredData = fixedData.filter(
     (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
   );

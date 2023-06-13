@@ -5,10 +5,16 @@ import { useContext, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
 
+/**
+ * Componente para exibir o perfil do usuário logado.
+ */
 export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
   const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
+  /**
+   * Estado para armazenar os dados do promoter.
+   */
   const [promoter, setPromoter] = useState({
     id: '',
     nome: '',
@@ -17,12 +23,18 @@ export default function MeuPerfil() {
     service: 'editarPromoter',
   });
 
+  /**
+   * Função assíncrona para editar o promoter.
+   */
   async function editarPromoter() {
     promoter.service = 'editarPromoter';
     const res = await router.apiPost(promoter, 'promoter');
     alert(res.result);
   }
 
+  /**
+   * Efeito colateral para carregar os dados do perfil do promoter.
+   */
   useEffect(() => {
     router.apiPost({ service: 'getPerfil', id: user.id }, 'promoter').then((value) => {
       if (value.result != null) {

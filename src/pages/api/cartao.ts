@@ -1,5 +1,10 @@
 import { Cartao, deleteCartao, insertCartao, selectCartao, updateCartao } from '../../types/cartao';
 
+/**
+ * Função que trata as solicitações relacionadas a cartões de crédito.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
   const { service } = req.body;
   if (service) {
@@ -8,20 +13,20 @@ export default async (req: any, res: any) => {
         const { titular, cpf, numero, vencimento, id_cliente } = req.body;
         const checkCartao = await selectCartao(id_cliente)
 
-        if(checkCartao != null){
-            const cartao: boolean = await updateCartao(titular, numero, vencimento, cpf, id_cliente)
-            if( cartao == true){
-                res.json({ success: true, cartao: cartao })
-            }else {
-                res.json({ success: false });
-            }
-        }else{
-            const cartao: Cartao = await insertCartao(titular, numero, vencimento, cpf, id_cliente);
-            if (cartao) {
-              res.json({ success: true, cartao: cartao });
-            } else {
-              res.json({ success: false });
-            }
+        if (checkCartao != null) {
+          const cartao: boolean = await updateCartao(titular, numero, vencimento, cpf, id_cliente)
+          if (cartao == true) {
+            res.json({ success: true, cartao: cartao })
+          } else {
+            res.json({ success: false });
+          }
+        } else {
+          const cartao: Cartao = await insertCartao(titular, numero, vencimento, cpf, id_cliente);
+          if (cartao) {
+            res.json({ success: true, cartao: cartao });
+          } else {
+            res.json({ success: false });
+          }
         }
         break;
       }
@@ -38,7 +43,7 @@ export default async (req: any, res: any) => {
         break;
       }
     }
-  }else{
+  } else {
     const { id_cliente } = req.body;
     const checkCartao = await selectCartao(id_cliente)
     res.json({ result: checkCartao, success: true });

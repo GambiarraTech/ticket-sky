@@ -1,12 +1,21 @@
 import { query } from '@/lib/db';
 
+/**
+ * Definição do tipo para os dados de um ingresso.
+ */
 type ingressos = {
     id_ingresso: number,
     tipoIngresso: number,
     quantidade: number
 }
 
-//Essa função é usada para quando for mais de um tipo/setor de ingresso
+/**
+ * Função assíncrona utilizada para realizar a compra de ingressos.
+ * Pode ser usada quando houver mais de um tipo/setor de ingresso.
+ * @param id_cliente - O ID do cliente que está realizando a compra.
+ * @param ingressos - Um array contendo os dados dos ingressos a serem comprados.
+ * @returns Uma mensagem informando que o pedido foi cadastrado com sucesso.
+ */
 export async function compra(id_cliente: number, ingressos: ingressos[]) {
 
     // Formato ingressos:
@@ -36,7 +45,16 @@ export async function compra(id_cliente: number, ingressos: ingressos[]) {
 
 }
 
-// Essa função pode ser usada quando a compra for de um só tipo e setor de ingresso
+/**
+ * Função assíncrona utilizada para cadastrar um pedido de ingresso.
+ * Pode ser usada quando a compra for de um só tipo e setor de ingresso.
+ * @param numero - O número do pedido.
+ * @param id_cliente - O ID do cliente que está realizando o pedido.
+ * @param id_tipo_ingresso - O ID do tipo de ingresso.
+ * @param id_ingresso - O ID do ingresso.
+ * @param quantidade - A quantidade de ingressos do pedido.
+ * @returns Uma mensagem informando que o pedido foi cadastrado com sucesso.
+ */
 export async function cadastroPedido(numero: string, id_cliente: number, id_tipo_ingresso: number, id_ingresso: number, quantidade: number) {
 
     if (numero == '') {
@@ -59,6 +77,10 @@ export async function cadastroPedido(numero: string, id_cliente: number, id_tipo
     return 'Pedido cadastrado com sucesso';
 }
 
+/**
+ * Função assíncrona utilizada para contar a quantidade de pedidos.
+ * @returns O número total de pedidos cadastrados.
+ */
 export async function contaPedidos() {
     const sql = `
         SELECT COUNT(*) AS quantidade_pedidos

@@ -2,6 +2,9 @@ import NavbarCliente from '@/components/cliente/NavbarCliente';
 import Head from 'next/head';
 import style from '../../styles/cliente/telaCompra.module.css';
 
+/**
+ * Componente para a página de finalização da compra.
+ */
 export default function CheckoutPage() {
   return (
     <>

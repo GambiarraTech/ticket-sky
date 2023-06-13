@@ -11,6 +11,9 @@ export interface IPromotersProps {
   cpf_cnpj: string;
 }
 
+/**
+ * Página de exibição de promotores.
+ */
 export default function Promoters() {
   const [promoters, setPromoters] = useState<IPromotersProps[]>([]);
   const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ'];
@@ -36,4 +39,5 @@ export default function Promoters() {
   );
 }
 
+// Exporta a função getServerSideProps para ações de servidor
 export { getServerSideProps };

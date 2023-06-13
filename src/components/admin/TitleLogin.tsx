@@ -1,3 +1,8 @@
+/**
+Componente TitleLogin.
+Este componente exibe o título e o logotipo do login do administrador.
+*/
+
 import styles from '@/styles/admin/titleLogin.module.css';
 import Image from 'next/image';
 

@@ -1,7 +1,12 @@
-import { v4 as uuid } from 'uuid'
-import { Admin, getAdmin, loginAdmin, getAllAdmins } from '../../types/admin'
 import md5 from "md5";
+import { v4 as uuid } from 'uuid';
+import { Admin, getAdmin, getAllAdmins, loginAdmin } from '../../types/admin';
 
+/**
+ * Função que trata as solicitações recebidas pelo servidor.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
 
     const { service } = req.body
@@ -35,7 +40,7 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    res.json({ error: 'Administrador não encontrado.'})
+                    res.json({ error: 'Administrador não encontrado.' })
                 }
 
                 break

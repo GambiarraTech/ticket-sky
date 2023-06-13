@@ -1,5 +1,8 @@
 import { query } from '@/lib/db'
 
+/**
+ * Tipo de dados para um administrador.
+ */
 export type Admin = {
     id: number,
     nome: string,
@@ -8,6 +11,12 @@ export type Admin = {
     super_adm: number
 }
 
+/**
+ * Função assíncrona para fazer o login de um administrador.
+ * @param email O email do administrador.
+ * @param senha A senha do administrador.
+ * @returns Um objeto Admin contendo os dados do administrador logado, ou null se o login falhar.
+ */
 export async function loginAdmin(email: string, senha: string) {
 
     const admin: any = await query({
@@ -24,6 +33,12 @@ export async function loginAdmin(email: string, senha: string) {
 
 }
 
+/**
+ * Função assíncrona para fazer o login de um administrador.
+ * @param email O email do administrador.
+ * @param senha A senha do administrador.
+ * @returns Um objeto Admin contendo os dados do administrador logado, ou null se o login falhar.
+ */
 export async function getAdmin(id: string) {
 
     const admin: any = await query({
@@ -39,6 +54,10 @@ export async function getAdmin(id: string) {
 
 }
 
+/**
+ * Função assíncrona para obter todos os administradores.
+ * @returns Um array de objetos Admin contendo os dados de todos os administradores encontrados, ou null se nenhum administrador for encontrado.
+ */
 export async function getAllAdmins() {
 
     const admins: any = await query({

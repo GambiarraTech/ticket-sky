@@ -1,12 +1,17 @@
 import styles from '../styles/warningModal.module.css';
 import CustomModal from './CustomModal';
 
-
+/**
+ * Propriedades do componente AlertaModal.
+ */
 interface AlertaModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+/**
+ * Componente para exibir um modal de aviso ou mensagem de confirmação.
+ */
 const AlertaModal: React.FC<AlertaModalProps> = ({ isOpen, onClose }) => {
   return (
     <CustomModal

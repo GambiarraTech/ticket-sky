@@ -1,13 +1,28 @@
+/**
+Componente AlterarSenha.
+Este componente exibe um formulário para alteração de senha do usuário.
+Ele faz uso do contexto de autenticação (AuthContext) para obter as informações do usuário.
+O usuário preenche os campos de senha antiga, nova senha e confirmação da nova senha.
+Quando o botão "Alterar Senha" é clicado, é feita a validação dos campos e a chamada à API para efetuar a alteração da senha.
+O resultado da alteração da senha é exibido em um alerta.
+*/
+
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import style from '@/styles/cliente/meuCartao.module.css';
 import styles from '@/styles/cliente/meuPerfil.module.css';
 import { useContext, useState } from 'react';
 
+/**
+ * Propriedades do componente AlterarSenha.
+ */
 interface ModalAlteraSenhaProps {
   onSubmit: () => void;
 }
 
+/**
+ * Componente para exibir um formulário de alteração de senha.
+ */
 export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   const { user } = useContext(AuthContext);
 
@@ -24,6 +39,9 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
     service: 'alterarSenha',
   });
 
+  /**
+   * Função para realizar a alteração de senha.
+   */
   async function alterarSenha() {
     // Define a mensagem que vai aparecer para o usuário
     var conteudo = '';

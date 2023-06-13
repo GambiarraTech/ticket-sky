@@ -1,3 +1,8 @@
+/**
+Componente Layout.
+@param children Os elementos filhos a serem renderizados dentro do layout.
+*/
+
 import styles from '@/styles/admin/Layout.module.css';
 import Footer from './Footer';
 import NavBar from './NavBar';

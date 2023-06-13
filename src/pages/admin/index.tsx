@@ -4,6 +4,9 @@ import Layout from '@/components/admin/Layout';
 import { getServerSideProps } from '@/lib/auth';
 import styles from '@/styles/admin/Admin.module.css';
 
+/**
+ * Página "Admin" que exibe os componentes de cartão relacionados às funcionalidades de administração.
+ */
 export default function Admin() {
   return (
     <Layout>

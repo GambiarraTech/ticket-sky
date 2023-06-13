@@ -1,7 +1,18 @@
+/**
+Componente Table.
+Este componente exibe uma tabela de ingressos do usuário.
+Recebe um array de objetos meusIngressosType como propriedade, contendo informações sobre cada ingresso.
+O componente mapeia os objetos e exibe uma linha na tabela para cada ingresso.
+Cada linha exibe uma imagem do ingresso, o nome do evento, a data de aquisição e o valor total.
+*/
+
 import style from '@/styles/cliente/table.module.css';
 import Image from 'next/image';
 import { FC } from 'react';
 
+/**
+ * Tipo de dados para um ingresso.
+ */
 export type meusIngressosType = {
   img: string;
   nomeEvento: string;
@@ -9,10 +20,16 @@ export type meusIngressosType = {
   valorTotal: string;
 };
 
+/**
+ * Props para o componente Table.
+ */
 interface TableProps {
   data?: meusIngressosType[];
 }
 
+/**
+ * Componente de tabela para exibir dados de ingressos.
+ */
 const Table: FC<TableProps> = ({ data }) => {
   return (
     <div className={style.positionTable}>

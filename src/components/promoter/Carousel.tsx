@@ -5,6 +5,9 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from '../../styles/promoter/carousel.module.css';
 
+/**
+ * Props do componente `Carousel`.
+ */
 interface CarouselProps {
   title?: String;
   page?: String;
@@ -69,18 +72,21 @@ function ConvertDate(data: Date, service: String) {
   }
 }
 
+/**
+ * Componente de carrossel de eventos.
+ */
 export default function Carousel({ title, page, category }: CarouselProps) {
   const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
-  const [titulo, setTitulo] = useState< String | null >()
+  const [titulo, setTitulo] = useState<String | null>();
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let isMounted = true;
 
-    setTitulo(title)
+    setTitulo(title);
     if (category) {
-      setTitulo(category + 's')
+      setTitulo(category + 's');
     }
 
     if (category) {
@@ -118,8 +124,10 @@ export default function Carousel({ title, page, category }: CarouselProps) {
     };
   }, [isLogged, user, category]);
 
-
-
+  /**
+   * Manipulador de clique no botão de rolagem para a esquerda.
+   * @param e - O evento de clique.
+   */
   const handleLeftClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {
@@ -127,6 +135,10 @@ export default function Carousel({ title, page, category }: CarouselProps) {
     }
   };
 
+  /**
+   * Manipulador de clique no botão de rolagem para a direita.
+   * @param e - O evento de clique.
+   */
   const handleRightClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {

@@ -4,10 +4,11 @@ import { AuthContext } from '@/contexts/AuthContext';
 import Head from 'next/head';
 import { useContext } from 'react';
 
-// function getMeusIngressos(id){
-
-// }
-
+/**
+ * Página de exibição dos "Meus Ingressos" para um cliente.
+ * Esta página exibe uma tabela contendo os ingressos adquiridos pelo cliente.
+ * @returns JSX.Element
+ */
 export default function meusIngressos() {
   const { user } = useContext(AuthContext);
 
