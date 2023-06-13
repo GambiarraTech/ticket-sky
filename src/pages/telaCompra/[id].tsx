@@ -44,7 +44,9 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>{obj.qntVip}</dd>
+                            <dd className={style.inline}>{'Inteira: '+obj.qntVipInt}</dd>
+                            <dd className={style.inline}>{'Meia: '+obj.qntVipMeia}</dd>
+                            <dd className={style.inline}>{'Gratuita: '+obj.qntVipGrat}</dd>
                           </div>
                         </dl>
                       </div>
@@ -62,7 +64,9 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>{obj.qntdBack}</dd>
+                            <dd className={style.inline}>{'Inteira: '+obj.qntdBackInt}</dd>
+                            <dd className={style.inline}>{'Meia: '+obj.qntdBackMeia}</dd>
+                            <dd className={style.inline}>{'Gratuita: '+obj.qntdBackGrat}</dd>
                           </div>
                         </dl>
                       </div>
@@ -80,7 +84,9 @@ export default function CheckoutPage() {
 
                           <div>
                             <dt className={style.inline}>Quantidade: </dt>
-                            <dd className={style.inline}>{obj.qntdCamarote}</dd>
+                            <dd className={style.inline}>{'Inteira: '+obj.qntdCamaroteInt}</dd>
+                            <dd className={style.inline}>{'Meia: '+obj.qntdCamaroteMeia}</dd>
+                            <dd className={style.inline}>{'Gratuita: '+obj.qntdCamaroteGrat}</dd>
                           </div>
                         </dl>
                       </div>

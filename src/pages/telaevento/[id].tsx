@@ -1,17 +1,21 @@
 import CountInput from '@/components/cliente/CountInput';
+import { AuthContext } from '@/contexts/AuthContext';
 import axios from 'axios';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MdOutlineLocationCity } from 'react-icons/md';
 import NavbarCliente from '../../components/cliente/NavbarCliente';
 import style from '../../styles/cliente/telaEvento.module.css';
+
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
 export default function TelaEvento() {
   
+  const { user } = useContext(AuthContext);
+
   //Configuração axios
   const api = axios.create({
     baseURL: 'http://localhost:3000/api'
@@ -230,6 +234,11 @@ export default function TelaEvento() {
 
   // OnClick do botão de comprar (vai para tela de pagamento)
   const handleClick = (e: any) => {
+    
+    if(user == undefined){
+      return alert('Você precisa estar logado para realizar uma compra!')
+    }
+    
     e.preventDefault()
 
     infosCompra.nomePromoter = evento.pronome;
