@@ -22,6 +22,7 @@ export default function MeuPerfil() {
               Nome:
             </label>
             <input
+              id='Nome'
               className={styles.input}
               value={user.nome}
               type="text"
@@ -33,6 +34,7 @@ export default function MeuPerfil() {
               Sobrenome:
             </label>
             <input
+              id='Sobrenome'
               className={styles.input}
               value={user.sobrenome}
               type="text"
@@ -44,6 +46,7 @@ export default function MeuPerfil() {
               E-mail:
             </label>
             <input
+              id='Email'
               className={styles.input}
               value={user.email}
               type="email"
@@ -55,6 +58,7 @@ export default function MeuPerfil() {
               CPF:
             </label>
             <input
+              id='CPF'
               className={styles.input}
               value={user.cpf}
               type="text"
@@ -68,6 +72,7 @@ export default function MeuPerfil() {
               Alterar Senha:
             </label>
             <input
+              id='Alterar Senha'
               className={styles.input}
               type="alterPassword"
               onChange={(e) => (cliente.alterPassword = e.target.value)}
@@ -77,7 +82,7 @@ export default function MeuPerfil() {
             <label className={styles.label} htmlFor="Senha">
               Senha:
             </label>
-            <input className={styles.input} type="password" onChange={(e) => (cliente.senha = e.target.value)} />
+            <input id='Senha' className={styles.input} type="password" onChange={(e) => (cliente.senha = e.target.value)} />
           </div>
           <div className={styles.row}>
             <button className={styles.salvarAlt}>Salvar Alterações</button>

@@ -17,7 +17,7 @@ export default function MeuPerfil() {
     cpf: user.cpf,
     service: "editarCliente"
   });
-  
+
   async function editaCliente() {
     const res = await router.apiPost(cliente, 'cliente');
     alert(res.result);
@@ -32,6 +32,7 @@ export default function MeuPerfil() {
               Nome:
             </label>
             <input
+              id='Nome'
               className={styles.input}
               defaultValue={user.nome}
               type="text"
@@ -43,6 +44,7 @@ export default function MeuPerfil() {
               E-mail:
             </label>
             <input
+              id='Email'
               className={styles.input}
               defaultValue={user.email}
               type="text"
@@ -51,30 +53,32 @@ export default function MeuPerfil() {
           </div>
         </div>
         <div className={styles.inputPositionRight}>
-            <div className={styles.row}>
-              <label className={styles.label} htmlFor="Sobrenome">
-                Sobrenome:
-              </label>
-              <input
-                className={styles.input}
-                defaultValue={user.sobrenome}
-                type="text"
-                onChange={(e) => (cliente.sobrenome = e.target.value)}
-              />
-            </div>
-          
-            <div className={styles.row}>
-              <label className={styles.label} htmlFor="CPF">
-                CPF:
-              </label>
-              <input
-                className={styles.input}
-                defaultValue={user.cpf}
-                type="text"
-                maxLength={11}
-                onChange={(e) => (cliente.cpf = e.target.value)}
-              />
-            </div>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Sobrenome">
+              Sobrenome:
+            </label>
+            <input
+              id='Sobrenome'
+              className={styles.input}
+              defaultValue={user.sobrenome}
+              type="text"
+              onChange={(e) => (cliente.sobrenome = e.target.value)}
+            />
+          </div>
+
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="CPF">
+              CPF:
+            </label>
+            <input
+              id='CPF'
+              className={styles.input}
+              defaultValue={user.cpf}
+              type="text"
+              maxLength={11}
+              onChange={(e) => (cliente.cpf = e.target.value)}
+            />
+          </div>
           <div>
             <div className={styles.row}>
               <button className={styles.salvarAlt} onClick={editaCliente}>Salvar Alterações</button>

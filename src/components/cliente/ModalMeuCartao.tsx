@@ -82,7 +82,7 @@ export default function MeuCartao() {
         </div>
       </form>
       <div className={style.buttonDiv}>
-        <button className={style.buttonDelete}>Remover</button>
+        <button className={style.buttonDelete} onClick={() => deletarCartao(cartao.cpf, cartao.numero)}>Remover</button>
         <button className={style.buttonSave} onClick={cadastrarCartao}>
           Salvar
         </button>
