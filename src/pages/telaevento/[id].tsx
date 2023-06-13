@@ -269,18 +269,19 @@ export default function TelaEvento() {
                   <div className={style.setor}>{'Vip (R$' + ingressoVip.valor + ')'}</div>
                   <div className={style.tipoIngresso}>
                     Inteira
-                    <CountInput valorInicial={0} onChange={(e) => handleChange(e, ingressoVip.valor, 'vip', 'int')} />
+                    <CountInput valorInicial={0} max={ingressoVip.quantidade} onChange={(e) => handleChange(e, ingressoVip.valor, 'vip', 'int')} />
                   </div>
                   <div className={style.tipoIngresso}>
                     Meia
                     <CountInput
                       valorInicial={0}
+                      max={ingressoVip.quantidade}
                       onChange={(e) => handleChange(e, ingressoVip.valor * 0.5, 'vip', 'meia')}
                     />
                   </div>
                   <div className={style.tipoIngresso}>
                     Gratuita
-                    <CountInput valorInicial={0} onChange={(e) => handleChange(e, 0, 'vip', 'grat')} />
+                    <CountInput max={ingressoVip.quantidade} valorInicial={0} onChange={(e) => handleChange(e, 0, 'vip', 'grat')} />
                   </div>
                 </div>
                 <div className={style.countPosition}>
@@ -288,18 +289,19 @@ export default function TelaEvento() {
 
                   <div className={style.tipoIngresso}>
                     Inteira
-                    <CountInput valorInicial={0} onChange={(e) => handleChange(e, ingressoBack.valor, 'back', 'int')} />
+                    <CountInput max={ingressoBack.quantidade} valorInicial={0} onChange={(e) => handleChange(e, ingressoBack.valor, 'back', 'int')} />
                   </div>
                   <div className={style.tipoIngresso}>
                     Meia
                     <CountInput
+                      max={ingressoBack.quantidade}
                       valorInicial={0}
                       onChange={(e) => handleChange(e, ingressoBack.valor * 0.5, 'back', 'meia')}
                     />
                   </div>
                   <div className={style.tipoIngresso}>
                     Gratuita
-                    <CountInput valorInicial={0} onChange={(e) => handleChange(e, 0, 'back', 'grat')} />
+                    <CountInput max={ingressoBack.quantidade} valorInicial={0} onChange={(e) => handleChange(e, 0, 'back', 'grat')} />
                   </div>
                 </div>
                 <div className={style.countPosition}>
@@ -308,6 +310,7 @@ export default function TelaEvento() {
                   <div className={style.tipoIngresso}>
                     Inteira
                     <CountInput
+                      max={ingressoCamarote.quantidade}
                       valorInicial={0}
                       onChange={(e) => handleChange(e, ingressoCamarote.valor, 'cam', 'int')}
                     />
@@ -315,13 +318,14 @@ export default function TelaEvento() {
                   <div className={style.tipoIngresso}>
                     Meia
                     <CountInput
+                    max={ingressoCamarote.quantidade}
                       valorInicial={0}
                       onChange={(e) => handleChange(e, ingressoCamarote.valor * 0.5, 'cam', 'meia')}
                     />
                   </div>
                   <div className={style.tipoIngresso}>
                     Gratuita
-                    <CountInput valorInicial={0} onChange={(e) => handleChange(e, 0, 'cam', 'grat')} />
+                    <CountInput max={ingressoCamarote.quantidade} valorInicial={0} onChange={(e) => handleChange(e, 0, 'cam', 'grat')} />
                   </div>
                 </div>
               </div>
