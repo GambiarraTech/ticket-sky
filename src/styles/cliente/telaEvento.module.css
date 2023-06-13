@@ -3,11 +3,23 @@
 }
 
 .containerGeral {
-  @apply container px-5 py-6 lg:w-4/5 mx-auto flex flex-wrap shadow-xl;
+  @apply container px-0 py-6 mx-auto flex flex-wrap items-center justify-around shadow-xl;
+}
+
+.countInputContainer {
+  @apply flex flex-col items-center;
+}
+
+.conteinerInfos {
+  @apply flex grid grid-cols-2 gap-28 justify-center;
+}
+
+.conteinerCount {
+  @apply flex grid grid-cols-3 gap-28 mt-10 justify-center;
 }
 
 .imgBanner {
-  @apply  w-full lg:h-auto h-full object-cover object-center rounded;
+  @apply w-full h-full object-cover object-center rounded;
 }
 
 .content {
@@ -19,11 +31,11 @@
 }
 
 .eventName {
-  @apply text-ticket-sky-blue text-3xl mb-1 flex mb-4;
+  @apply text-ticket-sky-blue text-3xl flex mb-4;
 }
 
 .description {
-  @apply leading-relaxed ;
+  @apply leading-relaxed;
 }
 
 .eventInfo {
@@ -39,19 +51,19 @@
 }
 
 .flexEvent {
-  @apply flex;
+  @apply flex mt-5;
 }
 
 .price {
-  @apply font-medium text-2xl text-gray-900;
+  @apply flex font-bold text-3xl text-gray-900 mr-10 items-center;
 }
 
 .positionBuyButton {
-  @apply flex flex-1 justify-end;
+  @apply mt-5 flex justify-center;
 }
 
 .buyButton {
-  @apply mr-1.5 flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 rounded;
+  @apply flex text-white text-lg bg-green-700 border-0 py-3 px-12 focus:outline-none hover:bg-green-700 rounded;
 }
 
 .eventLocation {
@@ -64,7 +76,7 @@
 
 /* COUNT INPUT */
 .countInput {
-  @apply flex items-center w-full justify-end;
+  @apply flex items-center w-full;
 }
 
 .buttonCount {
@@ -74,10 +86,15 @@
 .centerQuant {
   @apply px-3 py-2 w-16 text-center;
 }
-.containerImg{
-  @apply container shadow-xl w-96 h-96
+
+.containerImg {
+  @apply container w-[500px] h-[400px] shadow-xl;
 }
 
-.ingressos{
-  @apply flex justify-center
+.tipoIngresso {
+  @apply font-bold text-base my-2;
+}
+
+.setor {
+  @apply flex text-lg items-center;
 }
