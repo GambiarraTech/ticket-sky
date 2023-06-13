@@ -17,7 +17,8 @@ export default function MeuPerfil() {
     service: 'editarPromoter',
   });
 
-  async function editarPromoter() {
+  async function editarPromoter(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     promoter.service = 'editarPromoter';
     const res = await router.apiPost(promoter, 'promoter');
     alert(res.result);
@@ -34,6 +35,7 @@ export default function MeuPerfil() {
   return (
     <>
       <div className={styles.container}>
+        <form onSubmit={editarPromoter}>
         <div className={styles.title}>
           <h1>Meu Perfil</h1>
         </div>
@@ -46,7 +48,7 @@ export default function MeuPerfil() {
           required
         />
         <label>Nome</label>
-        <input type="text" defaultValue={promoter.nome} onChange={(e) => (promoter.nome = e.target.value)} required />
+        <input type="text" defaultValue={promoter.nome} maxLength={20} onChange={(e) => (promoter.nome = e.target.value)} required />
         <label>CPF/CNPJ</label>
         <input
           type="text"
@@ -55,17 +57,19 @@ export default function MeuPerfil() {
           readOnly
         />
         <div className={styles.buttonsContainer}>
-          <button className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
+          <button type='button' className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
             Alterar Senha
           </button>
-          <button className={styles.buttonSalvar} onClick={editarPromoter}>
+          <button type='submit' className={styles.buttonSalvar} >
             Salvar Alterações
           </button>
         </div>
-      </div>
-      <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
+        </form>
+        <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
         <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
       </Modal>
+      </div>
+
     </>
   );
 }

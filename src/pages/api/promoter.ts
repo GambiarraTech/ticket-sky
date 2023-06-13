@@ -1,6 +1,7 @@
 import md5 from "md5";
 import { v4 as uuid } from 'uuid';
 import * as promoter from '../../types/promoter';
+import { cp } from "fs/promises";
 
 export default async (req: any, res: any) => {
 
@@ -45,6 +46,10 @@ export default async (req: any, res: any) => {
             }
             case 'cadastroPromoter': {
                 const { nome, email, senha, cpf_cnpj } = body
+                const verificaCPF_CNPJ = isNumericString(cpf_cnpj)
+                if(!verificaCPF_CNPJ || cpf_cnpj.length <11){
+                    res.json({ error: 'CPF/CNPJ inválido!' })
+                }
                 const senhaHash = md5(senha)
                 const checkLogin: promoter.Promoter = await promoter.cadastroPromoter(nome, email, senhaHash, cpf_cnpj)
 
@@ -174,3 +179,8 @@ export default async (req: any, res: any) => {
     }
 
 }
+
+function isNumericString(str: string): boolean {
+    return /^\d+$/.test(str);
+  }
+
