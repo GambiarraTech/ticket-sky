@@ -22,11 +22,8 @@ export default function ModalMeuPerfil() {
   async function editarCliente(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     cliente.service = 'editarCliente';
-    console.log(cliente)
-    console.log('nada')
 
     const res = await router.apiPost(cliente, 'cliente');
-
 
     alert(res.result);
   }
@@ -40,49 +37,60 @@ export default function ModalMeuPerfil() {
   }, []);
 
   return (
-<>
-
-    <div className={styles.container}>
-     <form onSubmit={editarCliente}>
-        <div className={styles.title}>
-          <h1>Meu Perfil</h1>
-        </div>
-        <label>Email</label>
-        <input
-          type="email"
-          readOnly
-          maxLength={30}
-          defaultValue={cliente.email}
-          onChange={(e) => (cliente.email = e.target.value)}
-          required
-        />
-        <label>Nome</label>
-        <input type="text" defaultValue={cliente.nome} maxLength={30} required onChange={(e) => (cliente.nome = e.target.value)}  />
-        <label>Sobrenome</label>
-        <input
-          type="text"
-          defaultValue={cliente.sobrenome}
-          maxLength={20}
-          onChange={(e) => (cliente.sobrenome = e.target.value)}
-          required
-        />
-        <label>CPF</label>
-        <input type="text" defaultValue={cliente.cpf} maxLength={11} minLength={11} pattern="[0-9]*" inputMode="numeric" onChange={(e) => (cliente.cpf = e.target.value)} />
-        <div className={styles.buttonsContainer}>
-          <button type='button' className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
-            Alterar Senha
-          </button>
-          <button type='submit' className={styles.buttonSalvar} >
-            Salvar Alterações
-          </button>
-        </div>
-
+    <>
+      <div className={styles.container}>
+        <form onSubmit={editarCliente}>
+          <div className={styles.title}>
+            <h1>Meu Perfil</h1>
+          </div>
+          <label>Email</label>
+          <input
+            type="email"
+            readOnly
+            maxLength={30}
+            defaultValue={cliente.email}
+            onChange={(e) => (cliente.email = e.target.value)}
+            required
+          />
+          <label>Nome</label>
+          <input
+            type="text"
+            defaultValue={cliente.nome}
+            maxLength={30}
+            required
+            onChange={(e) => (cliente.nome = e.target.value)}
+          />
+          <label>Sobrenome</label>
+          <input
+            type="text"
+            defaultValue={cliente.sobrenome}
+            maxLength={20}
+            onChange={(e) => (cliente.sobrenome = e.target.value)}
+            required
+          />
+          <label>CPF</label>
+          <input
+            type="text"
+            defaultValue={cliente.cpf}
+            maxLength={11}
+            minLength={11}
+            pattern="[0-9]*"
+            inputMode="numeric"
+            onChange={(e) => (cliente.cpf = e.target.value)}
+          />
+          <div className={styles.buttonsContainer}>
+            <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
+              Alterar Senha
+            </button>
+            <button type="submit" className={styles.buttonSalvar}>
+              Salvar Alterações
+            </button>
+          </div>
         </form>
         <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
-        <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
+          <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
         </Modal>
       </div>
-
     </>
   );
 }
