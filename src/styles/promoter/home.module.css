@@ -3,7 +3,7 @@
 }
 
 .msg {
-  @apply flex mt-52 text-center text-gray-200 font-bold text-6xl;
+  @apply flex text-center text-gray-200 font-bold text-6xl;
 }
 
 .foter {
