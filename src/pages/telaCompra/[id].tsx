@@ -17,7 +17,7 @@ export default function CheckoutPage() {
               <div className={style.nomediv}>
                 <h2 className={style.nome}>Nome do Evento</h2>
               </div>
-              <h1 className={style.textsm}>Nome do Promoter</h1>
+              <h1 className={style.textmd}>Nome do Promoter</h1>
 
               <div>
                 <p className={style.valorTotal}>Valor Total: </p>
