@@ -72,30 +72,41 @@ function ConvertDate(data: Date, service: String) {
 export default function Carousel({ title, page, category }: CarouselProps) {
   const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [titulo, setTitulo] = useState< String | null >()
   let carousel = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let isMounted = true; // Variável de controle para verificar se o componente está montado
+    let isMounted = true;
+
+    setTitulo(title)
+    if (category) {
+      setTitulo(category + 's')
+    }
 
     if (category) {
-      title = category + 's';
-
-        apiPost({ service: category }, 'evento').then((value) => {
-          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+      if (isLogged && user.role === 'promoter') {
+        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
+          if (isMounted) {
             setData(value.result);
           }
         });
-      
+      } else {
+        apiPost({ service: category }, 'evento').then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      }
     } else {
       if (isLogged && user.role === 'promoter') {
         apiGet(`evento?id=${user.id}`).then((value) => {
-          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+          if (isMounted) {
             setData(value.result);
           }
         });
       } else {
         apiGet('evento').then((value) => {
-          if (isMounted) { // Verifica se o componente ainda está montado antes de atualizar o estado
+          if (isMounted) {
             setData(value.result);
           }
         });
@@ -103,9 +114,11 @@ export default function Carousel({ title, page, category }: CarouselProps) {
     }
 
     return () => {
-      isMounted = false; // Define a variável para false quando o componente for desmontado
+      isMounted = false;
     };
   }, [isLogged, user, category]);
+
+
 
   const handleLeftClick = (e: any) => {
     e.preventDefault();
@@ -123,78 +136,26 @@ export default function Carousel({ title, page, category }: CarouselProps) {
 
   if (!data || !data.length) return null;
 
-  //Esconder os botões caso o carrossel não ultrapasse a tela
-  if (data.length < 4) {
-    return (
-      <div className={styles.column}>
-        <div className={styles.titleAndButtons}>
-          <div>
-            <p>{title}</p>
-          </div>
+  return (
+    <div className={styles.column}>
+      <div className={styles.titleAndButtons}>
+        <div>
+          <p>{titulo}</p>
+        </div>
+        {data.length <= 4 ? (
           <div id="buttons" className={styles.buttonsInative}>
             <div>
               <button>
-                <IoIosArrowBack size="16" color="#e5e7eb" />
+                <IoIosArrowBack size="32" color="#e5e7eb" />
               </button>
             </div>
             <div>
               <button>
-                <IoIosArrowForward size="16" color="#e5e7eb" />
+                <IoIosArrowForward size="32" color="#e5e7eb" />
               </button>
             </div>
           </div>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.carousel} ref={carousel}>
-            {data.map((item) => {
-              const { id, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
-              const url = 'data:image/png;base64,' + banner;
-              const date = new Date(data_hora);
-              let dia = date.getDate().toString();
-              let horas = date.getHours().toString();
-              let minutos = date.getMinutes().toString();
-              if (date.getDate() < 10) {
-                dia = date.getDate().toString().padStart(2, '0');
-              }
-              if (date.getHours() < 10) {
-                horas = date.getHours().toString().padStart(2, '0');
-              }
-              if (date.getMinutes() < 10) {
-                minutos = date.getMinutes().toString().padStart(2, '0');
-              }
-              return (
-                <div
-                  id="itemID"
-                  className={styles.item}
-                  key={id}
-                  onClick={() => (window.location.href = 'telaevento/' + id)}
-                >
-                  <div className={styles.image}>
-                    <Image src={url} alt={descricao} height="260" width="420" />
-                  </div>
-                  <div className={styles.info}>
-                    <span className={styles.date}>
-                      {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
-                    </span>
-                    <span className={styles.name}>{evnome}</span>
-                    <span className={styles.address}>
-                      {bairro}, {rua}, {numero}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.column}>
-        <div className={styles.titleAndButtons}>
-          <div>
-            <p>{title}</p>
-          </div>
+        ) : (
           <div id="buttons" className={styles.buttons}>
             <div>
               <button onClick={handleLeftClick}>
@@ -207,50 +168,50 @@ export default function Carousel({ title, page, category }: CarouselProps) {
               </button>
             </div>
           </div>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.carousel} ref={carousel}>
-            {data.map((item) => {
-              const { id, descricao, banner, data_hora, evnome, bairro, rua, numero } = item;
-              const url = 'data:image/png;base64,' + banner;
-              const date = new Date(data_hora);
-              let dia = date.getDate().toString();
-              let horas = date.getHours().toString();
-              let minutos = date.getMinutes().toString();
-              if (date.getDate() < 10) {
-                dia = date.getDate().toString().padStart(2, '0');
-              }
-              if (date.getHours() < 10) {
-                horas = date.getHours().toString().padStart(2, '0');
-              }
-              if (date.getMinutes() < 10) {
-                minutos = date.getMinutes().toString().padStart(2, '0');
-              }
-              return (
-                <div
-                  id="itemID"
-                  className={styles.item}
-                  key={id}
-                  onClick={() => (window.location.href = 'telaevento/' + id)}
-                >
-                  <div className={styles.image}>
-                    <Image src={url} alt={descricao} height="260" width="420" />
-                  </div>
-                  <div className={styles.info}>
-                    <span className={styles.date}>
-                      {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
-                    </span>
-                    <span className={styles.name}>{evnome}</span>
-                    <span className={styles.address}>
-                      {bairro}, {rua}, {numero}
-                    </span>
-                  </div>
+        )}
+      </div>
+      <div className={styles.container}>
+        <div className={styles.carousel} ref={carousel}>
+          {data.map((item) => {
+            const { id, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
+            const url = 'data:image/png;base64,' + banner;
+            const date = new Date(data_hora);
+            let dia = date.getDate().toString();
+            let horas = date.getHours().toString();
+            let minutos = date.getMinutes().toString();
+            if (date.getDate() < 10) {
+              dia = date.getDate().toString().padStart(2, '0');
+            }
+            if (date.getHours() < 10) {
+              horas = date.getHours().toString().padStart(2, '0');
+            }
+            if (date.getMinutes() < 10) {
+              minutos = date.getMinutes().toString().padStart(2, '0');
+            }
+            return (
+              <div
+                id="itemID"
+                className={styles.item}
+                key={id}
+                onClick={() => (window.location.href = 'telaevento/' + id)}
+              >
+                <div className={styles.image}>
+                  <Image src={url} alt={descricao} height="260" width="420" />
                 </div>
-              );
-            })}
-          </div>
+                <div className={styles.info}>
+                  <span className={styles.date}>
+                    {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
+                  </span>
+                  <span className={styles.name}>{evnome}</span>
+                  <span className={styles.address}>
+                    {bairro}, {rua}, {numero}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

@@ -93,9 +93,14 @@ export default function CardAprovarPromoter() {
           <div className={styles.container}>
             <div className={styles.allContentContainer}>
               <div id="allContentID" className={styles.allContent} ref={carousel}>
-                {promotersNaoAprovados.map((promoter) => {
+                {promotersNaoAprovados.map((promoter, index) => {
                   return (
-                    <div id="itemID" className={styles.item} key={promoter.id}>
+                    <div
+                      id="itemID"
+                      className={styles.item}
+                      style={index == promotersNaoAprovados.length - 1 ? {} : { borderRightWidth: '1px' }}
+                      key={promoter.id}
+                    >
                       <div className={styles.contentItem}>
                         <div
                           className={styles.infoItem}
@@ -108,7 +113,7 @@ export default function CardAprovarPromoter() {
                             <div className={styles.txtImg}>
                               <FaUserClock size={60} />
                             </div>
-                            <div>{`Nome: ${promoter.nome}`}</div>
+                            <div>{`${promoter.nome}`}</div>
                           </div>
                         </div>
                         <div className={styles.buttons}>
