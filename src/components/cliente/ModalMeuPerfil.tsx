@@ -19,7 +19,8 @@ export default function ModalMeuPerfil() {
     service: '',
   });
 
-  async function editarCliente() {
+  async function editarCliente(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     cliente.service = 'editarCliente';
     console.log(cliente)
     console.log('nada')
@@ -66,7 +67,7 @@ export default function ModalMeuPerfil() {
           required
         />
         <label>CPF</label>
-        <input type="text" defaultValue={cliente.cpf} maxLength={11} minLength={11} onChange={(e) => (cliente.cpf = e.target.value)} />
+        <input type="text" defaultValue={cliente.cpf} maxLength={11} minLength={11} pattern="[0-9]*" inputMode="numeric" onChange={(e) => (cliente.cpf = e.target.value)} />
         <div className={styles.buttonsContainer}>
           <button type='button' className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
             Alterar Senha
@@ -75,10 +76,11 @@ export default function ModalMeuPerfil() {
             Salvar Alterações
           </button>
         </div>
+
+        </form>
         <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
         <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
         </Modal>
-        </form>
       </div>
 
     </>
