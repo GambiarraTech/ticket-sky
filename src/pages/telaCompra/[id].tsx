@@ -14,7 +14,22 @@ export default function CheckoutPage() {
   
   // Informações da compra vinda da tela de evento
   const obj = JSON.parse(query.id as string)
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      event.preventDefault();
+      event.returnValue = ''; // Mensagem vazia para o navegador
+      
+    };
     
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      
+    };
+  }, []);
+  
   const { user } = useContext(AuthContext);
   
   const [cartao, setCartao] = useState({
