@@ -1,6 +1,7 @@
 import { IAdminProps } from '@/pages/admin/administradores';
 import { IEventosProps } from '@/pages/admin/eventos';
 import { IPromotersProps } from '@/pages/admin/promoters';
+import { apiPost } from '@/pages/api/router';
 import styles from '@/styles/table/DataTable.module.css';
 import React, { FC } from 'react';
 import { BiSearch } from 'react-icons/bi';
@@ -12,10 +13,13 @@ interface TableProps {
   data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
+  endpoint: string,
+  updateData: () => void;
 }
 
-const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
+const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, updateData }) => {
   const [search, setSearch] = React.useState('');
+  const [forceUpdate, setForceUpdate] = React.useState(false);
   //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
 
@@ -27,6 +31,22 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
     (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
   );
 
+  function upper(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function excluir(endpoint: any, id: any){
+    if( endpoint == 'admin'){
+        apiPost({service: 'excluir'+ upper(endpoint), id: id}, endpoint)
+        .then(() => {
+            updateData(); // Atualiza os dados da tabela após excluir o dado
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir:', error);
+          });
+    }
+
+  }
   return (
     <div className={styles.dataTable}>
       <h1 className={styles.title}>{title}</h1>
@@ -61,7 +81,7 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
                   </td>
                 ))}
                 <td className={styles.tableCellIcon}>
-                  <button>
+                  <button onClick={() => excluir(endpoint,data[index].id)}>
                     <FaTrash color={'red'} />
                   </button>
                 </td>

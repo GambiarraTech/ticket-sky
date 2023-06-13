@@ -51,3 +51,18 @@ export async function getAllAdmins() {
         return null
     }
 }
+
+export async function excluirAdmin(id: string){
+    await query({
+        query: "DELETE FROM administrador WHERE administrador.id = (?)",
+        values: [ id]
+      })
+
+    const admin: any = getAdmin(id)
+
+    if( admin == null){
+        return true
+    }else{
+        return false
+    }
+}
