@@ -16,7 +16,7 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
   }
 
   function reduzir() {
-    if (quantidade > 1) {
+    if (quantidade > 0) {
       setQuantidade((qtAtual) => qtAtual - 1);
       onChange(quantidade - 1);
     }
@@ -29,7 +29,7 @@ export default function CountInput({ valorInicial, onChange }: CountInputProps) 
       </button>
       <input
         type="quantity"
-        min="1"
+        min="0"
         value={quantidade}
         onChange={(event) => {
           const value = parseInt(event.target.value, 10);
