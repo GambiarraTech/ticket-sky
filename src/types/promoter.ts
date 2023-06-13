@@ -1,4 +1,5 @@
 import { query } from '@/lib/db'
+import md5 from 'md5'
 
 export type Promoter = {
     id: number,
@@ -92,8 +93,9 @@ export async function editarPromoter(email: string, nome: string, cpf_cnpj: stri
 }
 
 export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
-
-    const confirmaSenha = await loginPromoter(email, senhaAntiga);
+    const senhaHash = md5(senhaAntiga)
+    const novaSenhaHash = md5(novaSenha)
+    const confirmaSenha = await loginPromoter(email, senhaHash);
 
     if (confirmaSenha != null) {
 
@@ -103,7 +105,7 @@ export async function alterarSenha(email: string, senhaAntiga: string, novaSenha
         else {
             const alteraSenha: any = await query({
                 query: "UPDATE promoter SET senha = (?) WHERE email = (?)",
-                values: [novaSenha, email],
+                values: [novaSenhaHash, email],
             })
 
             return "Senha alterada com sucesso!";

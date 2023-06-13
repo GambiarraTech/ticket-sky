@@ -1,4 +1,4 @@
-import * as relatorios from '../../types/relatorios'
+import * as relatorios from '../../types/relatorios';
 
 export default async (req: any, res: any) => {
 
@@ -9,6 +9,7 @@ export default async (req: any, res: any) => {
         switch (service) {
             case 'meusIngressos': {
                 const meusPedidos = await relatorios.meusIngressos(id)
+
                 if (meusPedidos && meusPedidos.length > 0) {
                     const data = meusPedidos
 
