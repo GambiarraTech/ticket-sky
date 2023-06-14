@@ -1,5 +1,6 @@
 import * as endereco from "@/types/endereco";
 import * as evento from "@/types/evento";
+import * as ingresso from "@/types/ingresso";
 
 export default async (req: any, res: any) => {
     const body = req.body;
@@ -13,6 +14,9 @@ export default async (req: any, res: any) => {
                 const { nome, descricao, imagem, categoria, promoter } = body
                 const data_hora = body.data + ' ' + body.hora
                 const novoEvento: evento.Evento = await evento.cadastroEvento(nome, descricao, data_hora, imagem, novoEndereco.id, categoria, promoter)
+
+                const { vip, backstage, camarote, preco_vip, preco_backstage, preco_camarote } = body
+                const cadastroIngresso: ingresso.Ingresso[] = await ingresso.cadastroIngressos(vip, backstage, camarote, preco_vip, preco_backstage, preco_camarote, novoEvento.id)
 
                 res.json({ result: novoEvento })
                 break;
