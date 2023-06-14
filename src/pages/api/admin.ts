@@ -1,6 +1,6 @@
 import md5 from "md5";
 import { v4 as uuid } from 'uuid';
-import { Admin, excluirAdmin, getAdmin, getAllAdmins, loginAdmin } from '../../types/admin';
+import { Admin, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
 
 /**
  * Função que trata as solicitações recebidas pelo servidor.
@@ -45,6 +45,19 @@ export default async (req: any, res: any) => {
 
                 break
             }
+            case 'editarAdmin': {
+                const { email, nome, sobrenome } = req.body
+
+                const admin = await editarAdmin(email, nome, sobrenome);
+                if (admin != undefined) {
+
+                    res.json({ result: admin })
+                } else {
+
+                    res.json({ error: 'Erro ao editar cliente' })
+                }
+                break
+            }
             case 'getAdmins': {
                 const admins: Admin[] = await getAllAdmins();
 
@@ -70,6 +83,12 @@ export default async (req: any, res: any) => {
                 } else {
                     res.json({ success: false });
                 }
+            }
+            case 'getPerfil': {
+                const email = req.body.email;
+                const checkLogin: Admin = await getAdminEmail(email)
+                res.json({ result: checkLogin })
+                break
             }
             default: {
 

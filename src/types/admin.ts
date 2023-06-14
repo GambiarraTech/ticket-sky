@@ -73,6 +73,46 @@ export async function getAdmin(id: string) {
 
 }
 
+export async function getAdminEmail(id: string) {
+
+    const admin: any = await query({
+        query: "SELECT * FROM administrador WHERE administrador.email = (?)",
+        values: [id],
+    })
+
+    if (Object.keys(admin).length > 0) {
+        return admin[0]
+    } else {
+        return null
+    }
+
+}
+
+/**
+ * Função assíncrona para editar os dados de um admin.
+ * @param email O email do admin a ser editado.
+ * @param nome O novo nome do admin.
+ * @param sobrenome O novo sobrenome do admin.
+ * @returns Uma mensagem informando que o admin foi alterado com sucesso.
+ */
+export async function editarAdmin(email: string, nome: string, sobrenome: string) {
+    const sql = `
+        UPDATE
+            administrador
+        SET
+            nome = (?),
+            sobrenome = (?)
+        WHERE
+            email = (?)
+    `;
+    const editarAdmin: any = await query({
+        query: sql,
+        values: [nome, sobrenome, email]
+    });
+
+    return "Administrador alterado com sucesso!";
+}
+
 /**
  * Função assíncrona para obter todos os administradores.
  * @returns Um array de objetos Admin contendo os dados de todos os administradores encontrados, ou null se nenhum administrador for encontrado.
