@@ -10,9 +10,6 @@ const listaInputs = [
   { id: 'senha', label: 'Digite sua senha:', length: 30 },
 ];
 
-/**
- * Componente para a página de login do promoter.
- */
 export default function Login() {
   return (
     <div className={styles.box}>

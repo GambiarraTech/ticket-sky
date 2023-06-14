@@ -3,23 +3,11 @@
 }
 
 .containerGeral {
-  @apply container px-0 py-6 mx-auto flex flex-wrap items-center justify-around shadow-xl;
-}
-
-.countInputContainer {
-  @apply flex flex-col items-center;
-}
-
-.conteinerInfos {
-  @apply flex grid grid-cols-2 gap-28 justify-center;
-}
-
-.conteinerCount {
-  @apply flex grid grid-cols-3 gap-28 mt-10 justify-center;
+  @apply container px-5 py-24 lg:w-4/5 mx-auto flex flex-wrap;
 }
 
 .imgBanner {
-  @apply w-full h-full object-cover object-center rounded;
+  @apply lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded;
 }
 
 .content {
@@ -27,11 +15,11 @@
 }
 
 .promoterName {
-  @apply text-sm text-gray-400 tracking-widest mb-3;
+  @apply text-sm text-gray-700 tracking-widest mb-3;
 }
 
 .eventName {
-  @apply text-ticket-sky-blue text-3xl flex mb-4;
+  @apply text-ticket-sky-blue text-3xl font-medium mb-1 flex mb-4;
 }
 
 .description {
@@ -43,7 +31,7 @@
 }
 
 .countPosition {
-  @apply flex flex-col items-center bg-gray-100 w-1/3 p-4 mx-2 space-y-4 flex-grow shadow;
+  @apply flex-col ml-6 w-full;
 }
 
 .eventInfoIndividual {
@@ -51,19 +39,19 @@
 }
 
 .flexEvent {
-  @apply flex mt-5;
+  @apply flex;
 }
 
 .price {
-  @apply flex font-bold text-3xl text-gray-900 mr-10 items-center;
+  @apply font-medium text-2xl text-gray-900;
 }
 
 .positionBuyButton {
-  @apply mt-5 flex justify-center;
+  @apply flex flex-1 justify-end;
 }
 
 .buyButton {
-  @apply flex text-white text-lg bg-green-700 border-0 py-3 px-12 focus:outline-none hover:bg-green-700 rounded;
+  @apply mr-1.5 flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-700 rounded;
 }
 
 .eventLocation {
@@ -76,7 +64,7 @@
 
 /* COUNT INPUT */
 .countInput {
-  @apply flex items-center w-full;
+  @apply flex items-center w-full justify-end;
 }
 
 .buttonCount {
@@ -85,16 +73,4 @@
 
 .centerQuant {
   @apply px-3 py-2 w-16 text-center;
-}
-
-.containerImg {
-  @apply container w-[500px] h-[400px] shadow-xl;
-}
-
-.tipoIngresso {
-  @apply font-bold text-base my-2;
-}
-
-.setor {
-  @apply flex text-lg items-center;
 }

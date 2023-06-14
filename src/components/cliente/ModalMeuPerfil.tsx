@@ -1,111 +1,96 @@
-/**
-Componente ModalMeuPerfil.
-Este componente exibe um modal contendo o perfil do usuário logado.
-O componente utiliza o contexto AuthContext para acessar as informações do usuário.
-O usuário pode editar seu perfil, como nome, sobrenome e CPF.
-O usuário também pode alterar sua senha ao clicar no botão "Alterar Senha".
-As alterações feitas no perfil são salvas ao clicar no botão "Salvar Alterações".
-*/
-
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
-import styles from '@/styles/cliente/meuPerfil.module.css';
-import { useContext, useEffect, useState } from 'react';
+import styles from '@/styles/cliente/MeuPerfil.module.css';
+import { useContext, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
 
-/**
- * Componente para exibir e editar o perfil do usuário logado.
- */
-export default function ModalMeuPerfil() {
-    const { user } = useContext(AuthContext);
+export default function MeuPerfil() {
+  const { user } = useContext(AuthContext);
+  const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
-    const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
+  const [cliente, setCliente] = useState({
+    id: user.id,
+    nome: user.nome,
+    sobrenome: user.sobrenome,
+    email: user.email,
+    cpf: user.cpf,
+    service: "editarCliente"
+  });
 
-    const [cliente, setCliente] = useState({
-        id: '',
-        nome: '',
-        sobrenome: '',
-        email: '',
-        cpf: '',
-        service: '',
-    });
+  async function editaCliente() {
+    const res = await router.apiPost(cliente, 'cliente');
+    alert(res.result);
+  }
 
-    /**
-     * Função para editar o perfil do cliente.
-     */
-    async function editarCliente(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        cliente.service = 'editarCliente';
+  return (
+    <>
+      <div className={styles.inputPosition}>
+        <div className={styles.inputPositionLeft}>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Nome">
+              Nome:
+            </label>
+            <input
+              id='Nome'
+              className={styles.input}
+              defaultValue={user.nome}
+              type="text"
+              onChange={(e) => (cliente.nome = e.target.value)}
+            />
+          </div>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Email">
+              E-mail:
+            </label>
+            <input
+              id='Email'
+              className={styles.input}
+              defaultValue={user.email}
+              type="text"
+              onChange={(e) => (cliente.email = e.target.value)}
+            />
+          </div>
+        </div>
+        <div className={styles.inputPositionRight}>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="Sobrenome">
+              Sobrenome:
+            </label>
+            <input
+              id='Sobrenome'
+              className={styles.input}
+              defaultValue={user.sobrenome}
+              type="text"
+              onChange={(e) => (cliente.sobrenome = e.target.value)}
+            />
+          </div>
 
-        const res = await router.apiPost(cliente, 'cliente');
-
-        alert(res.result);
-    }
-
-    useEffect(() => {
-        router.apiPost({ service: 'getPerfil', id: user.id }, 'cliente').then((value) => {
-            if (value.result != null) {
-                setCliente(value.result);
-            }
-        });
-    }, []);
-
-    return (
-        <>
-            <div className={styles.container}>
-                <form onSubmit={editarCliente}>
-                    <div className={styles.title}>
-                        <h1>Meu Perfil</h1>
-                    </div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        readOnly
-                        maxLength={30}
-                        defaultValue={cliente.email}
-                        onChange={(e) => (cliente.email = e.target.value)}
-                        required
-                    />
-                    <label>Nome</label>
-                    <input
-                        type="text"
-                        defaultValue={cliente.nome}
-                        maxLength={30}
-                        required
-                        onChange={(e) => (cliente.nome = e.target.value)}
-                    />
-                    <label>Sobrenome</label>
-                    <input
-                        type="text"
-                        defaultValue={cliente.sobrenome}
-                        maxLength={20}
-                        onChange={(e) => (cliente.sobrenome = e.target.value)}
-                        required
-                    />
-                    <label>CPF</label>
-                    <input
-                        type="text"
-                        defaultValue={cliente.cpf}
-                        maxLength={11}
-                        minLength={11}
-                        pattern="[0-9]*"
-                        inputMode="numeric"
-                        onChange={(e) => (cliente.cpf = e.target.value)}
-                    />
-                    <div className={styles.buttonsContainer}>
-                        <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
-                            Alterar Senha
-                        </button>
-                        <button type="submit" className={styles.buttonSalvar}>
-                            Salvar Alterações
-                        </button>
-                    </div>
-                </form>
-                <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
-                    <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
-                </Modal>
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor="CPF">
+              CPF:
+            </label>
+            <input
+              id='CPF'
+              className={styles.input}
+              defaultValue={user.cpf}
+              type="text"
+              maxLength={11}
+              onChange={(e) => (cliente.cpf = e.target.value)}
+            />
+          </div>
+          <div>
+            <div className={styles.row}>
+              <button className={styles.salvarAlt} onClick={editaCliente}>Salvar Alterações</button>
+              <a className={styles.cancelar}>Cancelar</a>
+              <button className={styles.salvarAlt} onClick={() => setOpenModalAltSenha(true)}>Alterar Senha</button>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+      <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
+        <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
+      </Modal>
+    </>
+  );
 }

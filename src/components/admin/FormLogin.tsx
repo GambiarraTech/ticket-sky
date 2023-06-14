@@ -1,15 +1,8 @@
-/**
-Componente FormLogin.
-*/
-
 import { AuthContext } from '@/contexts/AuthContext';
 import styles from '@/styles/admin/formLogin.module.css';
 import { useContext, useState } from 'react';
 import * as router from '../../pages/api/router';
 
-/**
-Componente de formulário de login.
-*/
 export default function FormLogin() {
   const [admin] = useState({
     email: '',
@@ -20,10 +13,6 @@ export default function FormLogin() {
   const { login } = useContext(AuthContext);
   const [showErro, setShowErro] = useState(false);
 
-  /**
-    Realiza o login do administrador.
-    @param e O evento do clique no botão de login.
-  */
   async function loginAdmin(e: any) {
     admin.service = e.target.name;
     const res = router.apiPost(admin, 'admin');

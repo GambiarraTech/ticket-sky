@@ -1,10 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 
-/**
- * Função responsável por definir as propriedades do lado do servidor.
- * Ela é executada em cada requisição feita para a página.
- */
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const codRole = switchCodRole(ctx.resolvedUrl);
     const { ['ticketsky-token']: token } = parseCookies(ctx);
@@ -36,10 +32,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
 };
 
-/**
- * Função responsável por mapear o código de papel (role) com base na URL da requisição.
- * Retorna o código de papel correspondente.
- */
 function switchCodRole(url: string) {
     const urlSplitted = url.split('/')
     switch (urlSplitted[1]) {

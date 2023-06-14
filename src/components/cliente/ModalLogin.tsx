@@ -1,34 +1,16 @@
-/**
-Componente ModalLogin.
-Este componente exibe um formulário de login ou cadastro para o cliente.
-O formulário pode alternar entre as variantes 'signIn' (login) e 'signUp' (cadastro).
-O usuário preenche os campos necessários (nome, sobrenome, email e senha) dependendo da variante escolhida.
-Quando o botão "Fazer Login" ou "Cadastre-se" é clicado, é feita a chamada à API para realizar o login ou cadastro do cliente.
-Caso ocorra algum erro, uma mensagem de erro é exibida.
-*/
-
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import style from '@/styles/cliente/login.module.css';
 import Image from 'next/image';
 import { useCallback, useContext, useState } from 'react';
 
-/**
- * Propriedades do componente ModalLogin.
- */
 interface ModalLoginProps {
   onSubmit: () => void;
 }
 
-/**
- * Componente para exibir um formulário de login e cadastro de usuário em um modal.
- */
 export default function ModalLogin(props: ModalLoginProps) {
   const [variant, setVariant] = useState('signIn');
 
-  /**
-   * Função para alternar entre as variantes "signIn" e "signUp".
-   */
   const changeVariant = useCallback(() => {
     setShowErroLogin(false);
     setVariant((currentvariant) => (currentvariant === 'signIn' ? 'signUp' : 'signIn'));
@@ -46,9 +28,6 @@ export default function ModalLogin(props: ModalLoginProps) {
   const [showErroLogin, setShowErroLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  /**
-   * Função para realizar o login do cliente.
-   */
   async function loginCliente(event: React.FormEvent) {
     cliente.service = 'loginCliente';
     event.preventDefault();
@@ -72,9 +51,6 @@ export default function ModalLogin(props: ModalLoginProps) {
     }
   }
 
-  /**
-   * Função para cadastrar um novo cliente.
-   */
   async function cadastroCliente(event: React.FormEvent) {
     cliente.service = 'cadastroCliente';
     event.preventDefault();
@@ -105,7 +81,7 @@ export default function ModalLogin(props: ModalLoginProps) {
 
   return (
     <>
-      <form onSubmit={variant === 'signIn' ? loginCliente : cadastroCliente} >
+      <form action="">
         <div className={style.centerText}>
           <h3 className={style.centerLogo}>
             <Image src="/images/logo-minimal.png" alt="Logo" height="100" width="100" />
@@ -155,7 +131,7 @@ export default function ModalLogin(props: ModalLoginProps) {
               />
             </div>
           </div>
-          <button className={style.loginButton}>
+          <button onClick={variant === 'signIn' ? loginCliente : cadastroCliente} className={style.loginButton}>
             {variant === 'signIn' ? 'Fazer Login' : 'Cadastre-se'}
           </button>
           <p className={style.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>

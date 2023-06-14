@@ -5,9 +5,6 @@ import { Input } from '@/types/components/input';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 
-/**
- * Propriedades do componente FormCardProps.
- */
 type FormCardProps = {
   inputs: Input[];
   titulo?: string;
@@ -19,10 +16,7 @@ type FormCardProps = {
   errorMessage: string;
 };
 
-/**
- * Função assíncrona para enviar um email de confirmação após o cadastro.
- * @param emailPromoter O email do promotor para envio da confirmação.
- */
+//Chamar função após dar a confirmação de cadastro na tela
 async function enviaEmailConfirmacao(emailPromoter: string) {
   let data;
   const res = router.apiPost(
@@ -38,9 +32,6 @@ async function enviaEmailConfirmacao(emailPromoter: string) {
   res.then((value) => {});
 }
 
-/**
- * Componente para exibir um formulário personalizável.
- */
 export default function FormCard(props: FormCardProps) {
   // Cria o estado inputValues inicialmente apenas com a propriedade service.
   // O inputValues é um objeto no qual as chaves ([key: string]) são do tipo string e os
@@ -75,10 +66,10 @@ export default function FormCard(props: FormCardProps) {
       const res = router.apiPost(inputValues, props.endPoint);
 
       res.then((value) => {
-        console.log(value);
         if (!value.error) {
           if (props.endPoint == 'promoter' && inputValues.service == 'cadastroPromoter') {
             enviaEmailConfirmacao(inputValues.email);
+            console.log('teste');
             setShowInfoMessage(true);
             setErrorMessage('Solicitação enviada. Verifique seu email.');
           } else {

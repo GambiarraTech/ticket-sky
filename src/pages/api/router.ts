@@ -1,8 +1,3 @@
-/**
- * Função que realiza uma requisição GET para a API.
- * @param endpoint - O endpoint da API a ser chamado.
- * @returns Uma Promise que resolve para os dados retornados pela API.
- */
 export async function apiGet(endpoint: any) {
     const response = await fetch(`../api/${endpoint}`, {
         method: 'GET',
@@ -15,12 +10,6 @@ export async function apiGet(endpoint: any) {
 
 }
 
-/**
- * Função que realiza uma requisição POST para a API.
- * @param data - Os dados a serem enviados na requisição.
- * @param endpoint - O endpoint da API a ser chamado.
- * @returns Uma Promise que resolve para os dados retornados pela API.
- */
 export async function apiPost(data: any, endpoint: any) {
     const response = await fetch(`../api/${endpoint}`, {
         method: 'POST',
@@ -33,12 +22,6 @@ export async function apiPost(data: any, endpoint: any) {
     return response.json();
 }
 
-/**
- * Função que realiza uma requisição PUT para a API.
- * @param data - Os dados a serem enviados na requisição.
- * @param endpoint - O endpoint da API a ser chamado.
- * @returns Uma Promise que resolve para os dados retornados pela API.
- */
 export async function apiPut(data: any, endpoint: any) {
     const response = await fetch(`../api/${endpoint}:${data.id}`, {
         method: 'PUT',
@@ -51,12 +34,7 @@ export async function apiPut(data: any, endpoint: any) {
     return response.json;
 }
 
-/**
- * Função que realiza uma requisição DELETE para a API.
- * @param data - Os dados a serem enviados na requisição.
- * @param endpoint - O endpoint da API a ser chamado.
- * @returns Uma Promise que resolve para os dados retornados pela API.
- */
+
 export async function apiDelete(data: any, endpoint: any) {
     const response = await fetch(`../api/${endpoint}`, {
         method: 'DELETE',
@@ -69,11 +47,6 @@ export async function apiDelete(data: any, endpoint: any) {
     return response.json();
 }
 
-/**
- * Função que obtém informações do usuário com base no token.
- * @param token - O token do usuário.
- * @returns Uma Promise que resolve para os dados do usuário obtidos da API.
- */
 export async function getUser(token: string) {
     const token_splitted = token.split('-')
     const user = token_splitted[0]

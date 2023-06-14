@@ -3,9 +3,6 @@ import { AiOutlineWarning } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { HiX } from 'react-icons/hi';
 
-/**
- * Propriedades do componente ModalProps.
- */
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,9 +15,6 @@ interface ModalProps {
   rightButton?: React.ReactNode;
 }
 
-/**
- * Componente para exibir um modal personalizado com várias opções de personalização.
- */
 export default function CustomModal({
   isOpen,
   onClose,

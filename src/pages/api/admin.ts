@@ -1,12 +1,7 @@
+import { v4 as uuid } from 'uuid'
+import { Admin, getAdmin, loginAdmin, getAllAdmins } from '../../types/admin'
 import md5 from "md5";
-import { v4 as uuid } from 'uuid';
-import { Admin, alterarSenha, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
 
-/**
- * Função que trata as solicitações recebidas pelo servidor.
- * @param req - O objeto de solicitação HTTP.
- * @param res - O objeto de resposta HTTP.
- */
 export default async (req: any, res: any) => {
 
     const { service } = req.body
@@ -40,35 +35,11 @@ export default async (req: any, res: any) => {
                     res.json({ result: data })
 
                 } else {
-                    res.json({ error: 'Administrador não encontrado.' })
+                    res.json({ error: 'Administrador não encontrado.'})
                 }
 
                 break
             }
-            case 'editarAdmin': {
-                const { email, nome, sobrenome } = req.body
-
-                const admin = await editarAdmin(email, nome, sobrenome);
-                if (admin != undefined) {
-
-                    res.json({ result: admin })
-                } else {
-
-                    res.json({ error: 'Erro ao editar cliente' })
-                }
-                break
-            }
-            case 'alterarSenha': {
-
-                const senhaAntiga = req.body.senhaAntiga;
-                const novaSenha = req.body.novaSenha;
-                const email = req.body.email;
-
-                const alteraSenha = await alterarSenha(email, senhaAntiga, novaSenha);
-                res.json({ result: alteraSenha })
-                break
-            }
-
             case 'getAdmins': {
                 const admins: Admin[] = await getAllAdmins();
 
@@ -83,23 +54,6 @@ export default async (req: any, res: any) => {
                 }
 
                 break;
-            }
-            case 'excluirAdmin': {
-                const id = req.body.id
-
-                const excluir: boolean = await excluirAdmin(id)
-
-                if (excluir == true) {
-                    res.json({ success: true });
-                } else {
-                    res.json({ success: false });
-                }
-            }
-            case 'getPerfil': {
-                const email = req.body.email;
-                const checkLogin: Admin = await getAdminEmail(email)
-                res.json({ result: checkLogin })
-                break
             }
             default: {
 

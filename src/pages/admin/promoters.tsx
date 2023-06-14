@@ -9,28 +9,13 @@ export interface IPromotersProps {
   nome: string;
   email: string;
   cpf_cnpj: string;
+  telefone: string;
 }
 
-/**
- * Página de exibição de promotores.
- */
 export default function Promoters() {
   const [promoters, setPromoters] = useState<IPromotersProps[]>([]);
-  const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ'];
-  const props = ['id', 'nome', 'email', 'cpf_cnpj'];
-
-  const fetchData = () => {
-    router
-      .apiPost({ service: 'getPromoters' }, 'promoter')
-      .then((data) => {
-        const promotersData = data.promoters;
-
-        setPromoters(promotersData);
-      })
-      .catch((error) => {
-        console.error('Erro ao obter os promoters:', error);
-      });
-  }
+  const columns = ['Código', 'Nome', 'Email', 'CPF/CNPJ', 'Telefone'];
+  const props = ['id', 'nome', 'email', 'cpf_cnpj', 'telefone'];
 
   useEffect(() => {
     router
@@ -47,10 +32,9 @@ export default function Promoters() {
 
   return (
     <Layout>
-      <DataTable title="Promoters" data={promoters} columns={columns} props={props} endpoint='promoter' updateData={fetchData}></DataTable>
+      <DataTable title="Promoters" data={promoters} columns={columns} props={props}></DataTable>
     </Layout>
   );
 }
 
-// Exporta a função getServerSideProps para ações de servidor
 export { getServerSideProps };

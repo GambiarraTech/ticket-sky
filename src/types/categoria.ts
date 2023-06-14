@@ -1,18 +1,13 @@
 import { query } from "@/lib/db"
 
-/**
- * Tipo de dados para uma categoria.
- */
-export type Categoria = {
+
+export type Categoria ={
     id: number,
     nome: string,
     descricao: string,
 }
 
-/**
- * Função assíncrona para obter todas as categorias do banco de dados.
- * @returns Um array de objetos Categoria contendo todas as categorias encontradas, ou null se nenhuma categoria for encontrada.
- */
+
 export async function getAll() {
 
 

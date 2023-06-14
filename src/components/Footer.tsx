@@ -1,15 +1,9 @@
 import styles from '@/styles/footer.module.css';
 
-/**
- * Propriedades do componente FooterProps.
- */
 interface FooterProps {
   color: string;
 }
 
-/**
- * Componente para exibir um rodapé simples.
- */
 export default function Footer(props: FooterProps) {
   return (
     <>

@@ -8,10 +8,6 @@ import { useContext } from 'react';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
-/**
- * Componente para a página inicial do aplicativo TicketSky.
- * @returns O componente para a página inicial.
- */
 export default function Home() {
   const { user, isLogged, logout } = useContext(AuthContext);
 
@@ -23,9 +19,9 @@ export default function Home() {
         </Head>
         <NavbarCliente />
         <div>
-          <Carousel title="Todos os eventos" page="telaevento"></Carousel>
-          <Carousel category={'Show'}></Carousel>
-          <Carousel category={'Stand-up'}></Carousel>
+          <Carousel title="Em Alta" page="cliente/telaevento"></Carousel>
+          <Carousel title="Vistos Recentemente"></Carousel>
+          <Carousel title="Pra você"></Carousel>
         </div>
       </main>
       <Footer color="white" />
