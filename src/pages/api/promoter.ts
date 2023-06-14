@@ -53,7 +53,7 @@ export default async (req: any, res: any) => {
 
                 const checkCpfCnpj = await promoter.checkCpfCnpj(cpf_cnpj)
 
-                if (checkCpfCnpj == null) {
+                if (checkCpfCnpj != null) {
                     res.json({ error: 'CPF/CNPJ já cadastrado.' })
                     break;
                 }
