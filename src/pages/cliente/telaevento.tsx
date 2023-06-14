@@ -9,9 +9,18 @@ import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
+/**
+ * Página de exibição de um evento para um cliente.
+ * Esta página exibe detalhes sobre o evento, como nome, descrição, informações de ingressos e localização.
+ * @returns JSX.Element
+ */
 export default function TelaEvento() {
   const [quantidade, setQuantidade] = useState(1);
 
+  /**
+   * Função de callback para lidar com a mudança na quantidade selecionada.
+   * @param value O novo valor selecionado.
+   */
   function handleQtdChange(value: number) {
     setQuantidade(value);
   }
@@ -35,7 +44,7 @@ export default function TelaEvento() {
                   </div>
 
                   <div className={style.eventInfoIndividual}>
-                    Pista
+                    Backstage
                     <CountInput valorInicial={quantidade} onChange={handleQtdChange} />
                   </div>
 

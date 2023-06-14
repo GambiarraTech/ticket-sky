@@ -1,23 +1,24 @@
-import { apiGet } from '@/pages/api/router';
+import { AuthContext } from '@/contexts/AuthContext';
+import { apiGet, apiPost } from '@/pages/api/router';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import styles from '../../styles/promoter/carousel.module.css';
-import { AuthContext } from '@/contexts/AuthContext';
 
+/**
+ * Props do componente `Carousel`.
+ */
 interface CarouselProps {
   title?: String;
   page?: String;
+  category?: String;
 }
 
-const handleClick = (page: any) => {
-  return (
-    <Link href={`/${page}`}>
-      <a>Texto do link</a>
-    </Link>
-  );
-};
+function handleClick(id: any) {
+  //recebe a tela do 'page' quando chama o carrosel
+  const url = 'telaevento/' + id;
+  //window.location.href = url;
+}
 
 function ConvertDate(data: Date, service: String) {
   if (service == 'day') {
@@ -71,25 +72,62 @@ function ConvertDate(data: Date, service: String) {
   }
 }
 
-export default function Carousel({ title, page }: CarouselProps) {
+/**
+ * Componente de carrossel de eventos.
+ */
+export default function Carousel({ title, page, category }: CarouselProps) {
   const { user, isLogged } = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [titulo, setTitulo] = useState<String | null>();
   let carousel = useRef<HTMLInputElement>(null);
 
-
   useEffect(() => {
-    console.log(user)
-    if(isLogged && user.role == 'promoter'){
-        apiGet(`evento?id=${user.id}`).then((value) => {
-            setData(value.result);
-          });
-    }else{
-        apiGet('evento').then((value) => {
-            setData(value.result);
-          });
-    }
-  }, []);
+    let isMounted = true;
 
+    setTitulo(title);
+    if (category) {
+      setTitulo(category + 's');
+    }
+
+    if (category) {
+      if (isLogged && user.role === 'promoter') {
+        apiPost({ service: category }, `evento?id=${user.id}`).then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      } else {
+        apiPost({ service: category }, 'evento').then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      }
+    } else {
+      if (isLogged && user.role === 'promoter') {
+        apiGet(`evento?id=${user.id}`).then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      } else {
+        apiGet('evento').then((value) => {
+          if (isMounted) {
+            setData(value.result);
+          }
+        });
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isLogged, user, category]);
+
+  /**
+   * Manipulador de clique no botão de rolagem para a esquerda.
+   * @param e - O evento de clique.
+   */
   const handleLeftClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {
@@ -97,6 +135,10 @@ export default function Carousel({ title, page }: CarouselProps) {
     }
   };
 
+  /**
+   * Manipulador de clique no botão de rolagem para a direita.
+   * @param e - O evento de clique.
+   */
   const handleRightClick = (e: any) => {
     e.preventDefault();
     if (carousel.current != null) {
@@ -106,73 +148,26 @@ export default function Carousel({ title, page }: CarouselProps) {
 
   if (!data || !data.length) return null;
 
-  //Esconder os botões caso o carrossel não ultrapasse a tela
-  if (data.length < 4) {
-    return (
-      <div className={styles.column}>
-        <div className={styles.titleAndButtons}>
-          <div>
-            <p>{title}</p>
-          </div>
+  return (
+    <div className={styles.column}>
+      <div className={styles.titleAndButtons}>
+        <div>
+          <p>{titulo}</p>
+        </div>
+        {data.length <= 4 ? (
           <div id="buttons" className={styles.buttonsInative}>
             <div>
               <button>
-                <IoIosArrowBack size="16" color="#e5e7eb" />
+                <IoIosArrowBack size="32" color="#e5e7eb" />
               </button>
             </div>
             <div>
               <button>
-                <IoIosArrowForward size="16" color="#e5e7eb" />
+                <IoIosArrowForward size="32" color="#e5e7eb" />
               </button>
             </div>
           </div>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.carousel} ref={carousel}>
-            {data.map((item) => {
-              const { id, evnome, descricao, banner, data_hora, bairro, rua, number } = item;
-              const url = 'data:image/png;base64,' + banner;
-              const date = new Date(data_hora);
-              let dia = date.getDate().toString();
-              let horas = date.getHours().toString();
-              let minutos = date.getMinutes().toString();
-              if (date.getDate() < 10) {
-                dia = date.getDate().toString().padStart(2, '0');
-              }
-              if (date.getHours() < 10) {
-                horas = date.getHours().toString().padStart(2, '0');
-              }
-              if (date.getMinutes() < 10) {
-                minutos = date.getMinutes().toString().padStart(2, '0');
-              }
-              return (
-                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
-                  <div className={styles.image}>
-                    <Image src={url} alt={descricao} height="260" width="420" />
-                  </div>
-                  <div className={styles.info}>
-                    <span className={styles.date}>
-                      {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
-                    </span>
-                    <span className={styles.name}>{evnome}</span>
-                    <span className={styles.address}>
-                      {bairro}, {rua}, {number}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.column}>
-        <div className={styles.titleAndButtons}>
-          <div>
-            <p>{title}</p>
-          </div>
+        ) : (
           <div id="buttons" className={styles.buttons}>
             <div>
               <button onClick={handleLeftClick}>
@@ -185,45 +180,50 @@ export default function Carousel({ title, page }: CarouselProps) {
               </button>
             </div>
           </div>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.carousel} ref={carousel}>
-            {data.map((item) => {
-              const { id, descricao, banner, data_hora, evnome, bairro, rua, number } = item;
-              const url = 'data:image/png;base64,' + banner;
-              const date = new Date(data_hora);
-              let dia = date.getDate().toString();
-              let horas = date.getHours().toString();
-              let minutos = date.getMinutes().toString();
-              if (date.getDate() < 10) {
-                dia = date.getDate().toString().padStart(2, '0');
-              }
-              if (date.getHours() < 10) {
-                horas = date.getHours().toString().padStart(2, '0');
-              }
-              if (date.getMinutes() < 10) {
-                minutos = date.getMinutes().toString().padStart(2, '0');
-              }
-              return (
-                <div id="itemID" className={styles.item} key={id} onClick={handleClick}>
-                  <div className={styles.image}>
-                    <Image src={url} alt={descricao} height="260" width="420" />
-                  </div>
-                  <div className={styles.info}>
-                    <span className={styles.date}>
-                      {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
-                    </span>
-                    <span className={styles.name}>{evnome}</span>
-                    <span className={styles.address}>
-                      {bairro}, {rua}, {number}
-                    </span>
-                  </div>
+        )}
+      </div>
+      <div className={styles.container}>
+        <div className={styles.carousel} ref={carousel}>
+          {data.map((item) => {
+            const { id, id_evento, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
+            const url = 'data:image/png;base64,' + banner;
+            const date = new Date(data_hora);
+            let dia = date.getDate().toString();
+            let horas = date.getHours().toString();
+            let minutos = date.getMinutes().toString();
+            if (date.getDate() < 10) {
+              dia = date.getDate().toString().padStart(2, '0');
+            }
+            if (date.getHours() < 10) {
+              horas = date.getHours().toString().padStart(2, '0');
+            }
+            if (date.getMinutes() < 10) {
+              minutos = date.getMinutes().toString().padStart(2, '0');
+            }
+            return (
+              <div
+                id="itemID"
+                className={styles.item}
+                key={id}
+                onClick={() => (window.location.href = 'telaevento/' + id_evento)}
+              >
+                <div className={styles.image}>
+                  <Image src={url} alt={descricao} height="260" width="420" />
                 </div>
-              );
-            })}
-          </div>
+                <div className={styles.info}>
+                  <span className={styles.date}>
+                    {ConvertDate(date, 'day')}, {dia} {ConvertDate(date, 'month')} - {horas}:{minutos}
+                  </span>
+                  <span className={styles.name}>{evnome}</span>
+                  <span className={styles.address}>
+                    {bairro}, {rua}, {numero}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

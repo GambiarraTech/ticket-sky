@@ -1,63 +1,29 @@
-.modal {
-  @apply fixed inset-0 z-10 overflow-y-auto flex items-center min-h-screen px-4 py-8;
-}
-
-.modalBg {
-  @apply relative w-full max-w-xl p-12 mx-auto bg-[#ffffff] rounded-lg shadow-lg;
-}
-
-.bgBlur {
-  @apply fixed inset-0 w-full h-full bg-[#000000] opacity-40 blur-md;
-}
-
-.closeButtonPosition {
-  @apply -mt-3;
-}
-
-.closeButton {
-  @apply p-1 text-[red] bg-gray-200 -mr-2 rounded-full;
-}
-
-.head {
-  @apply flex flex-row rounded-t-md  p-7 justify-between bg-[#9b9bc3] -mt-12 -ml-12 -mr-12;
-}
-
-.icone {
-  @apply bg-[#5b639d]  text-ticket-sky-blue -mb-24 rounded-full;
-}
-
-.meuperfil {
-  @apply text-white text-xl;
-}
-
-.label {
-  @apply text-left text-ticket-sky-blue self-start;
-}
-
-.input {
-  @apply bg-[#dfe0ff] rounded-lg ps-4 pe-5 text-left py-2.5 text-sm;
-}
-
-.inputPosition {
-  @apply flex flex-row justify-between mt-2 gap-10;
-}
-
-.inputPositionLeft {
+.container {
   @apply flex flex-col gap-1;
 }
 
-.inputPositionRight {
-  @apply flex flex-col gap-1;
+.container label {
+  @apply my-2 text-ticket-sky-blue;
 }
 
-.salvarAlt {
-  @apply w-40 bg-green-700 text-white rounded-lg p-1.5 mt-12;
+.container input {
+  @apply w-full text-[#718096] outline-none border-[1px] rounded-lg shadow-sm;
 }
 
-.cancelar {
-  @apply text-[red] rounded-lg mt-4;
+.title {
+  @apply text-xl font-bold flex justify-center sm:text-2xl mb-6 text-ticket-sky-blue;
 }
 
-.row {
-  @apply flex flex-col mt-4 justify-center items-center;
+.container input {
+  @apply rounded-md h-8 border-[1px] pl-1;
+}
+
+.buttonsContainer {
+  @apply w-full flex flex-row mt-12 justify-between gap-4;
+}
+.buttonSalvar {
+  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-green-700 hover:bg-[#167f0e] rounded-lg;
+}
+.buttonAlterarSenha {
+  @apply w-1/2 py-3 px-4 font-medium text-[#ffffff] text-base text-center bg-[#0013a6] hover:bg-[#0028be] rounded-lg;
 }

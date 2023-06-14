@@ -1,5 +1,13 @@
 import mysql from "mysql2/promise"
 
+/**
+ * Função para executar uma consulta no banco de dados MySQL.
+ * 
+ * @param query - A consulta SQL a ser executada
+ * @param values (opcional) - Os valores para os parâmetros da consulta (caso a consulta seja parametrizada)
+ * @returns Uma Promise que resolve para os resultados da consulta
+ * @throws Um erro se ocorrer algum problema durante a execução da consulta
+ */
 export async function query({ query, values = [] }: any) {
 
     const conectDb = await mysql.createConnection({

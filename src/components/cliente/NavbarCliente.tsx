@@ -1,3 +1,13 @@
+/**
+Componente NavbarCliente.
+Este componente exibe a barra de navegação personalizada para os usuários logados com perfil de cliente.
+O componente exibe o logo da empresa TicketSky à esquerda, um menu de ícones no lado direito e oferece funcionalidades como "Meu Perfil", 
+"Meu Cartão", "Meus Ingressos" e "Sair".
+O componente utiliza o contexto AuthContext para verificar se o usuário está logado e para realizar o logout.
+O componente também utiliza os componentes Modal, ModalLogin, ModalMeuPerfil e ModalMeuCartao para exibir modais de login, 
+perfil e cartão do cliente.
+*/
+
 import Navbar from '@/components/Navbar';
 import { AuthContext } from '@/contexts/AuthContext';
 import style from '@/styles/cliente/navbarCliente.module.css';
@@ -11,6 +21,9 @@ import ModalLogin from './ModalLogin';
 import ModalMeuCartao from './ModalMeuCartao';
 import ModalMeuPerfil from './ModalMeuPerfil';
 
+/**
+ * Componente de barra de navegação para usuários do tipo "cliente".
+ */
 export default function NavbarCliente() {
   const { user, isLogged, logout } = useContext(AuthContext);
   const [openModalLogin, setOpenModalLogin] = useState(false);

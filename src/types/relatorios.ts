@@ -1,13 +1,19 @@
 import { query } from '@/lib/db';
 
-
+/**
+ * Função assíncrona que retorna os ingressos de um cliente.
+ * @param idCliente - O ID do cliente.
+ * @returns Uma lista contendo os ingressos do cliente, ou null caso não haja ingressos.
+ */
 export async function meusIngressos(idCliente: number) {
 
     const sql = `
         SELECT
+            ig.id,
             ev.banner,
             ev.descricao as descricao_evento,
             ev.data_hora,
+            ev.nome,
             ig.valor as valor_ingresso,
             p.quantidade,
             s.descricao as setor,
@@ -38,11 +44,16 @@ export async function meusIngressos(idCliente: number) {
     }
 }
 
+/**
+ * Função assíncrona que retorna os eventos de um promoter.
+ * @param idPromoter - O ID do promoter.
+ * @returns Uma lista contendo os eventos do promoter, ou null caso não haja eventos.
+ */
 export async function meusEventos(idPromoter: number) {
     const sql = `
         SELECT
             ev.id,
-
+            ev.nome as nome,
             ev.descricao as descricao_evento,
             s.descricao as setor,
             SUM(p.quantidade) as quantidade_vendida,
@@ -74,11 +85,48 @@ export async function meusEventos(idPromoter: number) {
     }
 }
 
+/**
+ * Função assíncrona que retorna os eventos com maior número de vendas.
+ * @returns Uma lista contendo os eventos com maior número de vendas, ou null caso não haja eventos.
+ */
+export async function eventosAlta() {
+    const sql = `
+        SELECT
+            ev.id,
+            ev.nome AS nome,
+            SUM(p.quantidade) AS quantidade_vendida
+        FROM
+            evento ev
+            JOIN ingresso ig ON ev.id = ig.id_evento
+            JOIN pedido p ON ig.id = p.id_ingresso
+        GROUP BY
+            ev.id, ev.nome
+        ORDER BY
+            quantidade_vendida DESC
+        LIMIT 5;
+    `;
+    const eventosAlta: any = await query({
+        query: sql,
+        values: [],
+    })
+
+    if (Object.keys(eventosAlta).length > 0) {
+        return eventosAlta
+    } else {
+        return null
+    }
+
+}
+
+/**
+Função assíncrona que retorna todos os eventos.
+@returns Uma lista contendo todos os eventos, ou null caso não haja eventos.
+*/
 export async function todosEventos() {
     const sql = `
         SELECT
             even.id,
-            even.descricao as nome,
+            even.nome,
             even.data_hora,
             cat.nome as categoria,
             prom.nome as promoter

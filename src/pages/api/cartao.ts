@@ -1,32 +1,51 @@
-import { Cartao, deleteCartao, insertCartao } from '../../types/cartao';
+import { Cartao, deleteCartao, insertCartao, selectCartao, updateCartao } from '../../types/cartao';
 
+/**
+ * Função que trata as solicitações relacionadas a cartões de crédito.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
-  const { service } = req.body;
+    const { service } = req.body;
+    if (service) {
+        switch (service) {
+            case 'saveCartao': {
+                const { titular, cpf, numero, vencimento, id_cliente } = req.body;
+                const checkCartao = await selectCartao(id_cliente)
 
-  if (service) {
-    switch (service) {
-      case 'criarCartao': {
-        const { titular, cpf, numero, validade, cvv } = req.body;
-        const cartao: Cartao = await insertCartao(titular, cpf, numero, validade, cvv);
-        if (cartao) {
-          res.json({ success: true, cartao: cartao });
-        } else {
-          res.json({ success: false });
+                if (checkCartao != null) {
+                    const cartao: boolean = await updateCartao(titular, numero, vencimento, cpf, id_cliente)
+                    if (cartao) {
+                        res.json({ result: 'Cartão editado com sucesso.' })
+                    } else {
+                        res.json({ result: 'Erro ao editar o cartão.' });
+                    }
+                } else {
+                    const cartao: Cartao = await insertCartao(titular, numero, vencimento, cpf, id_cliente);
+                    if (cartao) {
+                        res.json({ result: 'Cartão salvo com sucesso.' });
+                    } else {
+                        res.json({ result: 'Erro ao cadastrar o cartão.' });
+                    }
+                }
+                break;
+            }
+            case 'deletarCartao': {
+                const { id_cliente } = req.body;
+                const result: boolean = await deleteCartao(id_cliente);
+
+                if (result) {
+                    res.json({ result: 'Cartão deletado com sucesso.' });
+                } else {
+                    res.json({ result: 'Erro ao deletar o cartão.' });
+                }
+
+                break;
+            }
         }
-        break;
-      }
-      case 'deletarCartao': {
-        const { cpf, numero } = req.body;
-        const result: boolean = await deleteCartao(cpf, numero);
-
-        if (result) {
-          res.json({ success: true });
-        } else {
-          res.json({ success: false });
-        }
-
-        break;
-      }
+    } else {
+        const { id_cliente } = req.body;
+        const checkCartao = await selectCartao(id_cliente)
+        res.json({ result: checkCartao, success: true });
     }
-  }
 }

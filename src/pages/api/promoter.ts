@@ -1,10 +1,18 @@
+import md5 from "md5";
 import { v4 as uuid } from 'uuid';
 import * as promoter from '../../types/promoter';
-import md5 from "md5";
+
+/**
+ * Função que lida com as solicitações relacionadas a promoters.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 
 export default async (req: any, res: any) => {
 
-    const body = req.body
+    const body = req.body;
+    const { nome, email, senha, cpf_cnpj } = req.body
+
 
     if (body.service) {
         switch (body.service) {
@@ -12,6 +20,7 @@ export default async (req: any, res: any) => {
                 const { email, senha } = body;
                 const senhaHash = md5(senha)
                 const checkLogin: promoter.Promoter = await promoter.loginPromoter(email, senhaHash)
+                console.log(checkLogin);
 
                 if (checkLogin != null) {
 
@@ -33,7 +42,13 @@ export default async (req: any, res: any) => {
                         }
                     }
 
-                    res.json({ result: data })
+                    if (checkLogin.aprovado == 1) {
+
+                        res.json({ result: data })
+                    } else {
+                        res.json({ error: 'Solicitação de cadastro ainda não foi autorizada.' })
+                    }
+
 
                 } else {
                     res.json({ error: 'Promoter não encontrado.' })
@@ -43,7 +58,19 @@ export default async (req: any, res: any) => {
             }
             case 'cadastroPromoter': {
                 const { nome, email, senha, cpf_cnpj } = body
+                const verificaCPF_CNPJ = isNumericString(cpf_cnpj)
+                if (!verificaCPF_CNPJ || cpf_cnpj.length < 11) {
+                    res.json({ error: 'CPF/CNPJ inválido!' })
+                }
                 const senhaHash = md5(senha)
+
+                const checkCpfCnpj = await promoter.checkCpfCnpj(cpf_cnpj)
+
+                if (checkCpfCnpj != null) {
+                    res.json({ error: 'CPF/CNPJ já cadastrado.' })
+                    break;
+                }
+
                 const checkLogin: promoter.Promoter = await promoter.cadastroPromoter(nome, email, senhaHash, cpf_cnpj)
 
                 if (checkLogin != null) {
@@ -68,6 +95,35 @@ export default async (req: any, res: any) => {
 
                 break
             }
+
+            case 'editarPromoter': {
+                const id = req.body.id;
+                const editarPromoter = await promoter.editarPromoter(email, nome, cpf_cnpj, id);
+                if (editarPromoter != undefined) {
+
+                    res.json({ result: editarPromoter })
+                } else {
+
+                    res.json({ error: 'Erro ao editar promoter' })
+                }
+                break
+            }
+            case 'alterarSenha': {
+
+                const senhaAntiga = req.body.senhaAntiga;
+                const novaSenha = req.body.novaSenha;
+
+                const alteraSenha = await promoter.alterarSenha(email, senhaAntiga, novaSenha);
+                res.json({ result: alteraSenha })
+                break
+            }
+            case 'getPerfil': {
+                const id = req.body.id;
+                const checkLogin: promoter.Promoter = await promoter.getPromoter(id)
+                res.json({ result: checkLogin })
+                break
+            }
+
             case 'getPromoters': {
                 const promoters: promoter.Promoter[] = await promoter.getAllPromoters();
 
@@ -119,7 +175,6 @@ export default async (req: any, res: any) => {
                 } else {
                     res.json({ error: 'Houve algum erro durante a reprovação' })
                 }
-
                 break
             }
             default: {
@@ -144,3 +199,8 @@ export default async (req: any, res: any) => {
     }
 
 }
+
+function isNumericString(str: string): boolean {
+    return /^\d+$/.test(str);
+}
+

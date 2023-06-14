@@ -4,6 +4,9 @@ import Router from 'next/router';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import { createContext, useEffect, useState } from 'react';
 
+/**
+ * Interface que define a estrutura do objeto de usuário.
+ */
 type User = {
   id: string;
   email: string;
@@ -13,11 +16,17 @@ type User = {
   role: string;
 };
 
+/**
+ * Interface que define a estrutura dos dados de login.
+ */
 type loginData = {
   token: string;
   user: User;
 };
 
+/**
+ * Interface que define o formato do contexto de autenticação.
+ */
 type AuthContextType = {
   user: User;
   isLogged: boolean;
@@ -25,8 +34,14 @@ type AuthContextType = {
   logout: () => Promise<void>;
 };
 
+/**
+ * Criação do contexto de autenticação.
+ */
 export const AuthContext = createContext({} as AuthContextType);
 
+/**
+ * Componente de provedor do contexto de autenticação.
+ */
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
 
@@ -46,12 +61,15 @@ export function AuthProvider({ children }: any) {
     }
   }, []);
 
-  //Faz o login na aplicaçao cria o token, seta o usuario e redireciona para a pagina em questao que o usuario pertence
+  /**
+   * Função assíncrona para fazer o login do usuário.
+   * Cria o token, define o usuário e redireciona para a página correspondente ao tipo de usuário.
+   */
   async function login({ token, user }: loginData) {
     //setando cookie (contexto, nome, token, parametros adicionais)
     setCookie(undefined, 'ticketsky-token', token, {
       maxAge: 3600, // 1 hora
-      path: '/'
+      path: '/',
     });
 
     api.defaults.headers['Authorization'] = `Bearer ${token}`;
@@ -61,8 +79,10 @@ export function AuthProvider({ children }: any) {
     Router.push(`/${user.role == 'cliente' ? '' : user.role}`);
   }
 
-  //Funçao que faz o logout do usuario do sistema, destrói o token, seta o usuario da aplicaçao como null
-  //e redireciona para o login do tipo do usuario logado anteriormente
+  /**
+   * Função assíncrona para fazer o logout do usuário.
+   * Destrói o token, define o usuário como null e redireciona para a página de login.
+   */
   async function logout() {
     const { 'ticketsky-token': token } = parseCookies();
 

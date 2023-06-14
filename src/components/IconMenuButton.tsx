@@ -2,16 +2,24 @@ import style from '@/styles/IconMenuButton.module.css';
 import { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 
+/**
+ * Propriedades do componente IconMenuButtonProps.
+ */
 type IconMenuButtonProps = {
   children: React.ReactNode;
   color: string;
 };
 
+/**
+ * Componente para exibir um botão de menu com ícone.
+ */
 export default function IconMenuButton(props: IconMenuButtonProps) {
   // Estado para controlar a abertura e fechamento do menu
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Função para alternar o estado do menu
+  /**
+   * Função para alternar o estado do menu.
+   */
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };

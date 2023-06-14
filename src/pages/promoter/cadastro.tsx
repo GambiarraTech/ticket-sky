@@ -13,7 +13,10 @@ const listaInputs = [
   { id: 'cpf_cnpj', label: 'Digite seu CPF ou CNPJ:', length: 14 },
 ];
 
-//Chamar função após dar a confirmação de cadastro na tela
+/**
+ * Envia um e-mail de confirmação de cadastro para o promoter.
+ * @param emailPromoter O e-mail do promoter.
+ */
 async function enviaEmailConfirmacao(emailPromoter: string) {
   let data;
   const res = router.apiPost(
@@ -29,6 +32,11 @@ async function enviaEmailConfirmacao(emailPromoter: string) {
   res.then((value) => { });
 }
 
+/**
+ * Página de cadastro para um promoter.
+ * Permite que o usuário preencha um formulário para solicitar acesso como promoter.
+ * @returns JSX.Element
+ */
 export default function Cadastro() {
   return (
     <div className={styles.box}>
@@ -46,7 +54,7 @@ export default function Cadastro() {
             buttonText={'Solicitar acesso promoter'}
             service="cadastroPromoter"
             endPoint="promoter"
-            errorMessage="Usuário ou senha incorreta."
+            errorMessage="Erro ao realizar o cadastro."
             footer={{ message: 'Já possui conta? ', linkMessage: 'Fazer login ', link: '/promoter/login' }}
           />
         </div>

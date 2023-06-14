@@ -3,7 +3,7 @@
 }
 
 .allContentContainer {
-  @apply max-w-full min-h-[93%];
+  @apply w-full min-h-[93%];
 }
 
 .allContent {
@@ -15,7 +15,11 @@
 }
 
 .item {
-  @apply flex justify-center min-h-full min-w-[11.802rem] border-l-2 border-[#d1d5db] mr-2 ml-2;
+  @apply flex justify-center min-h-full min-w-[11.802rem] bg-[F6F6F5] border-gray-400;
+}
+
+.item:hover {
+  @apply bg-[#dbdcff];
 }
 
 .contentItem {

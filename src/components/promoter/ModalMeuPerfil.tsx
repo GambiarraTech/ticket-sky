@@ -1,94 +1,91 @@
 import { AuthContext } from '@/contexts/AuthContext';
-import styles from '@/styles/cliente/MeuPerfil.module.css';
-import { useContext, useState } from 'react';
+import * as router from '@/pages/api/router';
+import styles from '@/styles/cliente/meuPerfil.module.css';
+import { useContext, useEffect, useState } from 'react';
+import Modal from '../Modal';
+import ModalAlteraSenha from './ModalAlteraSenha';
 
+/**
+ * Componente para exibir o perfil do usuário logado.
+ */
 export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
-  const [cliente, setCliente] = useState({
+  const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
+
+  /**
+   * Estado para armazenar os dados do promoter.
+   */
+  const [promoter, setPromoter] = useState({
+    id: '',
     nome: '',
-    sobrenome: '',
     email: '',
-    senha: '',
-    alterPassword: '',
-    cpf: '',
+    cpf_cnpj: '',
+    service: 'editarPromoter',
   });
+
+  /**
+   * Função assíncrona para editar o promoter.
+   */
+  async function editarPromoter(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    promoter.service = 'editarPromoter';
+    const res = await router.apiPost(promoter, 'promoter');
+    alert(res.result);
+  }
+
+  /**
+   * Efeito colateral para carregar os dados do perfil do promoter.
+   */
+  useEffect(() => {
+    router.apiPost({ service: 'getPerfil', id: user.id }, 'promoter').then((value) => {
+      if (value.result != null) {
+        setPromoter(value.result);
+      }
+    });
+  }, []);
 
   return (
     <>
-      <div className={styles.inputPosition}>
-        <div className={styles.inputPositionLeft}>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="Nome">
-              Nome:
-            </label>
-            <input
-              id='Nome'
-              className={styles.input}
-              value={user.nome}
-              type="text"
-              onChange={(e) => (cliente.nome = e.target.value)}
-            />
+      <div className={styles.container}>
+        <form onSubmit={editarPromoter}>
+          <div className={styles.title}>
+            <h1>Meu Perfil</h1>
           </div>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="Sobrenome">
-              Sobrenome:
-            </label>
-            <input
-              id='Sobrenome'
-              className={styles.input}
-              value={user.sobrenome}
-              type="text"
-              onChange={(e) => (cliente.sobrenome = e.target.value)}
-            />
+          <label>Email</label>
+          <input
+            type="email"
+            readOnly
+            defaultValue={promoter.email}
+            onChange={(e) => (promoter.email = e.target.value)}
+            required
+          />
+          <label>Nome</label>
+          <input
+            type="text"
+            defaultValue={promoter.nome}
+            maxLength={20}
+            onChange={(e) => (promoter.nome = e.target.value)}
+            required
+          />
+          <label>CPF/CNPJ</label>
+          <input
+            type="text"
+            defaultValue={promoter.cpf_cnpj}
+            onChange={(e) => (promoter.cpf_cnpj = e.target.value)}
+            readOnly
+          />
+          <div className={styles.buttonsContainer}>
+            <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
+              Alterar Senha
+            </button>
+            <button type="submit" className={styles.buttonSalvar}>
+              Salvar Alterações
+            </button>
           </div>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="Email">
-              E-mail:
-            </label>
-            <input
-              id='Email'
-              className={styles.input}
-              value={user.email}
-              type="email"
-              onChange={(e) => (cliente.email = e.target.value)}
-            />
-          </div>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="CPF">
-              CPF:
-            </label>
-            <input
-              id='CPF'
-              className={styles.input}
-              value={user.cpf}
-              type="text"
-              onChange={(e) => (cliente.cpf = e.target.value)}
-            />
-          </div>
-        </div>
-        <div className={styles.inputPositionRight}>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="AlterarSenha">
-              Alterar Senha:
-            </label>
-            <input
-              id='Alterar Senha'
-              className={styles.input}
-              type="alterPassword"
-              onChange={(e) => (cliente.alterPassword = e.target.value)}
-            />
-          </div>
-          <div className={styles.row}>
-            <label className={styles.label} htmlFor="Senha">
-              Senha:
-            </label>
-            <input id='Senha' className={styles.input} type="password" onChange={(e) => (cliente.senha = e.target.value)} />
-          </div>
-          <div className={styles.row}>
-            <button className={styles.salvarAlt}>Salvar Alterações</button>
-            <a className={styles.cancelar}>Cancelar</a>
-          </div>
-        </div>
+        </form>
+        <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
+          <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
+        </Modal>
       </div>
     </>
   );
