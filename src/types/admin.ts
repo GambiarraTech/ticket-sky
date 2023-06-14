@@ -1,4 +1,5 @@
 import { query } from '@/lib/db'
+import md5 from 'md5'
 
 /**
  * Tipo de dados para um administrador.
@@ -111,6 +112,38 @@ export async function editarAdmin(email: string, nome: string, sobrenome: string
     });
 
     return "Administrador alterado com sucesso!";
+}
+
+/**
+ * Função assíncrona utilizada para alterar a senha de um admin.
+ * Verifica se a senha antiga fornecida está correta antes de alterar a senha.
+ * @param email - O email do admin.
+ * @param senhaAntiga - A senha antiga do admin.
+ * @param novaSenha - A nova senha do admin.
+ * @returns Uma mensagem informando que a senha foi alterada com sucesso ou uma mensagem de erro.
+ */
+export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
+    const senhaHash = md5(senhaAntiga)
+    const novaSenhaHash = md5(novaSenha)
+    const confirmaSenha = await loginAdmin(email, senhaHash);
+
+    if (confirmaSenha != null) {
+
+        if (novaSenha == senhaAntiga) {
+            return 'A nova senha não pode ser igual a atual';
+        }
+        else {
+            const alteraSenha: any = await query({
+                query: "UPDATE administrador SET senha = (?) WHERE email = (?)",
+                values: [novaSenhaHash, email],
+            })
+
+            return "Senha alterada com sucesso!";
+        }
+
+    }
+
+    return 'Senha incorreta';
 }
 
 /**

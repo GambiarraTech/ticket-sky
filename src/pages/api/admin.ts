@@ -1,6 +1,6 @@
 import md5 from "md5";
 import { v4 as uuid } from 'uuid';
-import { Admin, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
+import { Admin, alterarSenha, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
 
 /**
  * Função que trata as solicitações recebidas pelo servidor.
@@ -58,6 +58,17 @@ export default async (req: any, res: any) => {
                 }
                 break
             }
+            case 'alterarSenha': {
+
+                const senhaAntiga = req.body.senhaAntiga;
+                const novaSenha = req.body.novaSenha;
+                const email = req.body.email;
+
+                const alteraSenha = await alterarSenha(email, senhaAntiga, novaSenha);
+                res.json({ result: alteraSenha })
+                break
+            }
+
             case 'getAdmins': {
                 const admins: Admin[] = await getAllAdmins();
 

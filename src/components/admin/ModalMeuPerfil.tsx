@@ -2,6 +2,8 @@ import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/cliente/meuPerfil.module.css';
 import { useContext, useEffect, useState } from 'react';
+import Modal from '../Modal';
+import ModalAlteraSenha from './ModalAlteraSenha';
 
 export default function MeuPerfil() {
   const { user } = useContext(AuthContext);
@@ -12,6 +14,7 @@ export default function MeuPerfil() {
     email: '',
     service: 'editarPromoter',
   });
+  const [openModalAltSenha, setOpenModalAltSenha] = useState(false);
 
   async function editarAdmin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,17 +65,17 @@ export default function MeuPerfil() {
               required
             />
             <div className={styles.buttonsContainer}>
-              {/* <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
+              <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
                 Alterar Senha
-              </button> */}
+              </button>
               <button type="submit" className={styles.buttonSalvar}>
                 Salvar Alterações
               </button>
             </div>
           </form>
-          {/* <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
-          <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
-        </Modal> */}
+          <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
+            <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
+          </Modal>
         </div>
       </>
     </>

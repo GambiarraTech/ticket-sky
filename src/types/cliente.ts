@@ -115,13 +115,12 @@ export async function editarCliente(email: string, nome: string, sobrenome: stri
 }
 
 /**
- * Função assíncrona para editar os dados de um cliente.
- * @param email O novo email do cliente.
- * @param nome O novo nome do cliente.
- * @param sobrenome O novo sobrenome do cliente.
- * @param cpf O novo CPF do cliente.
- * @param id O ID do cliente a ser editado.
- * @returns Uma mensagem informando que o cliente foi alterado com sucesso.
+ * Função assíncrona utilizada para alterar a senha de um cliente.
+ * Verifica se a senha antiga fornecida está correta antes de alterar a senha.
+ * @param email - O email do cliente.
+ * @param senhaAntiga - A senha antiga do cliente.
+ * @param novaSenha - A nova senha do cliente.
+ * @returns Uma mensagem informando que a senha foi alterada com sucesso ou uma mensagem de erro.
  */
 export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
     const senhaHash = md5(senhaAntiga)
