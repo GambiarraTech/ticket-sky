@@ -20,6 +20,7 @@ export default async (req: any, res: any) => {
                 const { email, senha } = body;
                 const senhaHash = md5(senha)
                 const checkLogin: promoter.Promoter = await promoter.loginPromoter(email, senhaHash)
+                console.log(checkLogin);
 
                 if (checkLogin != null) {
 
@@ -41,7 +42,13 @@ export default async (req: any, res: any) => {
                         }
                     }
 
-                    res.json({ result: data })
+                    if (checkLogin.aprovado == 1) {
+
+                        res.json({ result: data })
+                    } else {
+                        res.json({ error: 'Solicitação de cadastro ainda não foi autorizada.' })
+                    }
+
 
                 } else {
                     res.json({ error: 'Promoter não encontrado.' })
