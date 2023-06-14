@@ -1,4 +1,5 @@
 import { query } from '@/lib/db'
+import md5 from 'md5'
 
 /**
  * Tipo de dados para um administrador.
@@ -71,6 +72,78 @@ export async function getAdmin(id: string) {
         return null
     }
 
+}
+
+export async function getAdminEmail(id: string) {
+
+    const admin: any = await query({
+        query: "SELECT * FROM administrador WHERE administrador.email = (?)",
+        values: [id],
+    })
+
+    if (Object.keys(admin).length > 0) {
+        return admin[0]
+    } else {
+        return null
+    }
+
+}
+
+/**
+ * Função assíncrona para editar os dados de um admin.
+ * @param email O email do admin a ser editado.
+ * @param nome O novo nome do admin.
+ * @param sobrenome O novo sobrenome do admin.
+ * @returns Uma mensagem informando que o admin foi alterado com sucesso.
+ */
+export async function editarAdmin(email: string, nome: string, sobrenome: string) {
+    const sql = `
+        UPDATE
+            administrador
+        SET
+            nome = (?),
+            sobrenome = (?)
+        WHERE
+            email = (?)
+    `;
+    const editarAdmin: any = await query({
+        query: sql,
+        values: [nome, sobrenome, email]
+    });
+
+    return "Administrador alterado com sucesso!";
+}
+
+/**
+ * Função assíncrona utilizada para alterar a senha de um admin.
+ * Verifica se a senha antiga fornecida está correta antes de alterar a senha.
+ * @param email - O email do admin.
+ * @param senhaAntiga - A senha antiga do admin.
+ * @param novaSenha - A nova senha do admin.
+ * @returns Uma mensagem informando que a senha foi alterada com sucesso ou uma mensagem de erro.
+ */
+export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
+    const senhaHash = md5(senhaAntiga)
+    const novaSenhaHash = md5(novaSenha)
+    const confirmaSenha = await loginAdmin(email, senhaHash);
+
+    if (confirmaSenha != null) {
+
+        if (novaSenha == senhaAntiga) {
+            return 'A nova senha não pode ser igual a atual';
+        }
+        else {
+            const alteraSenha: any = await query({
+                query: "UPDATE administrador SET senha = (?) WHERE email = (?)",
+                values: [novaSenhaHash, email],
+            })
+
+            return "Senha alterada com sucesso!";
+        }
+
+    }
+
+    return 'Senha incorreta';
 }
 
 /**
