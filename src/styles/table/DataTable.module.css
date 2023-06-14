@@ -66,6 +66,10 @@
   @apply border-y border-gray-400 table-cell pl-2 h-14;
 }
 
+.centralizar {
+  @apply flex flex-col justify-center items-center w-full h-full bg-azul-ticket text-red-600;
+}
+
 /* width */
 .tableBackground::-webkit-scrollbar {
   @apply w-[10px];

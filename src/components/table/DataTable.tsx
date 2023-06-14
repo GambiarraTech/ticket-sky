@@ -3,10 +3,12 @@ import { IEventosProps } from '@/pages/admin/eventos';
 import { IPromotersProps } from '@/pages/admin/promoters';
 import { apiPost } from '@/pages/api/router';
 import styles from '@/styles/table/DataTable.module.css';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
 import { IoIosAddCircle } from 'react-icons/io';
+import Modal from '../Modal';
+import ModalCadastroAdmin from '../admin/ModalCadastroAdmin';
 
 /**
  * Props do componente `DataTable`.
@@ -25,13 +27,9 @@ interface TableProps {
  */
 const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, updateData }) => {
   const [search, setSearch] = React.useState('');
-  const [forceUpdate, setForceUpdate] = React.useState(false);
+  const [openModalCriarAdmin, setOpenModalCriarAdmin] = useState(false);
   //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
-
-  function deletarAdmin(id: number) {
-    apiPost({ idPromoter: id, service: 'deleteAdmin' }, 'admin').then(() => {});
-  }
 
   /**
    * Manipulador para a pesquisa de dados na tabela.
@@ -77,7 +75,7 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
           <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
         </div>
         {title == 'Administradores' ? (
-          <button>
+          <button onClick={() => setOpenModalCriarAdmin(true)}>
             <IoIosAddCircle color="white" size={'25'} />
           </button>
         ) : (
@@ -131,6 +129,12 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
           </tbody>
         </table>
       </div>
+      <Modal isOpen={openModalCriarAdmin} onClose={() => setOpenModalCriarAdmin(false)}>
+        <ModalCadastroAdmin
+          onSubmit={() => setOpenModalCriarAdmin(false)}
+          updateData={() => updateData()}
+        ></ModalCadastroAdmin>
+      </Modal>
     </div>
   );
 };

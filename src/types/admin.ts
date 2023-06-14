@@ -18,6 +18,7 @@ export type Admin = {
  * @param senha A senha do administrador.
  * @returns Um objeto Admin contendo os dados do administrador logado, ou null se o login falhar.
  */
+
 export async function loginAdmin(email: string, senha: string) {
 
     const admin: any = await query({
@@ -30,6 +31,34 @@ export async function loginAdmin(email: string, senha: string) {
     } else {
         return null
     }
+
+
+}
+
+export async function cadastroAdmin(nome: string, sobrenome: string, email: string, senha: string) {
+    try {
+        const insertResult = await query({
+            query: "INSERT INTO administrador (nome, sobrenome, senha, email, super_adm) VALUES (?, ?, ?, ?, ?)",
+            values: [nome, sobrenome, senha, email, 0]
+        })
+        if ('insertId' in insertResult) {
+            const idNovoAdmin = insertResult.insertId;
+
+            const novoAdmin: any = await query({
+                query: "SELECT email, senha FROM administrador WHERE administrador.id = (?)",
+                values: [idNovoAdmin]
+            })
+
+            if (Object.keys(novoAdmin).length > 0) {
+                return novoAdmin[0]
+            } else {
+                return null
+            }
+        }
+
+    } catch (err) {
+
+    };
 
 
 }

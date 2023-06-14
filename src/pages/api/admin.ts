@@ -1,6 +1,6 @@
 import md5 from "md5";
 import { v4 as uuid } from 'uuid';
-import { Admin, alterarSenha, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
+import { Admin, alterarSenha, cadastroAdmin, editarAdmin, excluirAdmin, getAdmin, getAdminEmail, getAllAdmins, loginAdmin } from '../../types/admin';
 
 /**
  * Função que trata as solicitações recebidas pelo servidor.
@@ -45,6 +45,19 @@ export default async (req: any, res: any) => {
 
                 break
             }
+            case 'cadastroAdmin': {
+                const { email, senha, nome, sobrenome } = req.body
+                const senhaHash = md5(senha)
+                const createAdmin = await cadastroAdmin(nome, sobrenome, email, senhaHash)
+                if (createAdmin != undefined) {
+
+                    res.json({ result: createAdmin })
+                } else {
+
+                    res.json({ error: 'Email já cadastrado.' })
+                }
+                break
+            }
             case 'editarAdmin': {
                 const { email, nome, sobrenome } = req.body
 
@@ -54,7 +67,7 @@ export default async (req: any, res: any) => {
                     res.json({ result: admin })
                 } else {
 
-                    res.json({ error: 'Erro ao editar cliente' })
+                    res.json({ error: 'Erro ao editar Admin' })
                 }
                 break
             }
