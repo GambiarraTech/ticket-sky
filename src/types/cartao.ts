@@ -24,8 +24,8 @@ export type Cartao = {
 export async function insertCartao(titular: string, numero: string, vencimento: string, cpf: string, id_cliente: string) {
 
     const insertResult = await query({
-        query: "INSERT INTO cartao (numero, vencimento, id_cliente) VALUES (?, ?, ?)",
-        values: [numero, vencimento, id_cliente]
+        query: "INSERT INTO cartao (titular, numero, vencimento, cpf, id_cliente) VALUES (?, ?, ?, ?, ?)",
+        values: [titular, numero, vencimento, cpf, id_cliente]
     })
     if ('insertId' in insertResult) {
         const idNovoCartao = insertResult.insertId;
