@@ -46,7 +46,7 @@ export default function CountInput({ valorInicial, onChange, max }: CountInputPr
 
   return (
     <div className={style.countInput}>
-      <button type="button" onClick={reduzir} className={style.buttonCount}>
+      <button aria-label='reduzir' type="button" onClick={reduzir} className={style.buttonCount}>
         <AiOutlineMinus size="10" />
       </button>
       <input
@@ -63,7 +63,7 @@ export default function CountInput({ valorInicial, onChange, max }: CountInputPr
         }}
         className={style.centerQuant}
       />
-      <button type="button" onClick={adicionar} className={style.buttonCount}>
+      <button aria-label='adicionar' type="button" onClick={adicionar} className={style.buttonCount}>
         <AiOutlinePlus size="10" />
       </button>
     </div>
