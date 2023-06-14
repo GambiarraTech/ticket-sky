@@ -99,3 +99,22 @@ export async function contaPedidos() {
     const qntd: number = quantosPedidos[0].quantidade_pedidos;
     return qntd;
 }
+
+export async function getVendidos(id_ingresso: []) {
+    var qntdTotal = '';
+    console.log(id_ingresso)
+    id_ingresso.forEach(async (element: any) => {
+        const sql = `
+        SELECT SUM(quantidade) AS quantidade_vendida FROM pedido WHERE id_ingresso = (?);
+        `;
+        const quantosVendidos: any = await query({
+            query: sql,
+            values: [element]
+        });
+
+        //const qntd: number = quantosVendidos[0].quantidade_vendida;
+        qntdTotal = quantosVendidos;
+    });
+
+    return qntdTotal;
+}

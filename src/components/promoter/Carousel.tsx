@@ -14,10 +14,18 @@ interface CarouselProps {
   category?: String;
 }
 
-function handleClick(id: any) {
+function handleClick(id: any, role: any, isLogged: boolean) {
+  //user.role está sempre promoter!
+  console.log(role)
   //recebe a tela do 'page' quando chama o carrosel
-  const url = 'telaevento/' + id;
-  //window.location.href = url;
+  if(isLogged && role == 'promoter'){
+    window.location.href = 'telaeventopromoter/' + id
+}
+ else{
+     window.location.href = 'telaevento/' + id
+    
+   }
+ 
 }
 
 function ConvertDate(data: Date, service: String) {
@@ -205,7 +213,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                 id="itemID"
                 className={styles.item}
                 key={id}
-                onClick={() => (window.location.href = 'telaevento/' + id_evento)}
+                onClick={() => handleClick(id_evento, user.role, isLogged)}
               >
                 <div className={styles.image}>
                   <Image src={url} alt={descricao} height="260" width="420" />

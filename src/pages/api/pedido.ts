@@ -28,6 +28,13 @@ export default async (req: any, res: any) => {
                 res.json({ result: cadastroPedido });
                 break
             }
+            case 'getVendidos': {
+                const { idIngressos } = req.body;
+                const qntdPedidos = await pedido.getVendidos(idIngressos);
+                res.json({ result: qntdPedidos });
+                break
+            }
+
         }
     }
 }
