@@ -185,7 +185,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
       <div className={styles.container}>
         <div className={styles.carousel} ref={carousel}>
           {data.map((item) => {
-            const { id, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
+            const { id, id_evento, evnome, descricao, banner, data_hora, bairro, rua, numero } = item;
             const url = 'data:image/png;base64,' + banner;
             const date = new Date(data_hora);
             let dia = date.getDate().toString();
@@ -205,7 +205,7 @@ export default function Carousel({ title, page, category }: CarouselProps) {
                 id="itemID"
                 className={styles.item}
                 key={id}
-                onClick={() => (window.location.href = 'telaevento/' + id)}
+                onClick={() => (window.location.href = 'telaevento/' + id_evento)}
               >
                 <div className={styles.image}>
                   <Image src={url} alt={descricao} height="260" width="420" />
