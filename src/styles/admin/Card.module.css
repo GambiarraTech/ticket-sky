@@ -1,5 +1,5 @@
 .card {
-  @apply h-96 w-[39.406rem] rounded-lg flex flex-col bg-[#DFE0FF];
+  @apply h-96 w-[30rem] rounded-lg flex flex-col bg-[#DFE0FF];
 }
 
 .header {
