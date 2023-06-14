@@ -81,7 +81,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
         <div className={style.inputFormat}>
           Nova Senha
           <input
-            type="text"
+            type="password"
             className={style.primaryInputStyle}
             placeholder="Nova Senha"
             required
@@ -91,7 +91,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
         <div className={style.inputFormat}>
           Confirme a nova Senha
           <input
-            type="text"
+            type="password"
             className={style.primaryInputStyle}
             placeholder="Digite novamente a nova senha"
             required
