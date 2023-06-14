@@ -11,6 +11,9 @@ import style from '../../styles/cliente/telaEvento.module.css';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
+/**
+ * Componente para exibir os detalhes de um evento.
+ */
 export default function TelaEvento() {
   const { user } = useContext(AuthContext);
 

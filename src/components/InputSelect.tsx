@@ -2,17 +2,25 @@ import { useEffect, useState } from 'react';
 import * as router from '../pages/api/router';
 import style from '../styles/select.module.css';
 
+/**
+ * Propriedades de cada item do select.
+ */
 interface PropsItens {
   id?: number;
   nome?: string;
 }
+
+/**
+ * Propriedades do componente InputSelect.
+ */
 interface PropsSelect {
   endpoint: string;
   onItemSelected: (id: number) => void;
 }
-/*Recebe o nome da tabela que deseja fazer o select.
-   Retorna o id do item que foi selecionado.
-*/
+
+/**
+ * Componente para exibir um campo de seleção personalizado (select).
+ */
 const InputSelect: React.FC<PropsSelect> = ({ onItemSelected, endpoint }) => {
   const [itens, setItens] = useState<PropsItens[]>([]);
   useEffect(() => {
@@ -22,6 +30,9 @@ const InputSelect: React.FC<PropsSelect> = ({ onItemSelected, endpoint }) => {
   }, []);
   if (!itens || itens.length == 0) return null;
 
+  /**
+   * Função chamada quando um item é selecionado no campo de seleção.
+   */
   async function handleSelect(event: any) {
     onItemSelected(parseInt(event.target.value));
   }

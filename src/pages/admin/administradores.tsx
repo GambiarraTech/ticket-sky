@@ -4,6 +4,9 @@ import { getServerSideProps } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 import * as router from '../api/router';
 
+/**
+ * Interface que define a estrutura de um administrador.
+ */
 export interface IAdminProps {
   id: number;
   nome: string;
@@ -11,6 +14,9 @@ export interface IAdminProps {
   super_adm: number;
 }
 
+/**
+ * Página "Administradores" que exibe uma tabela com a lista de administradores.
+ */
 export default function Administradores() {
   const [admins, setAdmins] = useState<IAdminProps[]>([]);
   const columns = ['Código', 'Nome', 'Email'];

@@ -9,6 +9,11 @@ import { FaUserClock } from 'react-icons/fa';
 import { HiXMark } from 'react-icons/hi2';
 import { IoIosArrowBack, IoIosArrowForward, IoMdCheckmark } from 'react-icons/io';
 
+/**
+ * Função assíncrona que envia um email para um promoter com base no seu status.
+ * @param emailPromoter - O email do promoter.
+ * @param status - O status do promoter (1 - Aprovado, 2 - Recusado).
+ */
 async function enviaEmail(emailPromoter: string, status: number) {
   let data;
   const res = router.apiPost(
@@ -26,12 +31,18 @@ async function enviaEmail(emailPromoter: string, status: number) {
   res.then((value) => {});
 }
 
+/**
+ * Componente para aprovar ou reprovar promoters aguardando aprovação.
+ */
 export default function CardAprovarPromoter() {
   const [promotersNaoAprovados, setData] = useState<IPromotersProps[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [promoterData, setDataPromoter] = useState<IPromotersProps>();
   let carousel = useRef<HTMLInputElement>(null);
 
+  /**
+   * Função para obter promoters aguardando aprovação.
+   */
   function getPromotersAguardandoAprov() {
     apiPost({ service: 'getPromotersAguardandoAprov' }, 'promoter')
       .then((data) => {
@@ -46,6 +57,11 @@ export default function CardAprovarPromoter() {
     getPromotersAguardandoAprov();
   }, []);
 
+  /**
+   * Função para aprovar um promoter.
+   * @param id - O ID do promoter.
+   * @param email - O email do promoter.
+   */
   function aprovarPromoter(id: number, email: string) {
     apiPost({ idPromoter: id, service: 'aprovarPromoter' }, 'promoter').then(() => {
       enviaEmail(email, 1);
@@ -53,6 +69,11 @@ export default function CardAprovarPromoter() {
     });
   }
 
+  /**
+   * Função para reprovar um promoter.
+   * @param id - O ID do promoter.
+   * @param email - O email do promoter.
+   */
   function reprovarPromoter(id: number, email: string) {
     apiPost({ idPromoter: id, service: 'reprovarPromoter' }, 'promoter').then(() => {
       enviaEmail(email, 2);
@@ -60,21 +81,29 @@ export default function CardAprovarPromoter() {
     });
   }
 
-  const handleLeftClick = (e: any) => {
+  /**
+   * Manipulador de clique para o botão de rolagem à esquerda.
+   * @param e - O evento de clique.
+   */
+  const handleLeftClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (carousel.current != null) {
       carousel.current.scrollLeft -= (document.getElementById('itemID')!.getBoundingClientRect().width + 16) * 3;
     }
   };
 
-  const handleRightClick = (e: any) => {
+  /**
+   * Manipulador de clique para o botão de rolagem à direita.
+   * @param e - O evento de clique.
+   */
+  const handleRightClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (carousel.current != null) {
       carousel.current.scrollLeft += (document.getElementById('itemID')!.getBoundingClientRect().width + 16) * 3;
     }
   };
 
-  if (promotersNaoAprovados.length == 0) {
+  if (promotersNaoAprovados.length === 0) {
     return (
       <Card
         label="Promoters Aguardando Aprovação"
@@ -98,7 +127,7 @@ export default function CardAprovarPromoter() {
                     <div
                       id="itemID"
                       className={styles.item}
-                      style={index == promotersNaoAprovados.length - 1 ? {} : { borderRightWidth: '1px' }}
+                      style={index === promotersNaoAprovados.length - 1 ? {} : { borderRightWidth: '1px' }}
                       key={promoter.id}
                     >
                       <div className={styles.contentItem}>

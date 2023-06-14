@@ -1,3 +1,12 @@
+/**
+Componente ModalMeuPerfil.
+Este componente exibe um modal contendo o perfil do usuário logado.
+O componente utiliza o contexto AuthContext para acessar as informações do usuário.
+O usuário pode editar seu perfil, como nome, sobrenome e CPF.
+O usuário também pode alterar sua senha ao clicar no botão "Alterar Senha".
+As alterações feitas no perfil são salvas ao clicar no botão "Salvar Alterações".
+*/
+
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import styles from '@/styles/cliente/meuPerfil.module.css';
@@ -5,6 +14,9 @@ import { useContext, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import ModalAlteraSenha from './ModalAlteraSenha';
 
+/**
+ * Componente para exibir e editar o perfil do usuário logado.
+ */
 export default function ModalMeuPerfil() {
   const { user } = useContext(AuthContext);
 
@@ -19,6 +31,9 @@ export default function ModalMeuPerfil() {
     service: '',
   });
 
+  /**
+   * Função para editar o perfil do cliente.
+   */
   async function editarCliente(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     cliente.service = 'editarCliente';

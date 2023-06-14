@@ -2,6 +2,12 @@ import md5 from "md5";
 import { v4 as uuid } from 'uuid';
 import * as promoter from '../../types/promoter';
 
+/**
+ * Função que lida com as solicitações relacionadas a promoters.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
+
 export default async (req: any, res: any) => {
 
     const body = req.body;

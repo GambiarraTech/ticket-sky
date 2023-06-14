@@ -1,3 +1,8 @@
+/**
+Componente SideMenu.
+Este componente representa o menu lateral do administrador.
+*/
+
 import styles from '@/styles/admin/sideMenu.module.css';
 import Link from 'next/link';
 import { FaTicketAlt, FaUserTie, FaUsers } from 'react-icons/fa';

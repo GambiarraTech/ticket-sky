@@ -1,5 +1,10 @@
 import * as pedido from '../../types/pedido';
 
+/**
+ * Função que lida com as solicitações relacionadas a pedidos.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
 
     const { service, idCliente } = req.body

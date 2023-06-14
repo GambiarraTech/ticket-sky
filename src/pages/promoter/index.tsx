@@ -7,12 +7,16 @@ import { apiGet } from '@/pages/api/router';
 import styles from '@/styles/promoter/home.module.css';
 import { useContext, useEffect, useState } from 'react';
 
+/**
+ * Componente para a página inicial do promoter.
+ */
 export default function Home() {
   const [eventos, setEventos] = useState([]);
   let condicaoEventos: boolean;
   const { user, isLogged } = useContext(AuthContext);
 
   useEffect(() => {
+    // Carrega os eventos do promoter ao carregar o componente ou quando o usuário é alterado
     if (isLogged && user.role == 'promoter') {
       apiGet(`evento?id=${user.id}`).then((value) => {
         setEventos(value.result);
@@ -20,6 +24,7 @@ export default function Home() {
     }
   }, [user]);
 
+  // Verifica se há eventos cadastrados ou não
   if (!eventos) {
     condicaoEventos = true;
   } else {

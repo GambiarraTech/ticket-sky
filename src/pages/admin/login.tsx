@@ -8,6 +8,9 @@ const listaInputs = [
   { id: 'senha', label: 'Digite sua senha:', length: 30 },
 ];
 
+/**
+ * Página de login para administradores.
+ */
 export default function Login() {
   return (
     <div className={styles.box}>

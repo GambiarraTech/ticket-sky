@@ -8,6 +8,10 @@ import { useContext } from 'react';
 
 const font = Inter({ subsets: ['latin'], weight: '500' });
 
+/**
+ * Componente para a página inicial do aplicativo TicketSky.
+ * @returns O componente para a página inicial.
+ */
 export default function Home() {
   const { user, isLogged, logout } = useContext(AuthContext);
 

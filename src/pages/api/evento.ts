@@ -2,6 +2,11 @@ import * as endereco from "@/types/endereco";
 import * as evento from "@/types/evento";
 import * as ingresso from "@/types/ingresso";
 
+/**
+ * Função que lida com as solicitações relacionadas a eventos.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
     const body = req.body;
 

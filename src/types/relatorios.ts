@@ -1,6 +1,10 @@
 import { query } from '@/lib/db';
 
-
+/**
+ * Função assíncrona que retorna os ingressos de um cliente.
+ * @param idCliente - O ID do cliente.
+ * @returns Uma lista contendo os ingressos do cliente, ou null caso não haja ingressos.
+ */
 export async function meusIngressos(idCliente: number) {
 
     const sql = `
@@ -40,6 +44,11 @@ export async function meusIngressos(idCliente: number) {
     }
 }
 
+/**
+ * Função assíncrona que retorna os eventos de um promoter.
+ * @param idPromoter - O ID do promoter.
+ * @returns Uma lista contendo os eventos do promoter, ou null caso não haja eventos.
+ */
 export async function meusEventos(idPromoter: number) {
     const sql = `
         SELECT
@@ -76,6 +85,10 @@ export async function meusEventos(idPromoter: number) {
     }
 }
 
+/**
+ * Função assíncrona que retorna os eventos com maior número de vendas.
+ * @returns Uma lista contendo os eventos com maior número de vendas, ou null caso não haja eventos.
+ */
 export async function eventosAlta() {
     const sql = `
         SELECT
@@ -105,6 +118,10 @@ export async function eventosAlta() {
 
 }
 
+/**
+Função assíncrona que retorna todos os eventos.
+@returns Uma lista contendo todos os eventos, ou null caso não haja eventos.
+*/
 export async function todosEventos() {
     const sql = `
         SELECT

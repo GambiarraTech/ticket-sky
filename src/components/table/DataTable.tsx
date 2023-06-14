@@ -8,16 +8,21 @@ import { BiSearch } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
 import { IoIosAddCircle } from 'react-icons/io';
 
+/**
+ * Props do componente `DataTable`.
+ */
 interface TableProps {
   title: string;
-  //   Adicionar os outros tipos
   data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
-  endpoint: string,
+  endpoint: string;
   updateData: () => void;
 }
 
+/**
+ * Componente de tabela de dados genérica.
+ */
 const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, updateData }) => {
   const [search, setSearch] = React.useState('');
   const [forceUpdate, setForceUpdate] = React.useState(false);
@@ -28,10 +33,18 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
     apiPost({ idPromoter: id, service: 'deleteAdmin' }, 'admin').then(() => {});
   }
 
+  /**
+   * Manipulador para a pesquisa de dados na tabela.
+   * @param event - O evento de mudança no campo de pesquisa.
+   */
+
   const handleSearch = (event: any) => {
     setSearch(event.target.value);
   };
 
+  /**
+   * Filtra os dados com base no termo de pesquisa.
+   */
   const filteredData = fixedData.filter(
     (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
   );
@@ -40,17 +53,16 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  function excluir(endpoint: any, id: any){
-    if( endpoint == 'admin'){
-        apiPost({service: 'excluir'+ upper(endpoint), id: id}, endpoint)
+  function excluir(endpoint: any, id: any) {
+    if (endpoint == 'admin') {
+      apiPost({ service: 'excluir' + upper(endpoint), id: id }, endpoint)
         .then(() => {
-            updateData(); // Atualiza os dados da tabela após excluir o dado
-          })
-          .catch((error) => {
-            console.error('Erro ao excluir:', error);
-          });
+          updateData(); // Atualiza os dados da tabela após excluir o dado
+        })
+        .catch((error) => {
+          console.error('Erro ao excluir:', error);
+        });
     }
-
   }
   return (
     <div className={styles.dataTable}>
@@ -106,7 +118,7 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, upda
                         <FaTrash color={'grey'} />
                       </button>
                     ) : (
-                      <button onClick={() => excluir(endpoint,data[index].id)}>
+                      <button onClick={() => excluir(endpoint, data[index].id)}>
                         <FaTrash color={'red'} />
                       </button>
                     )}

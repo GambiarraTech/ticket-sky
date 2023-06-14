@@ -1,8 +1,20 @@
+/**
+Componente MeuCartao.
+Este componente exibe um formulário para o usuário cadastrar ou visualizar as informações de um cartão.
+O componente utiliza o contexto AuthContext para acessar as informações do usuário logado.
+O formulário possui campos para o nome do titular, CPF do titular, número do cartão e validade.
+O usuário pode cadastrar um novo cartão ou visualizar as informações do cartão existente.
+O usuário também pode deletar o cartão existente.
+*/
+
 import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import style from '@/styles/cliente/meuCartao.module.css';
-import { FormEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
+/**
+ * Componente para exibir e editar as informações do cartão de crédito do usuário.
+ */
 export default function MeuCartao() {
   const { user } = useContext(AuthContext);
   const [cartao, setCartao] = useState({
@@ -14,7 +26,10 @@ export default function MeuCartao() {
     service: '',
   });
 
-  async function cadastrarCartao(event: FormEvent) {
+  /**
+   * Função para cadastrar o cartão de crédito do usuário.
+   */
+  async function cadastrarCartao(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     cartao.id_cliente = user.id;
     cartao.service = 'saveCartao';
@@ -22,6 +37,9 @@ export default function MeuCartao() {
     alert(res.result);
   }
 
+  /**
+   * Função para deletar o cartão de crédito do usuário.
+   */
   async function deletarCartao() {
     const res = await router.apiPost({ id_cliente: user.id, service: 'deletarCartao' }, 'cartao');
 

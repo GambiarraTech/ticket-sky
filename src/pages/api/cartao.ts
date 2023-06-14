@@ -1,5 +1,10 @@
 import { Cartao, deleteCartao, insertCartao, selectCartao, updateCartao } from '../../types/cartao';
 
+/**
+ * Função que trata as solicitações relacionadas a cartões de crédito.
+ * @param req - O objeto de solicitação HTTP.
+ * @param res - O objeto de resposta HTTP.
+ */
 export default async (req: any, res: any) => {
     const { service } = req.body;
     if (service) {

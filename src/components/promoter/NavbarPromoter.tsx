@@ -9,9 +9,13 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { HiOutlineLogout } from 'react-icons/hi';
 
+/**
+ * Componente para exibir a barra de navegação para os usuários do tipo "promotor".
+ */
 export default function NavbarPromoter() {
   const { user, isLogged, logout } = useContext(AuthContext);
   const [openModalMeuPerfil, setOpenModalMeuPerfil] = useState(false);
+
   return (
     <>
       <Navbar
@@ -47,4 +51,7 @@ export default function NavbarPromoter() {
   );
 }
 
+/**
+ * Exporta a função `getServerSideProps` do módulo `auth`.
+ */
 export { getServerSideProps };

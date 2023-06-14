@@ -4,19 +4,31 @@ import style from '@/styles/cliente/meuCartao.module.css';
 import styles from '@/styles/cliente/meuPerfil.module.css';
 import { useContext, useState } from 'react';
 
+/**
+ * Props para o componente ModalAlteraSenha.
+ */
 interface ModalAlteraSenhaProps {
   onSubmit: () => void;
 }
 
+/**
+ * Componente de alteração de senha.
+ */
 export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   const { user } = useContext(AuthContext);
 
+  /**
+   * Estado para armazenar os dados do formulário.
+   */
   const [dados, setDados] = useState({
     senhaAntiga: '',
     novaSenha: '',
     confirmacao: '',
   });
 
+  /**
+   * Estado para armazenar os dados a serem enviados para a API.
+   */
   const [data, setData] = useState({
     senhaAntiga: '',
     novaSenha: '',
@@ -24,25 +36,35 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
     service: 'alterarSenha',
   });
 
+  /**
+   * Função assíncrona para alterar a senha.
+   */
   async function alterarSenha(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     // Define a mensagem que vai aparecer para o usuário
-    var conteudo = '';
+    let conteudo = '';
 
-    //Checa se todos campos foram preenchidos
-    if (dados.senhaAntiga == '' || dados.novaSenha == '' || dados.confirmacao == '') {
+    // Checa se todos os campos foram preenchidos
+    if (dados.senhaAntiga === '' || dados.novaSenha === '' || dados.confirmacao === '') {
       conteudo = 'Preencha todos os campos para continuar!';
     }
 
-    //Checa se a nova senha é igual a confirmação de nova senha
+    // Checa se a nova senha é igual à confirmação de nova senha
     else if (dados.confirmacao !== dados.novaSenha) {
       conteudo = 'A confirmação de senha e a nova senha precisam ser iguais!';
     } else {
+      // Atualiza os dados a serem enviados para a API
       data.senhaAntiga = dados.senhaAntiga;
       data.novaSenha = dados.novaSenha;
+
+      // Chama a API para alterar a senha
       const res = await router.apiPost(data, 'promoter');
+
+      // Atualiza a mensagem de conteúdo com a resposta da API
       conteudo = res.result;
     }
+
+    // Exibe a mensagem para o usuário
     alert(conteudo);
   }
 
@@ -80,11 +102,10 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
             required
           />
         </div>
-        <button type='submit' className={styles.salvarAlt} >
+        <button type="submit" className={styles.salvarAlt}>
           Alterar Senha
         </button>
       </form>
-
     </>
   );
 }

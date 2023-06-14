@@ -1,5 +1,6 @@
 import { query } from "@/lib/db";
 
+
 export type Ingresso = {
     id: number,
     quantidade: number,
@@ -8,6 +9,11 @@ export type Ingresso = {
     id_setor: number
 }
 
+/**
+ * Função assíncrona para obter os ingressos de um evento específico.
+ * @param idEvento - O ID do evento.
+ * @returns Uma lista de objetos contendo os dados dos ingressos para o evento especificado, ou null se não houver ingressos encontrados.
+ */
 export async function getIngressosEvento(idEvento: string) {
 
     const ingressos: any = await query({
@@ -22,7 +28,7 @@ export async function getIngressosEvento(idEvento: string) {
     }
 }
 
-export async function cadastroIngressos(vip: number, backstage: number, camarote: number, preco_vip: number, preco_backstage: number, preco_camarote: number, idEvento: number){
+export async function cadastroIngressos(vip: number, backstage: number, camarote: number, preco_vip: number, preco_backstage: number, preco_camarote: number, idEvento: number) {
 
     const ingressoVip: any = await query({
         query: "INSERT INTO ingresso (quantidade, valor, id_evento, id_setor) VALUES (?, ?, ?, ?)",
@@ -60,11 +66,11 @@ export async function cadastroIngressos(vip: number, backstage: number, camarote
         })
 
 
-            if (Object.keys(vip).length > 0 && Object.keys(backstage).length > 0 && Object.keys(camarote).length > 0) {
-                return [ vip[0] , backstage[0], camarote[0]]
-            } else {
-                return []
-            }
+        if (Object.keys(vip).length > 0 && Object.keys(backstage).length > 0 && Object.keys(camarote).length > 0) {
+            return [vip[0], backstage[0], camarote[0]]
+        } else {
+            return []
+        }
     }
 
     return []

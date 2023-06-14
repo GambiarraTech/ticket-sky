@@ -8,6 +8,9 @@ import Dropzone from '../../components/promoter/Dropzone';
 import style from '../../styles/promoter/criarEvento.module.css';
 import * as router from '../api/router';
 
+/**
+ * Componente para criar um novo evento.
+ */
 export default function CriarEvento() {
   const [estados, setEstados] = useState<{ nome: string; uf: string }[]>([]);
   const [cidades, setCidades] = useState<{ nome: string }[]>([]);
@@ -54,6 +57,11 @@ export default function CriarEvento() {
 
   const { user } = useContext(AuthContext);
 
+  /**
+   * Converte um array de bytes em uma string.
+   * @param byteArray O array de bytes a ser convertido.
+   * @returns A string resultante da conversão.
+   */
   function convertByteArrayToString(byteArray: number[]): string {
     const chunkSize = 65536; // Tamanho do chunk (ajuste conforme necessário)
     let byteString = '';
@@ -66,11 +74,18 @@ export default function CriarEvento() {
     return byteString;
   }
 
+  /**
+   * Limpa as mensagens de erro e sucesso.
+   */
   function clearErrorMessage() {
     setErrorMessage('');
     setSuccessMessage('');
   }
 
+  /**
+   * Cria um novo evento.
+   * @param e O evento do formulário.
+   */
   async function criarEvento(e: any) {
     e.preventDefault();
 

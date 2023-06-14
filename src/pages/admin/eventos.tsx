@@ -4,6 +4,9 @@ import { getServerSideProps } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 import * as router from '../api/router';
 
+/**
+ * Interface que define a estrutura de um evento.
+ */
 export interface IEventosProps {
   id: number;
   nome: string;
@@ -12,6 +15,12 @@ export interface IEventosProps {
   promoter: string;
 }
 
+/**
+ * Função auxiliar que converte a data em formato personalizado.
+ * @param data A data a ser convertida.
+ * @param service O serviço para o qual a conversão está sendo feita ('day' ou 'month').
+ * @returns A data convertida para o formato personalizado.
+ */
 function ConvertDate(data: Date, service: String) {
   if (service == 'day') {
     switch (data.getDay()) {
@@ -64,6 +73,9 @@ function ConvertDate(data: Date, service: String) {
   }
 }
 
+/**
+ * Página "Eventos" que exibe uma tabela com a lista de eventos.
+ */
 export default function Eventos() {
   const [eventos, setEventos] = useState<IEventosProps[]>([]);
   const columns = ['Código', 'Nome', 'Data/ Hora', 'Categoria', 'Promoter'];

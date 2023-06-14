@@ -1,3 +1,8 @@
+/**
+Componente NavBar.
+Este componente representa a barra de navegação do administrador.
+*/
+
 import { AuthContext } from '@/contexts/AuthContext';
 import styles from '@/styles/admin/NavBar.module.css';
 import Link from 'next/link';
