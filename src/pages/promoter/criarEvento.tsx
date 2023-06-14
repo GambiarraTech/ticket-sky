@@ -47,6 +47,9 @@ export default function CriarEvento() {
     backstage: 0,
     camarote: 0,
     service: '',
+    preco_vip: 0,
+    preco_backstage: 0,
+    preco_camarote: 0,
     imagem: '',
   });
 
@@ -350,55 +353,101 @@ export default function CriarEvento() {
             </div>
           </div>
 
-          <div className={style.partes}>
+          <div className={style.parteImagem}>
+            <div></div>
             <div className={style.campo}>
               Banner do evento:
               <Dropzone onFileUploaded={setSelectedFile} />
             </div>
-
             <div className={style.data}>Quantidade de ingressos disponiveis:</div>
-            <div className={style.ingressos}>
-              <div className={style.campo}>
-                VIP:
-                <input
-                  className={style.input_pequeno}
-                  name="vip"
-                  type="number"
-                  min={0}
-                  required
-                  onChange={(e) => {
-                    evento.vip = Number(e.target.value);
-                    clearErrorMessage();
-                  }}
-                />
+            <div>
+              <div className={style.ingressos}>
+                <div className={style.campo}>
+                  VIP:
+                  <input
+                    className={style.input_pequeno}
+                    name="vip"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.vip = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
+                <div className={style.campo}>
+                  Backstage:
+                  <input
+                    className={style.input_pequeno}
+                    name="backstage"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.backstage = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
+                <div className={style.campo}>
+                  Camarote:
+                  <input
+                    className={style.input_pequeno}
+                    name="camarote"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.camarote = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
               </div>
-              <div className={style.campo}>
-                Backstage:
-                <input
-                  className={style.input_pequeno}
-                  name="backstage"
-                  type="number"
-                  min={0}
-                  required
-                  onChange={(e) => {
-                    evento.backstage = Number(e.target.value);
-                    clearErrorMessage();
-                  }}
-                />
-              </div>
-              <div className={style.campo}>
-                Camarote:
-                <input
-                  className={style.input_pequeno}
-                  name="camarote"
-                  type="number"
-                  min={0}
-                  required
-                  onChange={(e) => {
-                    evento.camarote = Number(e.target.value);
-                    clearErrorMessage();
-                  }}
-                />
+              <div className={style.ingressos}>
+                <div className={style.campo}>
+                  Preço:
+                  <input
+                    className={style.input_pequeno}
+                    name="preco_vip"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.preco_vip = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
+                <div className={style.campo}>
+                  Preço:
+                  <input
+                    className={style.input_pequeno}
+                    name="preco_backstage"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.preco_backstage = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
+                <div className={style.campo}>
+                  Preço:
+                  <input
+                    className={style.input_pequeno}
+                    name="preco_camarote"
+                    type="number"
+                    min={0}
+                    required
+                    onChange={(e) => {
+                      evento.preco_camarote = Number(e.target.value);
+                      clearErrorMessage();
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

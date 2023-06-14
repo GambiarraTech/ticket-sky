@@ -17,8 +17,8 @@ export default async (req: any, res: any) => {
                 break
             }
             case 'cadastroPedido': {
-                const { tipoIngresso, idIngresso, quantidade } = req.body;
-                const cadastroPedido = await pedido.cadastroPedido('', idCliente, tipoIngresso, idIngresso, quantidade);
+                const { ingressos } = req.body;
+                const cadastroPedido = await pedido.cadastroPedido('', idCliente, ingressos);
                 res.json({ result: cadastroPedido });
                 break
             }

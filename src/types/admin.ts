@@ -39,6 +39,25 @@ export async function loginAdmin(email: string, senha: string) {
  * @param senha A senha do administrador.
  * @returns Um objeto Admin contendo os dados do administrador logado, ou null se o login falhar.
  */
+export async function deleteAdmin(id: number) {
+    await query({
+        query: "DELETE FROM administrador WHERE administrador.id = (?)",
+        values: [id]
+    })
+
+    const admin: any = await query({
+        query: "SELECT * FROM administrador WHERE id = (?)",
+        values: [id]
+    })
+
+
+    if (Object.keys(admin).length > 0) {
+        return null
+    } else {
+        return 'Administrador removido.'
+    }
+}
+
 export async function getAdmin(id: string) {
 
     const admin: any = await query({
@@ -68,5 +87,20 @@ export async function getAllAdmins() {
         return admins
     } else {
         return null
+    }
+}
+
+export async function excluirAdmin(id: string) {
+    await query({
+        query: "DELETE FROM administrador WHERE administrador.id = (?)",
+        values: [id]
+    })
+
+    const admin: any = getAdmin(id)
+
+    if (admin == null) {
+        return true
+    } else {
+        return false
     }
 }

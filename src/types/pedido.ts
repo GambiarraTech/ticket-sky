@@ -38,7 +38,7 @@ export async function compra(id_cliente: number, ingressos: ingressos[]) {
     }
 
     ingressos.forEach(async (element) => {
-        await cadastroPedido(digitos, id_cliente, element.tipoIngresso, element.id_ingresso, element.quantidade);
+        await cadastroPedido(digitos, id_cliente, element);
     });
 
     return 'Pedido cadastrado com sucesso';
@@ -55,7 +55,8 @@ export async function compra(id_cliente: number, ingressos: ingressos[]) {
  * @param quantidade - A quantidade de ingressos do pedido.
  * @returns Uma mensagem informando que o pedido foi cadastrado com sucesso.
  */
-export async function cadastroPedido(numero: string, id_cliente: number, id_tipo_ingresso: number, id_ingresso: number, quantidade: number) {
+// Essa função pode ser usada quando a compra for de um só tipo e setor de ingresso
+export async function cadastroPedido(numero: string, id_cliente: number, ingresso: ingressos) {
 
     if (numero == '') {
         // Define o número do pedido
@@ -71,7 +72,7 @@ export async function cadastroPedido(numero: string, id_cliente: number, id_tipo
     }
     const cadastroPedido = await query({
         query: 'INSERT INTO pedido (numero, id_cliente, id_tipo_ingresso, id_ingresso, quantidade) VALUES (?, ?, ?, ?, ?);',
-        values: [numero, id_cliente, id_tipo_ingresso, id_ingresso, quantidade]
+        values: [numero, id_cliente, ingresso.tipoIngresso, ingresso.id_ingresso, ingresso.quantidade]
     })
 
     return 'Pedido cadastrado com sucesso';
@@ -85,8 +86,8 @@ export async function contaPedidos() {
     const sql = `
         SELECT COUNT(*) AS quantidade_pedidos
             FROM (
-                SELECT COUNT(*) 
-                    FROM pedido 
+                SELECT COUNT(*)
+                    FROM pedido
                     GROUP BY numero
             ) AS subconsulta;
     `;

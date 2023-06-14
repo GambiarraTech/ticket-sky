@@ -1,10 +1,12 @@
 import { IAdminProps } from '@/pages/admin/administradores';
 import { IEventosProps } from '@/pages/admin/eventos';
 import { IPromotersProps } from '@/pages/admin/promoters';
+import { apiPost } from '@/pages/api/router';
 import styles from '@/styles/table/DataTable.module.css';
 import React, { FC } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
+import { IoIosAddCircle } from 'react-icons/io';
 
 /**
  * Props do componente `DataTable`.
@@ -14,20 +16,29 @@ interface TableProps {
   data: IAdminProps[] | IPromotersProps[] | IEventosProps[];
   columns: string[];
   props: string[];
+  endpoint: string;
+  updateData: () => void;
 }
 
 /**
  * Componente de tabela de dados genérica.
  */
-const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
+const DataTable: FC<TableProps> = ({ data, columns, title, props, endpoint, updateData }) => {
   const [search, setSearch] = React.useState('');
+  const [forceUpdate, setForceUpdate] = React.useState(false);
+  //   Adicionar os outros tipos
   const fixedData: Array<IAdminProps | IPromotersProps | IEventosProps> = data;
+
+  function deletarAdmin(id: number) {
+    apiPost({ idPromoter: id, service: 'deleteAdmin' }, 'admin').then(() => {});
+  }
 
   /**
    * Manipulador para a pesquisa de dados na tabela.
    * @param event - O evento de mudança no campo de pesquisa.
    */
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleSearch = (event: any) => {
     setSearch(event.target.value);
   };
 
@@ -38,15 +49,40 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
     (item) => item.nome.toLowerCase().includes(search.toLowerCase()) || item.id.toString().includes(search)
   );
 
+  function upper(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function excluir(endpoint: any, id: any) {
+    if (endpoint == 'admin') {
+      apiPost({ service: 'excluir' + upper(endpoint), id: id }, endpoint)
+        .then(() => {
+          updateData(); // Atualiza os dados da tabela após excluir o dado
+        })
+        .catch((error) => {
+          console.error('Erro ao excluir:', error);
+        });
+    }
+  }
   return (
     <div className={styles.dataTable}>
       <h1 className={styles.title}>{title}</h1>
 
-      <div className={styles.searchIconPosition}>
-        <span className={styles.searchBar}>
-          <BiSearch className={styles.colorIcon} />
-        </span>
-        <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
+      <div className={styles.topContent}>
+        <div></div>
+        <div className={styles.searchIconPosition}>
+          <span className={styles.searchBar}>
+            <BiSearch className={styles.colorIcon} />
+          </span>
+          <input className={styles.input} placeholder="Pesquisar" type="text" onChange={handleSearch} />
+        </div>
+        {title == 'Administradores' ? (
+          <button>
+            <IoIosAddCircle color="white" size={'25'} />
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
 
       <div className={styles.tableBackground}>
@@ -58,9 +94,13 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
                   {item}
                 </th>
               ))}
-              <th scope="col" className={styles.tableCellHeader} style={{ color: 'red' }}>
-                Excluir
-              </th>
+              {title == 'Administradores' ? (
+                <th scope="col" className={styles.tableCellHeader} style={{ color: 'red' }}>
+                  Excluir
+                </th>
+              ) : (
+                <></>
+              )}
             </tr>
           </thead>
           <tbody className={styles.tableRowGroup}>
@@ -71,11 +111,21 @@ const DataTable: FC<TableProps> = ({ data, columns, title, props }) => {
                     {endPoint[values as keyof typeof endPoint]}
                   </td>
                 ))}
-                <td className={styles.tableCellIcon}>
-                  <button>
-                    <FaTrash color={'red'} />
-                  </button>
-                </td>
+                {title == 'Administradores' ? (
+                  <td className={styles.tableCellIcon}>
+                    {endPoint.id == 1 ? (
+                      <button disabled={true}>
+                        <FaTrash color={'grey'} />
+                      </button>
+                    ) : (
+                      <button onClick={() => excluir(endpoint, data[index].id)}>
+                        <FaTrash color={'red'} />
+                      </button>
+                    )}
+                  </td>
+                ) : (
+                  <></>
+                )}
               </tr>
             ))}
           </tbody>

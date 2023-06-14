@@ -1,4 +1,5 @@
 import { query } from '@/lib/db';
+import md5 from 'md5';
 
 /**
  * Tipo de dados para um cliente.
@@ -123,8 +124,9 @@ export async function editarCliente(email: string, nome: string, sobrenome: stri
  * @returns Uma mensagem informando que o cliente foi alterado com sucesso.
  */
 export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
-
-    const confirmaSenha = await loginCliente(email, senhaAntiga);
+    const senhaHash = md5(senhaAntiga)
+    const novaSenhaHash = md5(novaSenha)
+    const confirmaSenha = await loginCliente(email, senhaHash);
 
     if (confirmaSenha != null) {
 
@@ -134,7 +136,7 @@ export async function alterarSenha(email: string, senhaAntiga: string, novaSenha
         else {
             const alteraSenha: any = await query({
                 query: "UPDATE cliente SET senha = (?) WHERE email = (?)",
-                values: [novaSenha, email],
+                values: [novaSenhaHash, email],
             })
 
             return "Senha alterada com sucesso!";

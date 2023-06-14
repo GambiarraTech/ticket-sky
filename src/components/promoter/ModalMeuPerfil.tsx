@@ -26,7 +26,8 @@ export default function MeuPerfil() {
   /**
    * Função assíncrona para editar o promoter.
    */
-  async function editarPromoter() {
+  async function editarPromoter(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     promoter.service = 'editarPromoter';
     const res = await router.apiPost(promoter, 'promoter');
     alert(res.result);
@@ -46,38 +47,46 @@ export default function MeuPerfil() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.title}>
-          <h1>Meu Perfil</h1>
-        </div>
-        <label>Email</label>
-        <input
-          type="email"
-          readOnly
-          defaultValue={promoter.email}
-          onChange={(e) => (promoter.email = e.target.value)}
-          required
-        />
-        <label>Nome</label>
-        <input type="text" defaultValue={promoter.nome} onChange={(e) => (promoter.nome = e.target.value)} required />
-        <label>CPF/CNPJ</label>
-        <input
-          type="text"
-          defaultValue={promoter.cpf_cnpj}
-          onChange={(e) => (promoter.cpf_cnpj = e.target.value)}
-          readOnly
-        />
-        <div className={styles.buttonsContainer}>
-          <button className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
-            Alterar Senha
-          </button>
-          <button className={styles.buttonSalvar} onClick={editarPromoter}>
-            Salvar Alterações
-          </button>
-        </div>
+        <form onSubmit={editarPromoter}>
+          <div className={styles.title}>
+            <h1>Meu Perfil</h1>
+          </div>
+          <label>Email</label>
+          <input
+            type="email"
+            readOnly
+            defaultValue={promoter.email}
+            onChange={(e) => (promoter.email = e.target.value)}
+            required
+          />
+          <label>Nome</label>
+          <input
+            type="text"
+            defaultValue={promoter.nome}
+            maxLength={20}
+            onChange={(e) => (promoter.nome = e.target.value)}
+            required
+          />
+          <label>CPF/CNPJ</label>
+          <input
+            type="text"
+            defaultValue={promoter.cpf_cnpj}
+            onChange={(e) => (promoter.cpf_cnpj = e.target.value)}
+            readOnly
+          />
+          <div className={styles.buttonsContainer}>
+            <button type="button" className={styles.buttonAlterarSenha} onClick={() => setOpenModalAltSenha(true)}>
+              Alterar Senha
+            </button>
+            <button type="submit" className={styles.buttonSalvar}>
+              Salvar Alterações
+            </button>
+          </div>
+        </form>
+        <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
+          <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
+        </Modal>
       </div>
-      <Modal isOpen={openModalAltSenha} onClose={() => setOpenModalAltSenha(false)}>
-        <ModalAlteraSenha onSubmit={() => setOpenModalAltSenha(false)} />
-      </Modal>
     </>
   );
 }

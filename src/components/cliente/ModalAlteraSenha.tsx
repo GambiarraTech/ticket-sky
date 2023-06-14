@@ -42,7 +42,8 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   /**
    * Função para realizar a alteração de senha.
    */
-  async function alterarSenha() {
+  async function alterarSenha(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     // Define a mensagem que vai aparecer para o usuário
     var conteudo = '';
 
@@ -66,7 +67,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   return (
     <>
       <div className={style.title}>Alterar Senha</div>
-      <form className={style.formStyle}>
+      <form onSubmit={alterarSenha} className={style.formStyle}>
         <div className={style.inputFormat}>
           Senha atual
           <input
@@ -74,6 +75,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
             className={style.primaryInputStyle}
             placeholder="Senha Atual"
             onChange={(e) => (dados.senhaAntiga = e.target.value)}
+            required
           />
         </div>
         <div className={style.inputFormat}>
@@ -82,6 +84,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
             type="text"
             className={style.primaryInputStyle}
             placeholder="Nova Senha"
+            required
             onChange={(e) => (dados.novaSenha = e.target.value)}
           />
         </div>
@@ -91,15 +94,14 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
             type="text"
             className={style.primaryInputStyle}
             placeholder="Digite novamente a nova senha"
+            required
             onChange={(e) => (dados.confirmacao = e.target.value)}
           />
         </div>
-      </form>
-      <div>
-        <button className={styles.salvarAlt} onClick={alterarSenha}>
+        <button type="submit" className={styles.salvarAlt}>
           Alterar Senha
         </button>
-      </div>
+      </form>
     </>
   );
 }

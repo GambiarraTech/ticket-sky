@@ -1,4 +1,5 @@
 import { query } from '@/lib/db'
+import md5 from 'md5'
 
 /**
  * Definição do tipo para os dados de um promoter.
@@ -55,6 +56,17 @@ export async function getPromoter(id: string) {
 
 }
 
+export async function checkCpfCnpj(cpf_cnpj: string) {
+    const verificaPromoterCpf = await query({
+        query: "SELECT * FROM promoter WHERE promoter.cpf_cnpj = (?)",
+        values: [cpf_cnpj],
+    });
+
+    if (Object.keys(verificaPromoterCpf).length > 0) {
+        return null;
+    }
+}
+
 /**
  * Função assíncrona utilizada para cadastrar um promoter.
  * Verifica se o email fornecido já está sendo usado por outro promoter.
@@ -91,6 +103,7 @@ export async function cadastroPromoter(nome: string, email: string, senha: strin
         } else {
             throw new Error('Falha ao cadastrar o promoter.');
         }
+
     } catch (error: any) {
         throw new Error('Erro ao cadastrar o promoter: ' + error.message);
     }
@@ -133,8 +146,9 @@ export async function editarPromoter(email: string, nome: string, cpf_cnpj: stri
  * @returns Uma mensagem informando que a senha foi alterada com sucesso ou uma mensagem de erro.
  */
 export async function alterarSenha(email: string, senhaAntiga: string, novaSenha: string) {
-
-    const confirmaSenha = await loginPromoter(email, senhaAntiga);
+    const senhaHash = md5(senhaAntiga)
+    const novaSenhaHash = md5(novaSenha)
+    const confirmaSenha = await loginPromoter(email, senhaHash);
 
     if (confirmaSenha != null) {
 
@@ -144,7 +158,7 @@ export async function alterarSenha(email: string, senhaAntiga: string, novaSenha
         else {
             const alteraSenha: any = await query({
                 query: "UPDATE promoter SET senha = (?) WHERE email = (?)",
-                values: [novaSenha, email],
+                values: [novaSenhaHash, email],
             })
 
             return "Senha alterada com sucesso!";

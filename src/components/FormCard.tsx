@@ -75,6 +75,7 @@ export default function FormCard(props: FormCardProps) {
       const res = router.apiPost(inputValues, props.endPoint);
 
       res.then((value) => {
+        console.log(value);
         if (!value.error) {
           if (props.endPoint == 'promoter' && inputValues.service == 'cadastroPromoter') {
             enviaEmailConfirmacao(inputValues.email);
@@ -85,7 +86,7 @@ export default function FormCard(props: FormCardProps) {
           }
         } else {
           setShowErroLogin(true);
-          setErrorMessage(props.errorMessage);
+          setErrorMessage(value.error);
         }
       });
     } else {

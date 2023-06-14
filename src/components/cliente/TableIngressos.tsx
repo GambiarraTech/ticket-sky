@@ -24,7 +24,7 @@ export type meusIngressosType = {
  * Props para o componente Table.
  */
 interface TableProps {
-  data?: meusIngressosType[];
+  data: any[];
 }
 
 /**
@@ -43,31 +43,34 @@ const Table: FC<TableProps> = ({ data }) => {
             </tr>
           </thead>
           <tbody className={style.table}>
-            {data?.map((item) => (
-              <tr key={item.nomeEvento}>
+          {data.map((item) => {
+            const date = new Date(item.data_hora);
+            return(
+              <tr key={item.id+1}>
                 <td>
-                  <div className={style.tableContent}>
+                  <div  className={style.tableContent}>
                     <div>
                       <Image
                         className={style.imgBorder}
-                        src="/../public/images/quadrado.png"
+                        src={'data:image/png;base64,' + item.banner}
                         alt="ingresso"
-                        height="120"
-                        width="120"
+                        height="200"
+                        width="200"
                       />
                     </div>
 
                     <div className={style.contentText}>
                       <div className={style.spaceText}>
-                        <p className={style.eventName}>{item.nomeEvento}</p>
-                        <p className={style.eventInfo}>Data de Aquisição: {item.dataAquisicao}</p>
-                        <p className={style.eventInfo}>Valor total: {item.valorTotal}</p>
+                        <p className={style.eventName}>{item.nome}</p>
+                        <p className={style.eventInfo}>Data de Aquisição: {date.toLocaleDateString()}</p>
+                        <p className={style.eventInfo}>Valor total: {' $'+item.quantidade * item.valor_ingresso}</p>
                       </div>
                     </div>
                   </div>
                 </td>
               </tr>
-            ))}
+            )
+            })}
           </tbody>
         </table>
       </div>

@@ -80,6 +80,18 @@ export default function Eventos() {
   const [eventos, setEventos] = useState<IEventosProps[]>([]);
   const columns = ['Código', 'Nome', 'Data/ Hora', 'Categoria', 'Promoter'];
   const props = ['id', 'nome', 'data_hora', 'categoria', 'promoter'];
+  const fetchData = () => {
+    router
+      .apiPost({ service: 'todosEventos' }, 'relatorios')
+      .then((data) => {
+        const eventosData = data.todosEventos;
+        setEventos(eventosData);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os eventos:', error);
+      });
+  }
+
   useEffect(() => {
     router
       .apiPost({ service: 'todosEventos' }, 'relatorios')
@@ -121,7 +133,7 @@ export default function Eventos() {
 
   return (
     <Layout>
-      <DataTable title="Eventos" data={eventos} columns={columns} props={props}></DataTable>
+      <DataTable title="Eventos" data={eventos} columns={columns} props={props} endpoint='evento' updateData={fetchData}></DataTable>
     </Layout>
   );
 }

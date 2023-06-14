@@ -9,9 +9,11 @@ export async function meusIngressos(idCliente: number) {
 
     const sql = `
         SELECT
+            ig.id,
             ev.banner,
             ev.descricao as descricao_evento,
             ev.data_hora,
+            ev.nome,
             ig.valor as valor_ingresso,
             p.quantidade,
             s.descricao as setor,
