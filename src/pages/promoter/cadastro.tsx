@@ -26,7 +26,7 @@ async function enviaEmailConfirmacao(emailPromoter: string) {
     },
     'services/emailService'
   );
-  res.then((value) => {});
+  res.then((value) => { });
 }
 
 export default function Cadastro() {

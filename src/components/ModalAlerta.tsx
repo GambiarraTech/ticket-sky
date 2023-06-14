@@ -16,8 +16,8 @@ const AlertaModal: React.FC<AlertaModalProps> = ({ isOpen, onClose }) => {
       haveAvatar={false}
       title="Aviso"
       haveClose={false}
-      leftButton={<button className={styles.cancelButton}>Não</button>}
-      rightButton={<button className={styles.confirmButton}>Sim</button>}
+      leftButton={<button aria-label='Não' className={styles.cancelButton}>Não</button>}
+      rightButton={<button aria-label='Sim' className={styles.confirmButton}>Sim</button>}
     >
       <p className={styles.warningText}>Tem certeza que deseja continuar?</p>
     </CustomModal>

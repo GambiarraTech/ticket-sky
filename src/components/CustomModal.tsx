@@ -70,7 +70,7 @@ export default function CustomModal({
                 {/* Botão de fechar do modal */}
                 {haveClose && (
                   <div className={styles.margin3}>
-                    <button onClick={closeModal}>
+                    <button aria-label='close-button' onClick={closeModal}>
                       <HiX className={styles.xButton} />
                     </button>
                   </div>
