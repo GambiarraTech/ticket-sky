@@ -229,13 +229,13 @@ export async function aprovarPromoter(id: number) {
 
 /**
  * Função assíncrona utilizada para reprovar um promoter.
- * Atualiza o status de aprovação do promoter para 2.
+ * Deleta o promoter do banco.
  * @param id - O ID do promoter a ser reprovado.
  * @returns Uma mensagem informando que o promoter foi reprovado ou null caso ocorra algum erro.
  */
 export async function reprovarPromoter(id: number) {
     await query({
-        query: "UPDATE promoter SET aprovado = 2 WHERE id = (?)",
+        query: "DELETE FROM promoter WHERE id = (?)",
         values: [id]
     })
 
