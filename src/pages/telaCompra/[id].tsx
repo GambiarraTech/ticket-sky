@@ -1,6 +1,7 @@
 import NavbarCliente from '@/components/cliente/NavbarCliente';
 import { AuthContext } from '@/contexts/AuthContext';
 import * as api from '@/pages/api/router';
+import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
@@ -45,6 +46,23 @@ export default function CheckoutPage() {
     service: '',
     ingressos: [{}] || null,
   });
+
+  const apiEvento = axios.create({
+    baseURL: 'http://localhost:3000/api',
+  });
+
+  async function enviaEmail() {
+    const res = api.apiPost(
+      {
+        destinatario: user.email,
+        assunto: 'Confirmação de Compra',
+        mensagem: `A sua compra foi efetuada!`,
+        anexos: null,
+      },
+      'services/emailService'
+    );
+    res.then((value) => {});
+  }
 
   function constroiPedido() {
     var service = 'cadastroPedido';
@@ -162,6 +180,8 @@ export default function CheckoutPage() {
     }
 
     cadastrarPedido();
+    enviaEmail();
+
     alert('Compra efetuada com sucesso!');
   };
 

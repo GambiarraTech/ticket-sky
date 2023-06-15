@@ -6,6 +6,7 @@ import InputSelect from '@/components/InputSelect';
 import NavbarPromoter from '@/components/promoter/NavbarPromoter';
 import Dropzone from '../../components/promoter/Dropzone';
 import style from '../../styles/promoter/criarEvento.module.css';
+import { IAdminProps } from '../admin/administradores';
 import * as router from '../api/router';
 
 /**
@@ -82,6 +83,36 @@ export default function CriarEvento() {
     setSuccessMessage('');
   }
 
+  const [admins, setAdmins] = useState<IAdminProps[]>([]);
+  useEffect(() => {
+    router
+      .apiPost({ service: 'getAdmins' }, 'admin')
+      .then((data) => {
+        const adminsData = data.admins;
+        setAdmins(adminsData);
+      })
+      .catch((error) => {
+        console.error('Erro ao obter os administradores:', error);
+      });
+  }, []);
+
+  async function enviaEmail(evento: any) {
+    if (admins.length > 0) {
+      admins.map((admin) => {
+        const res = router.apiPost(
+          {
+            destinatario: admin.email,
+            assunto: 'Criação de Evento',
+            mensagem: `O evento ${evento.nome} foi criado! `,
+            anexos: null,
+          },
+          'services/emailService'
+        );
+        res.then((value) => {});
+      });
+    }
+  }
+
   /**
    * Cria um novo evento.
    * @param e O evento do formulário.
@@ -130,6 +161,7 @@ export default function CriarEvento() {
             .then((value) => {
               setSuccessMessage('Evento criado com sucesso!');
               setErrorMessage('');
+              enviaEmail(evento);
             })
             .catch((error) => {
               setErrorMessage('Erro ao criar evento: ' + error);
