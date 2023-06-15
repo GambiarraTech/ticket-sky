@@ -26,9 +26,9 @@ export default function TelaEventoPromoter() {
   var qtdVendida = 0;
 
   type qntVendida = {
-    id_ingressos: any,
-    service: ''
-  }
+    id_ingressos: any;
+    service: '';
+  };
 
   //Informações da tela (referente ao evento)
   const [evento, setEvento] = useState({
@@ -42,10 +42,12 @@ export default function TelaEventoPromoter() {
     numero: '',
   });
 
+  const [quantidadeVendida, setQuantidadeVendida] = useState(Number);
+
   const qntVendida: qntVendida = {
-      id_ingressos: [],
-      service: '',
-  }
+    id_ingressos: [],
+    service: '',
+  };
 
   useEffect(() => {
     if (query.id != undefined) {
@@ -69,7 +71,7 @@ export default function TelaEventoPromoter() {
         .catch(function (error) {
           return;
         });
-        api
+      api
         .post(
           '/ingresso',
           {
@@ -83,23 +85,19 @@ export default function TelaEventoPromoter() {
           }
         )
         .then(function (response) {
-
-          response.data.result.forEach((element: {id: number}) => {
-             qntVendida.id_ingressos.push(element.id);
+          response.data.result.forEach((element: { id: number }) => {
+            qntVendida.id_ingressos.push(element.id);
           });
-
         })
         .catch(function (error) {
           return;
         });
-      }
-      console.log(qntVendida.id_ingressos)
       api
         .post(
           '/pedido',
           {
             service: 'getVendidos',
-            idEvento: evento.id,
+            idEvento: query.id,
           },
           {
             headers: {
@@ -108,14 +106,14 @@ export default function TelaEventoPromoter() {
           }
         )
         .then(function (response) {
-          console.log(response)
-          qtdVendida = response.data.result;
+          qtdVendida = response.data.result[0].quantidade_vendida;
+          setQuantidadeVendida(qtdVendida);
           //qtdvendida está sempre 0
         })
         .catch(function (error) {
           return;
         });
-
+    }
   }, [query.id]);
 
   // OnClick do botão de comprar (vai para tela de pagamento)
@@ -153,14 +151,10 @@ export default function TelaEventoPromoter() {
                   <MdOutlineLocationCity size="40" />
                   {evento.rua + ', ' + evento.numero}
                 </div>
-                <div>{qtdVendida}</div>
+                <div>Ingressos vendidos: {quantidadeVendida}</div>
               </div>
             </div>
-            <div className={style.countInputContainer}>
-
-
-
-            </div>
+            <div className={style.countInputContainer}></div>
           </div>
         </div>
       </section>
