@@ -21,7 +21,7 @@ export default function Modal(props: ModalProps) {
           <div onClick={props.onClose} className={styles.bgBlur} aria-hidden="true"></div>
           <div className={styles.modalBg}>
             <div className={styles.closeButtonPosition}>
-              <button onClick={props.onClose} className={styles.closeButton}>
+              <button aria-label='Close' onClick={props.onClose} className={styles.closeButton}>
                 <IoClose />
               </button>
             </div>
