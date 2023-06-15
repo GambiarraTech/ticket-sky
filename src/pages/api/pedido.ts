@@ -29,8 +29,9 @@ export default async (req: any, res: any) => {
                 break
             }
             case 'getVendidos': {
-                const { idIngressos } = req.body;
-                const qntdPedidos = await pedido.getVendidos(idIngressos);
+                console.log("api")
+                const { idEvento} = req.body;
+                const qntdPedidos = await pedido.getVendidos(idEvento);
                 res.json({ result: qntdPedidos });
                 break
             }

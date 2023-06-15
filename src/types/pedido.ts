@@ -100,21 +100,22 @@ export async function contaPedidos() {
     return qntd;
 }
 
-export async function getVendidos(id_ingresso: []) {
+export async function getVendidos(idEvento: any) {
     var qntdTotal = '';
-    console.log(id_ingresso)
-    id_ingresso.forEach(async (element: any) => {
+    console.log("types")
+    //*console.log(id_ingresso)
+
         const sql = `
-        SELECT SUM(quantidade) AS quantidade_vendida FROM pedido WHERE id_ingresso = (?);
+        SELECT SUM(p.quantidade) AS quantidade_vendida FROM pedido AS p, ingresso AS i WHERE i.id_evento = (?) AND i.id = p.id_ingresso;
         `;
         const quantosVendidos: any = await query({
             query: sql,
-            values: [element]
-        });
+            values: [idEvento]
+
 
         //const qntd: number = quantosVendidos[0].quantidade_vendida;
-        qntdTotal = quantosVendidos;
-    });
 
-    return qntdTotal;
+    });
+    console.log(quantosVendidos)
+    return quantosVendidos;
 }

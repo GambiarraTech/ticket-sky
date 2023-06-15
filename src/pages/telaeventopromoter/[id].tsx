@@ -26,7 +26,7 @@ export default function TelaEventoPromoter() {
   var qtdVendida = 0;
 
   type qntVendida = {
-    id_ingressos: any, 
+    id_ingressos: any,
     service: ''
   }
 
@@ -83,11 +83,11 @@ export default function TelaEventoPromoter() {
           }
         )
         .then(function (response) {
-          
+
           response.data.result.forEach((element: {id: number}) => {
              qntVendida.id_ingressos.push(element.id);
           });
-          
+
         })
         .catch(function (error) {
           return;
@@ -99,7 +99,7 @@ export default function TelaEventoPromoter() {
           '/pedido',
           {
             service: 'getVendidos',
-            idIngressos: qntVendida.id_ingressos,
+            idEvento: evento.id,
           },
           {
             headers: {
@@ -157,9 +157,9 @@ export default function TelaEventoPromoter() {
               </div>
             </div>
             <div className={style.countInputContainer}>
-              
 
-          
+
+
             </div>
           </div>
         </div>
