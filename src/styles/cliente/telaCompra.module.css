@@ -81,3 +81,8 @@
 .botaoCompra {
   @apply block px-4 py-4 w-full rounded-md bg-green-500 text-white transition hover:bg-green-700;
 }
+
+/* CSS UNICO PARA TELA MEUS INGRESSOS  */
+.semIngresso {
+  @apply flex text-4xl font-bold text-gray-500 min-w-full min-h-full items-center justify-center;
+}

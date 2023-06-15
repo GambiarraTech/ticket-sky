@@ -4,6 +4,7 @@ import { AuthContext } from '@/contexts/AuthContext';
 import * as router from '@/pages/api/router';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
+import style from '../../styles/cliente/telaCompra.module.css';
 
 /**
  * Página de exibição dos "Meus Ingressos" para um cliente.
@@ -25,13 +26,17 @@ export default function meusIngressos() {
     }
   }, [user]);
 
+  function isDataEmpty(data: any[]) {
+    return data.length === 1 && Object.keys(data[0]).length === 0;
+  }
+
   return (
     <div>
       <Head>
         <title>TicketSky - Meus Ingressos</title>
       </Head>
       <NavbarCliente />
-      <Table data={data}></Table>
+      {!isDataEmpty(data) ? <Table data={data} /> : <p className={style.semIngresso}>Nenhum ingresso comprado.</p>}
     </div>
   );
 }
