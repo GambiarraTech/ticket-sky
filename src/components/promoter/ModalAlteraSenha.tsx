@@ -32,7 +32,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   const [data, setData] = useState({
     senhaAntiga: '',
     novaSenha: '',
-    email: user.email,
+    email: user?.email,
     service: 'alterarSenha',
   });
 
@@ -102,7 +102,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
             required
           />
         </div>
-        <button type="submit" className={styles.salvarAlt}>
+        <button aria-label='Alterar Senha' type="submit" className={styles.salvarAlt}>
           Alterar Senha
         </button>
       </form>

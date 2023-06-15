@@ -32,7 +32,7 @@ export default function AlterarSenha(props: ModalAlteraSenhaProps) {
   const [data, setData] = useState({
     senhaAntiga: '',
     novaSenha: '',
-    email: user.email,
+    email: user?.email,
     service: 'alterarSenha',
   });
 
