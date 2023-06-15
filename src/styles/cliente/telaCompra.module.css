@@ -19,7 +19,7 @@
 }
 
 .textmd {
-  @apply text-md;
+  @apply text-base;
 }
 
 .flowRoot {
