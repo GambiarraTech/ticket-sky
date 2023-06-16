@@ -285,6 +285,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     id="CpfTitular"
+                    value={cartao.cpf}
                     className={style.input}
                     onChange={(e) => (cartao.cpf = e.target.value)}
                   />
@@ -298,6 +299,7 @@ export default function CheckoutPage() {
                   <input
                     type="text"
                     id="NomeTitular"
+                    value={cartao.titular}
                     className={style.input}
                     onChange={(e) => (cartao.titular = e.target.value)}
                   />
