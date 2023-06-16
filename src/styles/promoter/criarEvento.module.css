@@ -64,7 +64,7 @@
 }
 
 .mensagemSucesso {
-  @apply text-[green] pb-2 -mt-7 font-bold text-lg;
+  @apply text-[green] pb-2 -mt-7 font-bold text-sm;
 }
 
 .select {
