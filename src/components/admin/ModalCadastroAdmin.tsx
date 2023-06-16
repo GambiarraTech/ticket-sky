@@ -108,7 +108,7 @@ export default function ModalCadastroAdmin(props: ModalLoginProps) {
               />
             </div>
           </div>
-          <button className={style.loginButton}>Cadastre-se</button>
+          <button className={style.loginButton}>Cadastro</button>
           <p className={style.mensagemErro}>{showErroLogin ? errorMessage : ''}</p>
         </div>
       </form>
