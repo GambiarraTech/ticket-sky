@@ -151,7 +151,7 @@ export default function TelaEventoPromoter() {
                   <MdOutlineLocationCity size="40" />
                   {evento.rua + ', ' + evento.numero}
                 </div>
-                <div>Ingressos vendidos: {quantidadeVendida}</div>
+                <div>Ingressos vendidos: {quantidadeVendida ? quantidadeVendida : '0'}</div>
               </div>
             </div>
             <div className={style.countInputContainer}></div>
