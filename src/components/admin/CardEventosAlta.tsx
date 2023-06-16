@@ -53,7 +53,7 @@ export default function CardEventosAlta() {
           </table>
         ) : (
           <div className={styles.txtNullEventos}>
-            <p> Nenhum evento cadastrado </p>
+            <p> Nenhum evento cadastrado/Nenhum ingresso vendido </p>
           </div>
         )
       }
