@@ -112,7 +112,6 @@ export default function Eventos() {
         eventosData.map((item: any) => {
           const evento: IEventosProps = item;
           evento.data_hora = converterData(evento.data_hora);
-          console.log(evento.data_hora);
         });
         setEventos(eventosData);
       })
