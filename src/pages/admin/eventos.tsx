@@ -80,6 +80,18 @@ export default function Eventos() {
   const [eventos, setEventos] = useState<IEventosProps[]>([]);
   const columns = ['Código', 'Nome', 'Data/ Hora', 'Categoria', 'Promoter'];
   const props = ['id', 'nome', 'data_hora', 'categoria', 'promoter'];
+  function converterData(timestampStr: string): string {
+    const data = new Date(timestampStr);
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Os meses são baseados em zero
+    const ano = data.getFullYear();
+    const hora = String(data.getHours()).padStart(2, '0');
+    const minuto = String(data.getMinutes()).padStart(2, '0');
+    const segundo = String(data.getSeconds()).padStart(2, '0');
+
+    const dataString = `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+    return dataString;
+  }
   const fetchData = () => {
     router
       .apiPost({ service: 'todosEventos' }, 'relatorios')
@@ -90,13 +102,18 @@ export default function Eventos() {
       .catch((error) => {
         console.error('Erro ao obter os eventos:', error);
       });
-  }
+  };
 
   useEffect(() => {
     router
       .apiPost({ service: 'todosEventos' }, 'relatorios')
       .then((data) => {
         const eventosData = data.todosEventos;
+        eventosData.map((item: any) => {
+          const evento: IEventosProps = item;
+          evento.data_hora = converterData(evento.data_hora);
+          console.log(evento.data_hora);
+        });
         setEventos(eventosData);
       })
       .catch((error) => {
@@ -104,36 +121,16 @@ export default function Eventos() {
       });
   }, []);
 
-  {
-    eventos.map((item) => {
-      const evento: IEventosProps = item;
-      const date = new Date(evento.data_hora);
-      let dia = date.getDate().toString();
-      let horas = date.getHours().toString();
-      let minutos = date.getMinutes().toString();
-      if (date.getDate() < 10) {
-        dia = date.getDate().toString().padStart(2, '0');
-      }
-      if (date.getHours() < 10) {
-        horas = date.getSeconds().toString().padStart(2, '0');
-      }
-      if (date.getMinutes() < 10) {
-        minutos = date.getMinutes().toString().padStart(2, '0');
-      }
-      evento.data_hora =
-        `${ConvertDate(date, 'day')}` +
-        ', ' +
-        `${dia}` +
-        ' ' +
-        `${ConvertDate(date, 'month')}` +
-        ' ' +
-        `${horas}:${minutos}`;
-    });
-  }
-
   return (
     <Layout>
-      <DataTable title="Eventos" data={eventos} columns={columns} props={props} endpoint='evento' updateData={fetchData}></DataTable>
+      <DataTable
+        title="Eventos"
+        data={eventos}
+        columns={columns}
+        props={props}
+        endpoint="evento"
+        updateData={fetchData}
+      ></DataTable>
     </Layout>
   );
 }
