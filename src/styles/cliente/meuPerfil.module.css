@@ -1,5 +1,9 @@
 .container {
-  @apply flex flex-col gap-1;
+  @apply flex flex-col gap-1 m-1;
+}
+
+.form {
+  @apply m-5;
 }
 
 .container label {
@@ -15,7 +19,7 @@
 }
 
 .container input {
-  @apply rounded-md h-8 border-[1px] pl-1;
+  @apply rounded-md h-8 border-[1px] pl-1 mb-5;
 }
 
 .buttonsContainer {
