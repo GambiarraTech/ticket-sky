@@ -116,6 +116,7 @@ export async function getVendidos(idEvento: any) {
         //const qntd: number = quantosVendidos[0].quantidade_vendida;
 
     });
+    //teste
     console.log(quantosVendidos)
     return quantosVendidos;
 }
